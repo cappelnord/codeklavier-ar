@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7721715099224183062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 548579261727478920}
+  - component: {fileID: 4121976695624895078}
+  m_Layer: 0
+  m_Name: ArcBallGeneratorPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &548579261727478920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7721715099224183062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4121976695624895078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7721715099224183062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f419dbb63d374f48bddf962a9b16393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 8ba6108a0a93b9d4c9dd1ce766542074, type: 2}
+  - {fileID: 2100000, guid: 93e0a5138adf4f84486c0f1d1fb03f85, type: 2}
+  - {fileID: 2100000, guid: cbd11168f6f2e52459ab869d30be6450, type: 2}
+  - {fileID: 2100000, guid: d7e16af2e32cf3c46829d5c4a5fd8152, type: 2}
+  - {fileID: 2100000, guid: 738ed1742cf49e043b521523a0a46f8d, type: 2}
+  - {fileID: 2100000, guid: d7f4516442d7e5f47b88a4cd4b8f6849, type: 2}
+  - {fileID: 2100000, guid: 16d56ab6c59e4ec4c9df378d63824c49, type: 2}
+  - {fileID: 2100000, guid: 3ea52db160f74f74ea803a4cb867b45a, type: 2}
+  - {fileID: 2100000, guid: b7fe67801514b6245a34a9836a28fcbe, type: 2}
+  - {fileID: 2100000, guid: 0a96832ee5766594485a3a201ca21807, type: 2}
+  ringProto: {fileID: 4866796240417011212, guid: 47e93c839119e0d4d9bbb9ccf1483bd8,
+    type: 3}

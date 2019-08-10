@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6251518304027719345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 447591659104877642}
+  - component: {fileID: 5553012891015622112}
+  m_Layer: 0
+  m_Name: TestGeneratorPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &447591659104877642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251518304027719345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5553012891015622112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251518304027719345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d0593d105474e9459d0baecaa1db7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 3609570805101532433, guid: 32ef01be4e7127f40ad1872b1d01d8fc, type: 3}
+  - {fileID: 563909374382983554, guid: 5c1b08c34cac7dd4cafc23c8d272f19d, type: 3}
+  - {fileID: 2428266801363595841, guid: 7cc2e1eb2af02b141be7b8acbfd2414f, type: 3}
+  - {fileID: 1638560302014418756, guid: beadf4ac5f017964a94b762e3056febc, type: 3}
+  - {fileID: 6865204024746935960, guid: 61f7d599675323d4dbc7267728662bcd, type: 3}
+  - {fileID: 1585640374541547775, guid: f7ed507444a2c844c9873b6241f60982, type: 3}
+  - {fileID: 4018524374390967115, guid: b0741366ff20bb84ea5f336a6c44014a, type: 3}
+  - {fileID: 8610602101221788251, guid: ec28dc915a596e7488e60f0215277bf9, type: 3}
+  - {fileID: 5328539854550020535, guid: 77730ed244c15d745934c9abc1e78c77, type: 3}
+  - {fileID: 1361589828803561239, guid: 78031a9eebd07d641bde0d45d983f90f, type: 3}
+  connection: {fileID: 3179144696895573642, guid: d6e7632b0e8348140b3e0925c590ef7c,
+    type: 3}
+  connectionSphere: {fileID: 6283953413067597302, guid: e214c338b065ead43af5fbd8a545138a,
+    type: 3}
+  dynamicsText: {fileID: 5142498375761417526, guid: fd08b18c7bbf18e40823b9bb14f62729,
+    type: 3}
+  dynamicsToSize: 1
+  connectionSpheres: 0
+  fallingCubes: 0
+  hideCubes: 0
+  hideConnections: 0
+  hideDynamics: 1
