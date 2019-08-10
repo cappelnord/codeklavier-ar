@@ -17,9 +17,10 @@ Each Scene builds its own app:
 Use in conjunction with the websockets server:
 https://github.com/narcode/codeklavier-extras
 
-This repository includes the following Unity packages:
+This repository includes the following third party packages/code
 - [SteamVR](https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647)
 - [Vuforia](https://docs.unity3d.com/Manual/vuforia-sdk-overview.html)
 - [TextMesh Pro](https://assetstore.unity.com/packages/essentials/beta-projects/textmesh-pro-84126)
+- [UnityOSC](https://github.com/jorgegarcia/UnityOSC)
 
 [CodeKlavier](https://codeklavier.space/) is supported By Stimuleringsfonds Creatieve Industrie NL and other sponsors.
