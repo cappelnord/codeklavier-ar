@@ -17,6 +17,12 @@ Each Scene builds its own app:
 Use in conjunction with the websockets server:
 https://github.com/narcode/codeklavier-extras
 
+### Marker Transforms
+
+Marker transforms are defined in the server configuration and specify the relation of tracking markers to the desired position/rotation/scale of the visuals. Neutral marker position is flat on a table; positve Y facing upwards.
+
+## Acknowledgments
+
 This repository includes the following third party packages/code
 - [SteamVR](https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647)
 - [Vuforia](https://docs.unity3d.com/Manual/vuforia-sdk-overview.html)

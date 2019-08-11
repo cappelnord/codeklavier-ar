@@ -362,9 +362,6 @@ public class LSystemController : MonoBehaviour
     public char[] symbols = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
     public Dictionary<string, LSystem> forrest;
 
-    [HideInInspector]
-    public TransformSpec masterTransform;
-
     private static LSystemController instance;
 
     public static LSystemController Instance()
@@ -398,17 +395,9 @@ public class LSystemController : MonoBehaviour
         EventManager.InvokeViewChange(tree);
     }
 
-    public void DispatchTransform(string key, float[] position, float[] scale, float[] rotation)
+    public void DispatchTransform(string key, TransformSpec ts)
     {
-        TransformSpec ts = new TransformSpec(position, scale, rotation);
-        if(key == "master")
-        {
-            masterTransform = ts;
-        } else
-        {
-            GetLSystem(key).transformSpec = ts;
-        }
-
+        GetLSystem(key).transformSpec = ts;
         EventManager.InvokeTransformChange(key, ts);
     }
 
@@ -430,8 +419,6 @@ public class LSystemController : MonoBehaviour
     void Start()
     {
         forrest = new Dictionary<string, LSystem>();
-        masterTransform = TransformSpec.Identity();
-
         EventManager.InvokeViewChange("1");
     }
 

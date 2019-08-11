@@ -314,7 +314,14 @@ public class WebsocketConsumer : MonoBehaviour
             if(msgString.Contains("transform"))
             {
                 WebsocketJsonTransform msg = JsonUtility.FromJson<WebsocketJsonTransform>(msgString);
-                lsysController.DispatchTransform(msg.tree, msg.position, msg.scale, msg.rotation);
+                TransformSpec ts = new TransformSpec(msg.position, msg.scale, msg.rotation);
+                if(msg.tree.Contains("marker"))
+                {
+
+                } else
+                {
+                    lsysController.DispatchTransform(msg.tree, ts);
+                }
             }
             else if (msgString.Contains("shape"))
             {

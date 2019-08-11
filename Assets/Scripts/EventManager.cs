@@ -17,6 +17,9 @@ public class EventManager
     public delegate void TransformChangeAction(string tree, TransformSpec ts);
     public static event TransformChangeAction OnTransformChange;
 
+    public delegate void MarkerTransformAction(string marker, TransformSpec ts);
+    public static event MarkerTransformAction OnMarkerTransform;
+
     public delegate void ConsoleStatusAction(string msg);
     public static event ConsoleStatusAction OnConsoleStatus;
 
@@ -25,6 +28,7 @@ public class EventManager
 
     public delegate void NetworkStateChangeAction(CKARNetworkState state);
     public static event NetworkStateChangeAction OnNetworkStateChange;
+
 
 
     public static void InvokeGenerate(LSystemController lsysController)
@@ -56,6 +60,14 @@ public class EventManager
         if (OnTransformChange != null)
         {
             OnTransformChange(tree, ts);
+        }
+    }
+
+    public static void InvokeMarkerTransform(string marker, TransformSpec ts)
+    {
+        if (OnMarkerTransform != null)
+        {
+            OnMarkerTransform(marker, ts);
         }
     }
 
