@@ -317,7 +317,7 @@ public class WebsocketConsumer : MonoBehaviour
                 TransformSpec ts = new TransformSpec(msg.position, msg.scale, msg.rotation);
                 if(msg.tree.Contains("marker"))
                 {
-
+                    EventManager.InvokeMarkerTransform(msg.tree, ts);
                 } else
                 {
                     lsysController.DispatchTransform(msg.tree, ts);
