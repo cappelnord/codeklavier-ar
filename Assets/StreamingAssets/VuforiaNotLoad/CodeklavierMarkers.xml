@@ -3,5 +3,6 @@
   <Tracking>
     <ImageTarget name="Marker-1" size="0.266000 0.199500" />
     <ImageTarget name="DSC00045" size="0.265000 0.198750" />
+    <!--mt-->
   </Tracking>
 </QCARConfig>
