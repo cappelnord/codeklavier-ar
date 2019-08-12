@@ -24,13 +24,13 @@ public class ImageTargetSpec
 
 public class MarkerManager : MonoBehaviour
 {
-
     private string xmlTemplateHead = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><QCARConfig xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"qcar_config.xsd\"><Tracking>";
     private string xmlTemplateFoot = "</Tracking></QCARConfig>";
 
-    public string sourceFolder;
-    public string datasetBaseName;
-    public string multiMarkerName = "CodeKlavierMulti";
+    public string sourceFolder = "VuforiaNotLoad";
+    public string datasetBaseName = "CodeklavierMarkers";
+
+    private string multiMarkerName = "CodeKlavierMulti";
 
     private string targetXmlPath;
     private string targetDatPath;
@@ -79,7 +79,7 @@ public class MarkerManager : MonoBehaviour
         }
     }
 
-    static Dictionary<string, ImageTargetSpec> ParseMarkerXml(string xml)
+    public static Dictionary<string, ImageTargetSpec> ParseMarkerXml(string xml)
     {
         Dictionary<string, ImageTargetSpec> ret = new Dictionary<string, ImageTargetSpec>();
         XmlDocument doc = new XmlDocument();
@@ -133,8 +133,8 @@ public class MarkerManager : MonoBehaviour
         if (didInitiVuforiaData) return;
 
         string imageTargetsXml = "";
-        // TODO: Construct ImageTargets XML
-        foreach(string key in imageTargetSpecs.Keys)
+
+        foreach (string key in imageTargetSpecs.Keys)
         {
             if(markerTransformSpecs.ContainsKey(key))
             {
