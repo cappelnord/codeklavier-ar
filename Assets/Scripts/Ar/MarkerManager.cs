@@ -1,13 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using System.Linq;
+using System.Globalization;
 using UnityEngine;
 
 using Vuforia;
 
+public class ImageTargetSpec
+{
+    public string name;
+    public float width;
+    public float height;
+
+    public ImageTargetSpec(string _name, float _width, float _height)
+    {
+        name = _name;
+        width = _width;
+        height = _height;
+    }
+}
+
 public class MarkerManager : MonoBehaviour
 {
+
+    private string xmlTemplateHead = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><QCARConfig xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:noNamespaceSchemaLocation=\"qcar_config.xsd\"><Tracking>";
+    private string xmlTemplateFoot = "</Tracking></QCARConfig>";
 
     public string sourceFolder;
     public string datasetBaseName;
@@ -24,6 +43,7 @@ public class MarkerManager : MonoBehaviour
     private bool didInitiVuforiaData = false;
 
     private Dictionary<string, TransformSpec> markerTransformSpecs;
+    private Dictionary<string, ImageTargetSpec> imageTargetSpecs;
 
     IEnumerator Start()
     {
@@ -47,7 +67,7 @@ public class MarkerManager : MonoBehaviour
         using (WWW www = new WWW(sourceXmlPath))
         {
             yield return www;
-            xmlTemplateString = www.text;
+            imageTargetSpecs = ParseMarkerXml(www.text);
 
             using (WWW wwwData = new WWW(sourceDatPath))
             {
@@ -57,6 +77,24 @@ public class MarkerManager : MonoBehaviour
                 TryInitVuforiaData();
             }
         }
+    }
+
+    static Dictionary<string, ImageTargetSpec> ParseMarkerXml(string xml)
+    {
+        Dictionary<string, ImageTargetSpec> ret = new Dictionary<string, ImageTargetSpec>();
+        XmlDocument doc = new XmlDocument();
+        doc.LoadXml(xml);
+        XmlNodeList nodeList = doc.SelectNodes(".//" + "ImageTarget");
+
+        foreach(XmlNode node in nodeList)
+        {
+            string name = node.Attributes["name"].Value;
+            string sizeString = node.Attributes["size"].Value;
+            string[] sizeToken = sizeString.Split(' ');
+            ret[name] = new ImageTargetSpec(name, float.Parse(sizeToken[0], CultureInfo.InvariantCulture), float.Parse(sizeToken[1], CultureInfo.InvariantCulture));
+        }
+
+        return ret;
     }
 
     // Update is called once per frame
@@ -79,7 +117,8 @@ public class MarkerManager : MonoBehaviour
 
     public void OnMarkerTransform(string key, TransformSpec ts)
     {
-        markerTransformSpecs[key] = ts;
+        string markerName = key.Replace("marker-", "");
+        markerTransformSpecs[markerName] = ts;
     }
 
     public void OnServerEventEndMarkerConfig()
@@ -93,25 +132,33 @@ public class MarkerManager : MonoBehaviour
         if (!didFinishLoading || !didReceiveEndMarkerConfig) return;
         if (didInitiVuforiaData) return;
 
-        // TODO: Clean up trackables that should not be there
-
+        string imageTargetsXml = "";
+        // TODO: Construct ImageTargets XML
+        foreach(string key in imageTargetSpecs.Keys)
+        {
+            if(markerTransformSpecs.ContainsKey(key))
+            {
+                ImageTargetSpec spec = imageTargetSpecs[key];
+                string sw = spec.width.ToString("0.000000", CultureInfo.CreateSpecificCulture("en-US"));
+                string sh = spec.height.ToString("0.000000", CultureInfo.CreateSpecificCulture("en-US"));
+                imageTargetsXml += "<ImageTarget name=\"" + key + "\" size=\"" + sw + " " + sh + "\"/>\n";
+            }
+        }
 
         string multiTargetParts = "";
 
-        // "<Part name=\"Marker-1\" translation=\"0 0 0\" rotation=\"AD: 1 0 0 0\"/>";
-        foreach(string key in markerTransformSpecs.Keys)
+        foreach (string key in markerTransformSpecs.Keys)
         {
-            string markerName = key.Replace("marker-", "");
             TransformSpec ts = markerTransformSpecs[key];
-            multiTargetParts += "<Part name=\"" + markerName + 
+            multiTargetParts += "<Part name=\"" + key + 
                                 "\" translation=\"" + ts.position[0] + " " + ts.position[1] + " " + ts.position[2] + 
                                 "\" rotation=\"AD: 1 " + ts.rotation[0] + " " + ts.rotation[1] + " " + ts.rotation[2] +
-                                "\"/>";
+                                "\"/>\n";
         }
 
 
-        string xmlFragment = "<MultiTarget name=\"" + multiMarkerName + "\">" + multiTargetParts + "</MultiTarget>";
-        string xmlString = xmlTemplateString.Replace("<!--mt-->", xmlFragment);
+        string multiTargetXml = "<MultiTarget name=\"" + multiMarkerName + "\">" + multiTargetParts + "</MultiTarget>";
+        string xmlString = xmlTemplateHead + imageTargetsXml + multiTargetXml + xmlTemplateFoot;
         File.WriteAllText(targetXmlPath, xmlString);
         Debug.Log(targetXmlPath);
 
