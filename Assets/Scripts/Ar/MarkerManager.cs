@@ -18,12 +18,17 @@ public class MarkerManager : MonoBehaviour
     private string targetDatasetName;
 
     private string xmlTemplateString;
-    private string multiTargetParts = "<Part name=\"Marker-1\" translation=\"0 0 0\" rotation=\"AD: 1 0 0 0\"/>";
 
+    private bool didFinishLoading = false;
+    private bool didReceiveEndMarkerConfig = false;
     private bool didInitiVuforiaData = false;
+
+    private Dictionary<string, TransformSpec> markerTransformSpecs;
 
     IEnumerator Start()
     {
+        markerTransformSpecs = new Dictionary<string, TransformSpec>();
+
         string sourceXmlPath = Application.streamingAssetsPath + "/" + sourceFolder + "/" + datasetBaseName + ".xml";
         string sourceDatPath = Application.streamingAssetsPath + "/" + sourceFolder + "/" + datasetBaseName + ".dat";
         targetXmlPath = Application.temporaryCachePath + "/" + datasetBaseName + ".xml";
@@ -48,7 +53,8 @@ public class MarkerManager : MonoBehaviour
             {
                 yield return wwwData;
                 File.WriteAllBytes(targetDatPath, wwwData.bytes);
-                InitVuforiaData();
+                didFinishLoading = true;
+                TryInitVuforiaData();
             }
         }
     }
@@ -59,12 +65,50 @@ public class MarkerManager : MonoBehaviour
 
     }
 
-    public void InitVuforiaData()
+    void OnEnable()
     {
+        EventManager.OnServerEventEndMarkerConfig += OnServerEventEndMarkerConfig;
+        EventManager.OnMarkerTransform += OnMarkerTransform;
+    }
+
+    void OnDisable()
+    {
+        EventManager.OnServerEventEndMarkerConfig -= OnServerEventEndMarkerConfig;
+        EventManager.OnMarkerTransform -= OnMarkerTransform;
+    }
+
+    public void OnMarkerTransform(string key, TransformSpec ts)
+    {
+        markerTransformSpecs[key] = ts;
+    }
+
+    public void OnServerEventEndMarkerConfig()
+    {
+        didReceiveEndMarkerConfig = true;
+        TryInitVuforiaData();
+    }
+
+    public void TryInitVuforiaData()
+    {
+        if (!didFinishLoading || !didReceiveEndMarkerConfig) return;
         if (didInitiVuforiaData) return;
 
         // TODO: Clean up trackables that should not be there
-        // multiTargetParts = "";
+
+
+        string multiTargetParts = "";
+
+        // "<Part name=\"Marker-1\" translation=\"0 0 0\" rotation=\"AD: 1 0 0 0\"/>";
+        foreach(string key in markerTransformSpecs.Keys)
+        {
+            string markerName = key.Replace("marker-", "");
+            TransformSpec ts = markerTransformSpecs[key];
+            multiTargetParts += "<Part name=\"" + markerName + 
+                                "\" translation=\"" + ts.position[0] + " " + ts.position[1] + " " + ts.position[2] + 
+                                "\" rotation=\"AD: 1 " + ts.rotation[0] + " " + ts.rotation[1] + " " + ts.rotation[2] +
+                                "\"/>";
+        }
+
 
         string xmlFragment = "<MultiTarget name=\"" + multiMarkerName + "\">" + multiTargetParts + "</MultiTarget>";
         string xmlString = xmlTemplateString.Replace("<!--mt-->", xmlFragment);
