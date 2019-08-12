@@ -95,8 +95,6 @@ public class MarkerManager : MonoBehaviour
                     // add additional script components for trackable
                     tb.gameObject.AddComponent<DefaultTrackableEventHandler>();
                     // tb.gameObject.AddComponent<TurnOffBehaviour>();
-
-                    mainObject.SetActive(true);
                 }
             }
         }

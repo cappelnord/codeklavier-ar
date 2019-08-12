@@ -318,6 +318,9 @@ public class WebsocketConsumer : MonoBehaviour
                 if(msg.tree.Contains("marker"))
                 {
                     EventManager.InvokeMarkerTransform(msg.tree, ts);
+                } else if(msg.tree.Contains("master"))
+                {
+                    EventManager.InvokeMasterTransform(ts);
                 } else
                 {
                     lsysController.DispatchTransform(msg.tree, ts);
@@ -349,6 +352,14 @@ public class WebsocketConsumer : MonoBehaviour
                 if (msg.type == "view")
                 {
                     lsysController.DispatchView(msg.payload);
+                }
+
+                if (msg.type == "serverEvent")
+                {
+                    if(msg.payload == "endMarkerConfig")
+                    {
+                        EventManager.InvokeServerEventEndMarkerConfig();
+                    }
                 }
             }
         }

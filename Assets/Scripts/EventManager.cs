@@ -20,6 +20,9 @@ public class EventManager
     public delegate void MarkerTransformAction(string marker, TransformSpec ts);
     public static event MarkerTransformAction OnMarkerTransform;
 
+    public delegate void MasterTransformAction(TransformSpec ts);
+    public static event MasterTransformAction OnMasterTransform;
+
     public delegate void ConsoleStatusAction(string msg);
     public static event ConsoleStatusAction OnConsoleStatus;
 
@@ -29,6 +32,8 @@ public class EventManager
     public delegate void NetworkStateChangeAction(CKARNetworkState state);
     public static event NetworkStateChangeAction OnNetworkStateChange;
 
+    public delegate void ServerEventEndMarkerConfigAction();
+    public static event ServerEventEndMarkerConfigAction OnServerEventEndMarkerConfig;
 
 
     public static void InvokeGenerate(LSystemController lsysController)
@@ -71,6 +76,14 @@ public class EventManager
         }
     }
 
+    public static void InvokeMasterTransform(TransformSpec ts)
+    {
+        if (OnMasterTransform != null)
+        {
+            OnMasterTransform(ts);
+        }
+    }
+
     public static void InvokeConsoleStatus(string msg)
     {
         if (OnConsoleStatus != null)
@@ -92,6 +105,14 @@ public class EventManager
         if (OnNetworkStateChange != null)
         {
             OnNetworkStateChange(state);
+        }
+    }
+
+    public static void InvokeServerEventEndMarkerConfig()
+    {
+        if (OnServerEventEndMarkerConfig != null)
+        {
+            OnServerEventEndMarkerConfig();
         }
     }
 }
