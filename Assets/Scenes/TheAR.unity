@@ -242,8 +242,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sourceFolder: VuforiaNotLoad
   datasetBaseName: CodeklavierMarkers
-  multiMarkerName: CodeKlavierMulti
-  mainObject: {fileID: 0}
 --- !u!4 &156805156
 Transform:
   m_ObjectHideFlags: 0
@@ -447,22 +445,22 @@ PrefabInstance:
     - target: {fileID: 7713098529516373334, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.026600001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7713098529516373334, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.026600001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7713098529516373334, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.026600001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7713098530208074188, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: connectToLocal
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7713098530551993062, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
@@ -471,6 +469,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddb977535cb80c4b9e42ecaeaf2df3e, type: 3}
+--- !u!1 &763420098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7713098529516373335, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 763420097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &763420099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763420098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a255f377a09de7540990db711bc50fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1590606385
 GameObject:
   m_ObjectHideFlags: 0
