@@ -9,6 +9,7 @@ public class MarkerVisualizer : MonoBehaviour
 
     public string sourceFolder = "VuforiaNotLoad";
     public string datasetBaseName = "CodeklavierMarkers";
+    public GameObject markerVisualizerPrefab;
 
     private Dictionary<string, TransformSpec> markerTransformSpecs;
     private Dictionary<string, ImageTargetSpec> imageTargetSpecs;
@@ -62,7 +63,25 @@ public class MarkerVisualizer : MonoBehaviour
         if (!didFinishLoading || !didReceiveEndMarkerConfig) return;
         if (didVisualizeMarkers) return;
 
-        // TODO: Visualize Markers
+        foreach(string key in markerTransformSpecs.Keys)
+        {
+            if(!imageTargetSpecs.ContainsKey(key))
+            {
+                Debug.Log("Could not find ImageTargetSpec for:" + key);
+                continue;
+            }
+
+            TransformSpec ts = markerTransformSpecs[key];
+            ImageTargetSpec its = imageTargetSpecs[key];
+
+            GameObject obj = Instantiate(markerVisualizerPrefab, gameObject.transform);
+
+            obj.transform.localScale = new Vector3(its.width * ts.scale[0], its.height * ts.scale[1], 0.00001f * ts.scale[2]);
+            obj.transform.localEulerAngles = new Vector3(ts.rotation[0], ts.rotation[1], ts.rotation[2]);
+            obj.transform.Translate(new Vector3(ts.position[0], ts.position[1], ts.position[2]), Space.World);
+
+            obj.GetComponent<LoadMarkerTexture>().markerID = key;
+        }
 
         didVisualizeMarkers = true;
     }
