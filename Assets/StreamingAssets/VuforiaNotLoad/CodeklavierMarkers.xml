@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
-    <ImageTarget name="Marker-1" size="0.266000 0.199500" />
-    <ImageTarget name="DSC00045" size="0.265000 0.198750" />
+    <ImageTarget name="forrest5" size="354.000000 266.292542" />
+    <ImageTarget name="forrest4" size="354.000000 266.292542" />
+    <ImageTarget name="forrest3" size="354.000000 266.292542" />
+    <ImageTarget name="forrest2" size="354.000000 266.292542" />
+    <ImageTarget name="forrest1" size="354.000000 266.470581" />
   </Tracking>
 </QCARConfig>
