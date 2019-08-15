@@ -21,6 +21,8 @@ public class LoadMarkerTexture : MonoBehaviour
             // assign texture
             Renderer renderer = GetComponent<Renderer>();
             renderer.material.mainTexture = www.texture;
+
+            renderer.material.mainTextureScale = new Vector2(-1.0f, -1.0f);
         }
     }
 
