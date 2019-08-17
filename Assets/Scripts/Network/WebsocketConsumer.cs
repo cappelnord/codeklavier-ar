@@ -319,7 +319,7 @@ public class WebsocketConsumer : MonoBehaviour
         while(queue.Dequeue(out msgString))
         {
             Debug.Log(msgString);
-            if(msgString.Contains("transform"))
+            if(msgString.Contains("\"type\": \"transform\""))
             {
                 WebsocketJsonTransform msg = JsonUtility.FromJson<WebsocketJsonTransform>(msgString);
                 TransformSpec ts = new TransformSpec(msg.position, msg.scale, msg.rotation);
@@ -334,12 +334,12 @@ public class WebsocketConsumer : MonoBehaviour
                     lsysController.DispatchTransform(msg.tree, ts);
                 }
             }
-            else if (msgString.Contains("shape"))
+            else if (msgString.Contains("\"type\": \"shape\""))
             {
                 WebsocketJsonShape msg = JsonUtility.FromJson<WebsocketJsonShape>(msgString);
                 lsysController.DispatchShape(msg.tree, msg.shape);
             }
-            else if (msgString.Contains(": \"value\""))
+            else if (msgString.Contains("\"type\": \"value\""))
             {
                 WebsocketJsonValue msg = JsonUtility.FromJson<WebsocketJsonValue>(msgString);
                 EventManager.InvokeValue(msg.key, msg.payload);

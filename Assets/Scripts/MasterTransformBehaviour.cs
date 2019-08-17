@@ -44,7 +44,7 @@ public class MasterTransformBehaviour : MonoBehaviour
             gameObject.transform.Translate(new Vector3(ts.position[0] * direction, ts.position[1] * direction, ts.position[2] * direction), Space.World);
         } else
         {   // rotated around x; y and z should switch
-            gameObject.transform.Translate(new Vector3(ts.position[0] * direction, ts.position[2] * direction * -1.0f, ts.position[1] * direction* -1.0f), Space.World);
+            gameObject.transform.Translate(new Vector3(ts.position[0] * direction, ts.position[2] * direction * -1.0f, ts.position[1] * direction), Space.World);
 
         }
 
