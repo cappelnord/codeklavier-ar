@@ -35,6 +35,14 @@ public class EventManager
     public delegate void ServerEventEndMarkerConfigAction();
     public static event ServerEventEndMarkerConfigAction OnServerEventEndMarkerConfig;
 
+    public delegate void ValueAction(string key, float value);
+    public static event ValueAction OnValue;
+
+    private static Dictionary<string, ValueAction> valueActions;
+
+    static EventManager() {
+        valueActions = new Dictionary<string, ValueAction>();
+    }
 
     public static void InvokeGenerate(LSystemController lsysController)
     {
@@ -113,6 +121,42 @@ public class EventManager
         if (OnServerEventEndMarkerConfig != null)
         {
             OnServerEventEndMarkerConfig();
+        }
+    }
+
+    public static void SubscribeValue(string key, ValueAction action)
+    {
+        if(!valueActions.ContainsKey(key))
+        {
+            valueActions[key] = null;
+        }
+        (valueActions[key]) += action;
+    }
+
+    public static void UnsubscribeValue(string key, ValueAction action)
+    {
+        if (!valueActions.ContainsKey(key))
+        {
+            valueActions[key] = null;
+        }
+
+        (valueActions[key]) -= action;
+    }
+
+    public static void InvokeValue(string key, float value)
+    {
+        if (OnValue != null)
+        {
+            OnValue(key, value);
+        }
+
+        if (valueActions.ContainsKey(key))
+        {
+            ValueAction action = valueActions[key];
+            if (action != null)
+            {
+                action(key, value);
+            }
         }
     }
 }

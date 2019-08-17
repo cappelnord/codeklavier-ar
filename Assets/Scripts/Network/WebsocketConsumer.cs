@@ -155,6 +155,14 @@ public class WebsocketJsonMessage
 }
 
 [Serializable]
+public class WebsocketJsonValue
+{
+    public string type;
+    public string key;
+    public float payload;
+}
+
+[Serializable]
 public class WebsocketJsonShape
 {
     public string type;
@@ -330,6 +338,11 @@ public class WebsocketConsumer : MonoBehaviour
             {
                 WebsocketJsonShape msg = JsonUtility.FromJson<WebsocketJsonShape>(msgString);
                 lsysController.DispatchShape(msg.tree, msg.shape);
+            }
+            else if (msgString.Contains(": \"value\""))
+            {
+                WebsocketJsonValue msg = JsonUtility.FromJson<WebsocketJsonValue>(msgString);
+                EventManager.InvokeValue(msg.key, msg.payload);
             }
             else
             {

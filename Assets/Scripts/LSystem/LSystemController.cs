@@ -76,10 +76,12 @@ public class LSystem
     public TransformSpec transformSpec;
     public string shape;
 
+    public string key;
 
-    public LSystem(LSystemController _controller)
+    public LSystem(LSystemController _controller, string _key)
     {
         lsysController = _controller;
+        key = _key;
 
         transformSpec = TransformSpec.Identity();
         shape = "1";
@@ -411,7 +413,7 @@ public class LSystemController : MonoBehaviour
     {
         if (!forrest.ContainsKey(key))
         {
-            forrest[key] = new LSystem(this);
+            forrest[key] = new LSystem(this, key);
         }
     }
 

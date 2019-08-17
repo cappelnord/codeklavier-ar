@@ -531,6 +531,18 @@ PrefabInstance:
       propertyPath: connectToLocal
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: shape2
+      value: 
+      objectReference: {fileID: 7721715099224183062, guid: 319e9e813e141f447a3e0d3dbe369a92,
+        type: 3}
+    - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: shape3
+      value: 
+      objectReference: {fileID: 6251518304027719345, guid: 4986ea979b470384a92d025a7bdf4021,
+        type: 3}
     - target: {fileID: 7713098530551993062, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_IsActive
@@ -556,6 +568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a255f377a09de7540990db711bc50fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertTransform: 0
+  onlyTranslate: 0
+  worldIsAr: 1
 --- !u!4 &763420101 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7713098529516373334, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
