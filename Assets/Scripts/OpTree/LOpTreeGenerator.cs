@@ -34,13 +34,13 @@ public class LOpTreeGenerator : LGenerator
         ResetRandomness();
 
         mainSquish = RandomRange(0.2f, 1.0f);
-        bottomSquish = RandomRange(0.2f, 1.5f);
-        bottomRadius = RandomRange(0.25f, 1.0f);
+        bottomSquish = RandomRange(0.2f, 1.5f) * 0.1f;
+        bottomRadius = RandomRange(0.25f, 1.0f) * 0.1f;
         radiusMul = RandomRange(0.2f, 1.0f);
 
-        flowerRadius = RandomRange(0.5f, 3.0f);
+        flowerRadius = RandomRange(0.5f, 3.0f) * 0.1f;
         flowerSquish = RandomRange(0.5f, 1.5f);
-        flowerLength = RandomRange(0.25f, 2.0f);
+        flowerLength = RandomRange(0.25f, 2.0f) * 0.1f;
 
         growAngle = RandomRange(20.0f, 50.0f);
 
@@ -50,10 +50,10 @@ public class LOpTreeGenerator : LGenerator
             child.gameObject.GetComponent<GrowBehaviour>().Die();
         }
 
-        Grow(transform, lsys.units[0], 0.98f, 0.0f);
+        Grow(transform, lsys.units[0], 0.98f, 0.0f, 0);
     }
 
-    void Grow(Transform parent, List<ProcessUnit> children, float growWeight, float growDelay)
+    void Grow(Transform parent, List<ProcessUnit> children, float growWeight, float growDelay, int generation)
     {
         if (children.Count == 0) return;
 
@@ -64,6 +64,12 @@ public class LOpTreeGenerator : LGenerator
         float deltaAngleY = 360.0f / children.Count;
 
         float newGrowWeight = growWeight + (1.0f - growWeight) * 0.2f;
+
+        float initPosition = 0.0f;
+        if(generation == 0)
+        {
+            initPosition = -0.5f;
+        }
 
         foreach(ProcessUnit unit in children)
         {
@@ -83,8 +89,8 @@ public class LOpTreeGenerator : LGenerator
             grow.gen = this;
             grow.targetRotation = new Vector3(0.0f, angleY, angleZ);
             grow.targetScale = new Vector3(0.8f, 0.8f, 0.8f);
-            grow.targetPosition = new Vector3(0.0f, 3.0f, 0.0f);
-            grow.currentPosition = new Vector3(0.0f, 3.0f, 0.0f);
+            grow.targetPosition = new Vector3(0.0f, 3.0f * 0.1f + initPosition, 0.0f);
+            grow.currentPosition = new Vector3(0.0f, 3.0f * 0.1f + initPosition, 0.0f);
             grow.growDelay = growDelay;
 
             grow.growWeight = growWeight;
@@ -94,7 +100,7 @@ public class LOpTreeGenerator : LGenerator
 
             angleY += deltaAngleY;
 
-            Grow(obj.transform, unit.Children, newGrowWeight, growDelay + 0.05f);
+            Grow(obj.transform, unit.Children, newGrowWeight, growDelay + 0.05f, generation+1);
         }
     }
 
@@ -108,7 +114,11 @@ public class LOpTreeGenerator : LGenerator
         }
         
 
-        float upRadius = 0.8f;
+        float upRadius = 0.8f * 0.1f;
+
+        float lengthUp = 0.3f;
+        float lengthDown = 0.05f;
+
 
         float dynamicFactor = 0.5f + ((float)unit.Dynamic / 127.0f) * 1.0f;
 
@@ -118,16 +128,16 @@ public class LOpTreeGenerator : LGenerator
         {
             if (unit.Content == '6' || unit.Content == '7')
             {
-                return wedgeMeshGen.GetWedgeObject(sides, dynamicFactor, 0.0f, 3.0f, 1.0f, 0.5f, 0.01f , 0.2f, bottomSquish, parent, branchMaterial);
+                return wedgeMeshGen.GetWedgeObject(sides, dynamicFactor, 0.0f, lengthUp, 1.0f, lengthDown, 0.01f , 0.2f, bottomSquish, parent, branchMaterial);
             } else
             {
                 Material flowerMaterial = materialLookup.Get(unit.Content);
-                return wedgeMeshGen.GetWedgeObject(sides, 0.5f, flowerRadius * dynamicFactor, flowerLength, 0.5f, 0.5f, 0.2f, flowerSquish, 0.2f, parent, flowerMaterial);
+                return wedgeMeshGen.GetWedgeObject(sides, 0.5f, flowerRadius * dynamicFactor, flowerLength, 0.5f, lengthDown, 0.2f, flowerSquish, 0.2f, parent, flowerMaterial);
             }
         } else
         {
 
-            return wedgeMeshGen.GetWedgeObject(sides, 0.5f * radiusMul * dynamicFactor, upRadius * radiusMul * dynamicFactor, 3.0f, bottomRadius * radiusMul * dynamicFactor, 0.5f, mainSquish, 0.5f, bottomSquish, parent, branchMaterial);
+            return wedgeMeshGen.GetWedgeObject(sides, 0.5f * 0.1f * radiusMul * dynamicFactor, upRadius * radiusMul * dynamicFactor, lengthUp, bottomRadius * radiusMul * dynamicFactor, lengthDown, mainSquish, 0.5f, bottomSquish, parent, branchMaterial);
 
         }
 

@@ -54,7 +54,7 @@ public class LArcBallGenerator : LGenerator {
             child.gameObject.GetComponent<RingBehaviour>().Die();
         }
 
-        float scale = 0.5f;
+        float scale = 0.05f;
 
         foreach(List<ProcessUnit> data in lsys.units)
         {
@@ -69,12 +69,13 @@ public class LArcBallGenerator : LGenerator {
             dynamicsSum = dynamicsSum / data.Count;
             float speedMul = 0.05f + (2.45f / 128.0f * dynamicsSum) * 60.0f;
             float comp = 1.0f / scale;
+            float rotateCompensation = 0.1f / scale;
 
             GameObject ring = GameObject.Instantiate(ringProto, transform);
             ring.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
 
             ring.transform.Rotate(new Vector3(RandomRange(0.0f, 360.0f), RandomRange(0.0f, 360.0f), RandomRange(0.0f, 360.0f)));
-            ring.GetComponent<RingBehaviour>().rotation = new Vector3(RandomRange(-2.0f, 2.0f) * comp * speedMul, RandomRange(-2.0f, 2.0f) * comp * speedMul, RandomRange(-2.0f, 2.0f) * comp * speedMul);
+            ring.GetComponent<RingBehaviour>().rotation = new Vector3(RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul);
             ring.GetComponent<RingBehaviour>().targetScale = scale;
             ring.GetComponent<RingBehaviour>().scale = 0.0f;
 
@@ -116,13 +117,13 @@ public class LArcBallGenerator : LGenerator {
 
                 if (arc.unit.Content != '0')
                 {
-                    float width = 0.2f + (2.0f / 128.0f * arc.unit.Dynamic);
-                    GameObject obj = meshgen.GetArcObject(((arc.numSegments * degsPerSegment)) * Mathf.Deg2Rad, 0.4f * comp, width * comp, ring.transform, lookup[arc.unit.Content]);
+                    float width = (0.2f + (2.0f / 128.0f * arc.unit.Dynamic)) * 0.1f;
+                    GameObject obj = meshgen.GetArcObject(((arc.numSegments * degsPerSegment)) * Mathf.Deg2Rad, 0.4f * comp * 0.1f, width * comp, ring.transform, lookup[arc.unit.Content]);
                     obj.transform.Rotate(new Vector3(0.0f, 0.0f, startRotation), Space.Self);
                 }
             }
 
-            scale += 1.0f;
+            scale += 0.1f;
         }
     }
 }

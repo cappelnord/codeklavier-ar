@@ -31,4 +31,10 @@ public class LoadMarkerTexture : MonoBehaviour
     {
         
     }
+
+    public void SetDisplayed(bool what)
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = what;
+        gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = what;
+    }
 }

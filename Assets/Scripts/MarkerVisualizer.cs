@@ -19,6 +19,8 @@ public class MarkerVisualizer : MonoBehaviour
     private bool didVisualizeMarkers = false;
 
     public bool worldIsAr = false;
+    public bool markersStartDisabled = false;
+
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -95,6 +97,7 @@ public class MarkerVisualizer : MonoBehaviour
             obj.transform.localScale = new Vector3(its.width * ts.scale[0], its.height * ts.scale[1], 0.00001f * ts.scale[2]);
 
             obj.GetComponent<LoadMarkerTexture>().markerID = key;
+            obj.GetComponent<LoadMarkerTexture>().SetDisplayed(!markersStartDisabled);
         }
 
         didVisualizeMarkers = true;
