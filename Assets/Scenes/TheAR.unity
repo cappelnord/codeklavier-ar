@@ -387,6 +387,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MarkerVisualizer
       objectReference: {fileID: 0}
+    - target: {fileID: 5681937414346561832, guid: d174265c9967efd4582281ae5aa8deed,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5681937414346561839, guid: d174265c9967efd4582281ae5aa8deed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -749,6 +754,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UnityCage
+      objectReference: {fileID: 0}
+    - target: {fileID: 659369309851414938, guid: 1cfdd31ea61c1f44ca462d9a91570bcd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 659369309851414941, guid: 1cfdd31ea61c1f44ca462d9a91570bcd,
         type: 3}

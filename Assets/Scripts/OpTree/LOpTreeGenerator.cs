@@ -128,11 +128,11 @@ public class LOpTreeGenerator : LGenerator
         {
             if (unit.Content == '6' || unit.Content == '7')
             {
-                return wedgeMeshGen.GetWedgeObject(sides, dynamicFactor, 0.0f, lengthUp, 1.0f, lengthDown, 0.01f , 0.2f, bottomSquish, parent, branchMaterial);
+                return wedgeMeshGen.GetWedgeObject(sides, dynamicFactor * 0.1f, 0.0f, lengthUp, 1.0f * 0.1f, lengthDown, 0.01f , 0.2f, bottomSquish, parent, branchMaterial);
             } else
             {
                 Material flowerMaterial = materialLookup.Get(unit.Content);
-                return wedgeMeshGen.GetWedgeObject(sides, 0.5f, flowerRadius * dynamicFactor, flowerLength, 0.5f, lengthDown, 0.2f, flowerSquish, 0.2f, parent, flowerMaterial);
+                return wedgeMeshGen.GetWedgeObject(sides, 0.5f * 0.1f, flowerRadius * dynamicFactor, flowerLength, 0.5f * 0.1f, lengthDown, 0.2f, flowerSquish, 0.2f, parent, flowerMaterial);
             }
         } else
         {

@@ -13,6 +13,7 @@ public class LGenerator : LSystemBehaviour
     private string velValueKey;
 
     protected float scaleMultiplier;
+    protected float positionMultiplier;
 
     protected virtual void Awake()
     {
@@ -86,7 +87,7 @@ public class LGenerator : LSystemBehaviour
 
     virtual public void ApplyTransformSpec()
     {
-        gameObject.transform.localPosition = new Vector3(transformSpec.position[0] * 3.0f, transformSpec.position[1] * 3.0f, transformSpec.position[2] * 3.0f);
+        gameObject.transform.localPosition = new Vector3(transformSpec.position[0] * positionMultiplier, transformSpec.position[1] * positionMultiplier, transformSpec.position[2] * positionMultiplier);
         gameObject.transform.localScale = new Vector3(transformSpec.scale[0] * scaleMultiplier, transformSpec.scale[1] * scaleMultiplier, transformSpec.scale[2] * scaleMultiplier);
         gameObject.transform.localEulerAngles = new Vector3(transformSpec.rotation[0], transformSpec.rotation[1], transformSpec.rotation[2]);
     }
