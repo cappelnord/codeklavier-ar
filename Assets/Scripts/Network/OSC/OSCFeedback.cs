@@ -81,4 +81,13 @@ public class OSCFeedback : MonoBehaviour
 
         osc.Send(msg);
     }
+
+    public void SendValue(string key, float value)
+    {
+        OSCMessage msg = new OSCMessage("/ckvalue");
+        msg.Append(key);
+        msg.Append(value);
+
+        osc.Send(msg);
+    }
 }

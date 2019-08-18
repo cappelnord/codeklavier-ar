@@ -23,6 +23,8 @@ public class LOpTreeGenerator : LGenerator
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
+
         wedgeMeshGen = WedgeMeshGen.Instance();
         materialLookup = MaterialLookup.Instance();
     }

@@ -22,6 +22,8 @@ public class LTestGenerator : LGenerator
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
+
         lookup = new Dictionary<char, GameObject>();
 
         int i = 0;

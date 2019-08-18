@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LSystemBehaviour : MonoBehaviour
 {
-    public LSystem lsys;
+    protected LSystem lsys;
     private string lastLsysState;
 
     public bool ShouldAct()
@@ -31,8 +31,15 @@ public class LSystemBehaviour : MonoBehaviour
         SetLSystem(LSystemController.Instance().GetLSystem(key));
     }
 
-    public virtual void SetLSystem(LSystem _lsys)
+    public void SetLSystem(LSystem _lsys)
     {
         lsys = _lsys;
+
+        OnLSystemSet();
+    }
+
+    public virtual void OnLSystemSet()
+    {
+
     }
 }

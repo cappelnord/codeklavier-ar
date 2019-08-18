@@ -9,8 +9,15 @@ public class LGenerator : LSystemBehaviour
 
     public System.Random rand;
 
-    public float scaleMultiplier = 1.0f;
-    private float targetScaleMultiplier = 1.0f;
+    private IIRFilter velocityValueFilter;
+    private string velValueKey;
+
+    protected float scaleMultiplier;
+
+    protected void Start()
+    {
+        velocityValueFilter = new IIRFilter(1.0f, 0.01f);
+    }
 
     void OnEnable()
     {
@@ -26,9 +33,9 @@ public class LGenerator : LSystemBehaviour
     {
         if (lsys == null) return;
 
-        if(key == lsys.key + "-vel")
+        if(key == velValueKey)
         {
-            targetScaleMultiplier = 0.25f + (value * 1.75f);
+            velocityValueFilter.Set(value);
         }
     }
 
@@ -44,10 +51,7 @@ public class LGenerator : LSystemBehaviour
             transformSpec = lsys.transformSpec;
         }
 
-        float dtCounterWeight = Mathf.Clamp((1.0f - 0.99f) * 60.0f * Time.deltaTime, 0.0f, 1.0f);
-        float dtGrowWeight = 1.0f - dtCounterWeight;
-
-        scaleMultiplier = scaleMultiplier * dtGrowWeight + targetScaleMultiplier * dtCounterWeight;
+        scaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f);
 
         ApplyTransformSpec();
     }
@@ -79,5 +83,13 @@ public class LGenerator : LSystemBehaviour
         gameObject.transform.localPosition = new Vector3(transformSpec.position[0] * 3.0f, transformSpec.position[1] * 3.0f, transformSpec.position[2] * 3.0f);
         gameObject.transform.localScale = new Vector3(transformSpec.scale[0] * scaleMultiplier, transformSpec.scale[1] * scaleMultiplier, transformSpec.scale[2] * scaleMultiplier);
         gameObject.transform.localEulerAngles = new Vector3(transformSpec.rotation[0], transformSpec.rotation[1], transformSpec.rotation[2]);
+    }
+
+    override public void OnLSystemSet()
+    {
+        velValueKey = lsys.key + "-vel";
+        velocityValueFilter.Init(ValueStore.Get(velValueKey));
+
+        base.OnLSystemSet();
     }
 }

@@ -30,6 +30,8 @@ public class LArcBallGenerator : LGenerator {
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
+
         lsysController = LSystemController.Instance();
         meshgen = ArcMeshGen.Instance();
 
