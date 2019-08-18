@@ -18,13 +18,19 @@ public class ValueStore
 
     public static float Get(string key)
     {
+        return Get(key, 0.0f);
+    }
+
+    public static float Get(string key, float defaultValue)
+    {
         if(dict.ContainsKey(key))
         {
             return dict[key];
         } else
         {
-            Debug.Log("ValueStore does not have a key: " + key);
-            return 0.0f;
+            // Debug.Log("ValueStore does not have a key: " + key);
+            dict[key] = defaultValue;
+            return defaultValue;
         }
     }
 

@@ -14,10 +14,16 @@ public class LGenerator : LSystemBehaviour
 
     protected float scaleMultiplier;
 
-    protected void Start()
+    protected virtual void Awake()
     {
         velocityValueFilter = new IIRFilter(1.0f, 0.01f);
     }
+
+    protected virtual void Start()
+    {
+
+    }
+
 
     void OnEnable()
     {
@@ -88,7 +94,7 @@ public class LGenerator : LSystemBehaviour
     override public void OnLSystemSet()
     {
         velValueKey = lsys.key + "-vel";
-        velocityValueFilter.Init(ValueStore.Get(velValueKey));
+        velocityValueFilter.Init(ValueStore.Get(velValueKey, 0.5f));
 
         base.OnLSystemSet();
     }

@@ -21,7 +21,7 @@ public class LOpTreeGenerator : LGenerator
     
 
     // Start is called before the first frame update
-    void Start()
+    override protected void Start()
     {
         base.Start();
 
