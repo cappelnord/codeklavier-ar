@@ -18,6 +18,8 @@ public class MarkerVisualizer : MonoBehaviour
     private bool didReceiveEndMarkerConfig = false;
     private bool didVisualizeMarkers = false;
 
+    public bool worldIsAr = false;
+
     // Start is called before the first frame update
     IEnumerator Start()
     {
@@ -76,9 +78,21 @@ public class MarkerVisualizer : MonoBehaviour
 
             GameObject obj = Instantiate(markerVisualizerPrefab, gameObject.transform);
 
-            obj.transform.localScale = new Vector3(its.width * ts.scale[0], its.height * ts.scale[1], 0.00001f * ts.scale[2]);
+            obj.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+
+
             obj.transform.localEulerAngles = new Vector3(ts.rotation[0], ts.rotation[1], ts.rotation[2]);
-            obj.transform.Translate(new Vector3(ts.position[0], ts.position[1], ts.position[2]), Space.World);
+
+            if (!worldIsAr)
+            {
+                obj.transform.Translate(new Vector3(ts.position[0], ts.position[1], ts.position[2]), Space.World);
+            }
+            else
+            {   // rotated around x; y and z should switch
+                obj.transform.Translate(new Vector3(ts.position[0], ts.position[2] * -1.0f, ts.position[1]), Space.World);
+            }
+
+            obj.transform.localScale = new Vector3(its.width * ts.scale[0], its.height * ts.scale[1], 0.00001f * ts.scale[2]);
 
             obj.GetComponent<LoadMarkerTexture>().markerID = key;
         }

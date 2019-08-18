@@ -127,6 +127,36 @@ public class MarkerManager : MonoBehaviour
         TryInitVuforiaData();
     }
 
+    // !!! only works on one axis! !!!
+    /*
+    private string RotationString(TransformSpec ts)
+    {
+        string ret = "AD:";
+        int degs = 0;
+        for(int i = 0; i < 3; i++)
+        {
+            ret = ret + " ";
+            if (Mathf.Abs(ts.rotation[i]) > degs)
+            {
+                degs = (int) ts.rotation[i];
+            }
+            if(Mathf.Abs(ts.rotation[i]) > 0)
+            {
+                ret = ret + "1";
+            } else
+            {
+                ret = ret + "0";
+            }
+        }
+        return ret + " " + degs;
+    }
+    */
+
+     private string RotationString(TransformSpec ts)
+    {
+        return "AD: 1 0 0 0";
+    }
+
     public void TryInitVuforiaData()
     {
         if (!didFinishLoading || !didReceiveEndMarkerConfig) return;
@@ -152,8 +182,8 @@ public class MarkerManager : MonoBehaviour
             TransformSpec ts = markerTransformSpecs[key];
             multiTargetParts += "<Part name=\"" + key + 
                                 "\" translation=\"" + ts.position[0] + " " + ts.position[1] + " " + ts.position[2] + 
-                                "\" rotation=\"AD: 1 " + ts.rotation[0] + " " + ts.rotation[1] + " " + ts.rotation[2] +
-                                "\"/>\n";
+                                "\" rotation=\"" + RotationString(ts) + "\" " +
+                                "/>\n";
         }
 
 

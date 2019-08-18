@@ -288,6 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invertTransform: 0
   onlyTranslate: 0
+  worldIsAr: 0
 --- !u!1 &1170890128
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,6 +603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invertTransform: 1
   onlyTranslate: 1
+  worldIsAr: 0
 --- !u!1001 &4271976797839675839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -860,7 +862,7 @@ PrefabInstance:
     - target: {fileID: 7713098530208074188, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: connectToLocal
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}

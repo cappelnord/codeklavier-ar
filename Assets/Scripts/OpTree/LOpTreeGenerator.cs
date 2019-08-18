@@ -87,8 +87,6 @@ public class LOpTreeGenerator : LGenerator
             grow.currentPosition = new Vector3(0.0f, 3.0f, 0.0f);
             grow.growDelay = growDelay;
 
-    
-
             grow.growWeight = growWeight;
 
             obj.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);

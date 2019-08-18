@@ -48,7 +48,19 @@ public class OSCFeedback : MonoBehaviour
             LSystem lsys = lsysController.forrest[key];
             if (lsys.results.Count > 0) {
                 string result = lsys.results[lsys.results.Count - 1];
-                msg.Append(key + "@" + result + "A" + lsys.axiom + "G" + lsys.results.Count.ToString() + "S" + lsys.shape);
+                string dynamicsString = "";
+                List<ProcessUnit> lastUnits = lsys.units[lsys.results.Count - 1];
+
+                for(int i = 0; i < lastUnits.Count; i++)
+                {
+                    ProcessUnit unit = lastUnits[i];
+                    dynamicsString += unit.Dynamic;
+                    if (i != (lastUnits.Count-1))
+                    {
+                        dynamicsString += "|";
+                    }
+                }
+                msg.Append(key + "@" + result + "A" + lsys.axiom + "G" + lsys.results.Count.ToString() + "S" + lsys.shape +  "D" + dynamicsString);
             }
         }
 

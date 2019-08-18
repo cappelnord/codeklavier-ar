@@ -169,6 +169,13 @@ public class LSystem
                         axiomDynamics = dynamicsList;
                     }
                 }
+                else if (from == "g")
+                {
+                    int gSize = int.Parse(to);
+                    if (gSize < 1) gSize = 1;
+                    if (gSize > maxRecursionDepth) gSize = maxRecursionDepth;
+                    recursionDepth = gSize;
+                }
                 else if (from == to)
                 {
                     rules.Remove(from);
