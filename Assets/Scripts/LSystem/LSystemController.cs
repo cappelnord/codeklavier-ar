@@ -59,9 +59,11 @@ public class LSystem
     public string rulesString;
     public string axiom = "0";
 
-    int recursionDepth = 7;
-    int maxStringLength = 64;
-    int defaultVelocity = 90;
+    const int maxRecursionDepth = 9;
+    const int maxStringLength = 64;
+    const int defaultVelocity = 90;
+
+    int recursionDepth;
 
     private int rulesIDCounter = 0;
 
@@ -80,6 +82,8 @@ public class LSystem
 
     public LSystem(LSystemController _controller, string _key)
     {
+        recursionDepth = maxRecursionDepth;
+
         lsysController = _controller;
         key = _key;
 
