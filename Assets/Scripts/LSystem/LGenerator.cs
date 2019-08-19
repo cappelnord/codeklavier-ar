@@ -13,7 +13,7 @@ public class LGenerator : LSystemBehaviour
     private string velValueKey;
 
     protected float scaleMultiplier;
-    protected float positionMultiplier;
+    protected float positionMultiplier = 1.0f;
 
     protected virtual void Awake()
     {

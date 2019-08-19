@@ -345,7 +345,7 @@ public class WebsocketConsumer : MonoBehaviour
                 string[] keys = msg.key.Split(',');
                 foreach (string key in keys)
                 {
-                    ValueStore.Set(msg.key, msg.payload); // will also invoke event
+                    ValueStore.Set(key, msg.payload); // will also invoke event
                 }
             }
             else
