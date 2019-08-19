@@ -342,7 +342,11 @@ public class WebsocketConsumer : MonoBehaviour
             else if (msgString.Contains("\"type\": \"value\""))
             {
                 WebsocketJsonValue msg = JsonUtility.FromJson<WebsocketJsonValue>(msgString);
-                ValueStore.Set(msg.key, msg.payload); // will also invoke event
+                string[] keys = msg.key.Split(',');
+                foreach (string key in keys)
+                {
+                    ValueStore.Set(msg.key, msg.payload); // will also invoke event
+                }
             }
             else
             {
