@@ -1148,13 +1148,13 @@ PrefabInstance:
         type: 3}
       propertyPath: shape1
       value: 
-      objectReference: {fileID: 896692263428531264, guid: e860f41a9e6bd514a98d262bfd7d3867,
+      objectReference: {fileID: 5454875826750577939, guid: bf35641110e92144a8bd460e7ec7b16b,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: shape3
       value: 
-      objectReference: {fileID: 7721715099224183062, guid: 319e9e813e141f447a3e0d3dbe369a92,
+      objectReference: {fileID: 896692263428531264, guid: e860f41a9e6bd514a98d262bfd7d3867,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddb977535cb80c4b9e42ecaeaf2df3e, type: 3}
