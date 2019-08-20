@@ -67,7 +67,7 @@ public class LArcBallGenerator : LGenerator {
             }
 
             dynamicsSum = dynamicsSum / data.Count;
-            float speedMul = 0.05f + (2.45f / 128.0f * dynamicsSum) * 60.0f;
+            float speedMul = (0.05f + (2.45f / 128.0f * dynamicsSum)) * 60.0f * 0.2f;
             float comp = 1.0f / scale;
             float rotateCompensation = 0.1f / scale;
 

@@ -551,7 +551,13 @@ PrefabInstance:
         type: 3}
       propertyPath: shape3
       value: 
-      objectReference: {fileID: 6251518304027719345, guid: 4986ea979b470384a92d025a7bdf4021,
+      objectReference: {fileID: 5319093944089304181, guid: 5a07105a971060f46b02026b1c6e83aa,
+        type: 3}
+    - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: shape1
+      value: 
+      objectReference: {fileID: 1630489496941979760, guid: 1bb9cc22e1ed1ed4f9b51f3993c21356,
         type: 3}
     - target: {fileID: 7713098530551993062, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}

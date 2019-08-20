@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrowBehaviour : MonoBehaviour
+public class OpTreeGrowBehaviour : MonoBehaviour
 {
 
     public Vector3 targetScale;
@@ -83,7 +83,7 @@ public class GrowBehaviour : MonoBehaviour
 
         foreach (Transform child in transform)
         {
-            child.gameObject.GetComponent<GrowBehaviour>().Die();
+            child.gameObject.GetComponent<OpTreeGrowBehaviour>().Die();
         }
 
         // transform.parent = null;

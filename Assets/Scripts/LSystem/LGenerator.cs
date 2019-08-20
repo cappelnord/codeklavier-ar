@@ -15,6 +15,8 @@ public class LGenerator : LSystemBehaviour
     protected float scaleMultiplier;
     protected float positionMultiplier = 1.0f;
 
+    protected MaterialLookup materialLookup;
+
     protected virtual void Awake()
     {
         velocityValueFilter = new IIRFilter(1.0f, 0.01f);
@@ -22,7 +24,7 @@ public class LGenerator : LSystemBehaviour
 
     protected virtual void Start()
     {
-
+        materialLookup = MaterialLookup.Instance();
     }
 
 

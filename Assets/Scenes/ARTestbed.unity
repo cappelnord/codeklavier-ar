@@ -792,7 +792,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 22
+  field of view: 39
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1136,25 +1136,25 @@ PrefabInstance:
     - target: {fileID: 7713098530208074188, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: connectToLocal
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: shape2
       value: 
-      objectReference: {fileID: 7721715099224183062, guid: 319e9e813e141f447a3e0d3dbe369a92,
+      objectReference: {fileID: 1630489496941979760, guid: 1bb9cc22e1ed1ed4f9b51f3993c21356,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: shape1
       value: 
-      objectReference: {fileID: 5319093944089304181, guid: 5a07105a971060f46b02026b1c6e83aa,
+      objectReference: {fileID: 896692263428531264, guid: e860f41a9e6bd514a98d262bfd7d3867,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: shape3
       value: 
-      objectReference: {fileID: 6251518304027719345, guid: 4986ea979b470384a92d025a7bdf4021,
+      objectReference: {fileID: 7721715099224183062, guid: 319e9e813e141f447a3e0d3dbe369a92,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddb977535cb80c4b9e42ecaeaf2df3e, type: 3}

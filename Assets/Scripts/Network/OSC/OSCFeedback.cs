@@ -20,6 +20,7 @@ public class OSCFeedback : MonoBehaviour
         EventManager.OnShapeChange += OnGenerate;
         EventManager.OnViewChange += SendView;
         EventManager.OnTransformChange += SendTransform;
+        EventManager.OnValue += SendValue;
     }
 
     void OnDisable()
@@ -28,6 +29,7 @@ public class OSCFeedback : MonoBehaviour
         EventManager.OnShapeChange -= OnGenerate;
         EventManager.OnViewChange -= SendView;
         EventManager.OnTransformChange -= SendTransform;
+        EventManager.OnValue -= SendValue;
     }
 
     // Update is called once per frame
@@ -38,7 +40,7 @@ public class OSCFeedback : MonoBehaviour
 
     public void OnGenerate(LSystemController lsysController)
     {
-        OSCMessage msg = new OSCMessage("/cktree");
+        OSCMessage msg = new OSCMessage("/ckartree");
 
         List<string> keyList = new List<string>(lsysController.forrest.Keys);
         keyList.Sort();
@@ -69,14 +71,14 @@ public class OSCFeedback : MonoBehaviour
 
     public void SendView(string tree)
     {
-        OSCMessage msg = new OSCMessage("/cktreeview");
+        OSCMessage msg = new OSCMessage("/ckartreeview");
         msg.Append(tree);
         osc.Send(msg);
     }
 
     public void SendTransform(string tree, TransformSpec ts)
     {
-        OSCMessage msg = new OSCMessage("/cktreetransform");
+        OSCMessage msg = new OSCMessage("/ckartreetransform");
         msg.Append(tree);
 
         msg.Append(ts.position[0]);
@@ -96,7 +98,7 @@ public class OSCFeedback : MonoBehaviour
 
     public void SendValue(string key, float value)
     {
-        OSCMessage msg = new OSCMessage("/ckvalue");
+        OSCMessage msg = new OSCMessage("/ckarvalue");
         msg.Append(key);
         msg.Append(value);
 

@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uriString: 
-  connectToLocal: 1
+  connectToLocal: 0
   requestConsole: 1
   requestViews: 1
 --- !u!4 &764862007

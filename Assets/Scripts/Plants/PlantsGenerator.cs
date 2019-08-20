@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LOpTreeGenerator : LGenerator
+public class PlantsGenerator : LGenerator
 {
     public GameObject protoEmpty;
     public Material branchMaterial;
 
     private WedgeMeshGen wedgeMeshGen;
-    private MaterialLookup materialLookup;
 
     private float mainSquish;
     private float bottomSquish;
@@ -26,7 +25,6 @@ public class LOpTreeGenerator : LGenerator
         base.Start();
 
         wedgeMeshGen = WedgeMeshGen.Instance();
-        materialLookup = MaterialLookup.Instance();
     }
 
     override public void Generate()
@@ -47,7 +45,7 @@ public class LOpTreeGenerator : LGenerator
         foreach (Transform child in transform)
         {
             // Destroy(child.gameObject);
-            child.gameObject.GetComponent<GrowBehaviour>().Die();
+            child.gameObject.GetComponent<PlantsGrowBehaviour>().Die();
         }
 
         Grow(transform, lsys.units[0], 0.98f, 0.0f, 0);
@@ -85,7 +83,8 @@ public class LOpTreeGenerator : LGenerator
             obj.transform.Translate(0.0f, 3.0f * obj.transform.lossyScale[0], 0.0f);
             */
 
-            GrowBehaviour grow = obj.GetComponent<GrowBehaviour>();
+            
+            PlantsGrowBehaviour grow = obj.AddComponent<PlantsGrowBehaviour>() as PlantsGrowBehaviour;
             grow.gen = this;
             grow.targetRotation = new Vector3(0.0f, angleY, angleZ);
             grow.targetScale = new Vector3(0.8f, 0.8f, 0.8f);

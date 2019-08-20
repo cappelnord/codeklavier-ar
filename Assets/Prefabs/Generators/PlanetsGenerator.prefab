@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1630489496941979760
+--- !u!1 &896692263428531264
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1381929552446610432}
-  - component: {fileID: 5279746391183940756}
+  - component: {fileID: 9184501570389841085}
+  - component: {fileID: 5146554388505352955}
   m_Layer: 0
-  m_Name: OpTreeGeneratorPrefab
+  m_Name: PlanetsGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1381929552446610432
+--- !u!4 &9184501570389841085
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630489496941979760}
+  m_GameObject: {fileID: 896692263428531264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,18 +31,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5279746391183940756
+--- !u!114 &5146554388505352955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1630489496941979760}
+  m_GameObject: {fileID: 896692263428531264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d273c8da19ea145a42358416d055c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 89c962b1a7da8bd4fb944a8ac2dbca66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  protoPlanet: {fileID: 1374543573255133395, guid: f6aabbf1cbf5f6845a8213e4a6e7fd9e,
+    type: 3}
   protoEmpty: {fileID: 9160611660975841763, guid: 23c0ac690ac8c0c4ba5edddd67f50fc1,
     type: 3}
-  branchMaterial: {fileID: 2100000, guid: 2cc335f2f8babd24fbe1d9cdce3286f9, type: 2}
