@@ -12,6 +12,8 @@ public class PlanetsBehaviour : MonoBehaviour
 
     IIRFilter scaleFilter;
 
+    public LGenerator gen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +23,7 @@ public class PlanetsBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles[0], transform.localEulerAngles[1] + degreesPerSecond * Time.deltaTime, transform.localEulerAngles[2]);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles[0], transform.localEulerAngles[1] + degreesPerSecond * Time.deltaTime * gen.speedMultiplier, transform.localEulerAngles[2]);
         float currentScale = scaleFilter.Filter(targetScale);
         transform.GetChild(0).transform.localScale = new Vector3(currentScale, currentScale, currentScale);
 

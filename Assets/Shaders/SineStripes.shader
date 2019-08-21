@@ -3,6 +3,7 @@
     Properties
     {
         _Color ("Color", Color) = (1,1,1,1)
+		_BackgroundColor ("Background Color", Color) = (0, 0, 0, 1)
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
@@ -36,6 +37,8 @@
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
+		fixed4 _BackgroundColor;
+
 
 		float4 _PhaseFrequency;
 		float4 _PhaseCoordOffset;
@@ -53,12 +56,17 @@
 
         {
             // Albedo comes from a texture tinted by color
-			float c = sin((IN.uv_MainTex.x + _Phase + (_PhaseCoordOffset[0] * IN.uv_MainTex.y)) * _PhaseFrequency[0] * 2.0 * PI) + sin((IN.uv_MainTex.y + _Phase + (_PhaseCoordOffset[1] * IN.uv_MainTex.x)) * _PhaseFrequency[1] * 2.0 * PI);
+			float c1 = sin((IN.uv_MainTex.x + _Phase + (_PhaseCoordOffset[0] * IN.uv_MainTex.y)) * _PhaseFrequency[0] * 2.0 * PI) + sin((IN.uv_MainTex.y + _Phase + (_PhaseCoordOffset[1] * IN.uv_MainTex.x)) * _PhaseFrequency[1] * 2.0 * PI);
+			float c2 = sin((IN.uv_MainTex.x + _Phase + (_PhaseCoordOffset[2] * IN.uv_MainTex.y)) * _PhaseFrequency[2] * 2.0 * PI) + sin((IN.uv_MainTex.y + _Phase + (_PhaseCoordOffset[3] * IN.uv_MainTex.x)) * _PhaseFrequency[3] * 2.0 * PI);
+			float c = (c1 + c2) * 0.5;
 			c = max(0.0, c);
-            o.Albedo = float3(c, c, c);
+			o.Albedo = lerp(_BackgroundColor.rgb, _Color.rgb, c);
+
             // Metallic and smoothness come from slider variables
+
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
+
 			o.Alpha = 1.0;
         }
         ENDCG

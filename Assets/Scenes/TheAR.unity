@@ -564,6 +564,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1669893291076738559, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: worldIsAR
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddb977535cb80c4b9e42ecaeaf2df3e, type: 3}
 --- !u!1 &763420098 stripped
@@ -586,7 +591,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invertTransform: 0
   onlyTranslate: 0
-  worldIsAr: 1
 --- !u!4 &763420101 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7713098529516373334, guid: fddb977535cb80c4b9e42ecaeaf2df3e,

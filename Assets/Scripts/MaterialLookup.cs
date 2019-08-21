@@ -6,6 +6,8 @@ public class MaterialLookup : MonoBehaviour
 {
 
     public Material[] materials = new Material[10];
+    public Color[] colors = new Color[10];
+
 
     private static MaterialLookup instance;
     public static MaterialLookup Instance()
@@ -34,5 +36,11 @@ public class MaterialLookup : MonoBehaviour
     {
         int index = (int)char.GetNumericValue(symbol);
         return materials[index];
+    }
+
+    public Color GetColor(char symbol)
+    {
+        int index = (int)char.GetNumericValue(symbol);
+        return colors[index];
     }
 }

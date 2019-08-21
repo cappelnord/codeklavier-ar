@@ -47,7 +47,7 @@ public class LArcBallGenerator : LGenerator {
 
     override public void Generate()
     {
-        ResetRandomness();
+        PreGenerate();
 
         foreach (Transform child in transform)
         {
@@ -75,9 +75,12 @@ public class LArcBallGenerator : LGenerator {
             ring.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
 
             ring.transform.Rotate(new Vector3(RandomRange(0.0f, 360.0f), RandomRange(0.0f, 360.0f), RandomRange(0.0f, 360.0f)));
-            ring.GetComponent<RingBehaviour>().rotation = new Vector3(RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul);
-            ring.GetComponent<RingBehaviour>().targetScale = scale;
-            ring.GetComponent<RingBehaviour>().scale = 0.0f;
+
+            RingBehaviour ringBehave = ring.GetComponent<RingBehaviour>();
+            ringBehave.rotation = new Vector3(RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul);
+            ringBehave.targetScale = scale;
+            ringBehave.scale = 0.0f;
+            ringBehave.gen = this;
 
             float degsPerSegment = 360.0f / data.Count;
             float startRotation = 0.0f;

@@ -54,7 +54,7 @@ public class OpTreeGrowBehaviour : MonoBehaviour
             currentPosition = currentPosition * dtGrowWeight + targetPosition * dtCounterWeight;
 
             windPhase += (deltaWindPhase * Time.deltaTime);
-            Vector3 windRotation = currentRotation * windStrength * Mathf.Sin(windPhase);
+            Vector3 windRotation = currentRotation * windStrength * Mathf.Sin(windPhase) * gen.speedMultiplier;
 
             transform.localEulerAngles = currentRotation + windRotation;
             transform.localPosition = currentPosition;

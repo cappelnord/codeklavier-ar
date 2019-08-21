@@ -15,11 +15,10 @@ public class OpCubesGenerator : LGenerator
 
     override public void Generate()
     {
-        ResetRandomness();
+        PreGenerate();
 
         foreach (Transform child in transform)
         {
-            // Destroy(child.gameObject);
             OpCubeBehaviour behave = child.gameObject.GetComponent<OpCubeBehaviour>();
             if (behave != null)
             {
@@ -49,26 +48,30 @@ public class OpCubesGenerator : LGenerator
 
         foreach (ProcessUnit unit in children)
         {
-            GameObject obj = Spawn(parent, unit);
-            Transform tra = obj.transform;
-
+            GameObject obj;
             float newScale = lastScale * 0.99f;
-
-            tra.localEulerAngles = new Vector3(0.0f, angle + phase, skew);
-            tra.localPosition = new Vector3(outwardRadius, 0.0f, 0.0f);
-
-            if(unit.Content != '0')
+            bool constructObject = unit.Content != '0' && VisitUnit(unit);
+            if (constructObject)
             {
+                obj = Spawn(parent, unit, generation);
                 obj.GetComponent<OpCubeBehaviour>().targetScale = newScale;
                 obj.GetComponent<OpCubeBehaviour>().degreesPerSecond = RandomRange(-3.0f, 3.0f);
+                obj.GetComponent<OpCubeBehaviour>().gen = this;
+            } else
+            {
+                obj = Instantiate(protoEmpty, parent);
             }
+
+            Transform tra = obj.transform;
+            tra.localEulerAngles = new Vector3(0.0f, angle + phase, skew);
+            tra.localPosition = new Vector3(outwardRadius, 0.0f, 0.0f);
 
             angle += deltaAngle;
             Grow(tra, unit.Children, newScale, generation + 1);
         }
     }
 
-    GameObject Spawn(Transform parent, ProcessUnit unit)
+    GameObject Spawn(Transform parent, ProcessUnit unit, int generation)
     {
         if (unit.Content == '0')
         {
@@ -78,10 +81,24 @@ public class OpCubesGenerator : LGenerator
         
         GameObject obj = Object.Instantiate(protoCube, parent);
         SineStripesCycler ssc = obj.GetComponent<SineStripesCycler>();
-        ssc.phaseFrequencyX = RandomRange(0.2f, 8.0f);
-        ssc.phaseFrequencyY = 0.0f;
-        ssc.phaseOffsetX = Random.Range(-5.0f, 5.0f);
-        ssc.phaseOffsetY = Random.Range(-5.0f, 5.0f);
+        ssc.phaseFrequencyX = RandomRange(0.2f, 8.0f - (generation * 0.5f));
+        ssc.phaseFrequencyY = RandomRange(0.0f, generation * 0.05f);
+
+        float xyAmb = 4.0f - (generation * 0.3333f);
+
+        ssc.phaseOffsetX = Random.Range(-xyAmb, xyAmb);
+        ssc.phaseOffsetY = Random.Range(-xyAmb, xyAmb);
+
+        if(generation % 2 == 1)
+        {
+            ssc.color = Color.black;
+            ssc.backgroundColor = materialLookup.GetColor(unit.Content);
+        } else
+        {
+            ssc.color = Color.white;
+            ssc.backgroundColor = Color.black;
+
+        }
 
         return obj;
     }

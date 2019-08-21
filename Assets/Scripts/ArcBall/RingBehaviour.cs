@@ -11,6 +11,8 @@ public class RingBehaviour : MonoBehaviour
 
     private bool destruct;
 
+    public LGenerator gen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class RingBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(rotation * Time.deltaTime);
+        transform.Rotate(rotation * Time.deltaTime * gen.speedMultiplier);
         float dtWeight = Mathf.Clamp(0.05f * 60.0f * Time.deltaTime, 0.0f, 1.0f);
 
         scale = (scale * (1.0f - dtWeight)) + (targetScale * dtWeight);

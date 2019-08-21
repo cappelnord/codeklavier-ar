@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   degreesPerSecond: 0
-  targetScale: 0.4
+  targetScale: 0.3
 --- !u!1 &6386091702475611463
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 463214798381434731}
   - component: {fileID: 5472836868263174644}
   - component: {fileID: 1727093059819541141}
+  - component: {fileID: 2709270881718211356}
   m_Layer: 0
   m_Name: ProtoPlanetSphere
   m_TagString: Untagged
@@ -104,7 +105,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8150cff154862334c89771e8f6ed6cde, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,3 +139,20 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2709270881718211356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6386091702475611463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b235f6bdcd0bb6409dc80c803f49385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phaseFreqeuncy: {x: 0, y: 0, z: 0, w: 0}
+  phaseOffset: {x: 0, y: 0, z: 0, w: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+  offset: 0

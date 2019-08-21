@@ -7,7 +7,6 @@ public class MasterTransformBehaviour : MonoBehaviour
 
     public bool invertTransform = false;
     public bool onlyTranslate = false;
-    public bool worldIsAr = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +38,7 @@ public class MasterTransformBehaviour : MonoBehaviour
             gameObject.transform.localEulerAngles = new Vector3(ts.rotation[0] * direction, ts.rotation[1] * direction, ts.rotation[2] * direction);
         }
 
-        if (!worldIsAr)
+        if (!WorldIsAR.Get())
         {
             gameObject.transform.Translate(new Vector3(ts.position[0] * direction, ts.position[1] * direction, ts.position[2] * direction), Space.World);
         } else

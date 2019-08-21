@@ -29,7 +29,7 @@ public class PlantsGenerator : LGenerator
 
     override public void Generate()
     {
-        ResetRandomness();
+        PreGenerate();
 
         mainSquish = RandomRange(0.2f, 1.0f);
         bottomSquish = RandomRange(0.2f, 1.5f) * 0.1f;
@@ -71,11 +71,12 @@ public class PlantsGenerator : LGenerator
 
         foreach(ProcessUnit unit in children)
         {
-            GameObject obj = Spawn(parent, unit);
-            if(obj == null)
+            if(!VisitUnit(unit) || unit.Content == '0')
             {
                 continue;
             }
+
+            GameObject obj = Spawn(parent, unit);
 
             /*
             obj.transform.Rotate(0.0f, angleY, angleZ);
@@ -105,13 +106,6 @@ public class PlantsGenerator : LGenerator
 
     GameObject Spawn(Transform parent, ProcessUnit unit)
     {
-
-        
-        if (unit.Content == '0')
-        {
-            return null;
-        }
-        
 
         float upRadius = 0.8f * 0.1f;
 

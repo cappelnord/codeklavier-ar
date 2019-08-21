@@ -18,7 +18,6 @@ public class MarkerVisualizer : MonoBehaviour
     private bool didReceiveEndMarkerConfig = false;
     private bool didVisualizeMarkers = false;
 
-    public bool worldIsAr = false;
     public bool markersStartDisabled = false;
 
 
@@ -85,7 +84,7 @@ public class MarkerVisualizer : MonoBehaviour
 
             obj.transform.localEulerAngles = new Vector3(ts.rotation[0], ts.rotation[1], ts.rotation[2]);
 
-            if (!worldIsAr)
+            if (WorldIsAR.Get())
             {
                 obj.transform.Translate(new Vector3(ts.position[0], ts.position[1], ts.position[2]), Space.World);
             }
