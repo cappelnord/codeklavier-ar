@@ -11,7 +11,6 @@ public class Persistence : MonoBehaviour
 
     private bool dynamicsToSize = true;
     private bool connectionSpheres = true;
-    private bool fallingCubes = false;
     private bool hideCubes = false;
     private bool hideConnections = false;
     private bool hideDynamics = false;
@@ -34,7 +33,6 @@ public class Persistence : MonoBehaviour
 
         dynamicsToSize = PlayerPrefs.GetInt("dynamicsToSize", lgen.dynamicsToSize ? 1 : 0) != 0;
         connectionSpheres = PlayerPrefs.GetInt("connectionSpheres", lgen.connectionSpheres ? 1 : 0) != 0;
-        fallingCubes = PlayerPrefs.GetInt("fallingCubes", lgen.fallingCubes ? 1 : 0) != 0;
         hideCubes = PlayerPrefs.GetInt("hideCubes", lgen.hideCubes ? 1 : 0) != 0;
         hideConnections = PlayerPrefs.GetInt("hideConnections", lgen.hideConnections ? 1 : 0) != 0;
         hideDynamics = PlayerPrefs.GetInt("hideDynamics", lgen.hideDynamics ? 1 : 0) != 0;
@@ -51,7 +49,6 @@ public class Persistence : MonoBehaviour
 
         lgen.dynamicsToSize = dynamicsToSize;
         lgen.connectionSpheres = connectionSpheres;
-        lgen.fallingCubes = fallingCubes;
         lgen.hideCubes = hideCubes;
         lgen.hideConnections = hideConnections;
         lgen.hideDynamics = hideDynamics;
@@ -69,7 +66,6 @@ public class Persistence : MonoBehaviour
 
         dynamicsToSize = lgen.dynamicsToSize;
         connectionSpheres = lgen.connectionSpheres;
-        fallingCubes = lgen.fallingCubes;
         hideCubes = lgen.hideCubes;
         hideConnections = lgen.hideConnections;
         hideDynamics = lgen.hideDynamics;
@@ -85,7 +81,6 @@ public class Persistence : MonoBehaviour
 
         PlayerPrefs.SetInt("dynamicsToSize", dynamicsToSize ? 1 : 0);
         PlayerPrefs.SetInt("connectionSpheres", connectionSpheres ? 1 : 0);
-        PlayerPrefs.SetInt("fallingCubes", fallingCubes ? 1 : 0);
         PlayerPrefs.SetInt("hideCubes", hideCubes ? 1 : 0);
         PlayerPrefs.SetInt("hideConnections", hideConnections ? 1 : 0);
         PlayerPrefs.SetInt("hideDynamics", hideDynamics ? 1 : 0);

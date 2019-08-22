@@ -17,13 +17,18 @@ public class OpCubesGenerator : LGenerator
     {
         PreGenerate();
 
-        foreach (Transform child in transform)
+        Transform[] allChildren = GetComponentsInChildren<Transform>();
+        foreach (Transform child in allChildren)
         {
+            if (child == transform) continue;
+
             OpCubeBehaviour behave = child.gameObject.GetComponent<OpCubeBehaviour>();
             if (behave != null)
             {
                 behave.Die();
-            }
+            } 
+
+            // TODO: REFACTOR SO THAT ALSO EMPTY OBJECTS GET CLEANED UP ALSO IN OTHER PLACES
         }
 
         Grow(gameObject.transform, lsys.units[0], 0.7f, 0);
@@ -32,10 +37,16 @@ public class OpCubesGenerator : LGenerator
     void Grow(Transform parent, List<ProcessUnit> children, float lastScale, int generation)
     {
         float outwardRadius = 1.5f - (generation * RandomRange(0.02f, 0.08f));
+
         // add an empty in center if not-singular axiom
         if (generation == 0 && children.Count == 1)
         {
             outwardRadius = 0.0f;
+        } else
+        
+        if (generation == 0 && children.Count > 1) {
+            GameObject empty = Instantiate(protoEmpty, parent);
+            parent = empty.transform;
         }
 
         float phase = RandomRange(0.0f, 360.0f);

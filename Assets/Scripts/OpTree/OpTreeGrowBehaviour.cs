@@ -27,6 +27,8 @@ public class OpTreeGrowBehaviour : MonoBehaviour
 
     public LGenerator gen;
 
+    IIRFilter windStrengthFilter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,8 @@ public class OpTreeGrowBehaviour : MonoBehaviour
 
         windPhase = gen.RandomRange(0.0f, Mathf.PI * 2.0f);
         deltaWindPhase = gen.RandomRange(0.003f, 0.007f) * 60.0f;
+
+        windStrengthFilter = new IIRFilter(gen.speedMultiplier, 0.01f);
     }
 
     // Update is called once per frame
@@ -53,8 +57,9 @@ public class OpTreeGrowBehaviour : MonoBehaviour
             currentRotation = currentRotation * dtGrowWeight + targetRotation * dtCounterWeight;
             currentPosition = currentPosition * dtGrowWeight + targetPosition * dtCounterWeight;
 
-            windPhase += (deltaWindPhase * Time.deltaTime);
-            Vector3 windRotation = currentRotation * windStrength * Mathf.Sin(windPhase) * gen.speedMultiplier;
+            windPhase += (deltaWindPhase * Time.deltaTime * gen.speedMultiplier);
+            Vector3 windRotation = currentRotation * windStrength * Mathf.Sin(windPhase) * windStrengthFilter.Filter(gen.speedMultiplier);
+             
 
             transform.localEulerAngles = currentRotation + windRotation;
             transform.localPosition = currentPosition;
@@ -69,7 +74,7 @@ public class OpTreeGrowBehaviour : MonoBehaviour
 
             transform.localScale = new Vector3(currentScale[0] * xzW, currentScale[1] * yW, currentScale[2] * xzW);
           
-            if(transform.localScale[1] < 0.01)
+            if(transform.localScale[1] < 0.001f)
             {
                 Destroy(gameObject);
             }
@@ -81,11 +86,12 @@ public class OpTreeGrowBehaviour : MonoBehaviour
     {
         alive = false;
 
-        foreach (Transform child in transform)
+        Transform[] allChildren = GetComponentsInChildren<Transform>();
+        foreach (Transform child in allChildren)
         {
+            if (child == transform) continue;
+
             child.gameObject.GetComponent<OpTreeGrowBehaviour>().Die();
         }
-
-        // transform.parent = null;
     }
 }

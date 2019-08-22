@@ -13,7 +13,6 @@ public class VizGUI : MonoBehaviour
 
     private bool dynamicsToSize = true;
     private bool connectionSpheres = true;
-    private bool fallingCubes = false;
     private bool hideCubes = false;
     private bool hideConnections = false;
     private bool hideDynamics = false;
@@ -52,7 +51,6 @@ public class VizGUI : MonoBehaviour
 
                 dynamicsToSize = lgen.dynamicsToSize;
                 connectionSpheres = lgen.connectionSpheres;
-                fallingCubes = lgen.fallingCubes;
                 hideCubes = lgen.hideCubes;
                 hideConnections = lgen.hideConnections;
                 hideDynamics = lgen.hideDynamics;
@@ -67,7 +65,7 @@ public class VizGUI : MonoBehaviour
         }
         else
         {
-            GUI.Box(new Rect(10, 10, 280, 390), "Options");
+            GUI.Box(new Rect(10, 10, 280, 360), "Options");
 
             int y = 50;
             int lx = 30;
@@ -97,11 +95,6 @@ public class VizGUI : MonoBehaviour
 
             GUI.Label(new Rect(lx, y, lw, h), "Spheres");
             connectionSpheres = GUI.Toggle(new Rect(rx, y, tw, h), connectionSpheres, "");
-
-            y += sp;
-
-            GUI.Label(new Rect(lx, y, lw, h), "Falling Cubes");
-            fallingCubes = GUI.Toggle(new Rect(rx, y, tw, h), fallingCubes, "");
 
             y += sp;
 
@@ -146,7 +139,6 @@ public class VizGUI : MonoBehaviour
 
         lgen.dynamicsToSize = dynamicsToSize;
         lgen.connectionSpheres = connectionSpheres;
-        lgen.fallingCubes = fallingCubes;
         lgen.hideCubes = hideCubes;
         lgen.hideConnections = hideConnections;
         lgen.hideDynamics = hideDynamics;

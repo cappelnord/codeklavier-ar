@@ -24,6 +24,12 @@ public class GeneratorHerd : MonoBehaviour
     public GameObject shape1;
     public GameObject shape2;
     public GameObject shape3;
+    public GameObject shape4;
+    public GameObject shape5;
+    public GameObject shape6;
+    public GameObject shape7;
+
+    private int sparseUpdateCounter = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -52,13 +58,25 @@ public class GeneratorHerd : MonoBehaviour
                 objects[key] = Create(lsysController.forrest[key]);
             }
         }
+
+        // do sparse updates
+        List<GeneratorObject> objectsList = new List<GeneratorObject>(objects.Values);
+        if (objectsList.Count > 0)
+        {
+            if (Time.frameCount % 2 == 0)
+            {
+                int idx = sparseUpdateCounter % objectsList.Count;
+                objectsList[idx].lgen.SparseUpdate();
+                sparseUpdateCounter++;
+            }
+        }
     }
 
     GeneratorObject Create(LSystem lsys)
     {
         string shape = lsys.shape;
 
-        // lame
+        // lame code,, refactor!
         GameObject proto = shape1;
         if (shape == "2")
         {
@@ -68,9 +86,25 @@ public class GeneratorHerd : MonoBehaviour
         {
             proto = shape3;
         }
+        if (shape == "4")
+        {
+            proto = shape4;
+        }
+        if (shape == "5")
+        {
+            proto = shape5;
+        }
+        if (shape == "6")
+        {
+            proto = shape6;
+        }
+        if (shape == "7")
+        {
+            proto = shape7;
+        }
 
         GameObject obj = Instantiate(proto, transform);
-        obj.GetComponent<LSystemBehaviour>().SetLSystem(lsys);
+        obj.GetComponent<LGenerator>().SetLSystem(lsys);
 
         return new GeneratorObject(obj, shape);
     }

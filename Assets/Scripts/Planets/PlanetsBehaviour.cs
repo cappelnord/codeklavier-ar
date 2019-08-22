@@ -27,7 +27,7 @@ public class PlanetsBehaviour : MonoBehaviour
         float currentScale = scaleFilter.Filter(targetScale);
         transform.GetChild(0).transform.localScale = new Vector3(currentScale, currentScale, currentScale);
 
-        if(!isAlive && currentScale < 0.00f)
+        if(!isAlive && currentScale < 0.0002f)
         {
             Destroy(this);
         }

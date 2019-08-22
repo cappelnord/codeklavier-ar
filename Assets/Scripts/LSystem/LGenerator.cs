@@ -37,6 +37,7 @@ public class LGenerator : LSystemBehaviour
     protected virtual void Start()
     {
         materialLookup = MaterialLookup.Instance();
+        SparseUpdate();
     }
 
 
@@ -97,8 +98,11 @@ public class LGenerator : LSystemBehaviour
     }
 
     // don't calc on every frame; find some solution!
-    void SparseUpdate()
+    public void SparseUpdate()
     {
+        // GeneratorHerd should clean up
+        if (gameObject == null) return;
+
         Bounds bounds = GetBounds();
         Vector3 size = bounds.size;
         Vector3 center = bounds.center;
@@ -124,8 +128,6 @@ public class LGenerator : LSystemBehaviour
     // Update is called once per frame
     void Update()
     {
-        SparseUpdate();
-
         if (ShouldAct())
         {
             Generate();

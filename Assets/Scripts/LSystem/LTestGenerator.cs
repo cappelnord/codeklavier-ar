@@ -12,7 +12,6 @@ public class LTestGenerator : LGenerator
 
     public bool dynamicsToSize = true;
     public bool connectionSpheres = true;
-    public bool fallingCubes = false;
     public bool hideCubes = false;
     public bool hideConnections = false;
     public bool hideDynamics = false;
@@ -38,17 +37,7 @@ public class LTestGenerator : LGenerator
     {
         foreach (Transform child in transform)
         {
-            Rigidbody rb = child.gameObject.GetComponent<Rigidbody>();
-            if (rb == null || !fallingCubes)
-            {
-                GameObject.Destroy(child.gameObject);
-            }
-            else
-            {
-                child.localPosition = child.localPosition + new Vector3(0.0f, 0.0f, -0.3f);
-                rb.isKinematic = false;
-                rb.AddForce(Vector3.Scale(new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 0.0f)), child.lossyScale), ForceMode.Impulse);
-            }
+            GameObject.Destroy(child.gameObject);
         }
 
         float displace = 0.0f;

@@ -17,13 +17,19 @@ public class PlanetsGenerator : LGenerator
     {
         PreGenerate();
 
-        foreach (Transform child in transform)
+        Transform[] allChildren = GetComponentsInChildren<Transform>();
+        foreach (Transform child in allChildren)
         {
+            if (child == transform) continue;
+
             // Destroy(child.gameObject);
             PlanetsBehaviour behave = child.gameObject.GetComponent<PlanetsBehaviour>();
             if(behave != null)
             {
                 behave.Die();
+            } else
+            {
+                Destroy(child.gameObject);
             }
         }
 
@@ -37,6 +43,11 @@ public class PlanetsGenerator : LGenerator
         // add an empty in center if not-singular axiom
         if(generation == 0 && children.Count == 1) {
             outwardRadius = 0.0f;
+        }
+        if (generation == 0 && children.Count > 1)
+        {
+            GameObject empty = Instantiate(protoEmpty, parent);
+            parent = empty.transform;
         }
 
         float phase = RandomRange(0.0f, 360.0f);
@@ -81,7 +92,7 @@ public class PlanetsGenerator : LGenerator
         PlanetStripesCycler psc = obj.transform.GetChild(0).GetComponent<PlanetStripesCycler>();
 
         psc.phaseFreqeuncy = new Vector4(RandomRange(1, 3), RandomRange(1, 5), RandomRange(1, 3), RandomRange(1, 5));
-        psc.phaseOffset = new Vector4(RandomRange(0, 4), RandomRange(0, 5), RandomRange(0, 4), RandomRange(0, 5));
+        psc.phaseOffset = new Vector4(RandomRange(-3, 3), RandomRange(-3, 3), RandomRange(-3, 3), RandomRange(-3, 3));
         psc.offset = RandomRange(0.0f, 10.0f);
 
         Color col = materialLookup.GetColor(unit.Content);
