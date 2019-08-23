@@ -241,6 +241,11 @@ public class WebsocketConsumer : MonoBehaviour
         queue = new LockFreeQueue<string>();
         stateQueue = new LockFreeQueue<CKARNetworkState>();
 
+        if(Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
+        {
+            connectToLocal = false;
+        }
+
         if (connectToLocal)
         {
             string localIP;
