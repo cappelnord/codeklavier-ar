@@ -3,6 +3,8 @@ AR extension by Patrick Borgeat for [CodeKlavier](https://codeklavier.space/) by
 
 https://codeklavier.space/augmentedreality/
 
+Currently this projects uses **Unity 2019.2.3f1**.
+
 ## Scenes
 
 Each Scene builds its own app:
@@ -25,11 +27,6 @@ Some keys can be used to toggle between different states.
 
 Use in conjunction with the websockets server:
 https://github.com/narcode/codeklavier-extras
-
-### Unity
-
-Currently this projects uses **Unity 2019.2.3f1**.
-
 
 ### Marker Transforms
 
