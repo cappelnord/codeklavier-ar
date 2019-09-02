@@ -12,14 +12,28 @@ Each Scene builds its own app:
 - **TheAR** is the final AR client
 - **TheVR** is an experimental client for virtual reality using SteamVR
 
+## Controls
+
+### ARTestbed
+
+Some keys can be used to toggle between different states.
+
+- **S** to toggle between the default sky box and a black background.
+- **M** to toggle between a marker visualization, the unity cage (1 cubic meter) and axis
+
 ## Tech
 
 Use in conjunction with the websockets server:
 https://github.com/narcode/codeklavier-extras
 
+### Unity
+
+Currently this projects uses **Unity 2019.2.3f1**.
+
+
 ### Marker Transforms
 
-Marker transforms are defined in the server configuration and specify the relation of tracking markers to the desired position/rotation/scale of the visuals. Neutral marker position is flat on a table; positve Y facing upwards.
+Marker transforms are defined in the server configuration and specify the relation of tracking markers to the desired position/rotation/scale of the visuals. Currently there are still issues and it might need a rework.
 
 ## Acknowledgments
 
