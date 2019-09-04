@@ -20,7 +20,8 @@ Each Scene builds its own app:
 
 Some keys can be used to toggle between different states.
 
-- **S** to toggle between the default sky box and a black background.
+- **S** to toggle between the default sky box and a black background
+- **F** to toggle if camera should follow active trees
 - **M** to toggle between a marker visualization, the unity cage (1 cubic meter) and axis
 
 ## Tech

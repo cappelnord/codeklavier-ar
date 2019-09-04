@@ -109,9 +109,9 @@ public class GeneratorHerd : MonoBehaviour
         return new GeneratorObject(obj, shape);
     }
 
-    Vector3 CenterOfActivity()
+    public Vector3 CenterOfActivity()
     {
-        float timeGate = 3.0f;
+        float timeGate = 20.0f;
 
         float sumWeights = 0.0f;
         Vector3 sumPosition = new Vector3(0.0f, 0.0f, 0.0f);
@@ -122,17 +122,17 @@ public class GeneratorHerd : MonoBehaviour
         {
             LGenerator lgen = obj.lgen;
             float dt = ct - lgen.lastTimeTouched;
-            if(ct <= timeGate)
+            if(dt <= timeGate)
             {
-                float weight = timeGate - ct;
+                float weight = timeGate - dt;
                 sumWeights += weight;
                 sumPosition = sumPosition + (lgen.bounds.center * weight);
             }
         }
 
-        if(sumWeights <= 0.25f)
+        if(sumWeights <= 5.0f)
         {
-            sumWeights = 0.25f;
+            sumWeights = 5.0f;
         }
 
         return sumPosition / sumWeights;

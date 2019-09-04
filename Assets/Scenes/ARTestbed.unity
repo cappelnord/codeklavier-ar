@@ -928,6 +928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   herd: {fileID: 7713098529318963264}
+  active: 1
 --- !u!1 &1919123023
 GameObject:
   m_ObjectHideFlags: 0
