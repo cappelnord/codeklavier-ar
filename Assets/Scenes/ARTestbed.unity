@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setWorldIsAR: 0
   setConnectToLocal: 1
+  setFloatUp: 0
   setVsyncCount: -1
 --- !u!4 &73183693
 Transform:
@@ -841,6 +842,7 @@ GameObject:
   - component: {fileID: 1385827500}
   - component: {fileID: 1385827499}
   - component: {fileID: 1385827498}
+  - component: {fileID: 1385827501}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -913,6 +915,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 12.582, y: 0, z: 0}
+--- !u!114 &1385827501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385827497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb87a4ef045ac14eb446ac6ac99f2c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  herd: {fileID: 7713098529318963264}
 --- !u!1 &1919123023
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,3 +1300,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddb977535cb80c4b9e42ecaeaf2df3e, type: 3}
+--- !u!114 &7713098529318963264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7713098529318963263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121425540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb0852ef050d0b4fa9c3eaba22944f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

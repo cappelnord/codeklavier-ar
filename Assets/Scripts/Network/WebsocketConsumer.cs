@@ -375,7 +375,7 @@ public class WebsocketConsumer : MonoBehaviour
 
                 if (msg.type == "view")
                 {
-                    lsysController.DispatchView(msg.payload);
+                    EventManager.InvokeViewChange(msg.payload);
                 }
 
                 if (msg.type == "serverEvent")
