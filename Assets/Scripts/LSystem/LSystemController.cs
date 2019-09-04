@@ -235,20 +235,7 @@ public class LSystem
             }
         }
 
-
-        // generate fullStateString
-        // TODO: Bit dumb and slow ..
-
         fullStateString = "";
-
-        foreach(RuleSet ruleset in rules.Values)
-        {
-            fullStateString = fullStateString + ruleset.From + ">" +  ruleset.To + "#";
-            foreach(int dynamic in ruleset.Dynamics)
-            {
-                fullStateString = fullStateString + dynamic.ToString();
-            }
-        }
 
         foreach(string result in results)
         {

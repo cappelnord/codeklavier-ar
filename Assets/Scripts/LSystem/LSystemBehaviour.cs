@@ -34,7 +34,7 @@ public class LSystemBehaviour : MonoBehaviour
     public void SetLSystem(LSystem _lsys)
     {
         lsys = _lsys;
-
+        lastLsysState = null;
         OnLSystemSet();
     }
 
