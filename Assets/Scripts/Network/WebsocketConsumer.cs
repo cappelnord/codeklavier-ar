@@ -214,7 +214,7 @@ public class CKARNetworkState
 public class WebsocketConsumer : MonoBehaviour
 {
     public string uriString = "";
-    public bool connectToLocal;
+    private bool connectToLocal;
     private bool keepLocal = false;
     private int localConnectionAttempts = 0;
 
@@ -236,6 +236,8 @@ public class WebsocketConsumer : MonoBehaviour
 
     void Start()
     {
+        connectToLocal = Config.connectToLocal;
+
         lsysController = LSystemController.Instance();
 
         queue = new LockFreeQueue<string>();

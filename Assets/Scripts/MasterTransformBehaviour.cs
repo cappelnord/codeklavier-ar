@@ -38,7 +38,7 @@ public class MasterTransformBehaviour : MonoBehaviour
             gameObject.transform.localEulerAngles = new Vector3(ts.rotation[0] * direction, ts.rotation[1] * direction, ts.rotation[2] * direction);
         }
 
-        if (!WorldIsAR.Get())
+        if (!Config.worldIsAR)
         {
             gameObject.transform.Translate(new Vector3(ts.position[0] * direction, ts.position[1] * direction, ts.position[2] * direction), Space.World);
         } else

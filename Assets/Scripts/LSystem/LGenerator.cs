@@ -6,6 +6,8 @@ public class LGenerator : LSystemBehaviour
 {
 
     public TransformSpec transformSpec;
+    public Bounds bounds;
+    public float lastTimeTouched;
 
     public System.Random rand;
 
@@ -37,7 +39,13 @@ public class LGenerator : LSystemBehaviour
     protected virtual void Start()
     {
         materialLookup = MaterialLookup.Instance();
+        Touch();
         SparseUpdate();
+    }
+
+    void Touch()
+    {
+        lastTimeTouched = Time.time;
     }
 
 
@@ -55,6 +63,8 @@ public class LGenerator : LSystemBehaviour
     {
         if (lsys == null) return;
 
+        Touch();
+
         if(key == velValueKey)
         {
             velocityValueFilter.Set(value);
@@ -69,6 +79,7 @@ public class LGenerator : LSystemBehaviour
     protected void PreGenerate()
     {
         ResetRandomness();
+        Touch();
         visitedUnitDict = new Dictionary<long, ProcessUnit>();
 
     }
@@ -97,32 +108,35 @@ public class LGenerator : LSystemBehaviour
         return combinedBounds;
     }
 
-    // don't calc on every frame; find some solution!
     public void SparseUpdate()
     {
         // GeneratorHerd should clean up
         if (gameObject == null) return;
 
-        Bounds bounds = GetBounds();
-        Vector3 size = bounds.size;
-        Vector3 center = bounds.center;
-        float bottom;
-        if(WorldIsAR.Get()) {
-            // See if it's right!
-            bottom = center[2] - size[2] / 2;
-        }
-        else
+        bounds = GetBounds();
+
+        if (Config.floatUp)
         {
-            bottom = center[1] - size[1] / 2;
+            Vector3 size = bounds.size;
+            Vector3 center = bounds.center;
+            float bottom;
+            if (Config.worldIsAR)
+            {
+                // See if it's right!
+                bottom = center[2] - size[2] / 2;
+            }
+            else
+            {
+                bottom = center[1] - size[1] / 2;
+            }
+
+            if (bottom > 0.0f)
+            {
+                bottom = 0.0f;
+            }
+
+            floatUp.Set(-bottom);
         }
-
-       if(bottom > 0.0f)
-        {
-            bottom = 0.0f;
-        }
-
-        floatUp.Set(-bottom);
-
     }
 
     // Update is called once per frame
