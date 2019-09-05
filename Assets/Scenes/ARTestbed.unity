@@ -460,50 +460,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5681937414674152795}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &773021070
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 773021072}
-  - component: {fileID: 773021071}
-  m_Layer: 0
-  m_Name: SkyboxStateToggle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &773021071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773021070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96cd301d370eefb4e9f643a8642c5538, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 1385827499}
---- !u!4 &773021072
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773021070}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &873182069
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,6 +799,7 @@ GameObject:
   - component: {fileID: 1385827499}
   - component: {fileID: 1385827498}
   - component: {fileID: 1385827501}
+  - component: {fileID: 1385827502}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -929,6 +886,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   herd: {fileID: 7713098529318963264}
   active: 1
+--- !u!114 &1385827502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385827497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96cd301d370eefb4e9f643a8642c5538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1919123023
 GameObject:
   m_ObjectHideFlags: 0

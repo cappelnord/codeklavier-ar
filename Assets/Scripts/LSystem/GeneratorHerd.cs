@@ -109,6 +109,16 @@ public class GeneratorHerd : MonoBehaviour
         return new GeneratorObject(obj, shape);
     }
 
+    public Bounds GetBounds()
+    {
+        Bounds combinedBounds = new Bounds(transform.position, new Vector3(0.0f, 0.0f, 0.0f));
+        foreach(GeneratorObject obj in objects.Values)
+        {
+            combinedBounds.Encapsulate(obj.lgen.bounds);
+        }
+        return combinedBounds;
+    }
+
     public Vector3 CenterOfActivity()
     {
         float timeGate = 20.0f;
