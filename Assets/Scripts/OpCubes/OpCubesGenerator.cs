@@ -36,7 +36,7 @@ public class OpCubesGenerator : LGenerator
 
     void Grow(Transform parent, List<ProcessUnit> children, float lastScale, int generation)
     {
-        float outwardRadius = 1.5f - (generation * RandomRange(0.02f, 0.08f));
+        float outwardRadius = 2.0f - (generation * RandomRange(0.02f, 0.08f));
 
         // add an empty in center if not-singular axiom
         if (generation == 0 && children.Count == 1)
@@ -75,7 +75,7 @@ public class OpCubesGenerator : LGenerator
 
             Transform tra = obj.transform;
             tra.localEulerAngles = new Vector3(0.0f, angle + phase, skew);
-            tra.localPosition = new Vector3(outwardRadius, 0.0f, 0.0f);
+            tra.localPosition = new Vector3(outwardRadius, 0.0f, 0.0f) + new Vector3(RandomRange(-0.2f, 0.2f), RandomRange(-0.2f, 0.2f), RandomRange(-0.2f, 0.2f));
 
             angle += deltaAngle;
             Grow(tra, unit.Children, newScale, generation + 1);
@@ -93,7 +93,7 @@ public class OpCubesGenerator : LGenerator
         GameObject obj = Object.Instantiate(protoCube, parent);
         SineStripesCycler ssc = obj.GetComponent<SineStripesCycler>();
         ssc.phaseFrequencyX = RandomRange(0.2f, 8.0f - (generation * 0.5f));
-        ssc.phaseFrequencyY = RandomRange(0.0f, generation * 0.05f);
+        ssc.phaseFrequencyY = RandomRange(0.2f, generation * 0.05f);
 
         float xyAmb = 4.0f - (generation * 0.3333f);
 

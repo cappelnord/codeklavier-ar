@@ -6,7 +6,7 @@ public class ActivityFollower : MonoBehaviour
 {
     public GeneratorHerd herd;
     public bool active;
-    public float maxZoomOutFactor = 1.3333f;
+    public float maxZoomOutFactor = 1.5f;
     private IIRFilter3 filter;
     private IIRFilter fovFilter;
 
@@ -42,7 +42,7 @@ public class ActivityFollower : MonoBehaviour
             activityCenter = herd.CenterOfActivity();
             calcFOV = minFOV;
             float magHerdSize = herd.GetBounds().size.magnitude;
-            calcFOV = CKARTools.LinLin(magHerdSize, 8.0f, 20.0f, minFOV, maxFOV);
+            calcFOV = CKARTools.LinLin(magHerdSize, 6.0f, 20.0f, minFOV, maxFOV);
         }
         else
         {

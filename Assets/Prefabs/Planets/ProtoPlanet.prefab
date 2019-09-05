@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   degreesPerSecond: 0
-  targetScale: 0.3
+  targetScale: 0.2
+  gen: {fileID: 0}
 --- !u!1 &6386091702475611463
 GameObject:
   m_ObjectHideFlags: 0
