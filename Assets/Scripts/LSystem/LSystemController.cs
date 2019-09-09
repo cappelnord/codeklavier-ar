@@ -386,9 +386,21 @@ public class LSystemController : MonoBehaviour
         return instance;
     }
 
+    private bool Validate(string data)
+    {
+        // SHOULD BE PROPERLY IMPLEMENTED
+        return data.Contains("@") && data.Contains(".");
+    }
+
     public void Dispatch(string data)
     {
         // Debug.Log(data);
+        if(!Validate(data))
+        {
+            Debug.Log("Invalid lsys-rule: " + data);
+            return;
+        }
+
         Parse(data);
         Generate();
     }
