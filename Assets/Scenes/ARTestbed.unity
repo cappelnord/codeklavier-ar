@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   setWorldIsAR: 0
-  setConnectToLocal: 1
+  setConnectToLocal: 0
   setFloatUp: 0
   setVsyncCount: -1
 --- !u!4 &73183693
