@@ -242,6 +242,8 @@ public class LSystem
             fullStateString = fullStateString + result;
         }
 
+        fullStateString = fullStateString + "k:" + key;
+
     }
 
 

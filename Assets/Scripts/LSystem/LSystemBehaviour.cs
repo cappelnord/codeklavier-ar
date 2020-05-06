@@ -6,6 +6,7 @@ public class LSystemBehaviour : MonoBehaviour
 {
     protected LSystem lsys;
     private string lastLsysState;
+    private bool first = true;
 
     public bool ShouldAct()
     {
@@ -21,6 +22,11 @@ public class LSystemBehaviour : MonoBehaviour
                 return true;
             } else
             {
+                if (first)
+                {
+                    first = false;
+                    return true;
+                }
                 return false;
             }
         }
