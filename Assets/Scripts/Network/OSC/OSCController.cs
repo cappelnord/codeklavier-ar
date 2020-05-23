@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System;
 using UnityEngine;
 
 using UnityOSC;
@@ -49,10 +50,16 @@ public class OSCController : MonoBehaviour
 
     public void Send(OSCPacket packet)
     {
-        client.Send(packet);
-        if(sendToLocalhostToo)
+        try
         {
-            localhost.Send(packet);
+            client.Send(packet);
+            if (sendToLocalhostToo)
+            {
+                localhost.Send(packet);
+            }
+        } catch (Exception e)
+        {
+            Debug.Log(e);
         }
     }
 
