@@ -30,7 +30,7 @@ public class NetworkResponderUI : NetworkResponder
 
 
 
-        switch (state.type)
+        switch (state.Type)
         {
             case CKARNetworkStateType.ConnectingToMaster:
             case CKARNetworkStateType.ConnectingToServer:

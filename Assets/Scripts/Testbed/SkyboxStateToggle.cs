@@ -8,13 +8,13 @@ public class SkyboxStateToggle : MonoBehaviour
     private int state = 0;
     private int numStates = 2;
 
-    private Camera camera;
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
-        camera = GetComponent<Camera>();
-        camera.clearFlags = CameraClearFlags.Skybox;
+        cam = GetComponent<Camera>();
+        cam.clearFlags = CameraClearFlags.Skybox;
     }
 
     void Update()
@@ -32,10 +32,10 @@ public class SkyboxStateToggle : MonoBehaviour
         switch(state)
         {
             case 0:
-                camera.clearFlags = CameraClearFlags.Skybox;
+                cam.clearFlags = CameraClearFlags.Skybox;
                 break;
             case 1:
-                camera.clearFlags = CameraClearFlags.SolidColor;
+                cam.clearFlags = CameraClearFlags.SolidColor;
                 break;
         }
     }

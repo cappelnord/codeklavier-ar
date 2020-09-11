@@ -8,12 +8,12 @@ public class PlanetsGenerator : LGenerator
     public GameObject protoPlanet;
     public GameObject protoEmpty;
 
-    override protected void Start()
+    protected override void Start()
     {
         base.Start();
     }
 
-    override public void Generate()
+    public override void Generate()
     {
         PreGenerate();
 

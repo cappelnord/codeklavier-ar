@@ -17,17 +17,17 @@ public class PlantsGenerator : LGenerator
     private float flowerSquish;
     private float flowerLength;
     private float growAngle;
-    
+
 
     // Start is called before the first frame update
-    override protected void Start()
+    protected override void Start()
     {
         base.Start();
 
         wedgeMeshGen = WedgeMeshGen.Instance();
     }
 
-    override public void Generate()
+    public override void Generate()
     {
         PreGenerate();
 

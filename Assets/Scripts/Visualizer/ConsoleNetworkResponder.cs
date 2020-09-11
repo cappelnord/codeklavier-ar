@@ -19,6 +19,6 @@ public class ConsoleNetworkResponder : NetworkResponder
 
     override public void Handle(CKARNetworkState state)
     {
-        EventManager.InvokeConsole(state.message);
+        EventManager.InvokeConsole(state.Message);
     }
 }

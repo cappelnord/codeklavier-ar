@@ -12,7 +12,7 @@ public class RGenerator : LGenerator
     private Dictionary<char, GameObject> lookup;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         lookup = new Dictionary<char, GameObject>();
 
@@ -27,7 +27,7 @@ public class RGenerator : LGenerator
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if(ShouldAct())
         {

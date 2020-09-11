@@ -8,7 +8,6 @@ public class OpTreeGenerator : LGenerator
     public Material branchMaterial;
 
     private WedgeMeshGen wedgeMeshGen;
-    private MaterialLookup materialLookup;
 
     private float mainSquish;
     private float bottomSquish;
@@ -18,10 +17,10 @@ public class OpTreeGenerator : LGenerator
     private float flowerSquish;
     private float flowerLength;
     private float growAngle;
-    
+
 
     // Start is called before the first frame update
-    override protected void Start()
+    protected override void Start()
     {
         base.Start();
 
@@ -29,7 +28,7 @@ public class OpTreeGenerator : LGenerator
         materialLookup = MaterialLookup.Instance();
     }
 
-    override public void Generate()
+    public override void Generate()
     {
         ResetRandomness();
 

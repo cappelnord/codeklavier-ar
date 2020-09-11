@@ -8,7 +8,7 @@ public class OpCubesGenerator : LGenerator
     public GameObject protoCube;
     public GameObject protoEmpty;
 
-    override protected void Start()
+    protected override void Start()
     {
         base.Start();
     }

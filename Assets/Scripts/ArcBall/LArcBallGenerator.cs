@@ -28,7 +28,7 @@ public class LArcBallGenerator : LGenerator {
     private ArcMeshGen meshgen;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         base.Start();
 
@@ -45,7 +45,7 @@ public class LArcBallGenerator : LGenerator {
         }
     }
 
-    override public void Generate()
+    public override void Generate()
     {
         PreGenerate();
 

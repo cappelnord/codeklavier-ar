@@ -23,9 +23,9 @@ public class NetworkResponderDisk : NetworkResponder
         Renderer rend = GetComponent<Renderer>();
         rend.material.shader = Shader.Find("Standard");
 
-        Debug.Log(state.type);
+        Debug.Log(state.Type);
 
-        switch (state.type)
+        switch (state.Type)
         {
             case CKARNetworkStateType.ConnectingToMaster:
             case CKARNetworkStateType.ConnectingToServer:

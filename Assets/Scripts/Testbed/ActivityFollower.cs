@@ -13,14 +13,14 @@ public class ActivityFollower : MonoBehaviour
     private float minFOV;
     private float maxFOV;
 
-    private Camera camera;
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
 
-        minFOV = camera.fieldOfView;
+        minFOV = cam.fieldOfView;
         maxFOV = minFOV * maxZoomOutFactor;
 
         filter = new IIRFilter3(new Vector3(0.0f, 0.0f, 0.0f), 0.002f);
@@ -52,6 +52,6 @@ public class ActivityFollower : MonoBehaviour
 
         Vector3 filteredActivityCenter = filter.Filter(activityCenter);
         transform.LookAt(filteredActivityCenter, Vector3.up);
-        camera.fieldOfView = fovFilter.Filter(calcFOV);
+        cam.fieldOfView = fovFilter.Filter(calcFOV);
     }
 }

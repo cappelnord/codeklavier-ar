@@ -11,7 +11,7 @@ public class AGenerator : LGenerator
     private Dictionary<char, GameObject> lookup;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
 
         lookup = new Dictionary<char, GameObject>();
@@ -26,7 +26,7 @@ public class AGenerator : LGenerator
         lookup.Add('N', nullObject);
     }
 
-    override public void Generate()
+    public override void Generate()
     {
 
         foreach (Transform child in transform)

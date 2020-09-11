@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Net.WebSockets;
 using UnityEngine;
-using System.Threading;
 using UnityEngine.Networking;
 using System.Net;
 using System.Net.Sockets;
@@ -150,42 +149,42 @@ public class LockFreeQueue<T>
 [Serializable]
 public class WebsocketJsonMessage
 {
-    public string type;
-    public string payload;
+    public string Type;
+    public string Payload;
 }
 
 [Serializable]
 public class WebsocketJsonValue
 {
-    public string type;
-    public string key;
-    public float payload;
+    public string Type;
+    public string Key;
+    public float Payload;
 }
 
 [Serializable]
 public class WebsocketJsonShape
 {
-    public string type;
-    public string tree;
-    public string shape;
+    public string Type;
+    public string Tree;
+    public string Shape;
 }
 
 
 [Serializable]
 public class WebsocketJsonTransform
 {
-    public string type;
-    public string tree;
-    public float[] position;
-    public float[] scale;
-    public float[] rotation;
+    public string Type;
+    public string Tree;
+    public float[] Position;
+    public float[] Scale;
+    public float[] Rotation;
 }
 
 [Serializable]
 public class MasterResponse
 {
-    public string host;
-    public string port;
+    public string Host;
+    public string Port;
 }
 
 public enum CKARNetworkStateType
@@ -201,35 +200,35 @@ public enum CKARNetworkStateType
 
 public class CKARNetworkState
 {
-    public CKARNetworkStateType type;
-    public string message;
+    public CKARNetworkStateType Type { get; private set; }
+    public string Message { get; private set; }
 
-    public CKARNetworkState(CKARNetworkStateType _type, string _message)
+    public CKARNetworkState(CKARNetworkStateType type, string message)
     {
-        type = _type;
-        message = _message;
+        Type = type;
+        Message = message;
     }
 }
 
 public class WebsocketConsumer : MonoBehaviour
 {
-    public string uriString = "";
+    public string UriString = "";
     private bool connectToLocal;
     private bool keepLocal = false;
     private int localConnectionAttempts = 0;
 
-    string masterUri = "https://keyboardsunite.com/ckar/get.php";
+    public string MasterUri = "https://keyboardsunite.com/ckar/get.php";
 
-    ClientWebSocket cws = null;
-    ArraySegment<byte> buf = new ArraySegment<byte>(new byte[4096]);
+    private ClientWebSocket cws = null;
+    private ArraySegment<byte> buf = new ArraySegment<byte>(new byte[4096]);
 
-    public bool requestConsole = false;
-    public bool requestViews = false;
+    public bool RequestConsole = false;
+    public bool RequestViews = false;
 
-    bool connected = false;
+    private bool connected = false;
 
-    LockFreeQueue<string> queue;
-    LockFreeQueue<CKARNetworkState> stateQueue;
+    private LockFreeQueue<string> queue;
+    private LockFreeQueue<CKARNetworkState> stateQueue;
 
     private LSystemController lsysController;
 
@@ -258,10 +257,10 @@ public class WebsocketConsumer : MonoBehaviour
                 localIP = endPoint.Address.ToString();
             }
 
-            uriString = "ws://" + localIP + ":8081/ckar_consume";
+            UriString = "ws://" + localIP + ":8081/ckar_consume";
         }
 
-        if (uriString == "")
+        if (UriString == "")
         {
             ConnectToMaster();
         }
@@ -275,7 +274,7 @@ public class WebsocketConsumer : MonoBehaviour
 
     IEnumerator RetreiveWebsocketURI()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(new Uri(masterUri)))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(new Uri(MasterUri)))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -289,7 +288,7 @@ public class WebsocketConsumer : MonoBehaviour
                 else
                 {
                     MasterResponse response = JsonUtility.FromJson<MasterResponse>(webRequest.downloadHandler.text);
-                    uriString = "ws://" + response.host + ":" + response.port.ToString() + "/ckar_consume";
+                    UriString = "ws://" + response.Host + ":" + response.Port.ToString() + "/ckar_consume";
                     ResponderHandle(new CKARNetworkState(CKARNetworkStateType.ConnectedToMaster, "Connected to Master!"));
 
                 }
@@ -303,7 +302,7 @@ public class WebsocketConsumer : MonoBehaviour
     void Update()
     {
         bool doTryConnect = true;
-        doTryConnect = doTryConnect && !connected && uriString != "";
+        doTryConnect = doTryConnect && !connected && UriString != "";
         if(cws != null)
         {
             doTryConnect = doTryConnect && (cws.State == WebSocketState.Closed || cws.State == WebSocketState.Aborted);
@@ -329,58 +328,58 @@ public class WebsocketConsumer : MonoBehaviour
             if(msgString.Contains("\"type\": \"transform\""))
             {
                 WebsocketJsonTransform msg = JsonUtility.FromJson<WebsocketJsonTransform>(msgString);
-                TransformSpec ts = new TransformSpec(msg.position, msg.scale, msg.rotation);
-                if(msg.tree.Contains("marker"))
+                TransformSpec ts = new TransformSpec(msg.Position, msg.Scale, msg.Rotation);
+                if(msg.Tree.Contains("marker"))
                 {
-                    EventManager.InvokeMarkerTransform(msg.tree, ts);
-                } else if(msg.tree.Contains("master"))
+                    EventManager.InvokeMarkerTransform(msg.Tree, ts);
+                } else if(msg.Tree.Contains("master"))
                 {
                     EventManager.InvokeMasterTransform(ts);
                 } else
                 {
-                    lsysController.DispatchTransform(msg.tree, ts);
+                    lsysController.DispatchTransform(msg.Tree, ts);
                 }
             }
             else if (msgString.Contains("\"type\": \"shape\""))
             {
                 WebsocketJsonShape msg = JsonUtility.FromJson<WebsocketJsonShape>(msgString);
-                lsysController.DispatchShape(msg.tree, msg.shape);
+                lsysController.DispatchShape(msg.Tree, msg.Shape);
             }
             else if (msgString.Contains("\"type\": \"value\""))
             {
                 WebsocketJsonValue msg = JsonUtility.FromJson<WebsocketJsonValue>(msgString);
-                string[] keys = msg.key.Split(',');
+                string[] keys = msg.Key.Split(',');
                 foreach (string key in keys)
                 {
-                    ValueStore.Set(key, msg.payload); // will also invoke event
+                    ValueStore.Set(key, msg.Payload); // will also invoke event
                 }
             }
             else
             {
                 WebsocketJsonMessage msg = JsonUtility.FromJson<WebsocketJsonMessage>(msgString);
-                if (msg.type == "lsys")
+                if (msg.Type == "lsys")
                 {
-                    lsysController.Dispatch(msg.payload);
+                    lsysController.Dispatch(msg.Payload);
                 }
 
-                if (msg.type == "console")
+                if (msg.Type == "console")
                 {
-                    EventManager.InvokeConsole(msg.payload);
+                    EventManager.InvokeConsole(msg.Payload);
                 }
 
-                if (msg.type == "consoleStatus")
+                if (msg.Type == "consoleStatus")
                 {
-                    EventManager.InvokeConsoleStatus(msg.payload);
+                    EventManager.InvokeConsoleStatus(msg.Payload);
                 }
 
-                if (msg.type == "view")
+                if (msg.Type == "view")
                 {
-                    EventManager.InvokeViewChange(msg.payload);
+                    EventManager.InvokeViewChange(msg.Payload);
                 }
 
-                if (msg.type == "serverEvent")
+                if (msg.Type == "serverEvent")
                 {
-                    if(msg.payload == "endMarkerConfig")
+                    if(msg.Payload == "endMarkerConfig")
                     {
                         EventManager.InvokeServerEventEndMarkerConfig();
                     }
@@ -409,16 +408,16 @@ public class WebsocketConsumer : MonoBehaviour
 
         try
         {
-            Uri u = new Uri(uriString);
+            Uri u = new Uri(UriString);
             await thisCWS.ConnectAsync(u, CancellationToken.None);
 
             if (connectToLocal) keepLocal = true;
 
-            if(requestConsole)
+            if(RequestConsole)
             {
                 await SendString(thisCWS, "{\"type\": \"subscribe\", \"payload\": \"console\"}");
             }
-            if(requestViews)
+            if(RequestViews)
             {
                 await SendString(thisCWS, "{\"type\": \"subscribe\", \"payload\": \"view\"}");
             }

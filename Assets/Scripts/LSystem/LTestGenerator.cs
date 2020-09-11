@@ -19,7 +19,7 @@ public class LTestGenerator : LGenerator
     private Dictionary<char, GameObject> lookup;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         base.Start();
 
@@ -33,7 +33,7 @@ public class LTestGenerator : LGenerator
         }
     }
 
-    override public void Generate()
+    public override void Generate()
     {
         foreach (Transform child in transform)
         {
