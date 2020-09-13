@@ -5,33 +5,26 @@ using UnityEngine;
 public class PlanetsBehaviour : MonoBehaviour
 {
 
-    public float degreesPerSecond = 0.0f;
-    public float targetScale = 0.4f;
+    public float DegreesPerSecond = 0.0f;
+    public float TargetScale = 0.4f;
 
-    private bool isAlive = true;
+    public LGenerator Gen;
 
-    IIRFilter scaleFilter;
+    private bool alive = true;
 
-    public LGenerator gen;
+    private IIRFilter scaleFilter = new IIRFilter(0.0f, 0.02f);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        scaleFilter = new IIRFilter(0.0f, 0.02f);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles[0], transform.localEulerAngles[1] + degreesPerSecond * Time.deltaTime * gen.speedMultiplier, transform.localEulerAngles[2]);
-        float currentScale = scaleFilter.Filter(targetScale);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles[0], transform.localEulerAngles[1] + DegreesPerSecond * Time.deltaTime * Gen.speedMultiplier, transform.localEulerAngles[2]);
+        float currentScale = scaleFilter.Filter(TargetScale);
 
         if (transform.childCount > 0)
         {
             transform.GetChild(0).transform.localScale = new Vector3(currentScale, currentScale, currentScale);
         }
 
-        if(!isAlive && currentScale < 0.0002f)
+        if(!alive && currentScale < 0.0002f)
         {
             Destroy(this);
         }
@@ -40,7 +33,7 @@ public class PlanetsBehaviour : MonoBehaviour
 
     public void Die()
     {
-        isAlive = false;
-        targetScale = 0.0f;
+        alive = false;
+        TargetScale = 0.0f;
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class OpCubesGenerator : LGenerator
 {
 
-    public GameObject protoCube;
-    public GameObject protoEmpty;
+    public GameObject ProtoCube;
+    public GameObject ProtoEmpty;
 
     protected override void Start()
     {
@@ -22,13 +22,14 @@ public class OpCubesGenerator : LGenerator
         {
             if (child == transform) continue;
 
-            OpCubeBehaviour behave = child.gameObject.GetComponent<OpCubeBehaviour>();
-            if (behave != null)
+            OpCubeBehaviour behave = GetComponent<OpCubeBehaviour>();
+            if(behave != null)
             {
                 behave.Die();
-            } 
-
-            // TODO: REFACTOR SO THAT ALSO EMPTY OBJECTS GET CLEANED UP ALSO IN OTHER PLACES
+            } else
+            {
+                Destroy(child.gameObject);
+            }
         }
 
         Grow(gameObject.transform, lsys.units[0], 0.7f, 0);
@@ -45,7 +46,7 @@ public class OpCubesGenerator : LGenerator
         } else
         
         if (generation == 0 && children.Count > 1) {
-            GameObject empty = Instantiate(protoEmpty, parent);
+            GameObject empty = Instantiate(ProtoEmpty, parent);
             parent = empty.transform;
         }
 
@@ -65,12 +66,12 @@ public class OpCubesGenerator : LGenerator
             if (constructObject)
             {
                 obj = Spawn(parent, unit, generation);
-                obj.GetComponent<OpCubeBehaviour>().targetScale = newScale;
-                obj.GetComponent<OpCubeBehaviour>().degreesPerSecond = RandomRange(-3.0f, 3.0f);
-                obj.GetComponent<OpCubeBehaviour>().gen = this;
+                obj.GetComponent<OpCubeBehaviour>().TargetScale = newScale;
+                obj.GetComponent<OpCubeBehaviour>().DegreesPerSecond = RandomRange(-3.0f, 3.0f);
+                obj.GetComponent<OpCubeBehaviour>().Gen = this;
             } else
             {
-                obj = Instantiate(protoEmpty, parent);
+                obj = Instantiate(ProtoEmpty, parent);
             }
 
             Transform tra = obj.transform;
@@ -86,28 +87,28 @@ public class OpCubesGenerator : LGenerator
     {
         if (unit.Content == '0')
         {
-            return Object.Instantiate(protoEmpty, parent);
+            return Object.Instantiate(ProtoEmpty, parent);
         }
 
         
-        GameObject obj = Object.Instantiate(protoCube, parent);
+        GameObject obj = Object.Instantiate(ProtoCube, parent);
         SineStripesCycler ssc = obj.GetComponent<SineStripesCycler>();
-        ssc.phaseFrequencyX = RandomRange(0.2f, 8.0f - (generation * 0.5f));
-        ssc.phaseFrequencyY = RandomRange(0.2f, generation * 0.05f);
+        ssc.PhaseFrequencyX = RandomRange(0.2f, 8.0f - (generation * 0.5f));
+        ssc.PhaseFrequencyY = RandomRange(0.2f, generation * 0.05f);
 
         float xyAmb = 4.0f - (generation * 0.3333f);
 
-        ssc.phaseOffsetX = Random.Range(-xyAmb, xyAmb);
-        ssc.phaseOffsetY = Random.Range(-xyAmb, xyAmb);
+        ssc.PhaseOffsetX = Random.Range(-xyAmb, xyAmb);
+        ssc.PhaseOffsetY = Random.Range(-xyAmb, xyAmb);
 
         if(generation % 2 == 1)
         {
-            ssc.color = Color.black;
-            ssc.backgroundColor = materialLookup.GetColor(unit.Content);
+            ssc.Color = Color.black;
+            ssc.BackgroundColor = materialLookup.GetColor(unit.Content);
         } else
         {
-            ssc.color = Color.white;
-            ssc.backgroundColor = Color.black;
+            ssc.Color = Color.white;
+            ssc.BackgroundColor = Color.black;
 
         }
 

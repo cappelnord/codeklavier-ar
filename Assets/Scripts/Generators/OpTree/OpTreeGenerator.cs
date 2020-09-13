@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class OpTreeGenerator : LGenerator
 {
-    public GameObject protoEmpty;
-    public Material branchMaterial;
+    public GameObject ProtoEmpty;
+    public Material BranchMaterial;
 
     private WedgeMeshGen wedgeMeshGen;
 
@@ -45,7 +45,6 @@ public class OpTreeGenerator : LGenerator
 
         foreach (Transform child in transform)
         {
-            // Destroy(child.gameObject);
             child.gameObject.GetComponent<OpTreeGrowBehaviour>().Die();
         }
 
@@ -86,26 +85,24 @@ public class OpTreeGenerator : LGenerator
             obj.transform.Translate(0.0f, 3.0f * obj.transform.lossyScale[0], 0.0f);
             */
 
-
-
             OpTreeGrowBehaviour grow = obj.AddComponent<OpTreeGrowBehaviour>() as OpTreeGrowBehaviour;
-            grow.gen = this;
+            grow.Gen = this;
 
             float currentGrowMult = 0.9f;
             if (unit.Children.Count == 0)
             {
                 currentGrowMult = 1.0f;
-                grow.windStrength = 0.0f;
+                grow.WindStrength = 0.0f;
             }
 
-            grow.currentRotation = new Vector3(angleX * currentGrowMult, angleY * currentGrowMult, angleZ * currentGrowMult);
-            grow.targetRotation = new Vector3(angleX, angleY, angleZ);
-            grow.targetScale = new Vector3(0.8f, 0.8f, 0.8f);
-            grow.targetPosition = new Vector3(0.0f, 3.0f * 0.25f + initPosition, 0.0f);
-            grow.currentPosition = new Vector3(0.0f, 3.0f * 0.25f + initPosition, 0.0f);
-            grow.growDelay = growDelay;
+            grow.CurrentRotation = new Vector3(angleX * currentGrowMult, angleY * currentGrowMult, angleZ * currentGrowMult);
+            grow.TargetRotation = new Vector3(angleX, angleY, angleZ);
+            grow.TargetScale = new Vector3(0.8f, 0.8f, 0.8f);
+            grow.TargetPosition = new Vector3(0.0f, 3.0f * 0.25f + initPosition, 0.0f);
+            grow.CurrentPosition = new Vector3(0.0f, 3.0f * 0.25f + initPosition, 0.0f);
+            grow.GrowDelay = growDelay;
 
-            grow.growWeight = growWeight;
+            grow.GrowWeight = growWeight;
 
             obj.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
 
@@ -147,7 +144,7 @@ public class OpTreeGenerator : LGenerator
 
             // GetWedgeObject(int sides, float radiusCenter, float radiusUp, float lengthUp, float radiusDown, float lengthDown, float squish, float squishUp, float squishDown, Transform transform, Material material)
 
-            return wedgeMeshGen.GetWedgeObject(sides, 0.5f * 0.1f * radiusMul * dynamicFactor, upRadius * radiusMul * dynamicFactor, lengthUp, bottomRadius * radiusMul * dynamicFactor, lengthDown, mainSquish, bottomSquish, bottomSquish, parent, branchMaterial);
+            return wedgeMeshGen.GetWedgeObject(sides, 0.5f * 0.1f * radiusMul * dynamicFactor, upRadius * radiusMul * dynamicFactor, lengthUp, bottomRadius * radiusMul * dynamicFactor, lengthDown, mainSquish, bottomSquish, bottomSquish, parent, BranchMaterial);
 
         }
 

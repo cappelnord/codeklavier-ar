@@ -21,13 +21,6 @@ public class WedgeMeshGen : MeshGen
     {
         base.Start();
 
-        // GameObject obj = GetWedgeObject(3, 0.5f, 1.0f, 0.3f, 1.0f, 0.3f, transform, defaultMaterial);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public GameObject GetWedgeObject(int sides, float radiusCenter, float radiusUp, float lengthUp, float radiusDown, float lengthDown, float squish, float squishUp, float squishDown, Transform transform, Material material)
@@ -40,8 +33,7 @@ public class WedgeMeshGen : MeshGen
     {
         
         float thresh = 0.00001f;
-        // TODO
-        string key = "" + sides + "-" + Mathf.RoundToInt(radiusDown * 1000.0f) + "-" + Mathf.RoundToInt(lengthDown * 1000) + "-" + Mathf.RoundToInt(radiusUp * 1000.0f) + "-" + Mathf.RoundToInt(lengthUp * 1000) + "-" + Mathf.RoundToInt(squish * 1000);
+        string key = $"{sides}-{Mathf.RoundToInt(radiusDown * 1000.0f)}-{Mathf.RoundToInt(lengthDown * 1000)}-{Mathf.RoundToInt(radiusUp * 1000.0f)}-{Mathf.RoundToInt(lengthUp * 1000)}-{Mathf.RoundToInt(squish * 1000)}";
 
         Mesh cachedMesh = GetCachedMesh(key);
         if (cachedMesh != null) return cachedMesh;

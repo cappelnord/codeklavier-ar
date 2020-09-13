@@ -5,69 +5,67 @@ using UnityEngine;
 public class PlantsGrowBehaviour : MonoBehaviour
 {
     [HideInInspector]
-    public Vector3 targetScale;
-    public Vector3 targetRotation;
-    public Vector3 targetPosition;
+    public Vector3 TargetScale;
+    public Vector3 TargetRotation;
+    public Vector3 TargetPosition;
 
-    public float growWeight = 0.99f;
+    public float GrowWeight = 0.99f;
 
-    public Vector3 currentRotation;
-    public Vector3 currentScale;
-    public Vector3 currentPosition;
+    public Vector3 CurrentRotation;
+    public Vector3 CurrentScale;
+    public Vector3 CurrentPosition;
 
-    public bool alive = true;
+    public float WindStrength = 0.02f;
+    public float GrowDelay = 0.0f;
 
+    private float startTime;
+    private bool alive = true;
     private float windPhase;
     private float deltaWindPhase;
 
-    public float windStrength = 0.02f;
-
-    public float growDelay = 0.0f;
-    private float startTime;
-
-    public LGenerator gen;
+    public LGenerator Gen;
 
     // Start is called before the first frame update
     void Start()
     {
         startTime = Time.time;
 
-        currentRotation = new Vector3(0.0f, 0.0f, 0.0f);
-        currentScale = new Vector3(0.0f, 0.0f, 0.0f);
-        currentPosition = new Vector3(0.0f, 0.0f, 0.0f);
+        CurrentRotation = new Vector3(0.0f, 0.0f, 0.0f);
+        CurrentScale = new Vector3(0.0f, 0.0f, 0.0f);
+        CurrentPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
-        windPhase = gen.RandomRange(0.0f, Mathf.PI * 2.0f);
-        deltaWindPhase = gen.RandomRange(0.003f, 0.007f) * 60.0f;
+        windPhase = Gen.RandomRange(0.0f, Mathf.PI * 2.0f);
+        deltaWindPhase = Gen.RandomRange(0.003f, 0.007f) * 60.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (startTime + growDelay > Time.time) return;
+        if (startTime + GrowDelay > Time.time) return;
 
-        float dtCounterWeight = Mathf.Clamp((1.0f - growWeight) * 60.0f * Time.deltaTime, 0.0f, 1.0f);
+        float dtCounterWeight = Mathf.Clamp((1.0f - GrowWeight) * 60.0f * Time.deltaTime, 0.0f, 1.0f);
         float dtGrowWeight = 1.0f - dtCounterWeight;
 
         if (alive)
         {
-            currentRotation = currentRotation * dtGrowWeight + targetRotation * dtCounterWeight;
-            currentPosition = currentPosition * dtGrowWeight + targetPosition * dtCounterWeight;
+            CurrentRotation = CurrentRotation * dtGrowWeight + TargetRotation * dtCounterWeight;
+            CurrentPosition = CurrentPosition * dtGrowWeight + TargetPosition * dtCounterWeight;
 
             windPhase += (deltaWindPhase * Time.deltaTime);
-            Vector3 windRotation = currentRotation * windStrength * Mathf.Sin(windPhase);
+            Vector3 windRotation = CurrentRotation * WindStrength * Mathf.Sin(windPhase);
 
-            transform.localEulerAngles = currentRotation + windRotation;
-            transform.localPosition = currentPosition;
-            currentScale = currentScale * dtGrowWeight + targetScale * dtCounterWeight;
-            transform.localScale = currentScale;
+            transform.localEulerAngles = CurrentRotation + windRotation;
+            transform.localPosition = CurrentPosition;
+            CurrentScale = CurrentScale * dtGrowWeight + TargetScale * dtCounterWeight;
+            transform.localScale = CurrentScale;
         } else
         {
-            currentScale = transform.localScale;
+            CurrentScale = transform.localScale;
 
             float xzW = 1.0f - Mathf.Clamp(0.02f * 60.0f * Time.deltaTime, 0.0f, 1.0f);
             float yW =  1.0f - Mathf.Clamp(0.01f * 60.0f * Time.deltaTime, 0.0f, 1.0f);
 
-            transform.localScale = new Vector3(currentScale[0] * xzW, currentScale[1] * yW, currentScale[2] * xzW);
+            transform.localScale = new Vector3(CurrentScale[0] * xzW, CurrentScale[1] * yW, CurrentScale[2] * xzW);
           
             if(transform.localScale[1] < 0.01)
             {
@@ -85,7 +83,5 @@ public class PlantsGrowBehaviour : MonoBehaviour
         {
             child.gameObject.GetComponent<PlantsGrowBehaviour>().Die();
         }
-
-        // transform.parent = null;
     }
 }

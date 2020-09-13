@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlantsGenerator : LGenerator
 {
-    public GameObject protoEmpty;
-    public Material branchMaterial;
+    public GameObject ProtoEmpty;
+    public Material BranchMaterial;
 
     private WedgeMeshGen wedgeMeshGen;
 
@@ -44,7 +44,6 @@ public class PlantsGenerator : LGenerator
 
         foreach (Transform child in transform)
         {
-            // Destroy(child.gameObject);
             child.gameObject.GetComponent<PlantsGrowBehaviour>().Die();
         }
 
@@ -86,14 +85,14 @@ public class PlantsGenerator : LGenerator
 
             
             PlantsGrowBehaviour grow = obj.AddComponent<PlantsGrowBehaviour>() as PlantsGrowBehaviour;
-            grow.gen = this;
-            grow.targetRotation = new Vector3(0.0f, angleY, angleZ);
-            grow.targetScale = new Vector3(0.8f, 0.8f, 0.8f);
-            grow.targetPosition = new Vector3(0.0f, 3.0f * 0.1f + initPosition, 0.0f);
-            grow.currentPosition = new Vector3(0.0f, 3.0f * 0.1f + initPosition, 0.0f);
-            grow.growDelay = growDelay;
+            grow.Gen = this;
+            grow.TargetRotation = new Vector3(0.0f, angleY, angleZ);
+            grow.TargetScale = new Vector3(0.8f, 0.8f, 0.8f);
+            grow.TargetPosition = new Vector3(0.0f, 3.0f * 0.1f + initPosition, 0.0f);
+            grow.CurrentPosition = new Vector3(0.0f, 3.0f * 0.1f + initPosition, 0.0f);
+            grow.GrowDelay = growDelay;
 
-            grow.growWeight = growWeight;
+            grow.GrowWeight = growWeight;
 
             obj.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
 
@@ -121,7 +120,7 @@ public class PlantsGenerator : LGenerator
         {
             if (unit.Content == '6' || unit.Content == '7')
             {
-                return wedgeMeshGen.GetWedgeObject(sides, dynamicFactor * 0.1f, 0.0f, lengthUp, 1.0f * 0.1f, lengthDown, 0.01f , 0.2f, bottomSquish, parent, branchMaterial);
+                return wedgeMeshGen.GetWedgeObject(sides, dynamicFactor * 0.1f, 0.0f, lengthUp, 1.0f * 0.1f, lengthDown, 0.01f , 0.2f, bottomSquish, parent, BranchMaterial);
             } else
             {
                 Material flowerMaterial = materialLookup.Get(unit.Content);
@@ -130,7 +129,7 @@ public class PlantsGenerator : LGenerator
         } else
         {
 
-            return wedgeMeshGen.GetWedgeObject(sides, 0.5f * 0.1f * radiusMul * dynamicFactor, upRadius * radiusMul * dynamicFactor, lengthUp, bottomRadius * radiusMul * dynamicFactor, lengthDown, mainSquish, 0.5f, bottomSquish, parent, branchMaterial);
+            return wedgeMeshGen.GetWedgeObject(sides, 0.5f * 0.1f * radiusMul * dynamicFactor, upRadius * radiusMul * dynamicFactor, lengthUp, bottomRadius * radiusMul * dynamicFactor, lengthDown, mainSquish, 0.5f, bottomSquish, parent, BranchMaterial);
 
         }
 

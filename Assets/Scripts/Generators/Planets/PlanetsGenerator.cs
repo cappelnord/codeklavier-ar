@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlanetsGenerator : LGenerator
 {
 
-    public GameObject protoPlanet;
-    public GameObject protoEmpty;
+    public GameObject ProtoPlanet;
+    public GameObject ProtoEmpty;
 
     protected override void Start()
     {
@@ -46,7 +46,7 @@ public class PlanetsGenerator : LGenerator
         }
         if (generation == 0 && children.Count > 1)
         {
-            GameObject empty = Instantiate(protoEmpty, parent);
+            GameObject empty = Instantiate(ProtoEmpty, parent);
             parent = empty.transform;
         }
 
@@ -64,12 +64,12 @@ public class PlanetsGenerator : LGenerator
             if (VisitUnit(unit) && unit.Content != '0')
             {
                 obj = Spawn(parent, unit);
-                obj.GetComponent<PlanetsBehaviour>().degreesPerSecond = rotationSpeed;
-                obj.GetComponent<PlanetsBehaviour>().gen = this;
+                obj.GetComponent<PlanetsBehaviour>().DegreesPerSecond = rotationSpeed;
+                obj.GetComponent<PlanetsBehaviour>().Gen = this;
             }
             else
             {
-                obj = Instantiate(protoEmpty, parent);
+                obj = Instantiate(ProtoEmpty, parent);
             }
 
             Transform tra = obj.transform;
@@ -87,19 +87,19 @@ public class PlanetsGenerator : LGenerator
 
     GameObject Spawn(Transform parent, ProcessUnit unit)
     {
-        GameObject obj =  Object.Instantiate(protoPlanet, parent);
+        GameObject obj =  Object.Instantiate(ProtoPlanet, parent);
 
         PlanetStripesCycler psc = obj.transform.GetChild(0).GetComponent<PlanetStripesCycler>();
 
-        psc.phaseFreqeuncy = new Vector4(RandomRange(1, 3), RandomRange(1, 5), RandomRange(1, 3), RandomRange(1, 5));
-        psc.phaseOffset = new Vector4(RandomRange(-3, 3), RandomRange(-3, 3), RandomRange(-3, 3), RandomRange(-3, 3));
-        psc.offset = RandomRange(0.0f, 10.0f);
+        psc.PhaseFreqeuncy = new Vector4(RandomRange(1, 3), RandomRange(1, 5), RandomRange(1, 3), RandomRange(1, 5));
+        psc.PhaseOffset = new Vector4(RandomRange(-3, 3), RandomRange(-3, 3), RandomRange(-3, 3), RandomRange(-3, 3));
+        psc.Offset = RandomRange(0.0f, 10.0f);
 
         Color col = materialLookup.GetColor(unit.Content);
 
-        psc.color = col;
+        psc.Color = col;
         float bgDarken = RandomRange(0.15f, 0.3f);
-        psc.backgroundColor = new Color(col.r * bgDarken, col.g * bgDarken, col.b * bgDarken);
+        psc.BackgroundColor = new Color(col.r * bgDarken, col.g * bgDarken, col.b * bgDarken);
 
         return obj;
     }

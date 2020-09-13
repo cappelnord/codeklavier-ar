@@ -5,30 +5,32 @@ using UnityEngine;
 public class PlanetStripesCycler : MonoBehaviour
 {
 
-    public Vector4 phaseFreqeuncy;
-    public Vector4 phaseOffset;
+    public Vector4 PhaseFreqeuncy;
+    public Vector4 PhaseOffset;
 
-    public Color color;
-    public Color backgroundColor;
+    public Color Color;
+    public Color BackgroundColor;
 
-    public float offset;
+    public float Offset;
 
+    private MeshRenderer meshRenderer;
 
-    // Start is called before the first frame update
     void Start()
     {
-
+        meshRenderer = gameObject.GetComponent<MeshRenderer>();
     }
 
-    // Update is called once per frame
+
+    // TODO: Can't I reuse the MaterialPropertyBlock?
+
     void Update()
     {
         MaterialPropertyBlock block = new MaterialPropertyBlock();
-        block.SetFloat("_Phase", Time.time * 0.1f + offset);
-        block.SetVector("_PhaseFrequency", phaseFreqeuncy);
-        block.SetVector("_PhaseCoordOffset", phaseOffset);
-        block.SetColor("_Color", color);
-        block.SetColor("_BackgroundColor", backgroundColor);
-        gameObject.GetComponent<MeshRenderer>().SetPropertyBlock(block);
+        block.SetFloat("_Phase", Time.time * 0.1f + Offset);
+        block.SetVector("_PhaseFrequency", PhaseFreqeuncy);
+        block.SetVector("_PhaseCoordOffset", PhaseOffset);
+        block.SetColor("_Color", Color);
+        block.SetColor("_BackgroundColor", BackgroundColor);
+        meshRenderer.SetPropertyBlock(block);
     }
 }
