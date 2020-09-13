@@ -4,27 +4,25 @@ using UnityEngine;
 
 class RingSegment
 {
-    public int numSegments;
-    public float startRotation;
-    public ProcessUnit unit;
+    public int NumSegments;
+    public float StartRotation;
+    public ProcessUnit Unit;
 
-    public RingSegment(ProcessUnit _unit, int _numSegments, float _startRotation)
+    public RingSegment(ProcessUnit unit, int numSegments, float startRotation)
     {
-        unit = _unit;
-        numSegments = _numSegments;
-        startRotation = _startRotation;
+        Unit = unit;
+        NumSegments = numSegments;
+        StartRotation = startRotation;
     }
 }
 
 public class LArcBallGenerator : LGenerator {
 
-    public Material[] materials = new Material[10];
-    private Dictionary<char, Material> lookup;
+    public Material[] Materials = new Material[10];
+    public GameObject RingProto;
 
-    public GameObject ringProto;
-
+    private Dictionary<char, Material> lookup = new Dictionary<char, Material>();
     private LSystemController lsysController;
-
     private ArcMeshGen meshgen;
 
     // Start is called before the first frame update
@@ -35,12 +33,10 @@ public class LArcBallGenerator : LGenerator {
         lsysController = LSystemController.Instance();
         meshgen = ArcMeshGen.Instance();
 
-        lookup = new Dictionary<char, Material>();
-
         int i = 0;
         foreach (char symbol in lsysController.symbols)
         {
-            lookup.Add(symbol, materials[i]);
+            lookup.Add(symbol, Materials[i]);
             i++;
         }
     }
@@ -71,15 +67,15 @@ public class LArcBallGenerator : LGenerator {
             float comp = 1.0f / scale;
             float rotateCompensation = 0.1f / scale;
 
-            GameObject ring = GameObject.Instantiate(ringProto, transform);
+            GameObject ring = GameObject.Instantiate(RingProto, transform);
             ring.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
 
             ring.transform.Rotate(new Vector3(RandomRange(0.0f, 360.0f), RandomRange(0.0f, 360.0f), RandomRange(0.0f, 360.0f)));
 
             RingBehaviour ringBehave = ring.GetComponent<RingBehaviour>();
-            ringBehave.rotation = new Vector3(RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul);
-            ringBehave.targetScale = scale;
-            ringBehave.scale = 0.0f;
+            ringBehave.Rotation = new Vector3(RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul, RandomRange(-2.0f, 2.0f) * rotateCompensation * speedMul);
+            ringBehave.TargetScale = scale;
+            ringBehave.Scale = 0.0f;
             ringBehave.gen = this;
 
             float degsPerSegment = 360.0f / data.Count;
@@ -99,14 +95,14 @@ public class LArcBallGenerator : LGenerator {
                 }
                 else
                 {
-                    if (lastSegment.unit.Content != unit.Content)
+                    if (lastSegment.Unit.Content != unit.Content)
                     {
                         lastSegment = new RingSegment(unit, 0, startRotation);
                         list.Add(lastSegment);
                     }
                 }
 
-                lastSegment.numSegments = lastSegment.numSegments + 1;
+                lastSegment.NumSegments = lastSegment.NumSegments + 1;
                 startRotation += degsPerSegment;
             }
 
@@ -116,12 +112,12 @@ public class LArcBallGenerator : LGenerator {
             startRotation = 0.0f;
             foreach(RingSegment arc in list)
             {
-                startRotation += (arc.numSegments * degsPerSegment);
+                startRotation += (arc.NumSegments * degsPerSegment);
 
-                if (arc.unit.Content != '0')
+                if (arc.Unit.Content != '0')
                 {
-                    float width = (0.2f + (2.0f / 128.0f * arc.unit.Dynamic)) * 0.1f;
-                    GameObject obj = meshgen.GetArcObject(((arc.numSegments * degsPerSegment)) * Mathf.Deg2Rad, 0.4f * comp * 0.1f, width * comp, ring.transform, lookup[arc.unit.Content]);
+                    float width = (0.2f + (2.0f / 128.0f * arc.Unit.Dynamic)) * 0.1f;
+                    GameObject obj = meshgen.GetArcObject(((arc.NumSegments * degsPerSegment)) * Mathf.Deg2Rad, 0.4f * comp * 0.1f, width * comp, ring.transform, lookup[arc.Unit.Content]);
                     obj.transform.Rotate(new Vector3(0.0f, 0.0f, startRotation), Space.Self);
                 }
             }

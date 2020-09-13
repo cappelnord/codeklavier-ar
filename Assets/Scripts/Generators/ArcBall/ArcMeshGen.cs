@@ -5,8 +5,7 @@ using UnityEngine;
 public class ArcMeshGen : MeshGen
 {
 
-
-    public int resolution = 512;
+    public int Resolution = 512;
 
     private static ArcMeshGen instance;
     public static ArcMeshGen Instance()
@@ -20,17 +19,12 @@ public class ArcMeshGen : MeshGen
     }
 
 
-    // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public GameObject GetArcObject(float angle, float filledToCenter, float width, Transform parent, Material material)
     {
@@ -40,15 +34,14 @@ public class ArcMeshGen : MeshGen
 
     public Mesh GetMesh(float angle, float filledToCenter, float width)
     {
-    	string key  = "" + Mathf.RoundToInt(angle*1000.0f) + "-" + Mathf.RoundToInt(width*1000) + "-" + Mathf.RoundToInt(filledToCenter * 100);
+    	string key  = $"{Mathf.RoundToInt(angle*1000.0f)}-{Mathf.RoundToInt(width*1000)}-{Mathf.RoundToInt(filledToCenter * 100)}";
 
         Mesh cachedMesh = GetCachedMesh(key);
         if (cachedMesh != null) return cachedMesh;
 
-
         bool isFullCircle = angle >= ((2.0f * Mathf.PI) - 0.01f);
 
-        int numSteps = (int) (resolution * angle / (2.0 * Mathf.PI));
+        int numSteps = (int) (Resolution * angle / (2.0 * Mathf.PI));
         int numVertices = numSteps * 4;
         int numTriangles = (2 * numVertices);
 

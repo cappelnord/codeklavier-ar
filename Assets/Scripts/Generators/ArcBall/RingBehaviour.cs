@@ -4,33 +4,28 @@ using UnityEngine;
 
 public class RingBehaviour : MonoBehaviour
 {
-    public Vector3 rotation;
+    public Vector3 Rotation;
 
-    public float targetScale;
-    public float scale;
+    public float TargetScale;
+    public float Scale;
 
     private bool destruct;
 
     public LGenerator gen;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(rotation * Time.deltaTime * gen.speedMultiplier);
+        transform.Rotate(Rotation * Time.deltaTime * gen.speedMultiplier);
         float dtWeight = Mathf.Clamp(0.05f * 60.0f * Time.deltaTime, 0.0f, 1.0f);
 
-        scale = (scale * (1.0f - dtWeight)) + (targetScale * dtWeight);
-        transform.localScale = new Vector3(scale, scale, scale);
+        Scale = (Scale * (1.0f - dtWeight)) + (TargetScale * dtWeight);
+        transform.localScale = new Vector3(Scale, Scale, Scale);
 
         if(destruct)
         {
-            if(scale < 0.01f)
+            if(Scale < 0.01f)
             {
                 GameObject.Destroy(gameObject);
             }
@@ -40,6 +35,6 @@ public class RingBehaviour : MonoBehaviour
     public void Die()
     {
         destruct = true;
-        targetScale = -5.0f;
+        TargetScale = -5.0f;
     }
 }
