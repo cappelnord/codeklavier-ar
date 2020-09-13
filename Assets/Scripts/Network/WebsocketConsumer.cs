@@ -235,7 +235,7 @@ public class WebsocketConsumer : MonoBehaviour
 
     void Start()
     {
-        connectToLocal = Config.connectToLocal;
+        connectToLocal = Config.ConnectToLocal;
 
         lsysController = LSystemController.Instance();
 

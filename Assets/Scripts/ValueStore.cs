@@ -2,33 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Rethink if this monolithicness is needed
+
 public class ValueStore
 {
-    private static Dictionary<string, float> dict;
+    private static Dictionary<string, float> dict = new Dictionary<string, float>();
 
-    static ValueStore()
-    {
-        dict = new Dictionary<string, float>();
-    }
+    public static bool ContainsKey(string key) => dict.ContainsKey(key);
 
-    public static bool ContainsKey(string key)
+    public static float Get(string key, float defaultValue=0.0f)
     {
-        return dict.ContainsKey(key);
-    }
-
-    public static float Get(string key)
-    {
-        return Get(key, 0.0f);
-    }
-
-    public static float Get(string key, float defaultValue)
-    {
-        if(dict.ContainsKey(key))
+        if (dict.ContainsKey(key))
         {
             return dict[key];
-        } else
+        }
+        else
         {
-            // Debug.Log("ValueStore does not have a key: " + key);
             dict[key] = defaultValue;
             return defaultValue;
         }

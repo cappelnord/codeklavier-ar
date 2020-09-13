@@ -5,14 +5,9 @@ using UnityEngine;
 public class MasterTransformBehaviour : MonoBehaviour
 {
 
-    public bool invertTransform = false;
-    public bool onlyTranslate = false;
+    public bool InvertTransform = false;
+    public bool OnlyTranslate = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
     void OnEnable()
     {
         EventManager.OnMasterTransform += SetTransform;
@@ -26,19 +21,19 @@ public class MasterTransformBehaviour : MonoBehaviour
     public void SetTransform(TransformSpec ts)
     {
         float direction = 1.0f;
-        if(invertTransform)
+        if(InvertTransform)
         {
             direction = -1.0f;
         }
 
         gameObject.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
 
-        if (!onlyTranslate)
+        if (!OnlyTranslate)
         {
             gameObject.transform.localEulerAngles = new Vector3(ts.rotation[0] * direction, ts.rotation[1] * direction, ts.rotation[2] * direction);
         }
 
-        if (!Config.worldIsAR)
+        if (!Config.WorldIsAR)
         {
             gameObject.transform.Translate(new Vector3(ts.position[0] * direction, ts.position[1] * direction, ts.position[2] * direction), Space.World);
         } else
@@ -47,15 +42,9 @@ public class MasterTransformBehaviour : MonoBehaviour
 
         }
 
-        if (!onlyTranslate)
+        if (!OnlyTranslate)
         {
             gameObject.transform.localScale = new Vector3(ts.scale[0], ts.scale[1], ts.scale[2]);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

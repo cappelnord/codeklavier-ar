@@ -4,33 +4,26 @@ using UnityEngine;
 
 public class Config : MonoBehaviour
 {
+    public static bool WorldIsAR;
+    public bool SetWorldIsAR = false;
 
-    public static bool worldIsAR;
-    public bool setWorldIsAR = false;
+    public static bool ConnectToLocal;
+    public bool SetConnectToLocal = false;
 
-    public static bool connectToLocal;
-    public bool setConnectToLocal = false;
+    public static bool FloatUp;
+    public bool SetFloatUp = false;
 
-    public static bool floatUp;
-    public bool setFloatUp = false;
-
-    public int setVsyncCount = -1;
+    public int SetVsyncCount = -1;
 
     // Start is called before the first frame update
     void Start()
     {
-        worldIsAR = setWorldIsAR;
-        connectToLocal = setConnectToLocal;
-        floatUp = setFloatUp;
+        WorldIsAR = SetWorldIsAR;
+        ConnectToLocal = SetConnectToLocal;
+        FloatUp = SetFloatUp;
 
-        QualitySettings.vSyncCount = setVsyncCount;
+        QualitySettings.vSyncCount = SetVsyncCount;
 
         Destroy(gameObject);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

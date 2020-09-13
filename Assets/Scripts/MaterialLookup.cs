@@ -8,8 +8,8 @@ public class MaterialLookup : MonoBehaviour
     public Material[] materials = new Material[10];
     public Color[] colors = new Color[10];
 
-
     private static MaterialLookup instance;
+
     public static MaterialLookup Instance()
     {
         if (instance == null)
@@ -20,27 +20,8 @@ public class MaterialLookup : MonoBehaviour
         return instance;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // TODO: a bit a heavy cast from char to int via double
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public Material Get(char symbol)
-    {
-        int index = (int)char.GetNumericValue(symbol);
-        return materials[index];
-    }
-
-    public Color GetColor(char symbol)
-    {
-        int index = (int)char.GetNumericValue(symbol);
-        return colors[index];
-    }
+    public Material Get(char symbol) => materials[(int) char.GetNumericValue(symbol)];
+    public Color GetColor(char symbol) => colors[(int) char.GetNumericValue(symbol)];
 }

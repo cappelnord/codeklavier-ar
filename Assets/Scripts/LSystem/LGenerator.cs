@@ -115,12 +115,12 @@ public class LGenerator : LSystemBehaviour
 
         bounds = GetBounds();
 
-        if (Config.floatUp)
+        if (Config.FloatUp)
         {
             Vector3 size = bounds.size;
             Vector3 center = bounds.center;
             float bottom;
-            if (Config.worldIsAR)
+            if (Config.WorldIsAR)
             {
                 // See if it's right!
                 bottom = center[2] - size[2] / 2;

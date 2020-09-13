@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Probably require a bit more sensible formula; maybe also a leaner mehtod interface (using Properties)
+
 public class IIRFilter
 {
     private float weight;

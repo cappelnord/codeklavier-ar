@@ -7,19 +7,13 @@ public class MeshGen : MonoBehaviour
 
     public GameObject protoObject;
     public Material defaultMaterial;
-    private Dictionary<string, Mesh> meshes;
+    private Dictionary<string, Mesh> meshes = new Dictionary<string, Mesh>();
 
-    // Start is called before the first frame update
     public virtual void Start()
     {
-        meshes = new Dictionary<string, Mesh>();
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public Mesh GetCachedMesh(string key)
     {
@@ -49,6 +43,7 @@ public class MeshGen : MonoBehaviour
         {
             collider.sharedMesh = mesh;
         }
+
         return obj;
     }
 }
