@@ -4,27 +4,16 @@ using UnityEngine;
 
 public class NetworkResponderDisk : NetworkResponder
 {
-    // Start is called before the first frame update
+    private Renderer myRenderer;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+     myRenderer = GetComponent<Renderer>();
+     myRenderer.material.shader = Shader.Find("Standard");
     }
 
     public override void Handle(CKARNetworkState state)
     {
-        // https://docs.unity3d.com/ScriptReference/Material.SetColor.html
-
-        Renderer rend = GetComponent<Renderer>();
-        rend.material.shader = Shader.Find("Standard");
-
-        Debug.Log(state.Type);
-
         switch (state.Type)
         {
             case CKARNetworkStateType.ConnectingToMaster:
@@ -32,19 +21,19 @@ public class NetworkResponderDisk : NetworkResponder
             case CKARNetworkStateType.ConnectingToLocal:
             case CKARNetworkStateType.ConnectedToMaster:
                 {
-                    rend.material.SetColor("_Color", Color.yellow);
+                    myRenderer.material.SetColor("_Color", Color.yellow);
                     break;
                 }
             case CKARNetworkStateType.ConnectedToServer:
                 {
-                    rend.material.SetColor("_Color", Color.green);
+                    myRenderer.material.SetColor("_Color", Color.green);
                     break;
                 }
 
             case CKARNetworkStateType.FailedConnectingToMaster:
             case CKARNetworkStateType.DisconnectedFromServer:
                 {
-                    rend.material.SetColor("_Color", Color.red);
+                    myRenderer.material.SetColor("_Color", Color.red);
                     break;
                 }
         }

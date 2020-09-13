@@ -32,12 +32,6 @@ public class OSCFeedback : MonoBehaviour
         EventManager.OnValue -= SendValue;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void OnGenerate(LSystemController lsysController)
     {
         OSCMessage msg = new OSCMessage("/ckartree");

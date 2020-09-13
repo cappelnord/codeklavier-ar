@@ -216,10 +216,6 @@ public class CKARNetworkState
 public class WebsocketConsumer : MonoBehaviour
 {
     public string UriString = "";
-    private bool connectToLocal;
-    private bool keepLocal = false;
-    private int localConnectionAttempts = 0;
-
     public string MasterUri = "https://keyboardsunite.com/ckar/get.php";
 
     private ClientWebSocket cws = null;
@@ -228,22 +224,21 @@ public class WebsocketConsumer : MonoBehaviour
     public bool RequestConsole = false;
     public bool RequestViews = false;
 
+
     private bool connected = false;
-
-    private LockFreeQueue<string> queue;
-    private LockFreeQueue<CKARNetworkState> stateQueue;
-
+    private LockFreeQueue<string> queue = new LockFreeQueue<string>();
+    private LockFreeQueue<CKARNetworkState> stateQueue = new LockFreeQueue<CKARNetworkState>();
     private LSystemController lsysController;
+    private bool connectToLocal;
+    private bool keepLocal = false;
+    private int localConnectionAttempts = 0;
+
 
 
     void Start()
     {
         connectToLocal = Config.ConnectToLocal;
-
         lsysController = LSystemController.Instance();
-
-        queue = new LockFreeQueue<string>();
-        stateQueue = new LockFreeQueue<CKARNetworkState>();
 
         if(Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
         {

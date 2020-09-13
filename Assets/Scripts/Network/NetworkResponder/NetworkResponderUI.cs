@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class NetworkResponderUI : NetworkResponder
 {
 
-    public Sprite allOK;
-    public Sprite pending;
-    public Sprite error;
+    public Sprite AllOK;
+    public Sprite Pending;
+    public Sprite Error;
 
     private Image img;
 
@@ -16,20 +16,11 @@ public class NetworkResponderUI : NetworkResponder
     void Start()
     {
         img = GetComponent<Image>();
-        img.sprite = pending;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        img.sprite = Pending;
     }
 
     public override void Handle(CKARNetworkState state)
     {
-
-
-
         switch (state.Type)
         {
             case CKARNetworkStateType.ConnectingToMaster:
@@ -37,13 +28,13 @@ public class NetworkResponderUI : NetworkResponder
             case CKARNetworkStateType.ConnectingToLocal:
             case CKARNetworkStateType.ConnectedToMaster:
                 {
-                    img.sprite = pending;
+                    img.sprite = Pending;
                     img.enabled = true;
                     break;
                 }
             case CKARNetworkStateType.ConnectedToServer:
                 {
-                    img.sprite = allOK;
+                    img.sprite = AllOK;
                     img.enabled = false;
                     break;
                 }
@@ -51,7 +42,7 @@ public class NetworkResponderUI : NetworkResponder
             case CKARNetworkStateType.FailedConnectingToMaster:
             case CKARNetworkStateType.DisconnectedFromServer:
                 {
-                    img.sprite = error;
+                    img.sprite = Error;
                     img.enabled = true;
                     break;
                 }

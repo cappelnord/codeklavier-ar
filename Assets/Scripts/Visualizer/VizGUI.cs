@@ -8,7 +8,7 @@ public class VizGUI : MonoBehaviour
     private bool active = false;
 
     private string portString;
-    private string serverAddress;
+    private string serverIP;
     private bool sendToLocalhostToo;
 
     private bool dynamicsToSize = true;
@@ -16,12 +16,6 @@ public class VizGUI : MonoBehaviour
     private bool hideCubes = false;
     private bool hideConnections = false;
     private bool hideDynamics = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -43,9 +37,9 @@ public class VizGUI : MonoBehaviour
             if (GUI.Button(new Rect(10, 10, bw, h), "Options"))
             {
                 active = true;
-                serverAddress = GameObject.Find("OSCController").GetComponent<OSCController>().server.ToString();
-                portString = GameObject.Find("OSCController").GetComponent<OSCController>().port.ToString();
-                sendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo;
+                serverIP = GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString();
+                portString = GameObject.Find("OSCController").GetComponent<OSCController>().Port.ToString();
+                sendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo;
 
                 LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
@@ -75,8 +69,8 @@ public class VizGUI : MonoBehaviour
             int tw = 110;
 
 
-            GUI.Label(new Rect(lx, y, lw, h), "OSC Send Server");
-            serverAddress = GUI.TextField(new Rect(rx, y, tw, h), serverAddress);
+            GUI.Label(new Rect(lx, y, lw, h), "OSC Send Server IP");
+            serverIP = GUI.TextField(new Rect(rx, y, tw, h), serverIP);
             y += sp;
 
             GUI.Label(new Rect(lx, y, lw, h), "OSC Send Port");
@@ -129,9 +123,9 @@ public class VizGUI : MonoBehaviour
     private void CommitChanges()
     {
         OSCController oscc = GameObject.Find("OSCController").GetComponent<OSCController>();
-        oscc.server = serverAddress;
-        oscc.port = int.Parse(portString);
-        oscc.sendToLocalhostToo = sendToLocalhostToo;
+        oscc.ServerIP = serverIP;
+        oscc.Port = int.Parse(portString);
+        oscc.SendToLocalhostToo = sendToLocalhostToo;
 
         oscc.Connect();
 

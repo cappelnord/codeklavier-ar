@@ -6,7 +6,7 @@ public class Persistence : MonoBehaviour
 {
 
     private int _Port;
-    private string _ServerAddress;
+    private string _ServerIP;
     private bool _SendToLocalhostToo;
 
     private bool _DynamicsToSize = true;
@@ -24,10 +24,10 @@ public class Persistence : MonoBehaviour
 
     void Load()
     {
-        _ServerAddress = PlayerPrefs.GetString("ServerAddress", GameObject.Find("OSCController").GetComponent<OSCController>().server.ToString());
-        _Port = PlayerPrefs.GetInt("Port", GameObject.Find("OSCController").GetComponent<OSCController>().port);
+        _ServerIP = PlayerPrefs.GetString("ServerIP", GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString());
+        _Port = PlayerPrefs.GetInt("Port", GameObject.Find("OSCController").GetComponent<OSCController>().Port);
 
-        _SendToLocalhostToo = PlayerPrefs.GetInt("SendToLocalhostToo", GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo ? 1 : 0) != 0;
+        _SendToLocalhostToo = PlayerPrefs.GetInt("SendToLocalhostToo", GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo ? 1 : 0) != 0;
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
@@ -40,9 +40,9 @@ public class Persistence : MonoBehaviour
     
     void Commit()
     {
-        GameObject.Find("OSCController").GetComponent<OSCController>().server = _ServerAddress;
-        GameObject.Find("OSCController").GetComponent<OSCController>().port = _Port;
-        GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo = _SendToLocalhostToo;
+        GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP = _ServerIP;
+        GameObject.Find("OSCController").GetComponent<OSCController>().Port = _Port;
+        GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo = _SendToLocalhostToo;
         GameObject.Find("OSCController").GetComponent<OSCController>().Connect();
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
@@ -57,10 +57,10 @@ public class Persistence : MonoBehaviour
 
     void ReadLocal()
     {
-        _ServerAddress = GameObject.Find("OSCController").GetComponent<OSCController>().server.ToString();
-        _Port = GameObject.Find("OSCController").GetComponent<OSCController>().port;
+        _ServerIP = GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString();
+        _Port = GameObject.Find("OSCController").GetComponent<OSCController>().Port;
 
-        _SendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo;
+        _SendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo;
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
@@ -75,7 +75,7 @@ public class Persistence : MonoBehaviour
     {
         ReadLocal();
 
-        PlayerPrefs.SetString("ServerAddress", _ServerAddress);
+        PlayerPrefs.SetString("ServerIP", _ServerIP);
         PlayerPrefs.SetInt("Port", _Port);
         PlayerPrefs.SetInt("SendToLocalhostToo", _SendToLocalhostToo ? 1 : 0);
 

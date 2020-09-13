@@ -11,12 +11,11 @@ public class OSCController : MonoBehaviour
     private OSCClient client;
     private OSCClient localhost;
 
-    public string server = "192.168.1.111";
-    public int port = 57120;
+    public string ServerIP = "192.168.1.111";
+    public int Port = 57120;
 
-    public bool sendToLocalhostToo;
+    public bool SendToLocalhostToo;
 
-    // Start is called before the first frame update
     void Start()
     {
         Connect();
@@ -29,17 +28,11 @@ public class OSCController : MonoBehaviour
             Close();
         }
 
-        client = new OSCClient(IPAddress.Parse(server), port);
+        client = new OSCClient(IPAddress.Parse(ServerIP), Port);
         client.Connect();
 
-        localhost = new OSCClient(IPAddress.Parse("127.0.0.1"), port);
+        localhost = new OSCClient(IPAddress.Parse("127.0.0.1"), Port);
         localhost.Connect();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void Close()
@@ -53,7 +46,7 @@ public class OSCController : MonoBehaviour
         try
         {
             client.Send(packet);
-            if (sendToLocalhostToo)
+            if (SendToLocalhostToo)
             {
                 localhost.Send(packet);
             }

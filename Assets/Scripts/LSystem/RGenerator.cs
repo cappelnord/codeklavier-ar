@@ -47,7 +47,6 @@ public class RGenerator : LGenerator
         foreach (RuleSet rule in rules)
         {
             float pos = 0.0f;
-
             float alpha = 1.0f;
 
             if(rule.Touched != lsys.Generation)
