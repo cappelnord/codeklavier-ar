@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class MarkerStateToggle : MonoBehaviour
 {
+    public GameObject MarkerVisualizer;
+    public GameObject UnityCage;
 
     private int state = 0;
     private int numStates = 4;
 
-    public GameObject markerVisualizer;
-    public GameObject unityCage;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -37,20 +31,20 @@ public class MarkerStateToggle : MonoBehaviour
                 {
                     obj.GetComponent<MeshRenderer>().enabled = false;
                 }
-                foreach (Transform child in markerVisualizer.transform)
+                foreach (Transform child in MarkerVisualizer.transform)
                 {
                     child.gameObject.GetComponent<LoadMarkerTexture>().SetDisplayed(false);
                 }
-                unityCage.SetActive(false);
+                UnityCage.SetActive(false);
                 break;
             case 1: // display markers
-                foreach (Transform child in markerVisualizer.transform)
+                foreach (Transform child in MarkerVisualizer.transform)
                 {
                     child.gameObject.GetComponent<LoadMarkerTexture>().SetDisplayed(true);
                 }
                 break;
             case 2: // display cages
-                unityCage.SetActive(true);
+                UnityCage.SetActive(true);
                 break;
             case 3:
                 foreach (GameObject obj in GameObject.FindGameObjectsWithTag("CoordinateCross"))

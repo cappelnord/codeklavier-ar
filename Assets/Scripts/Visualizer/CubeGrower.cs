@@ -6,7 +6,8 @@ using UnityEngine;
 public class CubeGrower : MonoBehaviour
 {
 
-    public float targetSize = 0.75f;
+    public float TargetSize = 0.75f;
+
     private float currentSize;
     
     // Start is called before the first frame update
@@ -19,7 +20,7 @@ public class CubeGrower : MonoBehaviour
     void Update()
     {
         float dtWeight = Mathf.Clamp(0.15f * 60.0f * Time.deltaTime, 0.0f, 1.0f);
-        currentSize = (currentSize * (1.0f-dtWeight)) + (targetSize * dtWeight);
+        currentSize = (currentSize * (1.0f-dtWeight)) + (TargetSize * dtWeight);
         transform.localScale = new Vector3(currentSize, currentSize, currentSize);
 
         if(transform.position.y <= -10.0f)

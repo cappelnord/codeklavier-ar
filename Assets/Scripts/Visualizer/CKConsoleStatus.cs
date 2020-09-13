@@ -4,30 +4,10 @@ using UnityEngine;
 
 public class CKConsoleStatus : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    void OnEnable() => EventManager.OnConsoleStatus += Set;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void OnDisable() => EventManager.OnConsoleStatus -= Set;
 
-    void OnEnable()
-    {
-        EventManager.OnConsoleStatus += Set;
-    }
+    public void Set(string status) => GetComponent<TextMesh>().text = status;
 
-    void OnDisable()
-    {
-        EventManager.OnConsoleStatus -= Set;
-    }
-
-    public void Set(string s)
-    {
-        GetComponent<TextMesh>().text = s;
-    }
 }

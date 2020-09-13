@@ -69,15 +69,15 @@ public class VizGUI : MonoBehaviour
             int tw = 110;
 
 
-            GUI.Label(new Rect(lx, y, lw, h), "OSC Send Server IP");
+            GUI.Label(new Rect(lx, y, lw, h), "OSC server IP");
             serverIP = GUI.TextField(new Rect(rx, y, tw, h), serverIP);
             y += sp;
 
-            GUI.Label(new Rect(lx, y, lw, h), "OSC Send Port");
+            GUI.Label(new Rect(lx, y, lw, h), "OSC port");
             portString = GUI.TextField(new Rect(rx, y, tw, h), portString);
             y += sp;
 
-            GUI.Label(new Rect(lx, y, lw, h), "Send to localhost");
+            GUI.Label(new Rect(lx, y, lw, h), "Also to localhost");
             sendToLocalhostToo = GUI.Toggle(new Rect(rx, y, tw, h), sendToLocalhostToo, "");
 
             y += (int) ((float) sp * 1.5f);

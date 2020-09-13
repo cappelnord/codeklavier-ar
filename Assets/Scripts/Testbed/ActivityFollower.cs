@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ActivityFollower : MonoBehaviour
 {
-    public GeneratorHerd herd;
-    public bool active;
-    public float maxZoomOutFactor = 1.5f;
+    public GeneratorHerd Herd;
+    public bool Active;
+    public float MaxZoomOutFactor = 1.5f;
     private IIRFilter3 filter;
     private IIRFilter fovFilter;
 
@@ -21,7 +21,7 @@ public class ActivityFollower : MonoBehaviour
         cam = GetComponent<Camera>();
 
         minFOV = cam.fieldOfView;
-        maxFOV = minFOV * maxZoomOutFactor;
+        maxFOV = minFOV * MaxZoomOutFactor;
 
         filter = new IIRFilter3(new Vector3(0.0f, 0.0f, 0.0f), 0.002f);
         fovFilter = new IIRFilter(minFOV, 0.001f);
@@ -32,16 +32,16 @@ public class ActivityFollower : MonoBehaviour
     {
         if (Input.GetKeyDown("f"))
         {
-            active = !active;
+            Active = !Active;
         }
 
         Vector3 activityCenter;
         float calcFOV;
-        if (active)
+        if (Active)
         {
-            activityCenter = herd.CenterOfActivity();
+            activityCenter = Herd.CenterOfActivity();
             calcFOV = minFOV;
-            float magHerdSize = herd.GetBounds().size.magnitude;
+            float magHerdSize = Herd.GetBounds().size.magnitude;
             calcFOV = CKARTools.LinLin(magHerdSize, 6.0f, 20.0f, minFOV, maxFOV);
         }
         else

@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class VisualizerViewResponder : MonoBehaviour
 {
-    void OnEnable()
-    {
-        EventManager.OnViewChange += SwitchView;
-    }
+    void OnEnable() => EventManager.OnViewChange += SwitchView;
 
-    void OnDisable()
-    {
-        EventManager.OnViewChange -= SwitchView;
-    }
+    void OnDisable() => EventManager.OnViewChange -= SwitchView;
 
     public void SwitchView(string key)
     {

@@ -57,7 +57,7 @@ public class LTestGenerator : LGenerator
 
                 if(DynamicsToSize && unit.Content != '0')
                 {
-                    obj.GetComponent<CubeGrower>().targetSize = 0.25f + (0.5f * (unit.Dynamic / 128.0f));
+                    obj.GetComponent<CubeGrower>().TargetSize = 0.25f + (0.5f * (unit.Dynamic / 128.0f));
                 }
 
                 if(HideCubes)
