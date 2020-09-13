@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class RGenerator : LGenerator
 {
-    public GameObject[] prefabs = new GameObject[10];
-    public GameObject seperator;
-    public GameObject nullObject;
-    public GameObject dynamicsText;
+    public GameObject[] Prefabs = new GameObject[10];
+    public GameObject Seperator;
+    public GameObject NullObject;
+    public GameObject DynamicsText;
 
-    private Dictionary<char, GameObject> lookup;
+    private Dictionary<char, GameObject> lookup = new Dictionary<char, GameObject>();
 
     // Start is called before the first frame update
     protected override void Start()
     {
-        lookup = new Dictionary<char, GameObject>();
-
         int i = 0;
-        foreach(char symbol in LSystemController.Instance().symbols)
+        foreach(char symbol in LSystemController.Instance().Symbols)
         {
-            lookup.Add(symbol, prefabs[i]);
+            lookup.Add(symbol, Prefabs[i]);
             i++;
         }
 
-        lookup.Add('N', nullObject);
+        lookup.Add('N', NullObject);
     }
 
     // Update is called once per frame
@@ -52,7 +50,7 @@ public class RGenerator : LGenerator
 
             float alpha = 1.0f;
 
-            if(rule.Touched != lsys.generation)
+            if(rule.Touched != lsys.Generation)
             {
                 alpha = 0.2f;
             }
@@ -66,7 +64,7 @@ public class RGenerator : LGenerator
                 pos += 1.0f;
             }
 
-            GameObject sep = Object.Instantiate(seperator, gameObject.transform);
+            GameObject sep = Object.Instantiate(Seperator, gameObject.transform);
             sep.transform.localPosition += new Vector3(pos, displace, 0.0f);
             sep.transform.localScale = new Vector3(0.9f * 0.25f, 0.9f, 0.9f);
             sep.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f, alpha);
@@ -82,7 +80,7 @@ public class RGenerator : LGenerator
                 obj.GetComponent<Renderer>().material.color = new Color(1.0f, 1.0f, 1.0f, alpha);
                 pos += 1.0f;
 
-                GameObject text = Object.Instantiate(dynamicsText, gameObject.transform);
+                GameObject text = Object.Instantiate(DynamicsText, gameObject.transform);
                 text.transform.localPosition = obj.transform.localPosition + new Vector3(0.0f, -0.5f, -2.0f);
                 text.GetComponent<TextMesh>().text = rule.Dynamics[i].ToString();
             }

@@ -34,7 +34,7 @@ public class LArcBallGenerator : LGenerator {
         meshgen = ArcMeshGen.Instance();
 
         int i = 0;
-        foreach (char symbol in lsysController.symbols)
+        foreach (char symbol in lsysController.Symbols)
         {
             lookup.Add(symbol, Materials[i]);
             i++;
@@ -52,7 +52,7 @@ public class LArcBallGenerator : LGenerator {
 
         float scale = 0.05f;
 
-        foreach(List<ProcessUnit> data in lsys.units)
+        foreach(List<ProcessUnit> data in lsys.Units)
         {
             if (data.Count == 0) break;
 

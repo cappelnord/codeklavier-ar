@@ -17,7 +17,7 @@ public class RingBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Rotation * Time.deltaTime * gen.speedMultiplier);
+        transform.Rotate(Rotation * Time.deltaTime * gen.SpeedMultiplier);
         float dtWeight = Mathf.Clamp(0.05f * 60.0f * Time.deltaTime, 0.0f, 1.0f);
 
         Scale = (Scale * (1.0f - dtWeight)) + (TargetScale * dtWeight);

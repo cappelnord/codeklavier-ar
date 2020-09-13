@@ -32,7 +32,7 @@ public class OpCubesGenerator : LGenerator
             }
         }
 
-        Grow(gameObject.transform, lsys.units[0], 0.7f, 0);
+        Grow(gameObject.transform, lsys.Units[0], 0.7f, 0);
     }
 
     void Grow(Transform parent, List<ProcessUnit> children, float lastScale, int generation)

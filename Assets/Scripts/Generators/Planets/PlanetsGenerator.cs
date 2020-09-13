@@ -33,7 +33,7 @@ public class PlanetsGenerator : LGenerator
             }
         }
 
-        Grow(gameObject.transform, lsys.units[0], 0);
+        Grow(gameObject.transform, lsys.Units[0], 0);
     }
 
     void Grow(Transform parent, List<ProcessUnit> children, int generation)

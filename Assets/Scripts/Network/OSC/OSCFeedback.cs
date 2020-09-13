@@ -42,16 +42,18 @@ public class OSCFeedback : MonoBehaviour
     {
         OSCMessage msg = new OSCMessage("/ckartree");
 
-        List<string> keyList = new List<string>(lsysController.forrest.Keys);
+        List<string> keyList = new List<string>(lsysController.Forest.Keys);
         keyList.Sort();
 
         foreach (string key in keyList)
         {
-            LSystem lsys = lsysController.forrest[key];
-            if (lsys.results.Count > 0) {
-                string result = lsys.results[lsys.results.Count - 1];
+            LSystem lsys = lsysController.Forest[key];
+            int numResults = lsys.Results.Count;
+
+            if (numResults > 0) {
+                string result = lsys.Results[numResults - 1];
                 string dynamicsString = "";
-                List<ProcessUnit> lastUnits = lsys.units[lsys.results.Count - 1];
+                List<ProcessUnit> lastUnits = lsys.Units[numResults - 1];
 
                 for(int i = 0; i < lastUnits.Count; i++)
                 {
@@ -62,7 +64,7 @@ public class OSCFeedback : MonoBehaviour
                         dynamicsString += "|";
                     }
                 }
-                msg.Append(key + "@" + result + "A" + lsys.axiom + "G" + lsys.results.Count.ToString() + "S" + lsys.shape +  "D" + dynamicsString);
+                msg.Append($"{key}@{result}A{lsys.Axiom}G{numResults}S{lsys.Shape}D{dynamicsString}");
             }
         }
 
@@ -81,17 +83,17 @@ public class OSCFeedback : MonoBehaviour
         OSCMessage msg = new OSCMessage("/ckartreetransform");
         msg.Append(tree);
 
-        msg.Append(ts.position[0]);
-        msg.Append(ts.position[1]);
-        msg.Append(ts.position[2]);
+        msg.Append(ts.Position[0]);
+        msg.Append(ts.Position[1]);
+        msg.Append(ts.Position[2]);
 
-        msg.Append(ts.rotation[0]);
-        msg.Append(ts.rotation[1]);
-        msg.Append(ts.rotation[2]);
+        msg.Append(ts.Rotation[0]);
+        msg.Append(ts.Rotation[1]);
+        msg.Append(ts.Rotation[2]);
 
-        msg.Append(ts.scale[0]);
-        msg.Append(ts.scale[1]);
-        msg.Append(ts.scale[2]);
+        msg.Append(ts.Scale[0]);
+        msg.Append(ts.Scale[1]);
+        msg.Append(ts.Scale[2]);
 
         osc.Send(msg);
     }

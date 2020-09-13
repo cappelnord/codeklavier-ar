@@ -4,69 +4,80 @@ using UnityEngine;
 
 public class GeneratorObject
 {
-    public GameObject obj;
-    public string shape;
-    public LGenerator lgen;
+    public GameObject Obj;
+    public string Shape;
+    public LGenerator LGen;
 
-    public GeneratorObject(GameObject _obj, string _shape)
+    public GeneratorObject(GameObject obj, string shape)
     {
-        obj = _obj;
-        shape = _shape;
-        lgen = _obj.GetComponent<LGenerator>();
+        Obj = obj;
+        Shape = shape;
+        LGen = obj.GetComponent<LGenerator>();
     }
 }
 
 public class GeneratorHerd : MonoBehaviour
 {
-    private LSystemController lsysController;
-    private Dictionary<string, GeneratorObject> objects;
+    private LSystemController LSysController;
+    private Dictionary<string, GeneratorObject> Objects = new Dictionary<string, GeneratorObject>();
+    private Dictionary<string, GameObject> shapeLookup;
 
-    public GameObject shape1;
-    public GameObject shape2;
-    public GameObject shape3;
-    public GameObject shape4;
-    public GameObject shape5;
-    public GameObject shape6;
-    public GameObject shape7;
+    public GameObject Shape1;
+    public GameObject Shape2;
+    public GameObject Shape3;
+    public GameObject Shape4;
+    public GameObject Shape5;
+    public GameObject Shape6;
+    public GameObject Shape7;
 
     private int sparseUpdateCounter = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        objects = new Dictionary<string, GeneratorObject>();
-        lsysController = LSystemController.Instance();
+        LSysController = LSystemController.Instance();
+        shapeLookup = new Dictionary<string, GameObject>()
+        {
+            {"1", Shape1 },
+            {"2", Shape2 },
+            {"3", Shape3 },
+            {"4", Shape4 },
+            {"5", Shape5 },
+            {"6", Shape6 },
+            {"7", Shape7 }
+        };
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach(string key in lsysController.forrest.Keys)
+        foreach(string key in LSysController.Forest.Keys)
         {
-            bool create = !objects.ContainsKey(key);
+            // TODO: Bit weird logic, maybe use 2 distinct variables
+            bool create = !Objects.ContainsKey(key);
             if(!create)
             {
-                create = objects[key].shape != lsysController.forrest[key].shape;
+                create = Objects[key].Shape != LSysController.Forest[key].Shape;
                 if(create)
                 {
-                    Destroy(objects[key].obj);
+                    Destroy(Objects[key].Obj);
                 }
             }
 
             if(create)
             {
-                objects[key] = Create(lsysController.forrest[key]);
+                Objects[key] = Create(LSysController.Forest[key]);
             }
         }
 
         // do sparse updates
-        List<GeneratorObject> objectsList = new List<GeneratorObject>(objects.Values);
+        List<GeneratorObject> objectsList = new List<GeneratorObject>(Objects.Values);
         if (objectsList.Count > 0)
         {
             if (Time.frameCount % 2 == 0)
             {
                 int idx = sparseUpdateCounter % objectsList.Count;
-                objectsList[idx].lgen.SparseUpdate();
+                objectsList[idx].LGen.SparseUpdate();
                 sparseUpdateCounter++;
             }
         }
@@ -74,36 +85,9 @@ public class GeneratorHerd : MonoBehaviour
 
     GeneratorObject Create(LSystem lsys)
     {
-        string shape = lsys.shape;
+        string shape = lsys.Shape;
 
-        // lame code,, refactor!
-        GameObject proto = shape1;
-        if (shape == "2")
-        {
-            proto = shape2;
-        }
-        if (shape == "3")
-        {
-            proto = shape3;
-        }
-        if (shape == "4")
-        {
-            proto = shape4;
-        }
-        if (shape == "5")
-        {
-            proto = shape5;
-        }
-        if (shape == "6")
-        {
-            proto = shape6;
-        }
-        if (shape == "7")
-        {
-            proto = shape7;
-        }
-
-        GameObject obj = Instantiate(proto, transform);
+        GameObject obj = Instantiate(shapeLookup[shape], transform);
         obj.GetComponent<LGenerator>().SetLSystem(lsys);
 
         return new GeneratorObject(obj, shape);
@@ -112,9 +96,9 @@ public class GeneratorHerd : MonoBehaviour
     public Bounds GetBounds()
     {
         Bounds combinedBounds = new Bounds(transform.position, new Vector3(0.0f, 0.0f, 0.0f));
-        foreach(GeneratorObject obj in objects.Values)
+        foreach(GeneratorObject obj in Objects.Values)
         {
-            combinedBounds.Encapsulate(obj.lgen.bounds);
+            combinedBounds.Encapsulate(obj.LGen.Bounds);
         }
         return combinedBounds;
     }
@@ -128,15 +112,15 @@ public class GeneratorHerd : MonoBehaviour
 
         float ct = Time.time;
 
-        foreach(GeneratorObject obj in objects.Values)
+        foreach(GeneratorObject obj in Objects.Values)
         {
-            LGenerator lgen = obj.lgen;
-            float dt = ct - lgen.lastTimeTouched;
+            LGenerator lgen = obj.LGen;
+            float dt = ct - lgen.LastTimeTouched;
             if(dt <= timeGate)
             {
                 float weight = timeGate - dt;
                 sumWeights += weight;
-                sumPosition = sumPosition + (lgen.bounds.center * weight);
+                sumPosition = sumPosition + (lgen.Bounds.center * weight);
             }
         }
 

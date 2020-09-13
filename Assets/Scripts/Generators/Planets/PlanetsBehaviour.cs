@@ -16,7 +16,7 @@ public class PlanetsBehaviour : MonoBehaviour
 
     void Update()
     {
-        transform.localEulerAngles = new Vector3(transform.localEulerAngles[0], transform.localEulerAngles[1] + DegreesPerSecond * Time.deltaTime * Gen.speedMultiplier, transform.localEulerAngles[2]);
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles[0], transform.localEulerAngles[1] + DegreesPerSecond * Time.deltaTime * Gen.SpeedMultiplier, transform.localEulerAngles[2]);
         float currentScale = scaleFilter.Filter(TargetScale);
 
         if (transform.childCount > 0)

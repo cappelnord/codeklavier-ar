@@ -48,7 +48,7 @@ public class OpTreeGenerator : LGenerator
             child.gameObject.GetComponent<OpTreeGrowBehaviour>().Die();
         }
 
-        Grow(transform, lsys.units[0], 0.98f, 0.0f, 0);
+        Grow(transform, lsys.Units[0], 0.98f, 0.0f, 0);
     }
 
     void Grow(Transform parent, List<ProcessUnit> children, float growWeight, float growDelay, int generation)

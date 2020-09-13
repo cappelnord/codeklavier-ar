@@ -5,15 +5,15 @@ using UnityEngine;
 public class Persistence : MonoBehaviour
 {
 
-    private int port;
-    private string serverAddress;
-    private bool sendToLocalhostToo;
+    private int _Port;
+    private string _ServerAddress;
+    private bool _SendToLocalhostToo;
 
-    private bool dynamicsToSize = true;
-    private bool connectionSpheres = true;
-    private bool hideCubes = false;
-    private bool hideConnections = false;
-    private bool hideDynamics = false;
+    private bool _DynamicsToSize = true;
+    private bool _ConnectionSpheres = true;
+    private bool _HideCubes = false;
+    private bool _HideConnections = false;
+    private bool _HideDynamics = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,73 +24,67 @@ public class Persistence : MonoBehaviour
 
     void Load()
     {
-        serverAddress = PlayerPrefs.GetString("serverAddress", GameObject.Find("OSCController").GetComponent<OSCController>().server.ToString());
-        port = PlayerPrefs.GetInt("port", GameObject.Find("OSCController").GetComponent<OSCController>().port);
+        _ServerAddress = PlayerPrefs.GetString("ServerAddress", GameObject.Find("OSCController").GetComponent<OSCController>().server.ToString());
+        _Port = PlayerPrefs.GetInt("Port", GameObject.Find("OSCController").GetComponent<OSCController>().port);
 
-        sendToLocalhostToo = PlayerPrefs.GetInt("sendToLocalhostToo", GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo ? 1 : 0) != 0;
+        _SendToLocalhostToo = PlayerPrefs.GetInt("SendToLocalhostToo", GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo ? 1 : 0) != 0;
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
-        dynamicsToSize = PlayerPrefs.GetInt("dynamicsToSize", lgen.dynamicsToSize ? 1 : 0) != 0;
-        connectionSpheres = PlayerPrefs.GetInt("connectionSpheres", lgen.connectionSpheres ? 1 : 0) != 0;
-        hideCubes = PlayerPrefs.GetInt("hideCubes", lgen.hideCubes ? 1 : 0) != 0;
-        hideConnections = PlayerPrefs.GetInt("hideConnections", lgen.hideConnections ? 1 : 0) != 0;
-        hideDynamics = PlayerPrefs.GetInt("hideDynamics", lgen.hideDynamics ? 1 : 0) != 0;
+        _DynamicsToSize = PlayerPrefs.GetInt("SynamicsToSize", lgen.DynamicsToSize ? 1 : 0) != 0;
+        _ConnectionSpheres = PlayerPrefs.GetInt("ConnectionSpheres", lgen.ConnectionSpheres ? 1 : 0) != 0;
+        _HideCubes = PlayerPrefs.GetInt("HideCubes", lgen.HideCubes ? 1 : 0) != 0;
+        _HideConnections = PlayerPrefs.GetInt("HideConnections", lgen.HideConnections ? 1 : 0) != 0;
+        _HideDynamics = PlayerPrefs.GetInt("HideDynamics", lgen.HideDynamics ? 1 : 0) != 0;
     }
     
     void Commit()
     {
-        GameObject.Find("OSCController").GetComponent<OSCController>().server = serverAddress;
-        GameObject.Find("OSCController").GetComponent<OSCController>().port = port;
-        GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo = sendToLocalhostToo;
+        GameObject.Find("OSCController").GetComponent<OSCController>().server = _ServerAddress;
+        GameObject.Find("OSCController").GetComponent<OSCController>().port = _Port;
+        GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo = _SendToLocalhostToo;
         GameObject.Find("OSCController").GetComponent<OSCController>().Connect();
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
-        lgen.dynamicsToSize = dynamicsToSize;
-        lgen.connectionSpheres = connectionSpheres;
-        lgen.hideCubes = hideCubes;
-        lgen.hideConnections = hideConnections;
-        lgen.hideDynamics = hideDynamics;
+        lgen.DynamicsToSize = _DynamicsToSize;
+        lgen.ConnectionSpheres = _ConnectionSpheres;
+        lgen.HideCubes = _HideCubes;
+        lgen.HideConnections = _HideConnections;
+        lgen.HideDynamics = _HideDynamics;
 
     }
 
     void ReadLocal()
     {
-        serverAddress = GameObject.Find("OSCController").GetComponent<OSCController>().server.ToString();
-        port = GameObject.Find("OSCController").GetComponent<OSCController>().port;
+        _ServerAddress = GameObject.Find("OSCController").GetComponent<OSCController>().server.ToString();
+        _Port = GameObject.Find("OSCController").GetComponent<OSCController>().port;
 
-        sendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo;
+        _SendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().sendToLocalhostToo;
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
-        dynamicsToSize = lgen.dynamicsToSize;
-        connectionSpheres = lgen.connectionSpheres;
-        hideCubes = lgen.hideCubes;
-        hideConnections = lgen.hideConnections;
-        hideDynamics = lgen.hideDynamics;
+        _DynamicsToSize = lgen.DynamicsToSize;
+        _ConnectionSpheres = lgen.ConnectionSpheres;
+        _HideCubes = lgen.HideCubes;
+        _HideConnections = lgen.HideConnections;
+        _HideDynamics = lgen.HideDynamics;
     }
 
     public void Save()
     {
         ReadLocal();
 
-        PlayerPrefs.SetString("serverAddress", serverAddress);
-        PlayerPrefs.SetInt("port", port);
-        PlayerPrefs.SetInt("sendToLocalhostToo", sendToLocalhostToo ? 1 : 0);
+        PlayerPrefs.SetString("ServerAddress", _ServerAddress);
+        PlayerPrefs.SetInt("Port", _Port);
+        PlayerPrefs.SetInt("SendToLocalhostToo", _SendToLocalhostToo ? 1 : 0);
 
-        PlayerPrefs.SetInt("dynamicsToSize", dynamicsToSize ? 1 : 0);
-        PlayerPrefs.SetInt("connectionSpheres", connectionSpheres ? 1 : 0);
-        PlayerPrefs.SetInt("hideCubes", hideCubes ? 1 : 0);
-        PlayerPrefs.SetInt("hideConnections", hideConnections ? 1 : 0);
-        PlayerPrefs.SetInt("hideDynamics", hideDynamics ? 1 : 0);
+        PlayerPrefs.SetInt("DynamicsToSize", _DynamicsToSize ? 1 : 0);
+        PlayerPrefs.SetInt("ConnectionSpheres", _ConnectionSpheres ? 1 : 0);
+        PlayerPrefs.SetInt("HideCubes", _HideCubes ? 1 : 0);
+        PlayerPrefs.SetInt("HideConnections", _HideConnections ? 1 : 0);
+        PlayerPrefs.SetInt("HideDynamics", _HideDynamics ? 1 : 0);
 
         PlayerPrefs.Save();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

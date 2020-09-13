@@ -49,11 +49,11 @@ public class VizGUI : MonoBehaviour
 
                 LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
-                dynamicsToSize = lgen.dynamicsToSize;
-                connectionSpheres = lgen.connectionSpheres;
-                hideCubes = lgen.hideCubes;
-                hideConnections = lgen.hideConnections;
-                hideDynamics = lgen.hideDynamics;
+                dynamicsToSize = lgen.DynamicsToSize;
+                connectionSpheres = lgen.ConnectionSpheres;
+                hideCubes = lgen.HideCubes;
+                hideConnections = lgen.HideConnections;
+                hideDynamics = lgen.HideDynamics;
 
             }
             /*
@@ -137,11 +137,11 @@ public class VizGUI : MonoBehaviour
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
-        lgen.dynamicsToSize = dynamicsToSize;
-        lgen.connectionSpheres = connectionSpheres;
-        lgen.hideCubes = hideCubes;
-        lgen.hideConnections = hideConnections;
-        lgen.hideDynamics = hideDynamics;
+        lgen.DynamicsToSize = dynamicsToSize;
+        lgen.ConnectionSpheres = connectionSpheres;
+        lgen.HideCubes = hideCubes;
+        lgen.HideConnections = hideConnections;
+        lgen.HideDynamics = hideDynamics;
 
         lgen.Generate();
 

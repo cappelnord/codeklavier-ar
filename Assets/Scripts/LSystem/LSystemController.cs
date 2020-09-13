@@ -8,21 +8,21 @@ public class ProcessUnit
     public char Content;
     public List<ProcessUnit> Children;
     public List<ProcessUnit> Parents;
-    public long id;
+    public long Id;
     public int Dynamic;
 
     static long idCounter = 0;
 
-    public ProcessUnit(bool _processed, char _content, int _dynamic)
+    public ProcessUnit(bool processed, char content, int dynamic)
     {
-        Processed = _processed;
-        Content = _content;
-        Dynamic = _dynamic;
+        Processed = processed;
+        Content = content;
+        Dynamic = dynamic;
 
         Children = new List<ProcessUnit>();
         Parents = new List<ProcessUnit>();
 
-        id = idCounter;
+        Id = idCounter;
         idCounter++;
     }
 
@@ -38,14 +38,14 @@ public class RuleSet
     public string From;
     public string To;
     public int Touched;
-    public int id; // for sorting
+    public int Id; 
     public List<int> Dynamics;
 
     public RuleSet(string _from, string _to, int _id, List<int> _dynamics)
     {
         From = _from;
         To = _to;
-        id = _id;
+        Id = _id;
         Dynamics = _dynamics;
         Touched = 0;
     }
@@ -53,60 +53,52 @@ public class RuleSet
 
 public class LSystem
 {
-    LSystemController lsysController;
+    private const int maxRecursionDepth = 9;
+    private const int maxStringLength = 64;
+    private const int defaultVelocity = 90;
 
+    public string RulesString;
+    public string Axiom = "0";
 
-    public string rulesString;
-    public string axiom = "0";
+    public Dictionary<string, RuleSet> Rules;
+    public List<string> Results;
+    public List<List<ProcessUnit>> Units;
+    public int Generation = 0;
+    public List<int> AxiomDynamics;
 
-    const int maxRecursionDepth = 9;
-    const int maxStringLength = 64;
-    const int defaultVelocity = 90;
+    public TransformSpec TransformSpec;
+    public string Shape;
+    public string Key;
 
-    int recursionDepth;
-
+    private int recursionDepth;
+    private LSystemController lsysController;
     private int rulesIDCounter = 0;
-
-    public Dictionary<string, RuleSet> rules;
-    public List<string> results;
-    public List<List<ProcessUnit>> units;
-    public int generation = 0;
-    public List<int> axiomDynamics;
-
     private string fullStateString;
 
-    public TransformSpec transformSpec;
-    public string shape;
 
-    public string key;
-
-    public LSystem(LSystemController _controller, string _key)
+    public LSystem(LSystemController controller, string key)
     {
         recursionDepth = maxRecursionDepth;
 
-        lsysController = _controller;
-        key = _key;
+        lsysController = controller;
+        Key = key;
 
-        transformSpec = TransformSpec.Identity();
-        shape = "1";
+        TransformSpec = TransformSpec.Identity();
+        Shape = "1";
 
-        string tempAxiom = axiom;
-        Reset();
-
-        results = new List<string>();
-        units = new List<List<ProcessUnit>>();
-
-        axiom = tempAxiom;
+        Reset(Axiom);
+        Results = new List<string>();
+        Units = new List<List<ProcessUnit>>();
 
         Generate();
     }
 
-    void Reset()
+    void Reset(string axiom="0")
     {
-        rules = new Dictionary<string, RuleSet>();
-        axiom = "0";
-        axiomDynamics = new List<int>();
-        axiomDynamics.Add(defaultVelocity);
+        Rules = new Dictionary<string, RuleSet>();
+        Axiom = axiom;
+        AxiomDynamics = new List<int>();
+        AxiomDynamics.Add(defaultVelocity);
     }
 
     public string StateString()
@@ -116,7 +108,7 @@ public class LSystem
 
     public void Parse(string data)
     {
-        rulesString = data;
+        RulesString = data;
 
         string[] items = data.Split(',');
 
@@ -165,8 +157,8 @@ public class LSystem
                     }
                     else
                     {
-                        axiom = to;
-                        axiomDynamics = dynamicsList;
+                        Axiom = to;
+                        AxiomDynamics = dynamicsList;
                     }
                 }
                 else if (from == "g")
@@ -178,13 +170,13 @@ public class LSystem
                 }
                 else if (from == to)
                 {
-                    rules.Remove(from);
+                    Rules.Remove(from);
                 }
                 else
                 {
                     if (to != "" && from != "")
                     {
-                        rules[from] = new RuleSet(from, to, rulesIDCounter, dynamicsList);
+                        Rules[from] = new RuleSet(from, to, rulesIDCounter, dynamicsList);
                         rulesIDCounter++;
                     }
                 }
@@ -194,10 +186,10 @@ public class LSystem
 
     public List<RuleSet> SortedRules()
     {
-        List<RuleSet> sortedRules = new List<RuleSet>(rules.Values);
+        List<RuleSet> sortedRules = new List<RuleSet>(Rules.Values);
 
         sortedRules.Sort(delegate (RuleSet a, RuleSet b) {
-            return b.id - a.id;
+            return b.Id - a.Id;
         });
 
         return sortedRules;
@@ -205,44 +197,44 @@ public class LSystem
 
     public void Generate()
     {
-        generation++;
+        Generation++;
 
-        results.Clear();
-        results.Add(axiom);
+        Results.Clear();
+        Results.Add(Axiom);
 
-        units.Clear();
+        Units.Clear();
         List<ProcessUnit> axiomList = new List<ProcessUnit>();
 
         // wem must assume axiom is same length as dynamics
-        for (int i = 0; i < axiom.Length; i++)
+        for (int i = 0; i < Axiom.Length; i++)
         {
-            axiomList.Add(new ProcessUnit(true, axiom[i], axiomDynamics[i]));
+            axiomList.Add(new ProcessUnit(true, Axiom[i], AxiomDynamics[i]));
         }
 
-        units.Add(axiomList);
+        Units.Add(axiomList);
 
         List<RuleSet> sortedRules = SortedRules();
 
         for (int i = 0; i < recursionDepth; i++)
         {
-            List<ProcessUnit> list = ProcessList(units[i], sortedRules);
-            units.Add(list);
+            List<ProcessUnit> list = ProcessList(Units[i], sortedRules);
+            Units.Add(list);
 
             if (list.Count > 0)
             {
                 string res = ProcessString(list);
-                results.Add(res);
+                Results.Add(res);
             }
         }
 
         fullStateString = "";
 
-        foreach(string result in results)
+        foreach(string result in Results)
         {
             fullStateString = fullStateString + result;
         }
 
-        fullStateString = fullStateString + "k:" + key;
+        fullStateString = fullStateString + "k:" + Key;
 
     }
 
@@ -294,7 +286,7 @@ public class LSystem
 
                 if (matches)
                 {
-                    rule.Touched = generation;
+                    rule.Touched = Generation;
 
                     for (int f = 0; f < rule.To.Length; f++)
                     {
@@ -350,15 +342,15 @@ public class LSystem
 
 public class TransformSpec
 {
-    public float[] position;
-    public float[] scale;
-    public float[] rotation;
+    public float[] Position;
+    public float[] Scale;
+    public float[] Rotation;
 
-    public TransformSpec(float[] _position, float[] _scale, float[] _rotation)
+    public TransformSpec(float[] position, float[] scale, float[] rotation)
     {
-        position = _position;
-        scale = _scale;
-        rotation = _rotation;
+        Position = position;
+        Scale = scale;
+        Rotation = rotation;
     }
 
     public static TransformSpec Identity()
@@ -374,11 +366,10 @@ public class TransformSpec
 public class LSystemController : MonoBehaviour
 {
 
-    public char[] symbols = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-    public Dictionary<string, LSystem> forrest;
+    public char[] Symbols = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+    public Dictionary<string, LSystem> Forest;
 
     private static LSystemController instance;
-
     public static LSystemController Instance()
     {
         if(instance == null)
@@ -399,7 +390,7 @@ public class LSystemController : MonoBehaviour
         // Debug.Log(data);
         if(!Validate(data))
         {
-            Debug.Log("Invalid lsys-rule: " + data);
+            Debug.Log($"Invalid lsys-rule: {data}");
             return;
         }
 
@@ -410,44 +401,38 @@ public class LSystemController : MonoBehaviour
     public void DispatchShape(string key, string shape)
     {
         AssureTree(key);
-        if (forrest[key].shape != shape)
+        if (Forest[key].Shape != shape)
         {
-            forrest[key].shape = shape;
+            Forest[key].Shape = shape;
             EventManager.InvokeShapeChange(this);
         }
     }
 
     public void DispatchTransform(string key, TransformSpec ts)
     {
-        GetLSystem(key).transformSpec = ts;
+        GetLSystem(key).TransformSpec = ts;
         EventManager.InvokeTransformChange(key, ts);
     }
 
     public LSystem GetLSystem(string key)
     {
         AssureTree(key);
-        return forrest[key];
+        return Forest[key];
     }
 
     public void AssureTree(string key)
     {
-        if (!forrest.ContainsKey(key))
+        if (!Forest.ContainsKey(key))
         {
-            forrest[key] = new LSystem(this, key);
+            Forest[key] = new LSystem(this, key);
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        forrest = new Dictionary<string, LSystem>();
+        Forest = new Dictionary<string, LSystem>();
         EventManager.InvokeViewChange("1");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void Parse(string data)
@@ -464,9 +449,9 @@ public class LSystemController : MonoBehaviour
 
     void Generate()
     {
-        foreach(string key in forrest.Keys)
+        foreach(string key in Forest.Keys)
         {
-            forrest[key].Generate();
+            Forest[key].Generate();
         }
 
         EventManager.InvokeGenerate(this);

@@ -30,21 +30,21 @@ public class MasterTransformBehaviour : MonoBehaviour
 
         if (!OnlyTranslate)
         {
-            gameObject.transform.localEulerAngles = new Vector3(ts.rotation[0] * direction, ts.rotation[1] * direction, ts.rotation[2] * direction);
+            gameObject.transform.localEulerAngles = new Vector3(ts.Rotation[0] * direction, ts.Rotation[1] * direction, ts.Rotation[2] * direction);
         }
 
         if (!Config.WorldIsAR)
         {
-            gameObject.transform.Translate(new Vector3(ts.position[0] * direction, ts.position[1] * direction, ts.position[2] * direction), Space.World);
+            gameObject.transform.Translate(new Vector3(ts.Position[0] * direction, ts.Position[1] * direction, ts.Position[2] * direction), Space.World);
         } else
         {   // rotated around x; y and z should switch
-            gameObject.transform.Translate(new Vector3(ts.position[0] * direction, ts.position[2] * direction * -1.0f, ts.position[1] * direction), Space.World);
+            gameObject.transform.Translate(new Vector3(ts.Position[0] * direction, ts.Position[2] * direction * -1.0f, ts.Position[1] * direction), Space.World);
 
         }
 
         if (!OnlyTranslate)
         {
-            gameObject.transform.localScale = new Vector3(ts.scale[0], ts.scale[1], ts.scale[2]);
+            gameObject.transform.localScale = new Vector3(ts.Scale[0], ts.Scale[1], ts.Scale[2]);
         }
     }
 }

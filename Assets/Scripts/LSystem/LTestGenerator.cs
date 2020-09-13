@@ -4,31 +4,29 @@ using UnityEngine;
 
 public class LTestGenerator : LGenerator
 {
-    public GameObject[] prefabs = new GameObject[10];
+    public GameObject[] Prefabs = new GameObject[10];
 
-    public GameObject connection;
-    public GameObject connectionSphere;
-    public GameObject dynamicsText;
+    public GameObject Connection;
+    public GameObject ConnectionSphere;
+    public GameObject DynamicsText;
 
-    public bool dynamicsToSize = true;
-    public bool connectionSpheres = true;
-    public bool hideCubes = false;
-    public bool hideConnections = false;
-    public bool hideDynamics = false;
+    public bool DynamicsToSize = true;
+    public bool ConnectionSpheres = true;
+    public bool HideCubes = false;
+    public bool HideConnections = false;
+    public bool HideDynamics = false;
 
-    private Dictionary<char, GameObject> lookup;
+    private Dictionary<char, GameObject> lookup = new Dictionary<char, GameObject>();
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
 
-        lookup = new Dictionary<char, GameObject>();
-
         int i = 0;
-        foreach(char symbol in LSystemController.Instance().symbols)
+        foreach(char symbol in LSystemController.Instance().Symbols)
         {
-            lookup.Add(symbol, prefabs[i]);
+            lookup.Add(symbol, Prefabs[i]);
             i++;
         }
     }
@@ -44,7 +42,7 @@ public class LTestGenerator : LGenerator
 
         Dictionary<long, Transform> transforms = new Dictionary<long, Transform>();
 
-        foreach (List<ProcessUnit> data in lsys.units)
+        foreach (List<ProcessUnit> data in lsys.Units)
         {
 
             float pos = data.Count / -2.0f;
@@ -57,17 +55,17 @@ public class LTestGenerator : LGenerator
                 obj.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
                 pos += 1.0f;
 
-                if(dynamicsToSize && unit.Content != '0')
+                if(DynamicsToSize && unit.Content != '0')
                 {
                     obj.GetComponent<CubeGrower>().targetSize = 0.25f + (0.5f * (unit.Dynamic / 128.0f));
                 }
 
-                if(hideCubes)
+                if(HideCubes)
                 {
                     obj.GetComponent<MeshRenderer>().enabled = false;
                 }
 
-                transforms[unit.id] = obj.transform;
+                transforms[unit.Id] = obj.transform;
             }
 
             displace += 1.25f;
@@ -75,14 +73,14 @@ public class LTestGenerator : LGenerator
 
         float connectionsZ = -0.3333f;
 
-        foreach (List<ProcessUnit> data in lsys.units)
+        foreach (List<ProcessUnit> data in lsys.Units)
         {
             foreach(ProcessUnit unit in data)
             {
-                if(connectionSpheres && transforms.ContainsKey(unit.id) && unit.Content != '0')
+                if(ConnectionSpheres && transforms.ContainsKey(unit.Id) && unit.Content != '0')
                 {
-                    GameObject obj = Object.Instantiate(connectionSphere, gameObject.transform);
-                    obj.transform.localPosition = transforms[unit.id].localPosition + new Vector3(0.0f, 0.0f, connectionsZ);
+                    GameObject obj = Object.Instantiate(ConnectionSphere, gameObject.transform);
+                    obj.transform.localPosition = transforms[unit.Id].localPosition + new Vector3(0.0f, 0.0f, connectionsZ);
                     float scale = 0.25f + (unit.Dynamic / 128.0f * 0.5f);
                     obj.transform.localScale = new Vector3(scale, scale, scale);
                 }
@@ -90,11 +88,11 @@ public class LTestGenerator : LGenerator
                 foreach(ProcessUnit child in unit.Children)
                 {
                     if(unit.Content != '0' && child.Content != '0') {
-                        if(transforms.ContainsKey(unit.id) && transforms.ContainsKey(child.id)) {
-                            GameObject obj = Object.Instantiate(connection, gameObject.transform);
+                        if(transforms.ContainsKey(unit.Id) && transforms.ContainsKey(child.Id)) {
+                            GameObject obj = Object.Instantiate(Connection, gameObject.transform);
 
-                            Transform fromTransform = transforms[unit.id];
-                            Transform toTransform = transforms[child.id];
+                            Transform fromTransform = transforms[unit.Id];
+                            Transform toTransform = transforms[child.Id];
 
                             Vector3 between = toTransform.localPosition - fromTransform.localPosition;
                             float distance = between.magnitude;
@@ -102,7 +100,7 @@ public class LTestGenerator : LGenerator
                             obj.transform.localScale = new Vector3(0.075f, 0.075f, distance);
                             obj.transform.localRotation = Quaternion.LookRotation(between);
 
-                            if(hideConnections)
+                            if(HideConnections)
                             {
                                 obj.GetComponent<MeshRenderer>().enabled = false;
                             }
@@ -112,16 +110,16 @@ public class LTestGenerator : LGenerator
             }
         }
 
-        if(!hideDynamics)
+        if(!HideDynamics)
         {
-            foreach (List<ProcessUnit> data in lsys.units)
+            foreach (List<ProcessUnit> data in lsys.Units)
             {
                 foreach(ProcessUnit unit in data)
                 {
-                    if(transforms.ContainsKey(unit.id) && unit.Content != '0')
+                    if(transforms.ContainsKey(unit.Id) && unit.Content != '0')
                     {
-                        Transform transform = transforms[unit.id];
-                        GameObject obj = Object.Instantiate(dynamicsText, gameObject.transform);
+                        Transform transform = transforms[unit.Id];
+                        GameObject obj = Object.Instantiate(DynamicsText, gameObject.transform);
                         obj.transform.localPosition = transform.localPosition + new Vector3(0.1f, -0.4f, -2.0f);
                         obj.GetComponent<TextMesh>().text = unit.Dynamic.ToString();
 

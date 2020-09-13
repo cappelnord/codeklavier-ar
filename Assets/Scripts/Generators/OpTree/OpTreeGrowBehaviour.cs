@@ -41,7 +41,7 @@ public class OpTreeGrowBehaviour : MonoBehaviour
         windPhase = Gen.RandomRange(0.0f, Mathf.PI * 2.0f);
         deltaWindPhase = Gen.RandomRange(0.003f, 0.007f) * 60.0f;
 
-        windStrengthFilter = new IIRFilter(Gen.speedMultiplier, 0.01f);
+        windStrengthFilter = new IIRFilter(Gen.SpeedMultiplier, 0.01f);
 
     }
 
@@ -58,8 +58,8 @@ public class OpTreeGrowBehaviour : MonoBehaviour
             CurrentRotation = CurrentRotation * dtGrowWeight + TargetRotation * dtCounterWeight;
             CurrentPosition = CurrentPosition * dtGrowWeight + TargetPosition * dtCounterWeight;
 
-            windPhase += (deltaWindPhase * Time.deltaTime * Gen.speedMultiplier);
-            Vector3 windRotation = CurrentRotation * WindStrength * Mathf.Sin(windPhase) * windStrengthFilter.Filter(Gen.speedMultiplier);
+            windPhase += (deltaWindPhase * Time.deltaTime * Gen.SpeedMultiplier);
+            Vector3 windRotation = CurrentRotation * WindStrength * Mathf.Sin(windPhase) * windStrengthFilter.Filter(Gen.SpeedMultiplier);
              
 
             transform.localEulerAngles = CurrentRotation + windRotation;

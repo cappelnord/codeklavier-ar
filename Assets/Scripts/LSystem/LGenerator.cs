@@ -5,35 +5,26 @@ using UnityEngine;
 public class LGenerator : LSystemBehaviour
 {
 
-    public TransformSpec transformSpec;
-    public Bounds bounds;
-    public float lastTimeTouched;
-
-    public System.Random rand;
-
-    private IIRFilter velocityValueFilter;
-    private string velValueKey;
-
-    private IIRFilter speedValueFilter;
-    private string speedValueKey;
-
-    public float speedMultiplier = 1.0f;
+    public TransformSpec TransformSpec;
+    public Bounds Bounds;
+    public float LastTimeTouched;
+    public System.Random Rand;
+    public float SpeedMultiplier = 1.0f;
 
     protected float scaleMultiplier;
     protected float positionMultiplier = 1.0f;
-
     protected MaterialLookup materialLookup;
-
     protected Dictionary<long, ProcessUnit> visitedUnitDict;
 
-    private IIRFilter floatUp;
+    private IIRFilter velocityValueFilter = new IIRFilter(0.5f, 0.01f);
+    private string velValueKey;
+    private IIRFilter speedValueFilter = new IIRFilter(0.5f, 0.01f);
+    private string speedValueKey;
+    private IIRFilter floatUp = new IIRFilter(0.0f, 0.002f);
 
     protected virtual void Awake()
     {
-        velocityValueFilter = new IIRFilter(0.5f, 0.01f);
-        speedValueFilter = new IIRFilter(0.5f, 0.01f);
 
-        floatUp = new IIRFilter(0.0f, 0.002f);
     }
 
     protected virtual void Start()
@@ -43,21 +34,11 @@ public class LGenerator : LSystemBehaviour
         SparseUpdate();
     }
 
-    void Touch()
-    {
-        lastTimeTouched = Time.time;
-    }
+    void Touch() => LastTimeTouched = Time.time;
 
+    void OnEnable() => EventManager.OnValue += OnValue;
 
-    void OnEnable()
-    {
-        EventManager.OnValue += OnValue;
-    }
-
-    void OnDisable()
-    {
-        EventManager.OnValue -= OnValue;
-    }
+    void OnDisable() => EventManager.OnValue -= OnValue;
 
     void OnValue(string key, float value)
     {
@@ -86,9 +67,9 @@ public class LGenerator : LSystemBehaviour
 
     protected bool VisitUnit(ProcessUnit unit)
     {
-        if(!visitedUnitDict.ContainsKey(unit.id))
+        if(!visitedUnitDict.ContainsKey(unit.Id))
         {
-            visitedUnitDict[unit.id] = unit;
+            visitedUnitDict[unit.Id] = unit;
             return true;
         } else
         {
@@ -113,12 +94,12 @@ public class LGenerator : LSystemBehaviour
         // GeneratorHerd should clean up
         if (gameObject == null) return;
 
-        bounds = GetBounds();
+        Bounds = GetBounds();
 
         if (Config.FloatUp)
         {
-            Vector3 size = bounds.size;
-            Vector3 center = bounds.center;
+            Vector3 size = Bounds.size;
+            Vector3 center = Bounds.center;
             float bottom;
             if (Config.WorldIsAR)
             {
@@ -147,36 +128,34 @@ public class LGenerator : LSystemBehaviour
             Generate();
         }
 
-        if (lsys.transformSpec != transformSpec) {
-            transformSpec = lsys.transformSpec;
-        }
+        TransformSpec = lsys.TransformSpec;
 
         scaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f);
-        speedMultiplier = 1.0f / speedValueFilter.Filter() * 0.25f;
+        SpeedMultiplier = 1.0f / speedValueFilter.Filter() * 0.25f;
 
         ApplyTransformSpec();
     }
 
     public float RandomRange(float min, float max)
     {
-        return (float) (min + (rand.NextDouble() * (max - min)));
+        return (float) (min + (Rand.NextDouble() * (max - min)));
     }
 
     public int RandomRange(int min, int max)
     {
-        return rand.Next(min, max);
+        return Rand.Next(min, max);
     }
 
     public void ResetRandomness()
     {
-        char[] chars = lsys.rulesString.ToCharArray();
+        char[] chars = lsys.RulesString.ToCharArray();
         int sum = 0;
         for(int i = 0; i < chars.Length; i++)
         {
             sum = sum + chars[i];
         }
 
-        rand = new System.Random(sum % 100000);
+        Rand = new System.Random(sum % 100000);
     }
 
     virtual public void Generate()
@@ -186,17 +165,17 @@ public class LGenerator : LSystemBehaviour
 
     virtual public void ApplyTransformSpec()
     {
-        gameObject.transform.localPosition = new Vector3(transformSpec.position[0] * positionMultiplier, transformSpec.position[1] * positionMultiplier + floatUp.Filter(), transformSpec.position[2] * positionMultiplier);
-        gameObject.transform.localScale = new Vector3(transformSpec.scale[0] * scaleMultiplier, transformSpec.scale[1] * scaleMultiplier, transformSpec.scale[2] * scaleMultiplier);
-        gameObject.transform.localEulerAngles = new Vector3(transformSpec.rotation[0], transformSpec.rotation[1], transformSpec.rotation[2]);
+        gameObject.transform.localPosition = new Vector3(TransformSpec.Position[0] * positionMultiplier, TransformSpec.Position[1] * positionMultiplier + floatUp.Filter(), TransformSpec.Position[2] * positionMultiplier);
+        gameObject.transform.localScale = new Vector3(TransformSpec.Scale[0] * scaleMultiplier, TransformSpec.Scale[1] * scaleMultiplier, TransformSpec.Scale[2] * scaleMultiplier);
+        gameObject.transform.localEulerAngles = new Vector3(TransformSpec.Rotation[0], TransformSpec.Rotation[1], TransformSpec.Rotation[2]);
     }
 
     override public void OnLSystemSet()
     {
-        velValueKey = lsys.key + "-vel";
+        velValueKey = $"{lsys.Key}-vel";
         velocityValueFilter.Init(ValueStore.Get(velValueKey, 0.5f));
 
-        speedValueKey = lsys.key + "-speed";
+        speedValueKey = $"{lsys.Key}-speed";
         speedValueFilter.Init(ValueStore.Get(velValueKey, 0.5f));
 
         base.OnLSystemSet();
