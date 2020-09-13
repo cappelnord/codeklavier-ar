@@ -146,45 +146,48 @@ public class LockFreeQueue<T>
     }
 }
 
+// be aware: The field names must be in small case
+// as otherwise they would not properly deserialize
+
 [Serializable]
 public class WebsocketJsonMessage
 {
-    public string Type;
-    public string Payload;
+    public string type;
+    public string payload;
 }
 
 [Serializable]
 public class WebsocketJsonValue
 {
-    public string Type;
-    public string Key;
-    public float Payload;
+    public string type;
+    public string key;
+    public float payload;
 }
 
 [Serializable]
 public class WebsocketJsonShape
 {
-    public string Type;
-    public string Tree;
-    public string Shape;
+    public string type;
+    public string tree;
+    public string shape;
 }
 
 
 [Serializable]
 public class WebsocketJsonTransform
 {
-    public string Type;
-    public string Tree;
-    public float[] Position;
-    public float[] Scale;
-    public float[] Rotation;
+    public string type;
+    public string tree;
+    public float[] position;
+    public float[] scale;
+    public float[] rotation;
 }
 
 [Serializable]
 public class MasterResponse
 {
-    public string Host;
-    public string Port;
+    public string host;
+    public string port;
 }
 
 public enum CKARNetworkStateType
@@ -257,7 +260,7 @@ public class WebsocketConsumer : MonoBehaviour
                 localIP = endPoint.Address.ToString();
             }
 
-            UriString = "ws://" + localIP + ":8081/ckar_consume";
+            UriString = $"ws://{localIP}:8081/ckar_consume";
         }
 
         if (UriString == "")
@@ -283,17 +286,18 @@ public class WebsocketConsumer : MonoBehaviour
             {
                 if (webRequest.isNetworkError)
                 {
-                    throw new Exception("Could not connect to Master Server: " + webRequest.error);
+                    throw new Exception($"Could not connect to Master Server: {webRequest.error}");
                 }
                 else
                 {
                     MasterResponse response = JsonUtility.FromJson<MasterResponse>(webRequest.downloadHandler.text);
-                    UriString = "ws://" + response.Host + ":" + response.Port.ToString() + "/ckar_consume";
+                    UriString = $"ws://{response.host}:{response.port}/ckar_consume";
                     ResponderHandle(new CKARNetworkState(CKARNetworkStateType.ConnectedToMaster, "Connected to Master!"));
 
                 }
             }
-            catch {
+            catch (Exception e) {
+                Debug.LogException(e);
                 ResponderHandle(new CKARNetworkState(CKARNetworkStateType.FailedConnectingToMaster, "Failed connecting to Master!"));
             }
         }
@@ -328,58 +332,58 @@ public class WebsocketConsumer : MonoBehaviour
             if(msgString.Contains("\"type\": \"transform\""))
             {
                 WebsocketJsonTransform msg = JsonUtility.FromJson<WebsocketJsonTransform>(msgString);
-                TransformSpec ts = new TransformSpec(msg.Position, msg.Scale, msg.Rotation);
-                if(msg.Tree.Contains("marker"))
+                TransformSpec ts = new TransformSpec(msg.position, msg.scale, msg.rotation);
+                if(msg.tree.Contains("marker"))
                 {
-                    EventManager.InvokeMarkerTransform(msg.Tree, ts);
-                } else if(msg.Tree.Contains("master"))
+                    EventManager.InvokeMarkerTransform(msg.tree, ts);
+                } else if(msg.tree.Contains("master"))
                 {
                     EventManager.InvokeMasterTransform(ts);
                 } else
                 {
-                    lsysController.DispatchTransform(msg.Tree, ts);
+                    lsysController.DispatchTransform(msg.tree, ts);
                 }
             }
             else if (msgString.Contains("\"type\": \"shape\""))
             {
                 WebsocketJsonShape msg = JsonUtility.FromJson<WebsocketJsonShape>(msgString);
-                lsysController.DispatchShape(msg.Tree, msg.Shape);
+                lsysController.DispatchShape(msg.tree, msg.shape);
             }
             else if (msgString.Contains("\"type\": \"value\""))
             {
                 WebsocketJsonValue msg = JsonUtility.FromJson<WebsocketJsonValue>(msgString);
-                string[] keys = msg.Key.Split(',');
+                string[] keys = msg.key.Split(',');
                 foreach (string key in keys)
                 {
-                    ValueStore.Set(key, msg.Payload); // will also invoke event
+                    ValueStore.Set(key, msg.payload); // will also invoke event
                 }
             }
             else
             {
                 WebsocketJsonMessage msg = JsonUtility.FromJson<WebsocketJsonMessage>(msgString);
-                if (msg.Type == "lsys")
+                if (msg.type == "lsys")
                 {
-                    lsysController.Dispatch(msg.Payload);
+                    lsysController.Dispatch(msg.payload);
                 }
 
-                if (msg.Type == "console")
+                if (msg.type == "console")
                 {
-                    EventManager.InvokeConsole(msg.Payload);
+                    EventManager.InvokeConsole(msg.payload);
                 }
 
-                if (msg.Type == "consoleStatus")
+                if (msg.type == "consoleStatus")
                 {
-                    EventManager.InvokeConsoleStatus(msg.Payload);
+                    EventManager.InvokeConsoleStatus(msg.payload);
                 }
 
-                if (msg.Type == "view")
+                if (msg.type == "view")
                 {
-                    EventManager.InvokeViewChange(msg.Payload);
+                    EventManager.InvokeViewChange(msg.payload);
                 }
 
-                if (msg.Type == "serverEvent")
+                if (msg.type == "serverEvent")
                 {
-                    if(msg.Payload == "endMarkerConfig")
+                    if(msg.payload == "endMarkerConfig")
                     {
                         EventManager.InvokeServerEventEndMarkerConfig();
                     }
