@@ -5,10 +5,19 @@ using UnityEngine;
 public class LGenerator : LSystemBehaviour
 {
 
+    [HideInInspector]
     public TransformSpec TransformSpec;
+
+    [HideInInspector]
     public Bounds Bounds;
+
+    [HideInInspector]
     public float LastTimeTouched;
+
+    [HideInInspector]
     public System.Random Rand;
+
+    [HideInInspector]
     public float SpeedMultiplier = 1.0f;
 
     protected float scaleMultiplier;

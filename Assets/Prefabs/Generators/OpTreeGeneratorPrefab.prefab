@@ -43,6 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54d273c8da19ea145a42358416d055c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  protoEmpty: {fileID: 9160611660975841763, guid: 23c0ac690ac8c0c4ba5edddd67f50fc1,
+  Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  LastTimeTouched: 0
+  SpeedMultiplier: 1
+  ProtoEmpty: {fileID: 9160611660975841763, guid: 23c0ac690ac8c0c4ba5edddd67f50fc1,
     type: 3}
-  branchMaterial: {fileID: 2100000, guid: 2cc335f2f8babd24fbe1d9cdce3286f9, type: 2}
+  BranchMaterial: {fileID: 2100000, guid: 526e3245ca489c74e8dcbe114234ae0d, type: 2}

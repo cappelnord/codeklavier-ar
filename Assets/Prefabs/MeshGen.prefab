@@ -63,7 +63,7 @@ MonoBehaviour:
   protoObject: {fileID: 4408701006148909110, guid: 23b9d79e7e155e94899b43f60c7dfb6f,
     type: 3}
   defaultMaterial: {fileID: 2100000, guid: 93e0a5138adf4f84486c0f1d1fb03f85, type: 2}
-  resolution: 512
+  Resolution: 512
 --- !u!114 &4416692584519701483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,3 +87,14 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 3ea52db160f74f74ea803a4cb867b45a, type: 2}
   - {fileID: 2100000, guid: b7fe67801514b6245a34a9836a28fcbe, type: 2}
   - {fileID: 2100000, guid: 0a96832ee5766594485a3a201ca21807, type: 2}
+  colors:
+  - {r: 0.19215688, g: 0.19607845, b: 0.19215688, a: 0}
+  - {r: 1, g: 0, b: 0.16078432, a: 0}
+  - {r: 1, g: 0, b: 0.882353, a: 0}
+  - {r: 0.53333336, g: 0, b: 1, a: 0}
+  - {r: 0, g: 0.050980397, b: 1, a: 0}
+  - {r: 0, g: 0.76470596, b: 1, a: 0}
+  - {r: 0, g: 1, b: 0.64705884, a: 0}
+  - {r: 0, g: 1, b: 0.015686275, a: 0}
+  - {r: 1, g: 0.8980393, b: 0, a: 0}
+  - {r: 1, g: 0.45098042, b: 0, a: 0}

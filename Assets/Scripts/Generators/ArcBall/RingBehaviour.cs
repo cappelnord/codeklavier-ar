@@ -5,12 +5,12 @@ using UnityEngine;
 public class RingBehaviour : MonoBehaviour
 {
     public Vector3 Rotation;
-
     public float TargetScale;
     public float Scale;
 
     private bool destruct;
 
+    [HideInInspector]
     public LGenerator gen;
 
 

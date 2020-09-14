@@ -352,8 +352,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UriString: 
   MasterUri: https://keyboardsunite.com/ckar/get.php
-  RequestConsole: 0
-  RequestViews: 0
+  RequestConsole: 1
+  RequestViews: 1
 --- !u!4 &764862007
 Transform:
   m_ObjectHideFlags: 0
@@ -478,19 +478,22 @@ MonoBehaviour:
   LastTimeTouched: 0
   SpeedMultiplier: 1
   Prefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Seperator: {fileID: 0}
-  NullObject: {fileID: 0}
-  DynamicsText: {fileID: 0}
+  - {fileID: 3609570805101532433, guid: 32ef01be4e7127f40ad1872b1d01d8fc, type: 3}
+  - {fileID: 5322915186494964522, guid: f2689e13d3e1b5b4b88ecafd312378d6, type: 3}
+  - {fileID: 8564795404932978203, guid: 640adf50e1f5f86489076ec3e3d8eb15, type: 3}
+  - {fileID: 5467017873910374301, guid: a7ec588c69aad0f44a504fdc057a20df, type: 3}
+  - {fileID: 3461400070617508354, guid: 2bbf0a4a5a7e0354bb253a76ecccf502, type: 3}
+  - {fileID: 4892947281143064881, guid: 447466bd0cb2c334f874c7040ddb3262, type: 3}
+  - {fileID: 4377273532062327876, guid: 8d25ec548dbcab14d9e004b2058cf2b7, type: 3}
+  - {fileID: 7495753400018995834, guid: cbb0c04f6c5c3d248b4ea3714b23db03, type: 3}
+  - {fileID: 3613063298327990409, guid: 5be8e0d1656cdad4d972afbb09f47e4e, type: 3}
+  - {fileID: 1124247826149277085, guid: d99a5876e43e6f4498887b090bf4c18f, type: 3}
+  Seperator: {fileID: 3440736454626628714, guid: 7713cb73401492b4dad57c740da1994f,
+    type: 3}
+  NullObject: {fileID: 7068285632690174663, guid: 9547cece738922040bd3eefbada500e8,
+    type: 3}
+  DynamicsText: {fileID: 4921333318244916401, guid: f7c190568e6b7c743a9efdfab060e7ee,
+    type: 3}
 --- !u!1 &1077808182
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,7 +968,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b07a3e7a342e95409d223c490a2da61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CodeLabel: {fileID: 0}
+  CodeLabel: {fileID: 5456730405749734700, guid: e356333213750734a9223f0191b5a853,
+    type: 3}
   MaxHeight: 1.5
 --- !u!4 &1626004193
 Transform:
@@ -1182,19 +1186,22 @@ MonoBehaviour:
   LastTimeTouched: 0
   SpeedMultiplier: 1
   Prefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Connection: {fileID: 0}
-  ConnectionSphere: {fileID: 0}
-  DynamicsText: {fileID: 0}
+  - {fileID: 3609570805101532433, guid: 32ef01be4e7127f40ad1872b1d01d8fc, type: 3}
+  - {fileID: 563909374382983554, guid: 5c1b08c34cac7dd4cafc23c8d272f19d, type: 3}
+  - {fileID: 2428266801363595841, guid: 7cc2e1eb2af02b141be7b8acbfd2414f, type: 3}
+  - {fileID: 1638560302014418756, guid: beadf4ac5f017964a94b762e3056febc, type: 3}
+  - {fileID: 6865204024746935960, guid: 61f7d599675323d4dbc7267728662bcd, type: 3}
+  - {fileID: 1585640374541547775, guid: f7ed507444a2c844c9873b6241f60982, type: 3}
+  - {fileID: 4018524374390967115, guid: b0741366ff20bb84ea5f336a6c44014a, type: 3}
+  - {fileID: 8610602101221788251, guid: ec28dc915a596e7488e60f0215277bf9, type: 3}
+  - {fileID: 5328539854550020535, guid: 77730ed244c15d745934c9abc1e78c77, type: 3}
+  - {fileID: 1361589828803561239, guid: 78031a9eebd07d641bde0d45d983f90f, type: 3}
+  Connection: {fileID: 3179144696895573642, guid: d6e7632b0e8348140b3e0925c590ef7c,
+    type: 3}
+  ConnectionSphere: {fileID: 6283953413067597302, guid: e214c338b065ead43af5fbd8a545138a,
+    type: 3}
+  DynamicsText: {fileID: 5142498375761417526, guid: fd08b18c7bbf18e40823b9bb14f62729,
+    type: 3}
   DynamicsToSize: 1
   ConnectionSpheres: 1
   HideCubes: 0
@@ -1235,18 +1242,20 @@ MonoBehaviour:
   LastTimeTouched: 0
   SpeedMultiplier: 1
   Prefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  NullObject: {fileID: 0}
-  DynamicsText: {fileID: 0}
+  - {fileID: 3609570805101532433, guid: 32ef01be4e7127f40ad1872b1d01d8fc, type: 3}
+  - {fileID: 5322915186494964522, guid: f2689e13d3e1b5b4b88ecafd312378d6, type: 3}
+  - {fileID: 8564795404932978203, guid: 640adf50e1f5f86489076ec3e3d8eb15, type: 3}
+  - {fileID: 5467017873910374301, guid: a7ec588c69aad0f44a504fdc057a20df, type: 3}
+  - {fileID: 3461400070617508354, guid: 2bbf0a4a5a7e0354bb253a76ecccf502, type: 3}
+  - {fileID: 4892947281143064881, guid: 447466bd0cb2c334f874c7040ddb3262, type: 3}
+  - {fileID: 4377273532062327876, guid: 8d25ec548dbcab14d9e004b2058cf2b7, type: 3}
+  - {fileID: 7495753400018995834, guid: cbb0c04f6c5c3d248b4ea3714b23db03, type: 3}
+  - {fileID: 3613063298327990409, guid: 5be8e0d1656cdad4d972afbb09f47e4e, type: 3}
+  - {fileID: 1124247826149277085, guid: d99a5876e43e6f4498887b090bf4c18f, type: 3}
+  NullObject: {fileID: 7068285632690174663, guid: 9547cece738922040bd3eefbada500e8,
+    type: 3}
+  DynamicsText: {fileID: 4921333318244916401, guid: f7c190568e6b7c743a9efdfab060e7ee,
+    type: 3}
 --- !u!4 &2005952236
 Transform:
   m_ObjectHideFlags: 0

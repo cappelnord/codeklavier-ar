@@ -8,6 +8,7 @@ public class PlanetsBehaviour : MonoBehaviour
     public float DegreesPerSecond = 0.0f;
     public float TargetScale = 0.4f;
 
+    [HideInInspector]
     public LGenerator Gen;
 
     private bool alive = true;

@@ -40,10 +40,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5681937414346561832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c8e83931c0afef4994657bc04b9e020, type: 3}
+  m_Script: {fileID: 11500000, guid: 1394a5ee9c98d324f94661580b4a0bbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sourceFolder: VuforiaNotLoad
-  datasetBaseName: CodeklavierMarkers
-  markerVisualizerPrefab: {fileID: 8962375899935581991, guid: 2957d33460f9aa7429df0592f5960fbc,
-    type: 3}
+  MarkerID: 
+  MarkerFolder: MarkerTextures

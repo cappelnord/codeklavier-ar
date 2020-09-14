@@ -43,7 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c962b1a7da8bd4fb944a8ac2dbca66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  protoPlanet: {fileID: 1374543573255133395, guid: f6aabbf1cbf5f6845a8213e4a6e7fd9e,
+  Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  LastTimeTouched: 0
+  SpeedMultiplier: 1
+  ProtoPlanet: {fileID: 1374543573255133395, guid: f6aabbf1cbf5f6845a8213e4a6e7fd9e,
     type: 3}
-  protoEmpty: {fileID: 9160611660975841763, guid: 23c0ac690ac8c0c4ba5edddd67f50fc1,
+  ProtoEmpty: {fileID: 9160611660975841763, guid: 23c0ac690ac8c0c4ba5edddd67f50fc1,
     type: 3}

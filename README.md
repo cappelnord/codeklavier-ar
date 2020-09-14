@@ -3,7 +3,7 @@ AR extension by Patrick Borgeat for [CodeKlavier](https://codeklavier.space/) by
 
 https://codeklavier.space/augmentedreality/
 
-Currently this projects uses **Unity 2019.2.3f1**.
+Currently this projects uses **Unity 2020.1.4f1**.
 
 ## Scenes
 
@@ -11,8 +11,6 @@ Each Scene builds its own app:
 
 - **Visualizer** is a tool used by the pianist for coding/visualizng the structure of the L-Systems
 - **ARTestbed** is a pre-vis tool for the final AR visuals
-- **TheAR** is the final AR client
-- **TheVR** is an experimental client for virtual reality using SteamVR
 
 ## Controls
 
@@ -22,7 +20,7 @@ Some keys can be used to toggle between different states.
 
 - **S** to toggle between the default sky box and a black background
 - **F** to toggle if camera should follow active trees
-- **M** to toggle between a marker visualization, the unity cage (1 cubic meter) and axis
+- **M** to toggle to display the unity cage (1 cubic meter) and coordinate axis
 
 ## Tech
 
@@ -36,8 +34,6 @@ Marker transforms are defined in the server configuration and specify the relati
 ## Acknowledgments
 
 This repository includes the following third party packages/code
-- [SteamVR](https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647)
-- [Vuforia](https://docs.unity3d.com/Manual/vuforia-sdk-overview.html)
 - [TextMesh Pro](https://assetstore.unity.com/packages/essentials/beta-projects/textmesh-pro-84126)
 - [UnityOSC](https://github.com/jorgegarcia/UnityOSC)
 
