@@ -70,6 +70,8 @@ public class LSystem
     public string Shape;
     public string Key;
 
+    public bool TooWide = false;
+
     private int recursionDepth;
     private LSystemController lsysController;
     private int rulesIDCounter = 0;
@@ -198,6 +200,8 @@ public class LSystem
     public void Generate()
     {
         Generation++;
+
+        TooWide = false;
 
         Results.Clear();
         Results.Add(Axiom);
@@ -331,6 +335,7 @@ public class LSystem
 
         if (list.Count > maxStringLength)
         {
+            TooWide = true;
             return new List<ProcessUnit>();
         }
         else

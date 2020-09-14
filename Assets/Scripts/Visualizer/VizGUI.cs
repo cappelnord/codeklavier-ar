@@ -11,6 +11,7 @@ public class VizGUI : MonoBehaviour
     private string serverIP;
     private bool sendToLocalhostToo;
 
+    private bool fitToScreen = true;
     private bool dynamicsToSize = true;
     private bool connectionSpheres = true;
     private bool hideCubes = false;
@@ -41,7 +42,10 @@ public class VizGUI : MonoBehaviour
                 portString = GameObject.Find("OSCController").GetComponent<OSCController>().Port.ToString();
                 sendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo;
 
+                fitToScreen = GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active;
+
                 LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
+
 
                 dynamicsToSize = lgen.DynamicsToSize;
                 connectionSpheres = lgen.ConnectionSpheres;
@@ -59,7 +63,7 @@ public class VizGUI : MonoBehaviour
         }
         else
         {
-            GUI.Box(new Rect(10, 10, 280, 360), "Options");
+            GUI.Box(new Rect(10, 10, 280, 400), "Options");
 
             int y = 50;
             int lx = 30;
@@ -81,6 +85,11 @@ public class VizGUI : MonoBehaviour
             sendToLocalhostToo = GUI.Toggle(new Rect(rx, y, tw, h), sendToLocalhostToo, "");
 
             y += (int) ((float) sp * 1.5f);
+
+            GUI.Label(new Rect(lx, y, lw, h), "Fit to screen");
+            fitToScreen = GUI.Toggle(new Rect(rx, y, tw, h), fitToScreen, "");
+
+            y += sp;
 
             GUI.Label(new Rect(lx, y, lw, h), "Dynamics -> Size");
             dynamicsToSize = GUI.Toggle(new Rect(rx, y, tw, h), dynamicsToSize, "");
@@ -128,6 +137,8 @@ public class VizGUI : MonoBehaviour
         oscc.SendToLocalhostToo = sendToLocalhostToo;
 
         oscc.Connect();
+
+        GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active = fitToScreen;
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 

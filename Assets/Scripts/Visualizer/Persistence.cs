@@ -9,6 +9,7 @@ public class Persistence : MonoBehaviour
     private string _ServerIP;
     private bool _SendToLocalhostToo;
 
+    private bool _FitToScreen = true;
     private bool _DynamicsToSize = true;
     private bool _ConnectionSpheres = true;
     private bool _HideCubes = false;
@@ -31,7 +32,9 @@ public class Persistence : MonoBehaviour
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
-        _DynamicsToSize = PlayerPrefs.GetInt("SynamicsToSize", lgen.DynamicsToSize ? 1 : 0) != 0;
+        _FitToScreen = PlayerPrefs.GetInt("FitToScreen", GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active ? 1 : 0) != 0;
+
+        _DynamicsToSize = PlayerPrefs.GetInt("DynamicsToSize", lgen.DynamicsToSize ? 1 : 0) != 0;
         _ConnectionSpheres = PlayerPrefs.GetInt("ConnectionSpheres", lgen.ConnectionSpheres ? 1 : 0) != 0;
         _HideCubes = PlayerPrefs.GetInt("HideCubes", lgen.HideCubes ? 1 : 0) != 0;
         _HideConnections = PlayerPrefs.GetInt("HideConnections", lgen.HideConnections ? 1 : 0) != 0;
@@ -44,6 +47,9 @@ public class Persistence : MonoBehaviour
         GameObject.Find("OSCController").GetComponent<OSCController>().Port = _Port;
         GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo = _SendToLocalhostToo;
         GameObject.Find("OSCController").GetComponent<OSCController>().Connect();
+
+        GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active = _FitToScreen;
+
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
@@ -61,6 +67,7 @@ public class Persistence : MonoBehaviour
         _Port = GameObject.Find("OSCController").GetComponent<OSCController>().Port;
 
         _SendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo;
+        _FitToScreen = GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active;
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
@@ -78,6 +85,8 @@ public class Persistence : MonoBehaviour
         PlayerPrefs.SetString("ServerIP", _ServerIP);
         PlayerPrefs.SetInt("Port", _Port);
         PlayerPrefs.SetInt("SendToLocalhostToo", _SendToLocalhostToo ? 1 : 0);
+
+        PlayerPrefs.SetInt("FitToScreen", _FitToScreen ? 1 : 0);
 
         PlayerPrefs.SetInt("DynamicsToSize", _DynamicsToSize ? 1 : 0);
         PlayerPrefs.SetInt("ConnectionSpheres", _ConnectionSpheres ? 1 : 0);
