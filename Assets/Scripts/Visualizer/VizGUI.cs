@@ -6,6 +6,7 @@ public class VizGUI : MonoBehaviour
 {
 
     private bool active = false;
+    private bool visible = true;
 
     private string portString;
     private string serverIP;
@@ -18,6 +19,7 @@ public class VizGUI : MonoBehaviour
     private bool hideConnections = false;
     private bool hideDynamics = false;
 
+
     // Update is called once per frame
     void Update()
     {
@@ -25,13 +27,21 @@ public class VizGUI : MonoBehaviour
         {
             Application.Quit();
         }
+
+        if (Input.GetKeyDown("o"))
+        {
+            ToggleVisibility();
+        }
     }
+
+    void ToggleVisibility() => visible = !visible;
 
     void OnGUI()
     {
+        if (!visible) return;
+
         int bw = 100;
         int h = 25;
-
 
         if (!active)
         {
@@ -63,7 +73,7 @@ public class VizGUI : MonoBehaviour
         }
         else
         {
-            GUI.Box(new Rect(10, 10, 280, 400), "Options");
+            GUI.Box(new Rect(10, 10, 280, 400), "Options (Hide with 'O')");
 
             int y = 50;
             int lx = 30;
@@ -126,6 +136,9 @@ public class VizGUI : MonoBehaviour
             {
                 active = false;
             }
+
+            y += sp;
+
         }
     }
 
