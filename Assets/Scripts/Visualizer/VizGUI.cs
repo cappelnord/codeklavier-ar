@@ -136,9 +136,6 @@ public class VizGUI : MonoBehaviour
             {
                 active = false;
             }
-
-            y += sp;
-
         }
     }
 
