@@ -46,7 +46,7 @@ public class CKConsole : MonoBehaviour
                 } else
                 {
                     Add(buffer, false);
-                    buffer = "→ " + token;
+                    buffer = "… " + token;
                 }
             }
             if(buffer.Length > 2)
