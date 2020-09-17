@@ -7,7 +7,7 @@ public class CKConsole : MonoBehaviour
 
     public GameObject CodeLabel;
     public float MaxHeight = 1.5f;
-    public float MaxChars = 30;
+    public int MaxChars = 38;
 
     void OnEnable() => EventManager.OnConsole += Add;
 
@@ -32,7 +32,27 @@ public class CKConsole : MonoBehaviour
 
         if(s.Length >= MaxChars && performLineSplitting)
         {
-            string[] tokens = s.Split(' ');
+            string[] rawTokens = s.Split(' ');
+
+            // break up tokens larger than rawTokens
+            List<string> tokens = new List<string>();
+            for (int i = 0; i < rawTokens.Length; i++)
+            {
+                string token = rawTokens[i];
+
+                int shortenNextToken = 0;
+
+                while(token.Length > MaxChars - shortenNextToken)
+                {
+                    tokens.Add(token.Substring(0, MaxChars - shortenNextToken));
+                    token = token.Substring(MaxChars - shortenNextToken);
+                    shortenNextToken = 2;
+                }
+
+                tokens.Add(token);
+            }
+
+            // fill the lines; recombine tokens
             string buffer = "";
             foreach(string token in tokens)
             {
@@ -55,6 +75,8 @@ public class CKConsole : MonoBehaviour
             }
             return;
         }
+
+        // up here the string should fit the line ...
 
         foreach (Transform child in transform)
         {
