@@ -54,6 +54,7 @@ public class RuleSet
 public class LSystem
 {
     private const int maxRecursionDepth = 9;
+    private const int defaultRecursionDepth = 2;
     private const int maxStringLength = 64;
     private const int defaultVelocity = 90;
 
@@ -80,7 +81,7 @@ public class LSystem
 
     public LSystem(LSystemController controller, string key)
     {
-        recursionDepth = maxRecursionDepth;
+        recursionDepth = defaultRecursionDepth;
 
         lsysController = controller;
         Key = key;
