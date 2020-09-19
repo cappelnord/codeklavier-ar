@@ -28,7 +28,22 @@ public class CKConsole : MonoBehaviour
 
     public void Add(string s, bool performLineSplitting = true)
     {
-        // should be StringBuilder but it is not performance critical here ...
+        // should probably use StringBuilder. As this is
+        // not very performance critical I'll leave this like this for now.
+
+        // first split multiple lines in case a NL operator was found
+        // bit dirty as only Unix newlines are found like this ...
+        if(s.Contains("\n")) {
+            string[] lines = s.Split('\n');
+            foreach(string line in lines)
+            {
+                Add(line);
+            }
+            return;
+        }
+
+        // strip out \r
+        s = s.Replace("\r", "");
 
         if(s.Length >= MaxChars && performLineSplitting)
         {
