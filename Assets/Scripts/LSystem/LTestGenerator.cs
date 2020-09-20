@@ -45,7 +45,7 @@ public class LTestGenerator : LGenerator
         foreach (List<ProcessUnit> data in lsys.Units)
         {
 
-            float pos = data.Count / -2.0f;
+            float pos = data.Count / -2.0f + 0.5f;
             foreach(ProcessUnit unit in data)
             {
                 char symbol = unit.Content;
