@@ -6,8 +6,7 @@ public class LGeneratorScaler : MonoBehaviour
 {
 
     public float DefaultScale = 0.7f;
-    public float LowerBoundWidth = 10.0f;
-    public float UpperBoundHeight = 16.0f;
+    public float LowerBoundHeight = 2.0f;
     public bool Active = true;
 
     private IIRFilter filter;
@@ -24,22 +23,44 @@ public class LGeneratorScaler : MonoBehaviour
     {
         float scale = DefaultScale;
 
-        if(Active)
+        float lowerBoundWidth;
+
+
+        // bit a haaaaaack
+        if (Camera.main.aspect > 1.7)
         {
+            lowerBoundWidth = 9.25f;
+        }
+        else
+        {
+            lowerBoundWidth = 8.0f;
+        }
+
+        if (Active)
+        {
+            scale = DefaultScale;
+
             Bounds bounds = GetBounds();
 
+            float widthScale = scale;
             float width = bounds.extents.x / transform.localScale.x;
-            if (width >= LowerBoundWidth)
+
+            if (width > 0.1)
             {
-                scale = DefaultScale * (LowerBoundWidth / width);
+                widthScale = DefaultScale * (lowerBoundWidth / width);
             }
-            else
+
+            float heightScale = scale;
+            float height = bounds.extents.y / transform.localScale.y;
+            if (height > 0.1)
             {
-                float height = bounds.extents.y / transform.localScale.y;
-                if (height <= UpperBoundHeight && height >= 0.1)
-                {
-                    scale = DefaultScale * (UpperBoundHeight / height);
-                }
+                heightScale = DefaultScale * (LowerBoundHeight / height);
+            }
+
+            scale = widthScale;
+            if(heightScale < scale)
+            {
+                scale = heightScale;
             }
         }
 

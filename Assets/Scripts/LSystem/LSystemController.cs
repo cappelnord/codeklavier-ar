@@ -54,7 +54,7 @@ public class RuleSet
 public class LSystem
 {
     private const int maxRecursionDepth = 9;
-    private const int defaultRecursionDepth = 2;
+    private const int defaultRecursionDepth = 1;
     private const int maxStringLength = 64;
     private const int defaultVelocity = 90;
 

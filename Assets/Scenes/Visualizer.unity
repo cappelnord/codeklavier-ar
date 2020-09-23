@@ -734,8 +734,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultScale: 0.7
-  LowerBoundWidth: 9.5
-  UpperBoundHeight: 6
+  LowerBoundHeight: 6
   Active: 1
 --- !u!1 &1293995767
 GameObject:

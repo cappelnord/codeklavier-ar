@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SetWorldIsAR: 0
   SetConnectToLocal: 1
-  SetFloatUp: 1
+  SetFloatUp: 0
   SetVsyncCount: -1
 --- !u!4 &73183693
 Transform:
@@ -940,7 +940,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Herd: {fileID: 7713098529318963264}
-  Active: 0
+  Active: 1
   MaxZoomOutFactor: 1.5
 --- !u!114 &1385827502
 MonoBehaviour:
@@ -1206,7 +1206,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Shape1
       value: 
-      objectReference: {fileID: 7721715099224183062, guid: 319e9e813e141f447a3e0d3dbe369a92,
+      objectReference: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
