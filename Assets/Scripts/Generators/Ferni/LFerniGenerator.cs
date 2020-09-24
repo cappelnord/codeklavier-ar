@@ -45,11 +45,11 @@ public class LFerniGenerator : LGenerator
 
         float displace = 0.0f;
 
-        Dictionary<long, FerniNode> positions = new Dictionary<long, FerniNode>();
+        Dictionary<long, FerniNode> nodes = new Dictionary<long, FerniNode>();
 
         int generation = 0;
-        float jointScale = 0.05f;
-        float branchRadius = 0.02f;
+        float jointScale = 0.1f;
+        float branchRadius = 0.04f;
         float deltaDisplace = 1.25f;
 
         foreach (List<ProcessUnit> data in lsys.Units)
@@ -61,16 +61,22 @@ public class LFerniGenerator : LGenerator
                 char symbol = unit.Content;
                 pos += 1.0f;
 
-                positions[unit.Id] = new FerniNode(new Vector3(pos / 20.0f, displace / 3.0f, 0.0f), generation, jointScale, branchRadius);
+                nodes[unit.Id] = new FerniNode(new Vector3(pos / 20.0f, displace / 2.0f, 0.0f), generation, jointScale, branchRadius);
             }
 
             displace += deltaDisplace;
 
             generation++;
-            jointScale *= 0.8f;
-            branchRadius *= 0.8f;
+            jointScale *= 0.7f;
+            branchRadius *= 0.7f;
             deltaDisplace *= 0.75f;
 
+        }
+
+        foreach (FerniNode node in nodes.Values)
+        {
+            Vector3 position = node.Position;
+            node.Position = new Vector3(position.x + Mathf.Sin((position.x) * 8.2f) * 0.2f, position.y + Mathf.Sin(position.x  * 2.3f) * 0.6f, Mathf.Cos((position.x) * 7.5f) * 0.2f);
         }
 
 
@@ -79,12 +85,14 @@ public class LFerniGenerator : LGenerator
             foreach (ProcessUnit unit in data)
             {
                 
-                if (positions.ContainsKey(unit.Id) && unit.Content != '0' && unit.Children.Count > 0)
+                if (nodes.ContainsKey(unit.Id) && unit.Content != '0' && unit.Children.Count > 0)
                 {
+                    
                     GameObject obj = Object.Instantiate(JointPrefab, transform);
-                    FerniNode node = positions[unit.Id];
+                    FerniNode node = nodes[unit.Id];
                     obj.transform.localPosition = node.Position;
                     obj.transform.localScale = new Vector3(node.JointScale, node.JointScale, node.JointScale);
+                    
                 }
                 
 
@@ -92,18 +100,18 @@ public class LFerniGenerator : LGenerator
                 {
                     if (unit.Content != '0' && child.Content != '0')
                     {
-                        if (positions.ContainsKey(unit.Id) && positions.ContainsKey(child.Id))
+                        if (nodes.ContainsKey(unit.Id) && nodes.ContainsKey(child.Id))
                         {
 
-                            FerniNode from = positions[unit.Id];
-                            FerniNode to  = positions[child.Id];
+                            FerniNode from = nodes[unit.Id];
+                            FerniNode to  = nodes[child.Id];
 
                             Vector3 between = to.Position - from.Position;
                             float distance = between.magnitude;
 
                             GameObject obj = Spawn(transform, distance, from.BranchRadius); ;
 
-                            obj.transform.localPosition = from.Position + (between * 0.5f);
+                            obj.transform.localPosition = from.Position;
                             obj.transform.localRotation = Quaternion.LookRotation(between) * Quaternion.Euler(90.0f, 0.0f, 0.0f);
                         }
                     }
@@ -117,11 +125,11 @@ public class LFerniGenerator : LGenerator
         const int sides = 16;
 
         float radiusCenter = radius;
-        float radiusUp = radius * 0.25f;
+        float radiusUp = radius * 0.7f;
         float radiusDown = radius * 0.5f;
 
-        float lengthDown = length / 2.0f;
-        float lengthUp = length / 2.0f;
+        float lengthDown = length / 64.0f;
+        float lengthUp = length;
 
         float squish = 0.5f;
         float squishUp = 1.0f;
