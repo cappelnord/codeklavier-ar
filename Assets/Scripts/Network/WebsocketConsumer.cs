@@ -289,7 +289,7 @@ public class WebsocketConsumer : MonoBehaviour
                 else
                 {
                     MasterResponse response = JsonUtility.FromJson<MasterResponse>(webRequest.downloadHandler.text);
-                    UriString = response.url;
+                    UriString = $"{response.url}ckar_consume";
                     EventManager.InvokeConsole($"'{Channel}' - {response.description}");
                     if(response.status != "online")
                     {
