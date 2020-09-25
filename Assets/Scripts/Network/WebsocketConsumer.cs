@@ -186,8 +186,9 @@ public class WebsocketJsonTransform
 [Serializable]
 public class MasterResponse
 {
-    public string host;
-    public string port;
+    public string status;
+    public string description;
+    public string url;
 }
 
 public enum CKARNetworkStateType
@@ -216,7 +217,9 @@ public class CKARNetworkState
 public class WebsocketConsumer : MonoBehaviour
 {
     public string UriString = "";
-    public string MasterUri = "https://keyboardsunite.com/ckar/get.php";
+    public string Channel = "public";
+
+    private string MasterUri = "https://ar.codeklavier.space/master/channel";
 
     private ClientWebSocket cws = null;
     private ArraySegment<byte> buf = new ArraySegment<byte>(new byte[4096]);
@@ -272,7 +275,7 @@ public class WebsocketConsumer : MonoBehaviour
 
     IEnumerator RetreiveWebsocketURI()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(new Uri(MasterUri)))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(new Uri($"{MasterUri}?id={Channel}")))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -286,8 +289,13 @@ public class WebsocketConsumer : MonoBehaviour
                 else
                 {
                     MasterResponse response = JsonUtility.FromJson<MasterResponse>(webRequest.downloadHandler.text);
-                    UriString = $"ws://{response.host}:{response.port}/ckar_consume";
-                    ResponderHandle(new CKARNetworkState(CKARNetworkStateType.ConnectedToMaster, "Connected to Master!"));
+                    UriString = response.url;
+                    EventManager.InvokeConsole($"'{Channel}' - {response.description}");
+                    if(response.status != "online")
+                    {
+                        EventManager.InvokeConsole("Channel is probably offline ...");
+                    }
+                    ResponderHandle(new CKARNetworkState(CKARNetworkStateType.ConnectedToMaster, $"Retrieved URL from Master!"));
 
                 }
             }
