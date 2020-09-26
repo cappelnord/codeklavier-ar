@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UriString: 
-  MasterUri: https://keyboardsunite.com/ckar/get.php
+  Channel: nl
   RequestConsole: 1
   RequestViews: 1
 --- !u!4 &764862007
