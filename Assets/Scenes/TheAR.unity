@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: d666b62f07183324eb4d6a690b77d37c,
     type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 0f121b09760aa594b8ae958c20d48029,
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 7523bf2d1f0557040954c5611f7cc182,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -277,7 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce47a3c171d92e4d9ac6f536c1d7be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arCameraManager: {fileID: 0}
+  m_CameraManager: {fileID: 1464361634}
+  m_BrightnessMod: 2
 --- !u!1 &684177375
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,16 +1,40 @@
-﻿// https://tutorialsforar.com/using-light-estimation-in-ar-using-arkit-and-arcore-with-unity/
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.XR.ARFoundation;
 
+/// <summary>
+/// A component that can be used to access the most
+/// recently received light estimation information
+/// for the physical environment as observed by an
+/// AR device.
+/// </summary>
 [RequireComponent(typeof(Light))]
 public class LightEstimation : MonoBehaviour
 {
     [SerializeField]
-    private ARCameraManager arCameraManager;
+    [Tooltip("The ARCameraManager which will produce frame events containing light estimation information.")]
+    ARCameraManager m_CameraManager;
 
-    Light mainLight;
+    /// <summary>
+    /// Get or set the <c>ARCameraManager</c>.
+    /// </summary>
+    public ARCameraManager cameraManager
+    {
+        get { return m_CameraManager; }
+        set
+        {
+            if (m_CameraManager == value)
+                return;
+
+            if (m_CameraManager != null)
+                m_CameraManager.frameReceived -= FrameChanged;
+
+            m_CameraManager = value;
+
+            if (m_CameraManager != null & enabled)
+                m_CameraManager.frameReceived += FrameChanged;
+        }
+    }
 
     /// <summary>
     /// The estimated brightness of the physical environment, if available.
@@ -47,69 +71,64 @@ public class LightEstimation : MonoBehaviour
     /// </summary>
     public SphericalHarmonicsL2? sphericalHarmonics { get; private set; }
 
+    [SerializeField]
+    float m_BrightnessMod = 2.0f;
+
     void Awake()
     {
-        mainLight = GetComponent<Light>();
+        m_Light = GetComponent<Light>();
     }
 
     void OnEnable()
     {
-        if (arCameraManager != null)
-            arCameraManager.frameReceived += FrameChanged;
+        if (m_CameraManager != null)
+            m_CameraManager.frameReceived += FrameChanged;
     }
 
     void OnDisable()
     {
-        if (arCameraManager != null)
-            arCameraManager.frameReceived -= FrameChanged;
+        if (m_CameraManager != null)
+            m_CameraManager.frameReceived -= FrameChanged;
     }
-
 
     void FrameChanged(ARCameraFrameEventArgs args)
     {
         if (args.lightEstimation.averageBrightness.HasValue)
         {
             brightness = args.lightEstimation.averageBrightness.Value;
-            mainLight.intensity = brightness.Value;
+            m_Light.intensity = brightness.Value * m_BrightnessMod;
         }
+
         if (args.lightEstimation.averageColorTemperature.HasValue)
         {
             colorTemperature = args.lightEstimation.averageColorTemperature.Value;
-            mainLight.colorTemperature = colorTemperature.Value;
+            m_Light.colorTemperature = colorTemperature.Value;
         }
 
         if (args.lightEstimation.colorCorrection.HasValue)
         {
             colorCorrection = args.lightEstimation.colorCorrection.Value;
-            mainLight.color = colorCorrection.Value;
+            m_Light.color = colorCorrection.Value;
         }
+
         if (args.lightEstimation.mainLightDirection.HasValue)
         {
             mainLightDirection = args.lightEstimation.mainLightDirection;
-            mainLight.transform.rotation = Quaternion.LookRotation(mainLightDirection.Value);
+            m_Light.transform.rotation = Quaternion.LookRotation(mainLightDirection.Value);
         }
+
         if (args.lightEstimation.mainLightColor.HasValue)
         {
             mainLightColor = args.lightEstimation.mainLightColor;
-
-#if PLATFORM_ANDROID
-            // ARCore needs to apply energy conservation term (1 / PI) and be placed in gamma
-            mainLight.color = mainLightColor.Value / Mathf.PI;
-            mainLight.color = mainLight.color.gamma;
-            
-            // ARCore returns color in HDR format (can be represented as FP16 and have values above 1.0)
-            var camera = mainLight.GetComponentInParent<Camera>();
-            if (camera == null || !camera.allowHDR)
-            {
-                Debug.LogWarning($"HDR Rendering is not allowed.  Color values returned could be above the maximum representable value.");
-            }
-#endif
+            m_Light.color = mainLightColor.Value;
         }
+
         if (args.lightEstimation.mainLightIntensityLumens.HasValue)
         {
             mainLightIntensityLumens = args.lightEstimation.mainLightIntensityLumens;
-            mainLight.intensity = args.lightEstimation.averageMainLightBrightness.Value;
+            m_Light.intensity = args.lightEstimation.averageMainLightBrightness.Value;
         }
+
         if (args.lightEstimation.ambientSphericalHarmonics.HasValue)
         {
             sphericalHarmonics = args.lightEstimation.ambientSphericalHarmonics;
@@ -118,4 +137,5 @@ public class LightEstimation : MonoBehaviour
         }
     }
 
+    Light m_Light;
 }
