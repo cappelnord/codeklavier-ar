@@ -125,11 +125,11 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
         if (Active)
         {
             button.enabled = false;
-            PositionCube.SetActive(true);
+            PositionCube.GetComponentInChildren<Renderer>().enabled = true;
         } else
         {
             button.enabled = true;
-            PositionCube.SetActive(false);
+            PositionCube.GetComponentInChildren<Renderer>().enabled = false;
         }
         Visible = true;
     }
@@ -137,7 +137,7 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
     public void Hide()
     {
         button.enabled = false;
-        PositionCube.SetActive(false);
+        PositionCube.GetComponentInChildren<Renderer>().enabled = false;
         Visible = false;
     }
 
