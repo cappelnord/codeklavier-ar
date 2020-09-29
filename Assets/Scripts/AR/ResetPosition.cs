@@ -36,13 +36,18 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
+
+        Vector2 screen = new Vector2(Screen.width, Screen.height);
+
         if (Active && Visible)
         {
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
 
-                if(touch.phase == TouchPhase.Began)
+                Vector2 nPosition = touch.position / screen;
+
+                if(touch.phase == TouchPhase.Began & nPosition.x > 0.2 && nPosition.x < 0.8 && nPosition.y > 0.2 && nPosition.y < 0.8)
                 {
                     registeredTouchBegan = true;
                 }
@@ -58,7 +63,6 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
         {
             if(Input.touchCount == 2)
             {
-                Vector2 screen = new Vector2(Screen.width, Screen.height);
                 Vector2 positionA = Input.GetTouch(0).position / screen;
                 Vector2 positionB = Input.GetTouch(1).position / screen;
                 float distance = Vector2.Distance(positionA, positionB);

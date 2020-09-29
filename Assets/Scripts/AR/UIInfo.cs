@@ -4,7 +4,7 @@ using UnityEngine;
 
 using UnityEngine.EventSystems;
 
-public class UIInfoBehaviour : MonoBehaviour, IPointerClickHandler
+public class UIInfo : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
