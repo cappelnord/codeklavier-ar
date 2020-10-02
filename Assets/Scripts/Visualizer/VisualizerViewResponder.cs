@@ -5,6 +5,8 @@ using UnityEngine;
 public class VisualizerViewResponder : MonoBehaviour
 {
 
+    public string LockKey = "";
+
     private string key = "0";
 
     void OnEnable()
@@ -21,6 +23,11 @@ public class VisualizerViewResponder : MonoBehaviour
 
     public void SwitchView(string newViewKey)
     {
+        if(LockKey != "")
+        {
+            newViewKey = LockKey;
+        }
+
         key = newViewKey;
         GetComponent<TextMesh>().text = key;
         LSystem lsys = LSystemController.Instance().GetLSystem(key);
