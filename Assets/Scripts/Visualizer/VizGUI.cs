@@ -19,6 +19,8 @@ public class VizGUI : MonoBehaviour
     private bool hideConnections = false;
     private bool hideDynamics = false;
 
+    private string lockKey = "";
+
 
     // Update is called once per frame
     void Update()
@@ -63,6 +65,8 @@ public class VizGUI : MonoBehaviour
                 hideConnections = lgen.HideConnections;
                 hideDynamics = lgen.HideDynamics;
 
+                lockKey = GameObject.Find("VisualizerViewResponder").GetComponent<VisualizerViewResponder>().LockKey;
+
             }
             /*
             if (GUI.Button(new Rect(10 + bw + 30, 10, bw, h), "Exit"))
@@ -73,7 +77,7 @@ public class VizGUI : MonoBehaviour
         }
         else
         {
-            GUI.Box(new Rect(10, 10, 280, 400), "Options (Hide with 'O')");
+            GUI.Box(new Rect(10, 10, 280, 430), "Options (Hide with 'O')");
 
             int y = 50;
             int lx = 30;
@@ -124,6 +128,12 @@ public class VizGUI : MonoBehaviour
             GUI.Label(new Rect(lx, y, lw, h), "Hide Dynamics");
             hideDynamics = GUI.Toggle(new Rect(rx, y, tw, h), hideDynamics, "");
 
+            y += sp;
+
+            GUI.Label(new Rect(lx, y, lw, h), "Lock View to Key");
+            lockKey = GUI.TextField(new Rect(rx, y, tw, h), lockKey);
+
+
             y += (int)((float)sp * 1.5f);
 
             if(GUI.Button(new Rect(lx, y, bw,h), "Apply"))
@@ -157,6 +167,9 @@ public class VizGUI : MonoBehaviour
         lgen.HideCubes = hideCubes;
         lgen.HideConnections = hideConnections;
         lgen.HideDynamics = hideDynamics;
+
+        GameObject.Find("VisualizerViewResponder").GetComponent<VisualizerViewResponder>().LockKey = lockKey;
+        GameObject.Find("VisualizerViewResponder").GetComponent<VisualizerViewResponder>().SwitchView(lockKey);
 
         lgen.Generate();
 
