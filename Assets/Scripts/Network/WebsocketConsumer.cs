@@ -187,8 +187,11 @@ public class WebsocketJsonTransform
 public class MasterResponse
 {
     public string status;
+    public string name;
     public string description;
-    public string url;
+    public string eventISODate;
+    public string eventURL;
+    public string websocketBaseURL;
 }
 
 public enum CKARNetworkStateType
@@ -289,7 +292,7 @@ public class WebsocketConsumer : MonoBehaviour
                 else
                 {
                     MasterResponse response = JsonUtility.FromJson<MasterResponse>(webRequest.downloadHandler.text);
-                    UriString = $"{response.url}ckar_consume";
+                    UriString = $"{response.websocketBaseURL}ckar_consume";
                     EventManager.InvokeConsole($"'{Channel}' - {response.description}");
                     if(response.status != "online")
                     {
