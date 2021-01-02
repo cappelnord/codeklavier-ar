@@ -183,17 +183,6 @@ public class WebsocketJsonTransform
     public float[] rotation;
 }
 
-[Serializable]
-public class MasterResponse
-{
-    public string status;
-    public string name;
-    public string description;
-    public string eventISODate;
-    public string eventURL;
-    public string websocketBaseURL;
-}
-
 public enum CKARNetworkStateType
 {
     ConnectingToMaster,
@@ -221,8 +210,6 @@ public class WebsocketConsumer : MonoBehaviour
 {
     public string UriString = "";
     public string Channel = "public";
-
-    private string MasterUri = "https://ar.codeklavier.space/master/channel";
 
     private ClientWebSocket cws = null;
     private ArraySegment<byte> buf = new ArraySegment<byte>(new byte[4096]);
@@ -278,7 +265,7 @@ public class WebsocketConsumer : MonoBehaviour
 
     IEnumerator RetreiveWebsocketURI()
     {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(new Uri($"{MasterUri}?id={Channel}")))
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(new Uri($"{MasterServer.BaseURL}channel?id={Channel}")))
         {
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
@@ -291,7 +278,7 @@ public class WebsocketConsumer : MonoBehaviour
                 }
                 else
                 {
-                    MasterResponse response = JsonUtility.FromJson<MasterResponse>(webRequest.downloadHandler.text);
+                    MasterResponseChannelInfo response = JsonUtility.FromJson<MasterResponseChannelInfo>(webRequest.downloadHandler.text);
                     UriString = $"{response.websocketBaseURL}ckar_consume";
                     EventManager.InvokeConsole($"'{Channel}' - {response.description}");
                     if(response.status != "online")
