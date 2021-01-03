@@ -6,7 +6,7 @@ using UnityEngine;
 public static class MasterServer
 {
     public const string BaseURL = "https://ar.codeklavier.space/master/";
-    public const int ClientProtocol = 0;
+    public const int ClientProtocol = 1;
 }
 
 [Serializable]
