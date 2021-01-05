@@ -10,6 +10,7 @@ using TMPro;
 
 public class Loader : MonoBehaviour
 {
+    const string VersionString = "Version 0.1 - Preview";
 
     public GameObject UnityGray;
     public GameObject LoadingSpinner;
@@ -18,6 +19,7 @@ public class Loader : MonoBehaviour
     public GameObject TryAgainButton;
     public GameObject ARNeedsInstall;
     public GameObject ARIsNotSupported;
+    public GameObject VersionDisplay;
 
     private bool arIsAvailable = false;
     private bool isFirstLoad = true;
@@ -28,6 +30,8 @@ public class Loader : MonoBehaviour
 
     void Start()
     {
+        VersionDisplay.GetComponent<TextMeshProUGUI>().text = VersionString;
+
 #if UNITY_IOS
         ARIsNotSupported.GetComponent<TextMeshProUGUI>().text = "Your device is not compatible with ARKit. Unfortunately ARquatic will not run on your device.";
 #endif
@@ -72,7 +76,7 @@ public class Loader : MonoBehaviour
         if (success)
         {
             isFirstLoad = false;
-            UnityGray.GetComponent<FadeRawImageAlpha>().StartFade(0.0f, 2f);
+            UnityGray.GetComponent<FadeRawImageAlpha>().StartFade(0.0f, 1f);
         }
     }
 
@@ -183,7 +187,7 @@ public class Loader : MonoBehaviour
 
     void Update()
     {
-        if(isLoading && loadingStartTime + 0.5f < Time.time)
+        if(isLoading && loadingStartTime + 1f < Time.time)
         {
             LoadingSpinner.SetActive(true);
         }
