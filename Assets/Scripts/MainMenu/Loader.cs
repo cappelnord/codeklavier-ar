@@ -21,6 +21,9 @@ public class Loader : MonoBehaviour
     public GameObject ARIsNotSupported;
     public GameObject VersionDisplay;
 
+    public GameObject RefreshButton;
+    public GameObject RefreshSpinner;
+
     private bool arIsAvailable = false;
     private bool isFirstLoad = true;
     private bool isLoading = false;
@@ -28,9 +31,12 @@ public class Loader : MonoBehaviour
 
     private float loadingStartTime;
 
+    private ChannelInfoPopulator populator;
+
     void Start()
     {
         VersionDisplay.GetComponent<TextMeshProUGUI>().text = VersionString;
+        populator = GetComponent<ChannelInfoPopulator>();
 
 #if UNITY_IOS
         ARIsNotSupported.GetComponent<TextMeshProUGUI>().text = "Your device is not compatible with ARKit. Unfortunately ARquatic will not run on your device.";
@@ -80,9 +86,29 @@ public class Loader : MonoBehaviour
         }
     }
 
-    async void SecondLoad()
+    public void StartSecondLoad()
     {
+        StartCoroutine(SecondLoad());
+    }
 
+    private IEnumerator SecondLoad()
+    {
+        RefreshSpinner.SetActive(true);
+        RefreshButton.SetActive(false);
+        populator.Clean();
+
+        success = false;
+        yield return LoadMasterInfo();
+
+        if(!success)
+        {
+            populator.DisplayError();
+        }
+
+        RefreshSpinner.SetActive(false);
+        RefreshButton.SetActive(true);
+
+        yield break;
     }
 
     private void NetworkError(string message)
@@ -94,9 +120,9 @@ public class Loader : MonoBehaviour
         LoadingSpinner.SetActive(false);
     }
 
-    private void CommitData(MasterResponseChannelInfoPair[] channelPairs)
+    private void Populate(MasterResponseChannelInfoPair[] channelPairs)
     {
-
+        populator.Populate(channelPairs);
     }
 
     private IEnumerator InstallAR()
@@ -173,7 +199,7 @@ public class Loader : MonoBehaviour
                     yield break;
                 }
 
-                CommitData(response.channelList);
+                Populate(response.channelList);
 
             } catch(Exception e)
             {

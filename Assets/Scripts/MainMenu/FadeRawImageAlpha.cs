@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class FadeRawImageAlpha : MonoBehaviour
 {
+    public GameObject DeactivateOnZero;
+
     private RawImage rawImage;
 
     private Color color;
@@ -36,6 +38,11 @@ public class FadeRawImageAlpha : MonoBehaviour
         {
             currentAlpha = toAlpha;
             rawImage.color = new Color(color.r, color.g, color.b, toAlpha);
+        }
+
+        if(Time.time >= toTime && currentAlpha == 0f && DeactivateOnZero != null)
+        {
+            DeactivateOnZero.SetActive(false);
         }
     }
 

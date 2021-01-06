@@ -6,7 +6,7 @@ public class LightRotator : MonoBehaviour
 {
 
     private Vector3 basePosition;
-    private Vector3 baseRotation;
+    private Quaternion baseRotation;
     private float baseIntensity;
 
     public float IntensityPhaseMul = 0.2f;
@@ -34,7 +34,7 @@ public class LightRotator : MonoBehaviour
     void Start()
     {
         basePosition = transform.localPosition;
-        baseRotation = transform.localEulerAngles;
+        baseRotation = transform.localRotation;
         baseIntensity = GetComponent<Light>().intensity;
     }
 
@@ -46,7 +46,7 @@ public class LightRotator : MonoBehaviour
         GetComponent<Light>().intensity = baseIntensity + (Mathf.Sin(time * IntensityPhaseMul + IntensityPhaseOffset) * IntensityAmplitude);
 
         transform.localPosition = basePosition + new Vector3(Mathf.Sin(time * XPosPhaseMul + XPosPhaseOffset) * XPosAmplitude, 0.0f, Mathf.Sin(time * ZPosPhaseMul + ZPosPhaseOffset) * ZPosAmplitude);
-        transform.localEulerAngles = baseRotation + new Vector3(Mathf.Sin(time * XRotPhaseMul + XRotPhaseOffset) * XRotAmplitude, 0.0f, Mathf.Sin(time * ZRotPhaseMul + ZRotPhaseOffset) * ZRotAmplitude);
+        transform.localRotation = baseRotation * Quaternion.Euler(new Vector3(Mathf.Sin(time * XRotPhaseMul + XRotPhaseOffset) * XRotAmplitude, 0.0f, Mathf.Sin(time * ZRotPhaseMul + ZRotPhaseOffset) * ZRotAmplitude));
 
 
     }
