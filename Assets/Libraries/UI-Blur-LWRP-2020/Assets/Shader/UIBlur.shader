@@ -130,11 +130,17 @@
 
             fixed4 frag(v2f IN) : SV_Target
             {
-                half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
 
+                // ripping out most of things I don't need. I should probably just do my own blur shader.
+
+                // half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
+                
+                half4 color = IN.color;
+                /* 
                 #ifdef UNITY_UI_ALPHACLIP
                     clip (color.a - 0.001);
                 #endif
+                */
 
                 return  GetBlur(float4(IN.texcoord, 0.0, 1.0), color);
             }

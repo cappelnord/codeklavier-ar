@@ -13,6 +13,7 @@ public class ChannelInfoPopulator : MonoBehaviour
     public GameObject ChannelStatusPrefab;
     public GameObject ChannelNameDividerPrefab;
     public GameObject ChannelDatePrefab;
+    public GameObject ChannelTimezonePrefab;
     public GameObject ChannelDescriptionPrefab;
     public GameObject ChannelJoinButtonPrefab;
     public GameObject ChannelButtonDividerPrefab;
@@ -71,13 +72,16 @@ public class ChannelInfoPopulator : MonoBehaviour
 
             if(info.eventISODate != "" && info.eventISODate != null)
             {
-                GameObject eventDate = Instantiate(ChannelDatePrefab, Content);
-                DateTime date = DateTime.Parse(info.eventISODate, null, System.Globalization.DateTimeStyles.RoundtripKind);
-
                 System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-GB");
                 System.Threading.Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+                DateTime date = DateTime.Parse(info.eventISODate, null, System.Globalization.DateTimeStyles.RoundtripKind).ToLocalTime();
 
-                eventDate.GetComponent<TextMeshProUGUI>().text = date.ToString("g") + " UTC";
+                GameObject eventDate = Instantiate(ChannelDatePrefab, Content);
+                eventDate.GetComponent<TextMeshProUGUI>().text = date.ToString("g");
+
+                GameObject timezone = Instantiate(ChannelTimezonePrefab, Content);
+                timezone.GetComponent<TextMeshProUGUI>().text = TimeZone.CurrentTimeZone.StandardName;
+
             }
 
             GameObject description = Instantiate(ChannelDescriptionPrefab, Content);
