@@ -157,8 +157,17 @@ public class LGenerator : LSystemBehaviour
 
     public void ResetRandomness()
     {
-        char[] chars = lsys.RulesString.ToCharArray();
+        char[] chars;
+        if (lsys.RulesString != null)
+        {
+            chars = lsys.RulesString.ToCharArray();
+        } else
+        {
+            chars = "OK-Random!".ToCharArray();
+        }
+
         int sum = 0;
+
         for(int i = 0; i < chars.Length; i++)
         {
             sum = sum + chars[i];

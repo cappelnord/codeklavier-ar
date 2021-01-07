@@ -37,12 +37,12 @@ public class AboutPopulator : MonoBehaviour
         ParagraphDivider();
         
         Headline("Credits");
-        Paragraph("Best Piano Lady\nSweet Prince\nWhisky the Cat\nGerman Moustache Dude");
+        Paragraph("Best Piano Lady\nSweet Prince\nWhiskey the Cat\nGerman Moustache Dude");
 
         ParagraphDivider();
 
         Headline("Juan Appreciation");
-        Paragraph("Juan is a nice dude. He should have initially been part of the project but could not unfortunately because he is now Coorporate Juan.");
+        Paragraph("Juan is a nice dude. He should have initially been part of the project but could not unfortunately because he is now Corporate Juan.");
     }
 
     private void Headline(string text)

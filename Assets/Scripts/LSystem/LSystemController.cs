@@ -462,4 +462,9 @@ public class LSystemController : MonoBehaviour
 
         EventManager.InvokeGenerate(this);
     }
+
+    void OnDestroy()
+    {
+        instance = null;
+    }
 }

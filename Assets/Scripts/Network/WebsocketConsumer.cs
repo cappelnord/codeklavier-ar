@@ -233,6 +233,11 @@ public class WebsocketConsumer : MonoBehaviour
         connectToLocal = Config.ConnectToLocal;
         lsysController = LSystemController.Instance();
 
+        if(PersistentData.SelectedChannel != null)
+        {
+            Channel = PersistentData.SelectedChannel;
+        }
+
         if(Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
         {
             connectToLocal = false;

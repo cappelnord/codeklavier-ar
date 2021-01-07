@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LoadingSpinner : MonoBehaviour
 {
-    public float DegreesPerSecond = 90f;
+    public float DegreesPerSecond = 180f;
 
     void Update()
     {

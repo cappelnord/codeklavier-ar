@@ -4,20 +4,26 @@ using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
+using TMPro;
+
+
 public class ARStatus : MonoBehaviour
 {
     public ARSession Session = null;
     public ResetPosition ResetPosition;
 
-    public Sprite WaitingForTracking;
-    public Sprite TapOnCube;
+    private string WaitingForTracking = "Move your device slowly to establish tracking ...";
+    private string TapOnCube = "... tap on the cube to place the AR!";
 
-    private Image image;
+    private TextMeshProUGUI tmp;
+    private Image img;
 
 
     IEnumerator Start()
     {
-        image = GetComponent<Image>();
+        tmp = GetComponentInChildren<TextMeshProUGUI>();
+        img = GetComponent<Image>();
+        tmp.text = WaitingForTracking;
 
         if ((ARSession.state == ARSessionState.None) ||
             (ARSession.state == ARSessionState.CheckingAvailability))
@@ -87,23 +93,26 @@ public class ARStatus : MonoBehaviour
                 break;
         }
 
-        if (ResetPosition.Active && !image.enabled)
+        if (ResetPosition.Active && !tmp.enabled)
         {
-            image.sprite = TapOnCube;
-            image.enabled = true;
+            tmp.text = TapOnCube;
+            tmp.enabled = true;
+            img.enabled = true;
         }
     }
 
     private void Tracking()
     {
-        image.enabled = false;
+        tmp.enabled = false;
+        img.enabled = false;
         ResetPosition.Show();
     }
 
-    private void NotTracking(Sprite sprite)
+    private void NotTracking(string text)
     {
-        image.sprite = sprite;
-        image.enabled = true;
+        tmp.text = text;
+        tmp.enabled = true;
+        img.enabled = true;
         ResetPosition.Hide();
     }
 }

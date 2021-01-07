@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class ChannelInfoPopulator : MonoBehaviour
@@ -19,6 +20,10 @@ public class ChannelInfoPopulator : MonoBehaviour
     public GameObject ChannelButtonDividerPrefab;
     public GameObject ChannelMoreInformationButtonPrefab;
     public GameObject ChannelDividerPrefab;
+
+    public GameObject ToARBlack;
+
+    private bool startedTransitionToAR = false;
 
     void Start()
     {
@@ -95,7 +100,19 @@ public class ChannelInfoPopulator : MonoBehaviour
                 Button button = joinButton.GetComponent<Button>();
 
                 button.onClick.AddListener(delegate() {
-                    Debug.Log(id);
+                    if (startedTransitionToAR) return;
+                    startedTransitionToAR = true;
+
+                    PersistentData.SelectedChannel = id;
+                    PersistentData.FromMainMenu = true;
+
+                    ToARBlack.GetComponent<RawImage>().enabled = true;
+                    ToARBlack.GetComponent<FadeRawImageAlpha>().Start();
+                    ToARBlack.GetComponent<FadeRawImageAlpha>().StartFade(1f, 0.5f, delegate ()
+                    {
+                        SceneManager.LoadScene("TheAR");
+                    });
+
                 });
 
                 hadButton = true;

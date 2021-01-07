@@ -25,7 +25,6 @@ public class Loader : MonoBehaviour
     public GameObject RefreshSpinner;
 
     private bool arIsAvailable = false;
-    private bool isFirstLoad = true;
     private bool isLoading = false;
     private bool success = false;
 
@@ -58,7 +57,6 @@ public class Loader : MonoBehaviour
 
     private IEnumerator FirstLoad()
     {
-        isFirstLoad = true;
 
 #if !UNITY_EDITOR
         yield return CheckARAvailability();
@@ -81,7 +79,6 @@ public class Loader : MonoBehaviour
 
         if (success)
         {
-            isFirstLoad = false;
             UnityGray.GetComponent<FadeRawImageAlpha>().StartFade(0.0f, 1f);
         }
     }
