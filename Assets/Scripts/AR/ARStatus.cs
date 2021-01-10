@@ -12,9 +12,6 @@ public class ARStatus : MonoBehaviour
     public ARSession Session = null;
     public ResetPosition ResetPosition;
 
-    private string WaitingForTracking = "Move your device slowly to establish tracking ...";
-    private string TapOnCube = "... tap on the cube to place the AR!";
-
     private TextMeshProUGUI tmp;
     private Image img;
 
@@ -23,7 +20,7 @@ public class ARStatus : MonoBehaviour
     {
         tmp = GetComponentInChildren<TextMeshProUGUI>();
         img = GetComponent<Image>();
-        tmp.text = WaitingForTracking;
+        tmp.text = ARAppUITexts.ARStatusWaitingForTracking;
 
         if ((ARSession.state == ARSessionState.None) ||
             (ARSession.state == ARSessionState.CheckingAvailability))
@@ -33,7 +30,7 @@ public class ARStatus : MonoBehaviour
 
         if (ARSession.state == ARSessionState.Unsupported)
         {
-            // Start some fallback experience for unsupported devices
+            // should not happen!
         }
         else
         {
@@ -44,6 +41,8 @@ public class ARStatus : MonoBehaviour
 
     void Update()
     {
+
+        // most cases should not happen at this point as we test on startup ...
 
         switch (ARSession.state)
         {
@@ -66,7 +65,7 @@ public class ARStatus : MonoBehaviour
 
                 break;
             case ARSessionState.SessionInitializing:
-                NotTracking(WaitingForTracking);
+                NotTracking(ARAppUITexts.ARStatusWaitingForTracking);
                 break;
             case ARSessionState.SessionTracking:
                 Tracking();
@@ -78,16 +77,18 @@ public class ARStatus : MonoBehaviour
             case NotTrackingReason.None:
                 break;
             case NotTrackingReason.Initializing:
-                NotTracking(WaitingForTracking);
+                NotTracking(ARAppUITexts.ARStatusWaitingForTracking);
                 break;
             case NotTrackingReason.Relocalizing:
                 break;
             case NotTrackingReason.InsufficientLight:
+                NotTracking(ARAppUITexts.ARStatusInsufficientLight);
                 break;
             case NotTrackingReason.InsufficientFeatures:
+                NotTracking(ARAppUITexts.ARStatusInsufficientFeatures);
                 break;
             case NotTrackingReason.ExcessiveMotion:
-                NotTracking(WaitingForTracking);
+                NotTracking(ARAppUITexts.ARStatusWaitingForTracking);
                 break;
             case NotTrackingReason.Unsupported:
                 break;
@@ -95,7 +96,7 @@ public class ARStatus : MonoBehaviour
 
         if (ResetPosition.Active && !tmp.enabled)
         {
-            tmp.text = TapOnCube;
+            tmp.text = ARAppUITexts.ARStatusTapOnCube;
             tmp.enabled = true;
             img.enabled = true;
         }

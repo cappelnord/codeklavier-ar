@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -30,22 +28,10 @@ public class AboutPopulator : MonoBehaviour
 
     private void Populate()
     {
-        Headline("About");
-        Paragraph("This can be a short text about the app, the project and everything else ... Let's keep it short!");
-        LinkButton("CodeKlavier Homepage", "https://codeklavier.space/");
-        
-        ParagraphDivider();
-        
-        Headline("Credits");
-        Paragraph("Best Piano Lady\nSweet Prince\nWhiskey the Cat\nGerman Moustache Dude");
-
-        ParagraphDivider();
-
-        Headline("Juan Appreciation");
-        Paragraph("Juan is a nice dude. He should have initially been part of the project but could not unfortunately because he is now Corporate Juan.");
+        ARAppUITexts.PopulateAbout(this);
     }
 
-    private void Headline(string text)
+    public void Headline(string text)
     {
         GameObject obj = Instantiate(HeadlinePrefab, Content);
         obj.GetComponent<TextMeshProUGUI>().text = text;
@@ -53,13 +39,13 @@ public class AboutPopulator : MonoBehaviour
         Instantiate(HeadlineDividerPrefab, Content);
     }
 
-    private void Paragraph(string text)
+    public void Paragraph(string text)
     {
         GameObject obj = Instantiate(ParagraphPrefab, Content);
         obj.GetComponent<TextMeshProUGUI>().text = text;
     }
 
-    private void LinkButton(string text, string url)
+    public void LinkButton(string text, string url)
     {
         GameObject obj = Instantiate(MoreInformationButtonPrefab, Content);
         Button button = obj.GetComponent<Button>();
@@ -71,7 +57,7 @@ public class AboutPopulator : MonoBehaviour
         });
     }
 
-    private void ParagraphDivider()
+    public void ParagraphDivider()
     {
         Instantiate(ParagraphDividerPrefab, Content);
     }

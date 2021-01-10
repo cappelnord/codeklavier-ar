@@ -41,7 +41,7 @@ public class ChannelInfoPopulator : MonoBehaviour
     public void DisplayError()
     {
         GameObject description = Instantiate(ChannelDescriptionPrefab, Content);
-        description.GetComponent<TextMeshProUGUI>().text = "Could not refresh channel information ...";
+        description.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.MainMenuChannelInformationError;
     }
 
     public void Populate(MasterResponseChannelInfoPair[] channelPairs)
@@ -63,29 +63,42 @@ public class ChannelInfoPopulator : MonoBehaviour
             name.GetComponent<TextMeshProUGUI>().text = info.name;
 
             GameObject status = Instantiate(ChannelStatusPrefab, Content);
-            status.GetComponent<TextMeshProUGUI>().text = info.status;
 
             if(info.status == "online")
             {
+                status.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.MainMenuStatusOnline;
                 status.GetComponent<TextMeshProUGUI>().color = new Color(0.4f, 1f, 0.4f, 1.0f);
             } else if(info.status == "offline")
             {
+                status.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.MainMenuStatusOffline;
                 status.GetComponent<TextMeshProUGUI>().color = new Color(1f, 0.4f, 0.4f, 1.0f);
+            } else
+            {
+                status.GetComponent<TextMeshProUGUI>().text = info.status;
             }
 
             Instantiate(ChannelNameDividerPrefab, Content);
 
             if(info.eventISODate != "" && info.eventISODate != null)
             {
-                System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-GB");
+                System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture(ARAppUITexts.DateDisplayCulture);
                 System.Threading.Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;
                 DateTime date = DateTime.Parse(info.eventISODate, null, System.Globalization.DateTimeStyles.RoundtripKind).ToLocalTime();
 
-                GameObject eventDate = Instantiate(ChannelDatePrefab, Content);
-                eventDate.GetComponent<TextMeshProUGUI>().text = date.ToString("g");
+                string timeZoneString = TimeZone.CurrentTimeZone.StandardName;
+                string dateString = date.ToString("g");
 
-                GameObject timezone = Instantiate(ChannelTimezonePrefab, Content);
-                timezone.GetComponent<TextMeshProUGUI>().text = TimeZone.CurrentTimeZone.StandardName;
+                GameObject eventDate = Instantiate(ChannelDatePrefab, Content);
+
+                if (timeZoneString.Length > 6) {
+                    eventDate.GetComponent<TextMeshProUGUI>().text = dateString;
+
+                    GameObject timezone = Instantiate(ChannelTimezonePrefab, Content);
+                    timezone.GetComponent<TextMeshProUGUI>().text = timeZoneString;
+                } else
+                {
+                    eventDate.GetComponent<TextMeshProUGUI>().text = dateString + " " + timeZoneString;
+                }
 
             }
 
@@ -97,6 +110,8 @@ public class ChannelInfoPopulator : MonoBehaviour
             if(info.status == "online")
             {
                 GameObject joinButton = Instantiate(ChannelJoinButtonPrefab, Content);
+                joinButton.GetComponentInChildren<TextMeshProUGUI>().text = ARAppUITexts.ButtonJoin;
+
                 Button button = joinButton.GetComponent<Button>();
 
                 button.onClick.AddListener(delegate() {
@@ -126,6 +141,8 @@ public class ChannelInfoPopulator : MonoBehaviour
                 }
 
                 GameObject infoButton = Instantiate(ChannelMoreInformationButtonPrefab, Content);
+                infoButton.GetComponentInChildren<TextMeshProUGUI>().text = ARAppUITexts.ButtonMoreInformation;
+
                 Button button = infoButton.GetComponent<Button>();
 
                 button.onClick.AddListener(delegate() {

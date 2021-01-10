@@ -10,8 +10,6 @@ using TMPro;
 
 public class Loader : MonoBehaviour
 {
-    const string VersionString = "Version 0.1 - Preview";
-
     public GameObject UnityGray;
     public GameObject LoadingSpinner;
     public GameObject CannotConnectNotification;
@@ -34,15 +32,20 @@ public class Loader : MonoBehaviour
 
     void Start()
     {
-        VersionDisplay.GetComponent<TextMeshProUGUI>().text = VersionString;
+        CannotConnectNotification.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuCannotConnect;
+        AppOutOfDateNotification.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuAppOutOfDate;
+        TryAgainButton.GetComponentInChildren<TextMeshProUGUI>().text = ARAppUITexts.ButtonTryAgain;
+        ARNeedsInstall.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuARNeedsInstall;
+
+        VersionDisplay.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.VersionString;
         populator = GetComponent<ChannelInfoPopulator>();
 
 #if UNITY_IOS
-        ARIsNotSupported.GetComponent<TextMeshProUGUI>().text = "Your device is not compatible with ARKit. Unfortunately ARquatic will not run on your device.";
+        ARIsNotSupported.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuNotCompatibleApple;
 #endif
 
 #if UNITY_ANDROID
-        ARIsNotSupported.GetComponent<TextMeshProUGUI>().text = "Your device is not compatible with ARCore. Unfortunately ARquatic will not run on your device.";
+        ARIsNotSupported.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuNotCompatibleAndroid;
 #endif
 
         StartCoroutine(FirstLoad());

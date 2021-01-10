@@ -181,8 +181,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cannot connect to ARquatic server. Please connect to the Internet or try
-    again later.
+  m_text: ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b772236c363c6f64298f2ee13ed05705, type: 2}
   m_sharedMaterial: {fileID: -2241932726985502345, guid: b772236c363c6f64298f2ee13ed05705,
@@ -298,8 +297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: In order to run this app ARCore needs to be installed from the Play Store.
-    There will be a prompt for that.
+  m_text: ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b772236c363c6f64298f2ee13ed05705, type: 2}
   m_sharedMaterial: {fileID: -2241932726985502345, guid: b772236c363c6f64298f2ee13ed05705,
@@ -627,6 +625,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1d3624430d2504d9c28bbb82c5ed52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &411583563
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 411583565}
+  - component: {fileID: 411583564}
+  m_Layer: 0
+  m_Name: SetMiscTexts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &411583564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411583563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dae811e52e5fa149bf0f3feb9c818f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AvailableChannelsLabel: {fileID: 616062640}
+  InformationLabel: {fileID: 736567250}
+  RefreshButtonLabel: {fileID: 316991472351203197}
+--- !u!4 &411583565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411583563}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 147.35983, y: 164.96191, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &425256468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,7 +1509,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Available Channels
+  m_text: ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d750a9b74b23124582c85e7d1eca38b, type: 2}
   m_sharedMaterial: {fileID: -4506588124974051556, guid: 6d750a9b74b23124582c85e7d1eca38b,
@@ -1686,8 +1730,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Your app is out of date. Please update your app in order to experience
-    ARquatic.
+  m_text: ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b772236c363c6f64298f2ee13ed05705, type: 2}
   m_sharedMaterial: {fileID: -2241932726985502345, guid: b772236c363c6f64298f2ee13ed05705,
@@ -1876,7 +1919,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Information
+  m_text: ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d750a9b74b23124582c85e7d1eca38b, type: 2}
   m_sharedMaterial: {fileID: -4506588124974051556, guid: 6d750a9b74b23124582c85e7d1eca38b,
@@ -3123,7 +3166,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Try again!
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d750a9b74b23124582c85e7d1eca38b, type: 2}
   m_sharedMaterial: {fileID: -4506588124974051556, guid: 6d750a9b74b23124582c85e7d1eca38b,
@@ -3578,7 +3621,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Refresh
+  m_text: ...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6d750a9b74b23124582c85e7d1eca38b, type: 2}
   m_sharedMaterial: {fileID: -4506588124974051556, guid: 6d750a9b74b23124582c85e7d1eca38b,
