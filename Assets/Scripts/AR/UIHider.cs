@@ -10,7 +10,12 @@ public class UIHider : MonoBehaviour
     public GameObject CloseButton;
     public GameObject ResetPositionButton;
 
+    public ARStatus ARStatus;
+
     private float lastTimeActive;
+
+    [HideInInspector]
+    public bool UIHidden = false;
 
     void Start()
     {
@@ -24,9 +29,10 @@ public class UIHider : MonoBehaviour
 
         float now = Time.time;
 
-        if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+        if (Input.touchCount > 0 || Input.GetMouseButtonDown(0) || ARStatus.StatusVisible)
         {
             lastTimeActive = now;
+            UIHidden = false;
         }
 
         float alpha = 0f;
@@ -43,6 +49,7 @@ public class UIHider : MonoBehaviour
         else
         {
             alpha = 0f;
+            UIHidden = true;
         }
 
         ApplyAlpha(ScreenshotButton, alpha);

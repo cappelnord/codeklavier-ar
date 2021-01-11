@@ -25,6 +25,8 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
     private float currentScale = 0.0f;
     private float lastScaleTouchDistance = 0.0f;
 
+    public UIHider UIHider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -147,6 +149,8 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (UIHider.UIHidden) return;
+
         if(!Active)
         {
             Activate();

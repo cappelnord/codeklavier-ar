@@ -315,7 +315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 125, y: 150}
+  m_AnchoredPosition: {x: 100, y: 125}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &502165630
@@ -375,6 +375,7 @@ MonoBehaviour:
   DefaultScale: 0.25
   MinimumScale: 0.05
   MaximumScale: 1
+  UIHider: {fileID: 1997535672}
 --- !u!1 &579449824
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,6 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnityGray: {fileID: 1423658817}
+  UIHider: {fileID: 1997535672}
 --- !u!1 &599303493
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,7 +502,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -100, y: 150}
+  m_AnchoredPosition: {x: -100, y: 125}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &599303495
@@ -1606,6 +1608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Session: {fileID: 1094446299}
   ResetPosition: {fileID: 502165632}
+  StatusVisible: 1
 --- !u!1 &1997535667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1728,6 +1731,8 @@ MonoBehaviour:
   ScreenshotButton: {fileID: 2080608326}
   CloseButton: {fileID: 579449824}
   ResetPositionButton: {fileID: 502165628}
+  ARStatus: {fileID: 1986488010}
+  UIHidden: 0
 --- !u!1 &2080608326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,6 +1784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 1997535667}
+  UIHider: {fileID: 1997535672}
 --- !u!114 &2080608329
 MonoBehaviour:
   m_ObjectHideFlags: 0

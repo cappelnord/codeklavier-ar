@@ -15,6 +15,9 @@ public class ARStatus : MonoBehaviour
     private TextMeshProUGUI tmp;
     private Image img;
 
+    [HideInInspector]
+    public bool StatusVisible = true;
+
 
     IEnumerator Start()
     {
@@ -106,6 +109,7 @@ public class ARStatus : MonoBehaviour
     {
         tmp.enabled = false;
         img.enabled = false;
+        StatusVisible = false;
         ResetPosition.Show();
     }
 
@@ -114,6 +118,7 @@ public class ARStatus : MonoBehaviour
         tmp.text = text;
         tmp.enabled = true;
         img.enabled = true;
+        StatusVisible = true;
         ResetPosition.Hide();
     }
 }

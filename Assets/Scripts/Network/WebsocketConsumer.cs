@@ -326,7 +326,7 @@ public class WebsocketConsumer : MonoBehaviour
         string msgString;
         while(queue.Dequeue(out msgString))
         {
-            Debug.Log(msgString);
+            // Debug.Log(msgString);
             if(msgString.Contains("\"type\": \"transform\""))
             {
                 WebsocketJsonTransform msg = JsonUtility.FromJson<WebsocketJsonTransform>(msgString);

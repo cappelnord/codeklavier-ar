@@ -13,19 +13,23 @@ public class UIClose : MonoBehaviour, IPointerClickHandler
 
     public GameObject UnityGray;
 
+    public UIHider UIHider;
+
     void Start()
     {
         
         if(!PersistentData.FromMainMenu)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (UIHider.UIHidden) return;
         if (transitionHasStarted) return;
+
         transitionHasStarted = true;
 
         UnityGray.GetComponent<RawImage>().enabled = true;

@@ -10,8 +10,12 @@ public class UIScreenshot : MonoBehaviour, IPointerClickHandler
 
     public GameObject UI;
 
+    public UIHider UIHider;
+
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (UIHider.UIHidden) return;
+
         ScreenshotProvider.CaptureScreenshot();
         StartCoroutine(HideUI(0.5f));
     }
