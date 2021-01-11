@@ -10,7 +10,8 @@ public class PositionCube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 position = ARCamera.transform.localPosition + (ARCamera.transform.forward * 1.5f);
+        // TODO: Find wall in the back and position in the middle
+        Vector3 position = ARCamera.transform.localPosition + (ARCamera.transform.forward * 1f);
         transform.localPosition = position;
         transform.localEulerAngles = new Vector3(0.0f, ARCamera.transform.localEulerAngles.y, 0.0f);
     }

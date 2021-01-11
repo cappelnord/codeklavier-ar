@@ -15,7 +15,7 @@ public static class ARAppUITexts
 
     // text that might be displayed on startup
     public const string PreMenuCannotConnect = "Cannot connect to ARquatic server. Please connect to the Internet or try again later.";
-    public const string PreMenuNotCompatibleApple = "Your device is not compatible with ARKit.Unfortunately ARquatic will not run on your device.";
+    public const string PreMenuNotCompatibleApple = "Your device is not compatible with ARKit. Unfortunately ARquatic will not run on your device.";
     public const string PreMenuNotCompatibleAndroid = "Your device is not compatible with ARCore. Unfortunately ARquatic will not run on your device.";
     public const string PreMenuAppOutOfDate = "Your ARquatic app is out of date. Please update your app in order to experience ARquatic.";
     public const string PreMenuARNeedsInstall = "In order to run this app ARCore needs to be installed from the Play Store. Your device should display a prompt for that.";
@@ -32,8 +32,8 @@ public static class ARAppUITexts
     public const string ARStatusWaitingForTracking = "Move your device slowly to establish tracking ...";
     public const string ARStatusTapOnCube = "... tap on the cube to place the AR!";
 
-    public const string ARStatusInsufficientLight = "Insufficient light in your room to establish stable tracking.";
-    public const string ARStatusInsufficientFeatures = "Insufficient optical features in your room to establish stable tracking.";
+    public const string ARStatusInsufficientLight = "Insufficient light in your environment to establish stable tracking.";
+    public const string ARStatusInsufficientFeatures = "Insufficient optical features in your view to establish stable tracking.";
 
     static public void PopulateAbout(AboutPopulator x)
     {

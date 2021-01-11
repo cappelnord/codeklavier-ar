@@ -277,7 +277,7 @@ public class WebsocketConsumer : MonoBehaviour
 
             try
             {
-                if (webRequest.isNetworkError)
+                if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
                     throw new Exception($"Could not connect to Master Server: {webRequest.error}");
                 }
