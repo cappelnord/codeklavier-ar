@@ -22,6 +22,8 @@ public class Loader : MonoBehaviour
     public GameObject RefreshButton;
     public GameObject RefreshSpinner;
 
+    public string AdditionalChannel;
+
     private bool arIsAvailable = false;
     private bool isLoading = false;
     private bool success = false;
@@ -171,9 +173,19 @@ public class Loader : MonoBehaviour
         }
     }
 
+    private string MasterServerURL() {
+        string add = "";
+        if(AdditionalChannel != null && AdditionalChannel != "")
+        {
+            add = $"?additionalChannel={AdditionalChannel}";
+        }
+
+        return $"{MasterServer.BaseURL}app{add}";
+    }
+
     private IEnumerator LoadMasterInfo()
     {
-        using (UnityWebRequest masterRequest = UnityWebRequest.Get(new Uri($"{MasterServer.BaseURL}app")))
+        using (UnityWebRequest masterRequest = UnityWebRequest.Get(new Uri(MasterServerURL())))
         {
             yield return masterRequest.SendWebRequest();
 
