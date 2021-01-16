@@ -226,6 +226,8 @@ public class WebsocketConsumer : MonoBehaviour
     private bool keepLocal = false;
     private int localConnectionAttempts = 0;
 
+    private Coroutine currentCoroutine;
+
 
 
     void Start()
@@ -262,14 +264,37 @@ public class WebsocketConsumer : MonoBehaviour
         }
     }
 
+
+    // kind of trash ... but works well enough in combination with OnDestroy
+    private void Disconnect()
+    {
+        if(currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+            currentCoroutine = null;
+        }
+
+        if (cws != null)
+        {
+            try
+            {
+                cws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Resetting Connection", CancellationToken.None);
+                cws = null;
+            } catch { }
+        }
+
+        connected = false;
+    }
+
     void ConnectToMaster()
     {
         ResponderHandle(new CKARNetworkState(CKARNetworkStateType.ConnectingToMaster, "Connecting to Master ..."));
-        StartCoroutine(RetreiveWebsocketURI());
+        currentCoroutine = StartCoroutine(RetreiveWebsocketURI());
     }
 
     IEnumerator RetreiveWebsocketURI()
     {
+
         using (UnityWebRequest webRequest = UnityWebRequest.Get(new Uri($"{MasterServer.BaseURL}channel?id={Channel}")))
         {
             // Request and wait for the desired page.
@@ -279,24 +304,33 @@ public class WebsocketConsumer : MonoBehaviour
             {
                 if (webRequest.result == UnityWebRequest.Result.ConnectionError)
                 {
-                    throw new Exception($"Could not connect to Master Server: {webRequest.error}");
+                    throw new Exception($"Could not connect to Master server: {webRequest.error}");
+                } else if(webRequest.responseCode == 404)
+                {
+                    throw new Exception($"Channel \"{Channel}\" does not seem to be known by the Master server!");
                 }
                 else
                 {
                     MasterResponseChannelInfo response = JsonUtility.FromJson<MasterResponseChannelInfo>(webRequest.downloadHandler.text);
                     UriString = $"{response.websocketBaseURL}ckar_consume";
-                    EventManager.InvokeConsole($"'{Channel}' - {response.description}");
+                    EventManager.InvokeConsole($"'{Channel}' - {response.name}");
                     if(response.status != "online")
                     {
                         EventManager.InvokeConsole("Channel is probably offline ...");
                     }
+
+                    if(response.websocketBaseURL == "" || response.websocketBaseURL == null)
+                    {
+                        throw new Exception("Selected channel does not have a websocket base URL set ...");
+                    }
+
                     ResponderHandle(new CKARNetworkState(CKARNetworkStateType.ConnectedToMaster, $"Retrieved URL from Master!"));
 
                 }
             }
             catch (Exception e) {
                 Debug.LogException(e);
-                ResponderHandle(new CKARNetworkState(CKARNetworkStateType.FailedConnectingToMaster, "Failed connecting to Master!"));
+                ResponderHandle(new CKARNetworkState(CKARNetworkStateType.FailedConnectingToMaster, e.Message));
             }
         }
     }
@@ -359,6 +393,13 @@ public class WebsocketConsumer : MonoBehaviour
             else
             {
                 WebsocketJsonMessage msg = JsonUtility.FromJson<WebsocketJsonMessage>(msgString);
+
+                if(msg == null)
+                {
+                    EventManager.InvokeConsole($"Could not decode JSON message ... {msgString}");
+                    continue;
+                }
+
                 if (msg.type == "lsys")
                 {
                     lsysController.Dispatch(msg.payload);
@@ -398,6 +439,8 @@ public class WebsocketConsumer : MonoBehaviour
     async void TryConnect()
     {
         connected = true;
+        currentCoroutine = null;
+
         if (!connectToLocal)
         {
             ResponderHandle(new CKARNetworkState(CKARNetworkStateType.ConnectingToServer, "Connecting to Server ..."));
@@ -491,5 +534,11 @@ public class WebsocketConsumer : MonoBehaviour
             Debug.LogException(e);
             connected = false;
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("WebsocketConsumer Destroy");
+        Disconnect();
     }
 }

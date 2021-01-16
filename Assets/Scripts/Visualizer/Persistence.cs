@@ -5,6 +5,7 @@ using UnityEngine;
 public class Persistence : MonoBehaviour
 {
 
+    private string _Channel;
     private int _Port;
     private string _ServerIP;
     private bool _SendToLocalhostToo;
@@ -25,6 +26,7 @@ public class Persistence : MonoBehaviour
 
     void Load()
     {
+        _Channel = PlayerPrefs.GetString("Channel", GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel);
         _ServerIP = PlayerPrefs.GetString("ServerIP", GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString());
         _Port = PlayerPrefs.GetInt("Port", GameObject.Find("OSCController").GetComponent<OSCController>().Port);
 
@@ -50,6 +52,7 @@ public class Persistence : MonoBehaviour
 
         GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active = _FitToScreen;
 
+        GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel = _Channel;
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
@@ -63,6 +66,8 @@ public class Persistence : MonoBehaviour
 
     void ReadLocal()
     {
+        _Channel = GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel;
+
         _ServerIP = GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString();
         _Port = GameObject.Find("OSCController").GetComponent<OSCController>().Port;
 
@@ -82,6 +87,7 @@ public class Persistence : MonoBehaviour
     {
         ReadLocal();
 
+        PlayerPrefs.SetString("Channel", _Channel);
         PlayerPrefs.SetString("ServerIP", _ServerIP);
         PlayerPrefs.SetInt("Port", _Port);
         PlayerPrefs.SetInt("SendToLocalhostToo", _SendToLocalhostToo ? 1 : 0);

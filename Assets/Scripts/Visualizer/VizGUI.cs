@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class VizGUI : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class VizGUI : MonoBehaviour
 
     private string portString;
     private string serverIP;
+    private string channel;
     private bool sendToLocalhostToo;
 
     private bool fitToScreen = true;
@@ -50,6 +52,7 @@ public class VizGUI : MonoBehaviour
             if (GUI.Button(new Rect(10, 10, bw, h), "Options"))
             {
                 active = true;
+                channel = GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel;
                 serverIP = GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString();
                 portString = GameObject.Find("OSCController").GetComponent<OSCController>().Port.ToString();
                 sendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo;
@@ -77,7 +80,7 @@ public class VizGUI : MonoBehaviour
         }
         else
         {
-            GUI.Box(new Rect(10, 10, 280, 430), "Options (Hide with 'O')");
+            GUI.Box(new Rect(10, 10, 280, 460), "Options (Hide with 'O')");
 
             int y = 50;
             int lx = 30;
@@ -86,6 +89,9 @@ public class VizGUI : MonoBehaviour
             int sp = 30;
             int tw = 110;
 
+            GUI.Label(new Rect(lx, y, lw, h), "Channel");
+            channel = GUI.TextField(new Rect(rx, y, tw, h), channel);
+            y += sp;
 
             GUI.Label(new Rect(lx, y, lw, h), "OSC server IP");
             serverIP = GUI.TextField(new Rect(rx, y, tw, h), serverIP);
@@ -171,8 +177,18 @@ public class VizGUI : MonoBehaviour
         GameObject.Find("VisualizerViewResponder").GetComponent<VisualizerViewResponder>().LockKey = lockKey;
         GameObject.Find("VisualizerViewResponder").GetComponent<VisualizerViewResponder>().SwitchView(lockKey);
 
-        lgen.Generate();
+        WebsocketConsumer ws = GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>();
+
+        bool needsReconnect = ws.Channel != channel;
+        ws.Channel = channel;
 
         GameObject.Find("Persistence").GetComponent<Persistence>().Save();
+
+        if(needsReconnect)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        lgen.Generate();
     }
 }

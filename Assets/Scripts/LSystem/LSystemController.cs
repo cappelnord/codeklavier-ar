@@ -96,7 +96,7 @@ public class LSystem
         Generate();
     }
 
-    void Reset(string axiom="0")
+    public void Reset(string axiom="0")
     {
         Rules = new Dictionary<string, RuleSet>();
         Axiom = axiom;
