@@ -88,12 +88,12 @@ public class TestbedGUI : MonoBehaviour
 
     private void CommitChanges()
     {
-        bool needsReload = channel != GameObject.Find("Websocket").GetComponent<WebsocketConsumer>().Channel;
+        bool needsReload = channel != GameObject.Find("Websocket").GetComponent<WebsocketConsumer>().Channel || Config.ConnectToLocal != connectToLocal;
 
         PlayerPrefs.SetString("TBChannel", channel);
         PlayerPrefs.SetInt("TBConnectToLocal", connectToLocal ? 1 : 0);
 
-        if (needsReload || connectToLocal)
+        if (needsReload)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

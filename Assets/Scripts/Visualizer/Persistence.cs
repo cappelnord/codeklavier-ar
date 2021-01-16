@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1000)]
 public class Persistence : MonoBehaviour
 {
 
     private string _Channel;
+    private bool _ConnectToLocal;
     private int _Port;
     private string _ServerIP;
     private bool _SendToLocalhostToo;
@@ -17,6 +19,8 @@ public class Persistence : MonoBehaviour
     private bool _HideConnections = false;
     private bool _HideDynamics = false;
 
+    // TODO: Rewrite to directly query the component (not via GameObject names)
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +31,7 @@ public class Persistence : MonoBehaviour
     void Load()
     {
         _Channel = PlayerPrefs.GetString("Channel", GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel);
+        _ConnectToLocal = PlayerPrefs.GetInt("ConnectToLocal", GameObject.Find("Config").GetComponent<Config>().SetConnectToLocal ? 1 : 0) != 0;
         _ServerIP = PlayerPrefs.GetString("ServerIP", GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString());
         _Port = PlayerPrefs.GetInt("Port", GameObject.Find("OSCController").GetComponent<OSCController>().Port);
 
@@ -53,6 +58,7 @@ public class Persistence : MonoBehaviour
         GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active = _FitToScreen;
 
         GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel = _Channel;
+        GameObject.Find("Config").GetComponent<Config>().SetConnectToLocal = _ConnectToLocal;
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
@@ -67,6 +73,7 @@ public class Persistence : MonoBehaviour
     void ReadLocal()
     {
         _Channel = GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel;
+        _ConnectToLocal = Config.ConnectToLocal;
 
         _ServerIP = GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString();
         _Port = GameObject.Find("OSCController").GetComponent<OSCController>().Port;
@@ -88,6 +95,8 @@ public class Persistence : MonoBehaviour
         ReadLocal();
 
         PlayerPrefs.SetString("Channel", _Channel);
+        PlayerPrefs.SetInt("ConnectToLocal", _ConnectToLocal ? 1 : 0);
+
         PlayerPrefs.SetString("ServerIP", _ServerIP);
         PlayerPrefs.SetInt("Port", _Port);
         PlayerPrefs.SetInt("SendToLocalhostToo", _SendToLocalhostToo ? 1 : 0);

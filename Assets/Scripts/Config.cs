@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-500)]
 public class Config : MonoBehaviour
 {
     public static bool WorldIsAR;

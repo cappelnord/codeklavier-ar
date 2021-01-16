@@ -9,9 +9,11 @@ public class VizGUI : MonoBehaviour
     private bool active = false;
     private bool visible = true;
 
+    private string channel;
+    private bool connectToLocal;
+
     private string portString;
     private string serverIP;
-    private string channel;
     private bool sendToLocalhostToo;
 
     private bool fitToScreen = true;
@@ -53,6 +55,7 @@ public class VizGUI : MonoBehaviour
             {
                 active = true;
                 channel = GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel;
+                connectToLocal = Config.ConnectToLocal;
                 serverIP = GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString();
                 portString = GameObject.Find("OSCController").GetComponent<OSCController>().Port.ToString();
                 sendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo;
@@ -80,7 +83,7 @@ public class VizGUI : MonoBehaviour
         }
         else
         {
-            GUI.Box(new Rect(10, 10, 280, 460), "Options (Hide with 'O')");
+            GUI.Box(new Rect(10, 10, 280, 490), "Options (Hide with 'O')");
 
             int y = 50;
             int lx = 30;
@@ -93,6 +96,10 @@ public class VizGUI : MonoBehaviour
             channel = GUI.TextField(new Rect(rx, y, tw, h), channel);
             y += sp;
 
+            GUI.Label(new Rect(lx, y, lw, h), "Try Connect Local");
+            connectToLocal = GUI.Toggle(new Rect(rx, y, tw, h), connectToLocal, "");
+            y += sp;
+
             GUI.Label(new Rect(lx, y, lw, h), "OSC server IP");
             serverIP = GUI.TextField(new Rect(rx, y, tw, h), serverIP);
             y += sp;
@@ -101,7 +108,7 @@ public class VizGUI : MonoBehaviour
             portString = GUI.TextField(new Rect(rx, y, tw, h), portString);
             y += sp;
 
-            GUI.Label(new Rect(lx, y, lw, h), "Also to localhost");
+            GUI.Label(new Rect(lx, y, lw, h), "OSC also to Local");
             sendToLocalhostToo = GUI.Toggle(new Rect(rx, y, tw, h), sendToLocalhostToo, "");
 
             y += (int) ((float) sp * 1.5f);
@@ -179,10 +186,14 @@ public class VizGUI : MonoBehaviour
 
         WebsocketConsumer ws = GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>();
 
-        bool needsReconnect = ws.Channel != channel;
+        bool needsReconnect = ws.Channel != channel || Config.ConnectToLocal != connectToLocal;
+
         ws.Channel = channel;
+        Config.ConnectToLocal = connectToLocal;
 
         GameObject.Find("Persistence").GetComponent<Persistence>().Save();
+
+
 
         if(needsReconnect)
         {
