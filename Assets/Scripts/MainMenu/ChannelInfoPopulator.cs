@@ -85,7 +85,7 @@ public class ChannelInfoPopulator : MonoBehaviour
                 System.Threading.Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;
                 DateTime date = DateTime.Parse(info.eventISODate, null, System.Globalization.DateTimeStyles.RoundtripKind).ToLocalTime();
 
-                string timeZoneString = TimeZone.CurrentTimeZone.StandardName;
+                string timeZoneString = TimeZoneInfo.Local.StandardName;
                 string dateString = date.ToString("g");
 
                 GameObject eventDate = Instantiate(ChannelDatePrefab, Content);

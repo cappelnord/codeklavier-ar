@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Visualizer.unity
     guid: 1ca598caa7a76494a8d4574040de6fb3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 3e3e28a3386326b4c92cc1b68528a4b8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/TheAR.unity
     guid: 846669191c82213418e8164783580538
+  - enabled: 1
+    path: Assets/Scenes/ARTestbed.unity
+    guid: 39b90f02d85aa124ca0cdbb79de68b2c
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 46a9649bf6471e845a1f89c23f435f4b,
       type: 2}

@@ -147,7 +147,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.Codeklavier.CodeklaviAR
-    Standalone: unity.Valve.SteamVR
+    Standalone: com.Codeklavier.CodeklaviAR
     iPhone: com.Company.ProductName
     tvOS: com.Company.ProductName
   buildNumber:
