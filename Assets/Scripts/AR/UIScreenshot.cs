@@ -11,19 +11,23 @@ public class UIScreenshot : MonoBehaviour, IPointerClickHandler
     public GameObject UI;
 
     public UIHider UIHider;
+    public ScreenshotProvider ScreenshotProvider;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if (UIHider.UIHidden) return;
 
-        ScreenshotProvider.CaptureScreenshot();
-        StartCoroutine(HideUI(0.5f));
+        HideUI();
+        ScreenshotProvider.CaptureScreenshot((success, path) => ShowUI());
     }
 
-    private IEnumerator HideUI(float time)
+    private void HideUI()
     {
         UI.GetComponent<Canvas>().enabled = false;
-        yield return new WaitForSeconds(time);
+    }
+    
+    private void ShowUI()
+    {
         UI.GetComponent<Canvas>().enabled = true;
     }
 }

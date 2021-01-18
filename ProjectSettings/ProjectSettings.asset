@@ -7,7 +7,7 @@ PlayerSettings:
   productGUID: 20816ae6da1244e499cff3963f0fd37c
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
-  AndroidEnableSustainedPerformanceMode: 0
+  AndroidEnableSustainedPerformanceMode: 1
   defaultScreenOrientation: 0
   targetDevice: 2
   useOnDemandResources: 0
@@ -148,7 +148,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.Codeklavier.CodeklaviAR
     Standalone: com.Codeklavier.CodeklaviAR
-    iPhone: com.Company.ProductName
+    iPhone: com.Codeklavier.CodeklaviAR
     tvOS: com.Company.ProductName
   buildNumber:
     Standalone: 0
@@ -164,7 +164,7 @@ PlayerSettings:
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
   ForceInternetPermission: 1
-  ForceSDCardPermission: 0
+  ForceSDCardPermission: 1
   CreateWallpaper: 0
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
