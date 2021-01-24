@@ -1,7 +1,7 @@
 
 public static class ARAppUITexts
 {
-    public const string VersionString = "Preview Version 1";
+    public const string VersionString = "Internal 1";
     public const string DateDisplayCulture = "en-GB";
 
     // in case one cannot connect to the server
@@ -11,6 +11,7 @@ public static class ARAppUITexts
     // button to join a channel
     public const string ButtonJoin = "Start";
 
+    // button to get more info
     public const string ButtonMoreInformation = "More Information";
 
     // text that might be displayed on startup
@@ -23,14 +24,14 @@ public static class ARAppUITexts
     public const string MainMenuAvailableChannelsLabel = "Available Channels";
     public const string MainMenuInformationLabel = "Information";
 
-    public const string MainMenuChannelInformationError = "Could not refresh channel information...";
+    public const string MainMenuChannelInformationError = "Could not refresh channel information ...";
 
     public const string MainMenuStatusOnline = "online";
     public const string MainMenuStatusOffline = "offline";
 
     // status messages displayed in the AR experience
-    public const string ARStatusWaitingForTracking = "Move your device slowly to establish tracking ...";
-    public const string ARStatusTapOnCube = "... tap on the cube to place the AR!";
+    public const string ARStatusWaitingForTracking = "Move your device slowly to establish tracking!";
+    public const string ARStatusTapOnCube = "Tap to place the AR!";
 
     public const string ARStatusInsufficientLight = "Insufficient light in your environment to establish stable tracking.";
     public const string ARStatusInsufficientFeatures = "Insufficient optical features in your view to establish stable tracking.";
