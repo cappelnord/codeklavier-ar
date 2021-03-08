@@ -39,13 +39,13 @@ public static class ARAppUITexts
     static public void PopulateAbout(AboutPopulator x)
     {
         x.Headline("About");
-        x.Paragraph("This can be a short text about the app, the project and everything else ... Let's keep it short!");
-        x.LinkButton("CodeKlavier Homepage", "https://codeklavier.space/");
+        x.Paragraph("The ARquatic app will create the Augmented Reality (AR) visuals during an 'ARquatic Live' experience. When it is time for a show, simply follow the app prompts to watch the AR algae world unfold before your eyes.\nThe 'ARquatic Live' experience is a CodeKlavier project. A key aspect of this experience is that the AR visuals are built on L-systems that are coded, yes coded, by the pianist in real-time during the show. And of course, 'ARquatic Live' is an audio-visual experience with the same pianist and a collaborating laptop musician are performing music live.\n visit our website for more info about how 'ARquatic Live' works or ask the host!");
+        x.LinkButton("ARquatic Live", "https://codeklavier.space/arquatic");
 
         x.ParagraphDivider();
 
         x.Headline("Credits");
-        x.Paragraph("Best Piano Lady\nSweet Prince\nWhiskey the Cat\nGerman Moustache Dude");
+        x.Paragraph("Anne Veinberg - piano\nFelipe Ignacio Noriega - laptop audio\nPatrick Borgeat - visuals\nWhiskey the Cat - emotional support");
 
         x.ParagraphDivider();
 
