@@ -18,7 +18,7 @@ public class UIScreenshot : MonoBehaviour, IPointerClickHandler
         if (UIHider.UIHidden) return;
 
         HideUI();
-        ScreenshotProvider.CaptureScreenshot((success, path) => ShowUI());
+        // ScreenshotProvider.CaptureScreenshot((success, path) => ShowUI());
     }
 
     private void HideUI()

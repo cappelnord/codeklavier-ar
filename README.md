@@ -3,7 +3,7 @@ AR extension by Patrick Borgeat for [CodeKlavier](https://codeklavier.space/) by
 
 https://codeklavier.space/augmentedreality/
 
-Currently this projects uses **Unity 2020.2.1f1**.
+Currently this projects uses **Unity 2020.3.3f1**.
 
 ## Scenes
 

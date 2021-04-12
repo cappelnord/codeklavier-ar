@@ -10,6 +10,8 @@ public class ScreenshotProvider : MonoBehaviour
         
     }
 
+    /*
+
     public void CaptureScreenshot(NativeGallery.MediaSaveCallback callback)
     {
         StartCoroutine(TakeScreenshotAndSave(callback));
@@ -26,7 +28,7 @@ public class ScreenshotProvider : MonoBehaviour
         string filename = $"screenshot-{System.DateTime.Now.ToString("yyyy-mm-dd-HH-mm-ss")}.png";
 
         // Save the screenshot to Gallery/Photos
-        NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(ss, "ARquatic", "screenshot-.png", callback);
+        // NativeGallery.Permission permission = NativeGallery.SaveImageToGallery(ss, "ARquatic", "screenshot-.png", callback);
 
         // Debug.Log(filename);
         // Debug.Log("Permission result: " + permission);
@@ -34,5 +36,7 @@ public class ScreenshotProvider : MonoBehaviour
         // To avoid memory leaks
         Destroy(ss);
     }
+
+    */
 
 }
