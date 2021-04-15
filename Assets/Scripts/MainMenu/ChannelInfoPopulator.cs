@@ -59,6 +59,11 @@ public class ChannelInfoPopulator : MonoBehaviour
                 continue;
             }
 
+            if(info.visible != true)
+            {
+                continue;
+            }
+
             GameObject name = Instantiate(ChannelNamePrefab, Content);
             name.GetComponent<TextMeshProUGUI>().text = info.name;
 
@@ -120,6 +125,9 @@ public class ChannelInfoPopulator : MonoBehaviour
 
                     PersistentData.SelectedChannel = id;
                     PersistentData.FromMainMenu = true;
+                    PersistentData.BaseDistance = info.baseDistance;
+                    PersistentData.BaseScale = info.baseScale;
+
 
                     ToARBlack.GetComponent<RawImage>().enabled = true;
                     ToARBlack.GetComponent<FadeRawImageAlpha>().Start();

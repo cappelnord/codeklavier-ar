@@ -871,6 +871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ARCamera: {fileID: 1464361631}
+  ActualCube: {fileID: 1952079544}
 --- !u!4 &1424500892
 Transform:
   m_ObjectHideFlags: 0
@@ -1435,7 +1436,7 @@ GameObject:
   - component: {fileID: 1952079547}
   - component: {fileID: 1952079546}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: ActualCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

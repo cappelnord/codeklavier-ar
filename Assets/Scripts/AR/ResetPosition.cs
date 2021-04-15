@@ -9,12 +9,13 @@ using UnityEngine.EventSystems;
 public class ResetPosition : MonoBehaviour, IPointerClickHandler
 {
 
+    public static float DefaultScale = 0.25f;
+
     public bool Active = false;
     public bool Visible = false;
 
     public GameObject PositionCube;
     public GameObject ARWorld;
-    public float DefaultScale = 0.25f;
 
     public float MinimumScale = 0.05f;
     public float MaximumScale = 1.0f;
@@ -97,7 +98,7 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
     {
         ARWorld.transform.localPosition = PositionCube.transform.localPosition;
         ARWorld.transform.localRotation = PositionCube.transform.localRotation;
-        ScaleWorld(DefaultScale);
+        ScaleWorld(DefaultScale * PersistentData.BaseScale);
     }
 
     void UnPosition()
