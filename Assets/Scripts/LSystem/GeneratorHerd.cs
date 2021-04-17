@@ -35,6 +35,10 @@ public class GeneratorHerd : MonoBehaviour
     [HideInInspector]
     public Transform Trash;
 
+    [HideInInspector]
+    public ARquaticEnvironment Env;
+
+
     public bool SimpleDeath = false;
 
     // Start is called before the first frame update
@@ -53,6 +57,8 @@ public class GeneratorHerd : MonoBehaviour
         };
 
         Trash = transform.Find("Trash").transform;
+        Env = transform.Find("Environemt").GetComponent<ARquaticEnvironment>();
+
     }
 
     // Update is called once per frame
@@ -97,7 +103,7 @@ public class GeneratorHerd : MonoBehaviour
 
         GameObject obj = Instantiate(shapeLookup[shape], transform);
         obj.GetComponent<LGenerator>().SetLSystem(lsys);
-        obj.GetComponent<LGenerator>().SetHerd(this);
+        obj.GetComponent<LGenerator>().Herd = this;
 
 
         return new GeneratorObject(obj, shape);

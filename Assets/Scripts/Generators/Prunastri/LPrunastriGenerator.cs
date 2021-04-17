@@ -72,6 +72,8 @@ public class LPrunastriGenerator : LGenerator
             lbe.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
             lbe.GrowStartTime = Time.time + (0.5f * generation);
 
+            FlowBehaviour fb = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
+
             Grow(obj.transform, unit.Children, generation + 1, thisLengthUp, thisBaseRadius, thisBendAngle);
         }
     }

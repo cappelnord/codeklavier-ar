@@ -30,8 +30,11 @@ public class LInteriaGenerator : LGenerator
         outer = Instantiate(OuterPrefab, transform);
 
         LifeBehaviour lbe = outer.AddComponent<LifeBehaviour>() as LifeBehaviour;
-        lbe.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
+        lbe.TargetScale = new Vector3(1.1f, 1.1f, 1.1f);
         lbe.GrowStartTime = Time.time;
+
+        FlowBehaviour fb = outer.AddComponent<FlowBehaviour>() as FlowBehaviour;
+        fb.RotationMultiplier = 40f;
 
         Grow(transform, lsys.Units[0], 0, 1.0f);
     }
@@ -54,6 +57,10 @@ public class LInteriaGenerator : LGenerator
             LifeBehaviour lbe = center.AddComponent<LifeBehaviour>() as LifeBehaviour;
             lbe.TargetScale = new Vector3(0.15f, 0.15f, 0.15f);
             lbe.GrowStartTime = Time.time + (0.5f * generation);
+
+            FlowBehaviour fbe = center.AddComponent<FlowBehaviour>() as FlowBehaviour;
+            fbe.RotationMultiplier = 20f;
+
 
             parent = center.transform;
         }
@@ -83,6 +90,9 @@ public class LInteriaGenerator : LGenerator
             LifeBehaviour lbe = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
             lbe.TargetScale = new Vector3(thisScale, thisScale, thisScale);
             lbe.GrowStartTime = Time.time + (0.5f * generation);
+
+            FlowBehaviour fbe = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
+
 
             Grow(obj.transform, unit.Children, generation + 1, thisScale);
         }

@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Radius: 0.47
-  Number: 256
+  Number: 64
   Prefab: {fileID: 5106181076514387993, guid: c6eb74b3bcee6d34695e7e14682c0337, type: 3}
   MinScale: 0.015
   MaxScale: 0.02

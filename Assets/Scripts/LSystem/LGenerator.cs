@@ -198,6 +198,7 @@ public class LGenerator : LSystemBehaviour
     {
         obj.transform.SetParent(Herd.Trash);
         Destroy(obj.GetComponent<LifeBehaviour>());
+        Destroy(obj.GetComponent<FlowBehaviour>());
         DeathBehaviour db = obj.AddComponent<DeathBehaviour>() as DeathBehaviour;
         db.Velocity = 0.1f;
         db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
@@ -257,10 +258,5 @@ public class LGenerator : LSystemBehaviour
         speedValueFilter.Init(ValueStore.Get(velValueKey, 0.5f));
 
         base.OnLSystemSet();
-    }
-
-    public void SetHerd(GeneratorHerd herd)
-    {
-        Herd = herd;
     }
 }

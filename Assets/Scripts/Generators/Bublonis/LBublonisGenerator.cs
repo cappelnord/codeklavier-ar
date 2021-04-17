@@ -47,6 +47,9 @@ public class LBublonisGenerator : LGenerator
             LifeBehaviour lbs = joint.AddComponent<LifeBehaviour>() as LifeBehaviour;
             lbs.TargetScale = new Vector3(jointScale, jointScale, jointScale);
             lbs.GrowStartTime = Time.time;
+
+            FlowBehaviour fbs = joint.AddComponent<FlowBehaviour>() as FlowBehaviour;
+
         }
 
         foreach (ProcessUnit unit in children)
@@ -61,6 +64,8 @@ public class LBublonisGenerator : LGenerator
                 LifeBehaviour lbe = endPoint.AddComponent<LifeBehaviour>() as LifeBehaviour;
                 lbe.TargetScale = new Vector3(jointScale * 0.5f, jointScale, jointScale);
                 lbe.GrowStartTime = Time.time;
+
+                // FlowBehaviour fbe = endPoint.AddComponent<FlowBehaviour>() as FlowBehaviour;
 
                 continue;
             }
@@ -87,6 +92,9 @@ public class LBublonisGenerator : LGenerator
             LifeBehaviour lb = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
             lb.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
             lb.GrowStartTime = Time.time + (generation * 0.5f);
+
+            FlowBehaviour fb = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
+
 
             if (unit.Children.Count == 0)
             {
