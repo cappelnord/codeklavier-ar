@@ -2687,6 +2687,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1170847169}
   m_CullTransparentMesh: 1
+--- !u!1 &1262031473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1262031474}
+  m_Layer: 0
+  m_Name: Trash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1262031474
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262031473}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 634358977952824218}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1282227913
 GameObject:
   m_ObjectHideFlags: 0
@@ -3872,6 +3902,8 @@ MonoBehaviour:
   Shape5: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece, type: 3}
   Shape6: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece, type: 3}
   Shape7: {fileID: 8424831950952656913, guid: 01552d74240a4d34bad0aa0508d2a165, type: 3}
+  Trash: {fileID: 0}
+  SimpleDeath: 1
 --- !u!4 &634358977952824218
 Transform:
   m_ObjectHideFlags: 0
@@ -3886,6 +3918,7 @@ Transform:
   - {fileID: 634358978490502735}
   - {fileID: 634358979392171049}
   - {fileID: 1781523455}
+  - {fileID: 1262031474}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

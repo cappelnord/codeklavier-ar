@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.27690482, g: 0.45502394, b: 0.5209313, a: 1}
+  m_IndirectSpecularColor: {r: 0.27691865, g: 0.45505995, b: 0.5209869, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -155,7 +155,7 @@ MonoBehaviour:
   SetWorldIsAR: 0
   SetConnectToLocal: 1
   SetFloatUp: 0
-  SetVsyncCount: -1
+  SetVsyncCount: 0
 --- !u!4 &73183693
 Transform:
   m_ObjectHideFlags: 0
@@ -1175,6 +1175,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1919123024}
     m_Modifications:
+    - target: {fileID: 3801640813524030481, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6292406487959937301, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_RootOrder
@@ -1184,25 +1189,25 @@ PrefabInstance:
         type: 3}
       propertyPath: Shape1
       value: 
-      objectReference: {fileID: 8424831950952656913, guid: 01552d74240a4d34bad0aa0508d2a165,
+      objectReference: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: Shape2
       value: 
-      objectReference: {fileID: 3425564699107006824, guid: 33899415e02809346b9a1cd9430a051c,
+      objectReference: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: Shape3
       value: 
-      objectReference: {fileID: 1008974105662899192, guid: 5230048d5e2af8340b155f75230c4a42,
+      objectReference: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: Shape4
       value: 
-      objectReference: {fileID: 1008974105662899192, guid: 5230048d5e2af8340b155f75230c4a42,
+      objectReference: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
@@ -1214,13 +1219,13 @@ PrefabInstance:
         type: 3}
       propertyPath: Shape6
       value: 
-      objectReference: {fileID: 6251518304027719345, guid: 4986ea979b470384a92d025a7bdf4021,
+      objectReference: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: Shape7
       value: 
-      objectReference: {fileID: 7721715099224183062, guid: 319e9e813e141f447a3e0d3dbe369a92,
+      objectReference: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}

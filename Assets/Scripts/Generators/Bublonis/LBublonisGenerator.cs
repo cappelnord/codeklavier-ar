@@ -43,7 +43,10 @@ public class LBublonisGenerator : LGenerator
         if (generation == 0)
         {
             GameObject joint = Instantiate(JointPrefab, parent);
-            joint.transform.localScale = new Vector3(jointScale, jointScale, jointScale);
+
+            LifeBehaviour lbs = joint.AddComponent<LifeBehaviour>() as LifeBehaviour;
+            lbs.TargetScale = new Vector3(jointScale, jointScale, jointScale);
+            lbs.GrowStartTime = Time.time;
         }
 
         foreach (ProcessUnit unit in children)
@@ -54,7 +57,11 @@ public class LBublonisGenerator : LGenerator
             {
                 GameObject endPoint = Instantiate(JointPrefab, parent);
                 endPoint.transform.localPosition = new Vector3(0.0f, lastLengthUp, 0.0f);
-                endPoint.transform.localScale = new Vector3(jointScale * 0.5f, jointScale, jointScale);
+
+                LifeBehaviour lbe = endPoint.AddComponent<LifeBehaviour>() as LifeBehaviour;
+                lbe.TargetScale = new Vector3(jointScale * 0.5f, jointScale, jointScale);
+                lbe.GrowStartTime = Time.time;
+
                 continue;
             }
 
@@ -77,11 +84,18 @@ public class LBublonisGenerator : LGenerator
                 obj.transform.localEulerAngles = new Vector3(0.0f, (float)childrenIndex / children.Count * 360.0f, thisBendAngle);
             }
 
+            LifeBehaviour lb = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
+            lb.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
+            lb.GrowStartTime = Time.time + (generation * 0.5f);
+
             if (unit.Children.Count == 0)
             {
                 GameObject endPoint = Instantiate(JointPrefab, obj.transform);
                 endPoint.transform.localPosition = new Vector3(0.0f, lastLengthUp, 0.0f);
-                endPoint.transform.localScale = new Vector3(jointScale * 0.5f, jointScale, jointScale); 
+
+                LifeBehaviour lb2 = endPoint.AddComponent<LifeBehaviour>() as LifeBehaviour;
+                lb2.TargetScale = new Vector3(jointScale * 0.5f, jointScale, jointScale);
+                lb2.GrowStartTime = Time.time + (generation * 0.5f);
             }
 
             Grow(obj.transform, unit.Children, generation + 1, thisLengthUp, thisBaseRadius, thisBendAngle, jointScale);

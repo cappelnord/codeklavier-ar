@@ -38,10 +38,9 @@ public class LFerniGenerator : LGenerator
 
     public override void Generate()
     {
-        foreach (Transform child in transform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
+        PreGenerate();
+
+        Die();
 
         float displace = 0.0f;
 
@@ -91,10 +90,13 @@ public class LFerniGenerator : LGenerator
                     GameObject obj = Object.Instantiate(JointPrefab, transform);
                     FerniNode node = nodes[unit.Id];
                     obj.transform.localPosition = node.Position;
-                    obj.transform.localScale = new Vector3(node.JointScale, node.JointScale, node.JointScale);
-                    
+                    LifeBehaviour lb = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
+                    lb.TargetScale = new Vector3(node.JointScale, node.JointScale, node.JointScale);
+                    lb.GrowStartTime = Time.time + (node.Generation * 0.5f);
+                    lb.GrowTime = 0.5f;
+
                 }
-                
+
 
                 foreach (ProcessUnit child in unit.Children)
                 {
@@ -113,6 +115,12 @@ public class LFerniGenerator : LGenerator
 
                             obj.transform.localPosition = from.Position;
                             obj.transform.localRotation = Quaternion.LookRotation(between) * Quaternion.Euler(90.0f, 0.0f, 0.0f);
+
+                            LifeBehaviour lb = obj.AddComponent<LinearLifeBehaviour>() as LifeBehaviour;
+                            lb.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
+                            lb.GrowStartTime = Time.time + (from.Generation * 0.5f);
+                            lb.GrowTime = 0.5f;
+
                         }
                     }
                 }

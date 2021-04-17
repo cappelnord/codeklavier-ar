@@ -20,6 +20,9 @@ public class LGenerator : LSystemBehaviour
     [HideInInspector]
     public float SpeedMultiplier = 1.0f;
 
+    [HideInInspector]
+    public GeneratorHerd Herd;
+
     protected float scaleMultiplier;
     protected float positionMultiplier = 1.0f;
     protected MaterialLookup materialLookup;
@@ -109,6 +112,7 @@ public class LGenerator : LSystemBehaviour
         {
             Vector3 size = Bounds.size;
             Vector3 center = Bounds.center;
+
             float bottom;
             if (Config.WorldIsAR)
             {
@@ -143,6 +147,62 @@ public class LGenerator : LSystemBehaviour
         SpeedMultiplier = 1.0f / speedValueFilter.Filter() * 0.25f;
 
         ApplyTransformSpec();
+    }
+
+    virtual public void Die()
+    {
+        if(Bounds == null)
+        {
+            Bounds = GetBounds();
+        }
+
+        List<Transform> transforms = new List<Transform>();
+        foreach (Transform child in transform)
+        {
+            transforms.Add(child);
+        }
+
+        if(Herd.SimpleDeath)
+        {
+            foreach(Transform child in transforms)
+            {
+                Destroy(child.gameObject);
+            }
+            return;
+        }
+
+        foreach (Transform child in transforms)
+        {
+            DieIterate(child);
+        }
+
+    }
+
+    public virtual void DieIterate(Transform t)
+    {
+        List<Transform> transforms = new List<Transform>();
+        foreach (Transform child in t)
+        {
+            transforms.Add(child);
+        }
+
+        foreach (Transform child in transforms)
+        {
+            DieIterate(child);
+        }
+
+        MoveObjectToTrash(t.gameObject);
+    }
+
+    virtual public void MoveObjectToTrash(GameObject obj)
+    {
+        obj.transform.SetParent(Herd.Trash);
+        Destroy(obj.GetComponent<LifeBehaviour>());
+        DeathBehaviour db = obj.AddComponent<DeathBehaviour>() as DeathBehaviour;
+        db.Velocity = 0.1f;
+        db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
+        db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
+        db.ShrinkStartTime = Time.time + RandomRange(2f, 8f);
     }
 
     public float RandomRange(float min, float max)
@@ -197,5 +257,10 @@ public class LGenerator : LSystemBehaviour
         speedValueFilter.Init(ValueStore.Get(velValueKey, 0.5f));
 
         base.OnLSystemSet();
+    }
+
+    public void SetHerd(GeneratorHerd herd)
+    {
+        Herd = herd;
     }
 }

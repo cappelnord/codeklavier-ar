@@ -11,6 +11,8 @@ public class LInteriaGenerator : LGenerator
 
     private LSystemController lsysController;
 
+    private GameObject outer;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -23,15 +25,21 @@ public class LInteriaGenerator : LGenerator
     {
         PreGenerate();
 
+        Die();
 
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
+        outer = Instantiate(OuterPrefab, transform);
 
-        Instantiate(OuterPrefab, transform);
+        LifeBehaviour lbe = outer.AddComponent<LifeBehaviour>() as LifeBehaviour;
+        lbe.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
+        lbe.GrowStartTime = Time.time;
 
         Grow(transform, lsys.Units[0], 0, 1.0f);
+    }
+
+    public override void Die()
+    {
+        Destroy(outer);
+        base.Die();
     }
 
     void Grow(Transform parent, List<ProcessUnit> children, int generation, float lastScale)
@@ -42,7 +50,11 @@ public class LInteriaGenerator : LGenerator
         if (generation == 0)
         {
             GameObject center = Instantiate(InnerPrefab, parent);
-            center.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+
+            LifeBehaviour lbe = center.AddComponent<LifeBehaviour>() as LifeBehaviour;
+            lbe.TargetScale = new Vector3(0.15f, 0.15f, 0.15f);
+            lbe.GrowStartTime = Time.time + (0.5f * generation);
+
             parent = center.transform;
         }
 
@@ -64,10 +76,13 @@ public class LInteriaGenerator : LGenerator
             }
             else
             {
-                obj.transform.localScale = new Vector3(thisScale, thisScale, thisScale);
                 obj.transform.localPosition = new Vector3(0.0f, 1.0f, 0.0f);
                 obj.transform.localEulerAngles = new Vector3(0.0f, (float)childrenIndex / children.Count * 360.0f, 45.0f);
             }
+
+            LifeBehaviour lbe = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
+            lbe.TargetScale = new Vector3(thisScale, thisScale, thisScale);
+            lbe.GrowStartTime = Time.time + (0.5f * generation);
 
             Grow(obj.transform, unit.Children, generation + 1, thisScale);
         }

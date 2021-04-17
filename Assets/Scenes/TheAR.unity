@@ -157,7 +157,7 @@ MonoBehaviour:
   SetWorldIsAR: 0
   SetConnectToLocal: 0
   SetFloatUp: 0
-  SetVsyncCount: -1
+  SetVsyncCount: 1
 --- !u!4 &117817269
 Transform:
   m_ObjectHideFlags: 0
@@ -372,7 +372,6 @@ MonoBehaviour:
   Visible: 0
   PositionCube: {fileID: 1424500890}
   ARWorld: {fileID: 684177375}
-  DefaultScale: 0.25
   MinimumScale: 0.05
   MaximumScale: 1
   UIHider: {fileID: 1997535672}

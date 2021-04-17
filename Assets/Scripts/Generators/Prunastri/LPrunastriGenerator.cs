@@ -33,10 +33,7 @@ public class LPrunastriGenerator : LGenerator
     {
         PreGenerate();
 
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
+        Die();
 
         Grow(transform, lsys.Units[0], 0, 0.25f, 0.1f, 20.0f);
     }
@@ -70,6 +67,10 @@ public class LPrunastriGenerator : LGenerator
                 obj.transform.localPosition = new Vector3(0.0f, lastLengthUp, 0.0f);
                 obj.transform.localEulerAngles = new Vector3(0.0f, (float)childrenIndex / children.Count * 360.0f, thisBendAngle);
             }
+
+            LifeBehaviour lbe = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
+            lbe.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
+            lbe.GrowStartTime = Time.time + (0.5f * generation);
 
             Grow(obj.transform, unit.Children, generation + 1, thisLengthUp, thisBaseRadius, thisBendAngle);
         }

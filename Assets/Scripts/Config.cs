@@ -19,6 +19,8 @@ public class Config : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = -1;
+
         WorldIsAR = SetWorldIsAR;
         ConnectToLocal = SetConnectToLocal;
         FloatUp = SetFloatUp;

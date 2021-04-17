@@ -32,6 +32,11 @@ public class GeneratorHerd : MonoBehaviour
 
     private int sparseUpdateCounter = 0;
 
+    [HideInInspector]
+    public Transform Trash;
+
+    public bool SimpleDeath = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +51,8 @@ public class GeneratorHerd : MonoBehaviour
             {"6", Shape6 },
             {"7", Shape7 }
         };
+
+        Trash = transform.Find("Trash").transform;
     }
 
     // Update is called once per frame
@@ -60,6 +67,7 @@ public class GeneratorHerd : MonoBehaviour
                 create = Objects[key].Shape != LSysController.Forest[key].Shape;
                 if(create)
                 {
+                    Objects[key].Obj.GetComponent<LGenerator>().Die();
                     Destroy(Objects[key].Obj);
                 }
             }
@@ -89,6 +97,8 @@ public class GeneratorHerd : MonoBehaviour
 
         GameObject obj = Instantiate(shapeLookup[shape], transform);
         obj.GetComponent<LGenerator>().SetLSystem(lsys);
+        obj.GetComponent<LGenerator>().SetHerd(this);
+
 
         return new GeneratorObject(obj, shape);
     }
