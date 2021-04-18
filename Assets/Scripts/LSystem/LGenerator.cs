@@ -21,6 +21,9 @@ public class LGenerator : LSystemBehaviour
     public float SpeedMultiplier = 1.0f;
 
     [HideInInspector]
+    public float Intensity = 0.0f;
+
+    [HideInInspector]
     public GeneratorHerd Herd;
 
     protected float scaleMultiplier;
@@ -31,6 +34,8 @@ public class LGenerator : LSystemBehaviour
     private IIRFilter velocityValueFilter = new IIRFilter(0.5f, 0.01f);
     private string velValueKey;
     private IIRFilter speedValueFilter = new IIRFilter(0.5f, 0.01f);
+    private string intensityValueKey;
+    private IIRFilter intensityValueFilter = new IIRFilter(0.5f, 0.01f);
     private string speedValueKey;
     private IIRFilter floatUp = new IIRFilter(0.0f, 0.002f);
 
@@ -66,6 +71,11 @@ public class LGenerator : LSystemBehaviour
         if (key == speedValueKey)
         {
             speedValueFilter.Set(value);
+        }
+
+        if (key == intensityValueKey)
+        {
+            intensityValueFilter.Set(value);
         }
     }
 
@@ -145,6 +155,7 @@ public class LGenerator : LSystemBehaviour
 
         scaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f);
         SpeedMultiplier = 1.0f / speedValueFilter.Filter() * 0.25f;
+        Intensity = intensityValueFilter.Filter();
 
         ApplyTransformSpec();
     }
@@ -200,10 +211,15 @@ public class LGenerator : LSystemBehaviour
         Destroy(obj.GetComponent<LifeBehaviour>());
         Destroy(obj.GetComponent<FlowBehaviour>());
         DeathBehaviour db = obj.AddComponent<DeathBehaviour>() as DeathBehaviour;
-        db.Velocity = 0.1f;
+        db.Velocity = DeathVelocity(obj);
         db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
         db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
         db.ShrinkStartTime = Time.time + RandomRange(2f, 8f);
+    }
+
+    virtual public float DeathVelocity(GameObject obj)
+    {
+        return 0.1f + 0.3f * SpeedMultiplier;
     }
 
     public float RandomRange(float min, float max)
@@ -255,7 +271,10 @@ public class LGenerator : LSystemBehaviour
         velocityValueFilter.Init(ValueStore.Get(velValueKey, 0.5f));
 
         speedValueKey = $"{lsys.Key}-speed";
-        speedValueFilter.Init(ValueStore.Get(velValueKey, 0.5f));
+        speedValueFilter.Init(ValueStore.Get(speedValueKey, 0.5f));
+
+        intensityValueKey = $"{lsys.Key}-intensity";
+        intensityValueFilter.Init(ValueStore.Get(intensityValueKey, 0.5f));
 
         base.OnLSystemSet();
     }

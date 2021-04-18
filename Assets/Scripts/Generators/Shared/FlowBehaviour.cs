@@ -5,7 +5,9 @@ using UnityEngine;
 public class FlowBehaviour : MonoBehaviour
 {
     private Quaternion baseRotation;
-    public float RotationMultiplier = 7f;
+    public float RotationMultiplier = 35f;
+
+    public LGenerator Gen;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +18,6 @@ public class FlowBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localRotation = baseRotation * Quaternion.Euler(ARquaticEnvironment.Instance.Current(transform.position) * RotationMultiplier);
+        transform.localRotation = baseRotation * Quaternion.Euler(ARquaticEnvironment.Instance.Current(transform.position) * RotationMultiplier * Gen.SpeedMultiplier);
     }
 }

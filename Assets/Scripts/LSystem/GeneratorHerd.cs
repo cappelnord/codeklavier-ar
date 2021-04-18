@@ -67,10 +67,12 @@ public class GeneratorHerd : MonoBehaviour
         foreach(string key in LSysController.Forest.Keys)
         {
             // TODO: Bit weird logic, maybe use 2 distinct variables
+            
             bool create = !Objects.ContainsKey(key);
             if(!create)
             {
                 create = Objects[key].Shape != LSysController.Forest[key].Shape;
+
                 if(create)
                 {
                     Objects[key].Obj.GetComponent<LGenerator>().Die();

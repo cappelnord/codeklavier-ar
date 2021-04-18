@@ -23,9 +23,9 @@ public class ARquaticEnvironment : MonoBehaviour
     {
         // might be dumb ...
         return new Vector3(
-            Mathf.Sin(position.x + Time.time * 0.1f),
-            Mathf.Sin(position.z + position.y + Time.time * 0.15f) * 0.1f,
-            Mathf.Sin(position.y + position.y + Time.time * 0.13f) * 0.4f
+            Mathf.Sin(position.x + Time.time * 0.3f),
+            Mathf.Sin(position.z + position.y + Time.time * 0.35f) * 0.1f,
+            Mathf.Sin(position.y + position.y + Time.time * 0.33f) * 0.4f
        );
     }
 }

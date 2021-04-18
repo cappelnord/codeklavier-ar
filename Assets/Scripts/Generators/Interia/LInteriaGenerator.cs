@@ -35,6 +35,7 @@ public class LInteriaGenerator : LGenerator
 
         FlowBehaviour fb = outer.AddComponent<FlowBehaviour>() as FlowBehaviour;
         fb.RotationMultiplier = 40f;
+        fb.Gen = this;
 
         Grow(transform, lsys.Units[0], 0, 1.0f);
     }
@@ -43,6 +44,11 @@ public class LInteriaGenerator : LGenerator
     {
         Destroy(outer);
         base.Die();
+    }
+
+    public override float DeathVelocity(GameObject obj)
+    {
+        return 0.3f + 0.3f * SpeedMultiplier;
     }
 
     void Grow(Transform parent, List<ProcessUnit> children, int generation, float lastScale)
@@ -60,6 +66,7 @@ public class LInteriaGenerator : LGenerator
 
             FlowBehaviour fbe = center.AddComponent<FlowBehaviour>() as FlowBehaviour;
             fbe.RotationMultiplier = 20f;
+            fbe.Gen = this;
 
 
             parent = center.transform;
@@ -92,6 +99,7 @@ public class LInteriaGenerator : LGenerator
             lbe.GrowStartTime = Time.time + (0.5f * generation);
 
             FlowBehaviour fbe = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
+            fbe.Gen = this;
 
 
             Grow(obj.transform, unit.Children, generation + 1, thisScale);

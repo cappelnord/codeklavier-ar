@@ -26,10 +26,7 @@ public class LBublonisGenerator : LGenerator
     {
         PreGenerate();
 
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
+        Die();
 
         Grow(transform, lsys.Units[0], 0, 0.5f, 0.06f, 30.0f, 0.3f);
     }
@@ -42,13 +39,16 @@ public class LBublonisGenerator : LGenerator
 
         if (generation == 0)
         {
+            /*
             GameObject joint = Instantiate(JointPrefab, parent);
 
             LifeBehaviour lbs = joint.AddComponent<LifeBehaviour>() as LifeBehaviour;
-            lbs.TargetScale = new Vector3(jointScale, jointScale, jointScale);
+            lbs.TargetScale = new Vector3(jointScale * 0.5f, jointScale * 0.5f, jointScale * 0.5f);
             lbs.GrowStartTime = Time.time;
 
             FlowBehaviour fbs = joint.AddComponent<FlowBehaviour>() as FlowBehaviour;
+            fbs.Gen = this;
+            */
 
         }
 
@@ -94,6 +94,8 @@ public class LBublonisGenerator : LGenerator
             lb.GrowStartTime = Time.time + (generation * 0.5f);
 
             FlowBehaviour fb = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
+            fb.Gen = this;
+
 
 
             if (unit.Children.Count == 0)
