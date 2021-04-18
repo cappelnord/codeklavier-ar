@@ -43,6 +43,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 724a9c8f4e98405488a657ea2ab5357e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3741241027110572627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4781549529534720352}
+  - component: {fileID: 5931560324050426411}
+  m_Layer: 0
+  m_Name: BubbleSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4781549529534720352
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3741241027110572627}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7713098529516373334}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5931560324050426411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3741241027110572627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c7537ebedf7ac04593b9cd6ec11765b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BubblePrefab: {fileID: 1388381422508231109, guid: e3646c37dc8ee3343a961d652a18ec2f,
+    type: 3}
+  Probability: 0.05
 --- !u!1 &7713098529516373335
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,6 +123,7 @@ Transform:
   - {fileID: 7713098529605136339}
   - {fileID: 3801640813524030481}
   - {fileID: 715084295285601964}
+  - {fileID: 4781549529534720352}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -100,6 +147,7 @@ MonoBehaviour:
   Shape6: {fileID: 0}
   Shape7: {fileID: 0}
   Trash: {fileID: 0}
+  Env: {fileID: 0}
   SimpleDeath: 0
 --- !u!1 &7713098530039918724
 GameObject:

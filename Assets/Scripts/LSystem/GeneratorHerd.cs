@@ -19,7 +19,10 @@ public class GeneratorObject
 public class GeneratorHerd : MonoBehaviour
 {
     private LSystemController LSysController;
-    private Dictionary<string, GeneratorObject> Objects = new Dictionary<string, GeneratorObject>();
+
+    [HideInInspector]
+    public Dictionary<string, GeneratorObject> Objects = new Dictionary<string, GeneratorObject>();
+
     private Dictionary<string, GameObject> shapeLookup;
 
     public GameObject Shape1;

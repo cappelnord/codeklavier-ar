@@ -51,6 +51,12 @@ public class LInteriaGenerator : LGenerator
         return 0.3f + 0.3f * SpeedMultiplier;
     }
 
+    public override void SpawnBubble(GameObject prefab)
+    {
+        float targetScale = RandomRange(0.01f, 0.06f);
+        DoSpawnBubble(outer.transform, Random.insideUnitSphere.normalized * 0.51f, targetScale, prefab);
+    }
+
     void Grow(Transform parent, List<ProcessUnit> children, int generation, float lastScale)
     {
 

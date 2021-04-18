@@ -207,14 +207,22 @@ public class LGenerator : LSystemBehaviour
 
     virtual public void MoveObjectToTrash(GameObject obj)
     {
-        obj.transform.SetParent(Herd.Trash);
-        Destroy(obj.GetComponent<LifeBehaviour>());
-        Destroy(obj.GetComponent<FlowBehaviour>());
-        DeathBehaviour db = obj.AddComponent<DeathBehaviour>() as DeathBehaviour;
-        db.Velocity = DeathVelocity(obj);
-        db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
-        db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
-        db.ShrinkStartTime = Time.time + RandomRange(2f, 8f);
+        BubbleBehaviour bb = obj.GetComponent<BubbleBehaviour>();
+        if(bb)
+        {
+            bb.Dislodge();
+        } else
+        {
+            obj.transform.SetParent(Herd.Trash);
+            Destroy(obj.GetComponent<LifeBehaviour>());
+            Destroy(obj.GetComponent<FlowBehaviour>());
+            DeathBehaviour db = obj.AddComponent<DeathBehaviour>() as DeathBehaviour;
+            db.Velocity = DeathVelocity(obj);
+            db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
+            db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
+            db.ShrinkStartTime = Time.time + RandomRange(2f, 8f);
+        }
+
     }
 
     virtual public float DeathVelocity(GameObject obj)
@@ -263,6 +271,39 @@ public class LGenerator : LSystemBehaviour
         gameObject.transform.localPosition = new Vector3(TransformSpec.Position[0] * positionMultiplier, TransformSpec.Position[1] * positionMultiplier + floatUp.Filter(), TransformSpec.Position[2] * positionMultiplier);
         gameObject.transform.localScale = new Vector3(TransformSpec.Scale[0] * scaleMultiplier, TransformSpec.Scale[1] * scaleMultiplier, TransformSpec.Scale[2] * scaleMultiplier);
         gameObject.transform.localEulerAngles = new Vector3(TransformSpec.Rotation[0], TransformSpec.Rotation[1], TransformSpec.Rotation[2]);
+    }
+
+    virtual public void SpawnBubble(GameObject prefab)
+    {
+        List<Transform> transforms = new List<Transform>(GetComponentsInChildren<Transform>());
+        Transform target = transforms[Random.Range(0, transforms.Count)];
+
+        MeshFilter mf = target.gameObject.GetComponent<MeshFilter>();
+
+        if (mf)
+        {
+            Mesh mesh = mf.mesh;
+
+            float targetScale = RandomRange(0.01f, 0.06f);
+
+            Vector3[] vertices = mesh.vertices;
+            Vector3 randomVertex = vertices[Random.Range(0, vertices.Length)] * (1f + targetScale);
+
+            DoSpawnBubble(target, randomVertex, targetScale, prefab);
+        }
+    }
+
+    public void DoSpawnBubble(Transform target, Vector3 position, float targetScale, GameObject prefab)
+    {
+        GameObject bubble = Instantiate(prefab, target);
+
+        bubble.transform.localPosition = position;
+
+        BubbleBehaviour bb = bubble.GetComponent<BubbleBehaviour>();
+
+        bb.TargetTime = Time.time + RandomRange(2f, 4f);
+        bb.TargetScale = targetScale;
+        bb.TargetTransform = Herd.Trash;
     }
 
     override public void OnLSystemSet()
