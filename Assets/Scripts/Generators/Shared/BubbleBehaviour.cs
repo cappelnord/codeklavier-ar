@@ -16,6 +16,8 @@ public class BubbleBehaviour : MonoBehaviour
 
     public Transform TargetTransform;
 
+    private float scaleRelativeToWorld;
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +42,7 @@ public class BubbleBehaviour : MonoBehaviour
         } else
         {
             floatSpeed = floatSpeed * 1.025f;
-            transform.Translate((new Vector3(0f, floatSpeed, 0f) + ARquaticEnvironment.Instance.Current(transform.position) * 0.1f) * Time.deltaTime, Space.World);
+            transform.Translate((new Vector3(0f, floatSpeed, 0f) + ARquaticEnvironment.Instance.Current(transform.position) * 0.1f) * Time.deltaTime * scaleRelativeToWorld, Space.World);
             if(transform.localPosition.y > 5f)
             {
                 Destroy(gameObject);
@@ -51,6 +53,7 @@ public class BubbleBehaviour : MonoBehaviour
     public void Dislodge()
     {
         transform.SetParent(TargetTransform);
+        scaleRelativeToWorld = TargetTransform.lossyScale.x;
         lodged = false;
     }
 }

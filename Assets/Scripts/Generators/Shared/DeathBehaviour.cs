@@ -11,6 +11,8 @@ public class DeathBehaviour : MonoBehaviour
     public float WaitUntilShrink;
     public float ShrinkStartTime;
 
+    public float ScaleRelativeToWorld = 1.0f;
+
     private float scale = 1.0f;
     private float up = 0.01f;
     private Vector3 startScale;
@@ -25,7 +27,7 @@ public class DeathBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate((Direction  * Velocity + new Vector3(0f, up, 0f)) * Time.deltaTime, Space.World);
+        transform.Translate((Direction  * Velocity + new Vector3(0f, up, 0f)) * Time.deltaTime * ScaleRelativeToWorld, Space.World);
         transform.Rotate(Rotation * Time.deltaTime);
 
         if (up < 0.7)

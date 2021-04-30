@@ -221,6 +221,7 @@ public class LGenerator : LSystemBehaviour
             db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
             db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
             db.ShrinkStartTime = Time.time + RandomRange(2f, 8f);
+            db.ScaleRelativeToWorld = Herd.Trash.lossyScale.x;
         }
 
     }
