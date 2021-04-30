@@ -29,6 +29,9 @@ public class LInteriaGenerator : LGenerator
 
         outer = Instantiate(OuterPrefab, transform);
 
+        InteriaOuterIntensity ioi = outer.AddComponent<InteriaOuterIntensity>() as InteriaOuterIntensity;
+        ioi.Gen = this;
+
         LifeBehaviour lbe = outer.AddComponent<LifeBehaviour>() as LifeBehaviour;
         lbe.TargetScale = new Vector3(1.1f, 1.1f, 1.1f);
         lbe.GrowStartTime = Time.time;
@@ -74,11 +77,17 @@ public class LInteriaGenerator : LGenerator
             fbe.RotationMultiplier = 20f;
             fbe.Gen = this;
 
+            InteriaInnerIntensity iii = center.AddComponent<InteriaInnerIntensity>() as InteriaInnerIntensity;
+            iii.Gen = this;
+            iii.IntensityColor = materialLookup.GetColor('1');
+
 
             parent = center.transform;
         }
 
         int childrenIndex = -1;
+        bool firstObject = true;
+
         foreach (ProcessUnit unit in children)
         {
             childrenIndex++;
@@ -107,7 +116,17 @@ public class LInteriaGenerator : LGenerator
             FlowBehaviour fbe = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
             fbe.Gen = this;
 
+            if(!firstObject)
+            {
+                obj.GetComponent<MeshRenderer>().enabled = false;
+            } else
+            {
+                InteriaInnerIntensity iii = obj.AddComponent<InteriaInnerIntensity>() as InteriaInnerIntensity;
+                iii.Gen = this;
+                iii.IntensityColor = materialLookup.GetColor(unit.Content);
+            }
 
+            firstObject = false;
             Grow(obj.transform, unit.Children, generation + 1, thisScale);
         }
     }
