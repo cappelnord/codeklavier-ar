@@ -8,7 +8,9 @@ Shader "Custom/InteriaOuter"
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
         _Alpha ("Alpha", Float) = 0.1
+
         _Intensity ("Intensity", Float) = 0.1
+        _ColorIntensity ("ColorIntensity", Float) = 0.0
 
 		_Phase("Phase", Float) = 0.0
 		_PhaseFrequency("Phase Frequency", Vector) = (10,10,10,10)
@@ -48,6 +50,7 @@ Shader "Custom/InteriaOuter"
 		float _Phase;
         float _Alpha;
         float _Intensity;
+        float _ColorIntensity;
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -68,7 +71,7 @@ Shader "Custom/InteriaOuter"
             c = pow(c, 0.7);
 
 
-            fixed3 col = lerp(_Color.rgb, fixed3(1.0, 1.0, 1.0), _Intensity * 0.2);
+            fixed3 col = lerp(_Color.rgb, fixed3(1.0, 1.0, 1.0), _ColorIntensity * 0.2);
 
 			o.Albedo = lerp(_BackgroundColor.rgb, col, c);
 

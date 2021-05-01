@@ -4,13 +4,15 @@ Shader "Custom/InteriaInner"
     {
         _Color ("Color", Color) = (1,1,1,1)
 		_BackgroundColor ("Background Color", Color) = (0, 0, 0, 1)
-        _IntensityColor ("Intensity Color", Color) = (1,0,1,1)
+        _KeyColor ("Key Color", Color) = (1,0,1,1)
         
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _Glossiness ("Smoothness", Range(0,1)) = 0.5
         _Metallic ("Metallic", Range(0,1)) = 0.0
-        _Alpha ("Alpha", Float) = 0.1
+
         _Intensity ("Intensity", Float) = 0.1
+        _ColorIntensity ("ColorIntensity", Float) = 0.0
+
 
 		_Phase("Phase", Float) = 0.0
 		_PhaseFrequency("Phase Frequency", Vector) = (10,10,10,10)
@@ -42,7 +44,7 @@ Shader "Custom/InteriaInner"
         half _Metallic;
         fixed4 _Color;
 		fixed4 _BackgroundColor;
-        fixed4 _IntensityColor;
+        fixed4 _KeyColor;
 
 
 
@@ -50,8 +52,9 @@ Shader "Custom/InteriaInner"
 		float4 _PhaseCoordOffset;
 
 		float _Phase;
-        float _Alpha;
         float _Intensity;
+        float _ColorIntensity;
+
 
         // Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
         // See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -71,17 +74,18 @@ Shader "Custom/InteriaInner"
 
             c = pow(c, 0.5);
 
-            fixed3 col = lerp(_Color.rgb, _IntensityColor.rgb, _Intensity);
-            fixed3 bCol = lerp(_BackgroundColor.rgb, _BackgroundColor.rgb * 0.1 + _IntensityColor.rgb * 0.4, _Intensity);
+            fixed3 col = lerp(_Color.rgb, _KeyColor.rgb, _ColorIntensity);
+            fixed3 bCol = lerp(_BackgroundColor.rgb, _BackgroundColor.rgb * 0.1 + _KeyColor.rgb * 0.4, pow(_ColorIntensity, 0.8));
 
-			o.Albedo = lerp(bCol, col, c);
+
+			o.Albedo = lerp(bCol, col, c) * (1.0 + _Intensity * 2.0); ;
 
             // Metallic and smoothness come from slider variables
 
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
 
-			o.Alpha = _Alpha;
+			o.Alpha = 1.0;
         }
         ENDCG
     }

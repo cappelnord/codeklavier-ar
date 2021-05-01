@@ -26,6 +26,7 @@ public class InteriaOuterIntensity : IntensityBehaviour
         Color green = Color.HSVToRGB(Random.Range(0.29f, 0.3f), Random.Range(0.8f, 0.9f), Random.Range(0.5f, 0.55f));
 
         block.SetFloat("_Intensity", Gen.Intensity);
+        block.SetFloat("_ColorIntensity", Gen.ColorIntensity);
 
         block.SetColor("_Color", green);
         block.SetColor("_BackgroundColor", green * 0.6f);
@@ -36,8 +37,10 @@ public class InteriaOuterIntensity : IntensityBehaviour
     // Update is called once per frame
     void Update()
     {
-        block.SetFloat("_Phase", Time.time * 0.05f);
+        block.SetFloat("_Phase", Time.time * 0.2f);
         block.SetFloat("_Intensity", Gen.Intensity);
+        block.SetFloat("_ColorIntensity", Gen.ColorIntensity);
+
         meshRenderer.SetPropertyBlock(block);
     }
 }

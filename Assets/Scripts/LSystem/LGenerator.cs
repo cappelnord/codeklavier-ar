@@ -24,6 +24,9 @@ public class LGenerator : LSystemBehaviour
     public float Intensity = 0.0f;
 
     [HideInInspector]
+    public float ColorIntensity = 0.0f;
+
+    [HideInInspector]
     public GeneratorHerd Herd;
 
     protected float scaleMultiplier;
@@ -35,9 +38,14 @@ public class LGenerator : LSystemBehaviour
     private string velValueKey;
     private IIRFilter speedValueFilter = new IIRFilter(0.5f, 0.01f);
     private string intensityValueKey;
+    private IIRFilter colorIntensityValueFilter = new IIRFilter(0.5f, 0.01f);
+    private string colorIntensityValueKey;
     private IIRFilter intensityValueFilter = new IIRFilter(0.5f, 0.01f);
     private string speedValueKey;
     private IIRFilter floatUp = new IIRFilter(0.0f, 0.002f);
+
+    private TransformSpec lastTransformSpec;
+    private bool generated = true;
 
     protected virtual void Awake()
     {
@@ -63,7 +71,7 @@ public class LGenerator : LSystemBehaviour
 
         Touch();
 
-        if(key == velValueKey)
+        if (key == velValueKey)
         {
             velocityValueFilter.Set(value);
         }
@@ -77,10 +85,16 @@ public class LGenerator : LSystemBehaviour
         {
             intensityValueFilter.Set(value);
         }
+
+        if (key == colorIntensityValueKey)
+        {
+            colorIntensityValueFilter.Set(value);
+        }
     }
 
     protected void PreGenerate()
     {
+        generated = true;
         ResetRandomness();
         Touch();
         visitedUnitDict = new Dictionary<long, ProcessUnit>();
@@ -89,7 +103,7 @@ public class LGenerator : LSystemBehaviour
 
     protected bool VisitUnit(ProcessUnit unit)
     {
-        if(!visitedUnitDict.ContainsKey(unit.Id))
+        if (!visitedUnitDict.ContainsKey(unit.Id))
         {
             visitedUnitDict[unit.Id] = unit;
             return true;
@@ -105,7 +119,7 @@ public class LGenerator : LSystemBehaviour
         MeshRenderer[] renderers = GetComponentsInChildren<MeshRenderer>();
         foreach (MeshRenderer renderer in renderers)
         {
-             combinedBounds.Encapsulate(renderer.bounds);
+            combinedBounds.Encapsulate(renderer.bounds);
         }
 
         return combinedBounds;
@@ -149,20 +163,31 @@ public class LGenerator : LSystemBehaviour
         if (ShouldAct())
         {
             Generate();
+            generated = true;
         }
 
         TransformSpec = lsys.TransformSpec;
 
+        if(lastTransformSpec != TransformSpec && generated && lastTransformSpec != null)
+        {
+            Die(true);
+            Generate();
+        }
+
+        lastTransformSpec = TransformSpec;
+
         scaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f);
         SpeedMultiplier = 1.0f / speedValueFilter.Filter() * 0.25f;
         Intensity = intensityValueFilter.Filter();
+        ColorIntensity = colorIntensityValueFilter.Filter();
+
 
         ApplyTransformSpec();
     }
 
-    virtual public void Die()
+    virtual public void Die(bool transformDeath = false)
     {
-        if(Bounds == null)
+        if (Bounds == null)
         {
             Bounds = GetBounds();
         }
@@ -173,9 +198,9 @@ public class LGenerator : LSystemBehaviour
             transforms.Add(child);
         }
 
-        if(Herd.SimpleDeath)
+        if (Herd.SimpleDeath)
         {
-            foreach(Transform child in transforms)
+            foreach (Transform child in transforms)
             {
                 Destroy(child.gameObject);
             }
@@ -184,12 +209,12 @@ public class LGenerator : LSystemBehaviour
 
         foreach (Transform child in transforms)
         {
-            DieIterate(child);
+            DieIterate(child, transformDeath);
         }
 
     }
 
-    public virtual void DieIterate(Transform t)
+    public virtual void DieIterate(Transform t, bool transformDeath)
     {
         List<Transform> transforms = new List<Transform>();
         foreach (Transform child in t)
@@ -199,16 +224,16 @@ public class LGenerator : LSystemBehaviour
 
         foreach (Transform child in transforms)
         {
-            DieIterate(child);
+            DieIterate(child, transformDeath);
         }
 
-        MoveObjectToTrash(t.gameObject);
+        MoveObjectToTrash(t.gameObject, transformDeath);
     }
 
-    virtual public void MoveObjectToTrash(GameObject obj)
+    virtual public void MoveObjectToTrash(GameObject obj, bool transformDeath)
     {
         BubbleBehaviour bb = obj.GetComponent<BubbleBehaviour>();
-        if(bb)
+        if (bb)
         {
             bb.Dislodge();
         } else
@@ -218,12 +243,23 @@ public class LGenerator : LSystemBehaviour
             Destroy(obj.GetComponent<FlowBehaviour>());
             Destroy(obj.GetComponent<IntensityBehaviour>());
 
-            DeathBehaviour db = obj.AddComponent<DeathBehaviour>() as DeathBehaviour;
-            db.Velocity = DeathVelocity(obj);
-            db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
-            db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
-            db.ShrinkStartTime = Time.time + RandomRange(2f, 8f);
-            db.ScaleRelativeToWorld = Herd.Trash.lossyScale.x;
+            if (!transformDeath)
+            {
+                DeathBehaviour db = obj.AddComponent<DeathBehaviour>() as DeathBehaviour;
+                db.Velocity = DeathVelocity(obj);
+                db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
+                db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
+                db.ShrinkStartTime = Time.time + RandomRange(2f, 8f);
+                db.ScaleRelativeToWorld = Herd.Trash.lossyScale.x;
+            } else
+            {
+                TransformDeathBehaviour db = obj.AddComponent<TransformDeathBehaviour>() as TransformDeathBehaviour;
+                db.Velocity = DeathVelocity(obj) * 0.5f;
+                db.Rotation = new Vector3(RandomRange(-40.0f, 40.0f), RandomRange(-40.0f, 40.0f), RandomRange(-40.0f, 40.0f));
+                db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
+                db.ShrinkStartTime = Time.time;
+                db.ScaleRelativeToWorld = Herd.Trash.lossyScale.x;
+            }
         }
 
     }
@@ -235,11 +271,13 @@ public class LGenerator : LSystemBehaviour
 
     public float RandomRange(float min, float max)
     {
-        return (float) (min + (Rand.NextDouble() * (max - min)));
+        if (Rand == null) return min;
+        return (float)(min + (Rand.NextDouble() * (max - min)));
     }
 
     public int RandomRange(int min, int max)
     {
+        if (Rand == null) return min;
         return Rand.Next(min, max);
     }
 
@@ -256,7 +294,7 @@ public class LGenerator : LSystemBehaviour
 
         int sum = 0;
 
-        for(int i = 0; i < chars.Length; i++)
+        for (int i = 0; i < chars.Length; i++)
         {
             sum = sum + chars[i];
         }
@@ -270,7 +308,8 @@ public class LGenerator : LSystemBehaviour
     }
 
     virtual public void ApplyTransformSpec()
-    {
+    { 
+
         gameObject.transform.localPosition = new Vector3(TransformSpec.Position[0] * positionMultiplier, TransformSpec.Position[1] * positionMultiplier + floatUp.Filter(), TransformSpec.Position[2] * positionMultiplier);
         gameObject.transform.localScale = new Vector3(TransformSpec.Scale[0] * scaleMultiplier, TransformSpec.Scale[1] * scaleMultiplier, TransformSpec.Scale[2] * scaleMultiplier);
         gameObject.transform.localEulerAngles = new Vector3(TransformSpec.Rotation[0], TransformSpec.Rotation[1], TransformSpec.Rotation[2]);
@@ -319,6 +358,9 @@ public class LGenerator : LSystemBehaviour
 
         intensityValueKey = $"{lsys.Key}-intensity";
         intensityValueFilter.Init(ValueStore.Get(intensityValueKey, 0.5f));
+
+        colorIntensityValueKey = $"{lsys.Key}-color";
+        colorIntensityValueFilter.Init(ValueStore.Get(colorIntensityValueKey, 0.5f));
 
         base.OnLSystemSet();
     }

@@ -40,13 +40,15 @@ public class LInteriaGenerator : LGenerator
         fb.RotationMultiplier = 40f;
         fb.Gen = this;
 
+        outer.GetComponent<RandomSpherePoints>().Gen = this;
+
         Grow(transform, lsys.Units[0], 0, 1.0f);
     }
 
-    public override void Die()
+    public override void Die(bool transformDeath = false)
     {
         Destroy(outer);
-        base.Die();
+        base.Die(transformDeath);
     }
 
     public override float DeathVelocity(GameObject obj)
@@ -79,7 +81,7 @@ public class LInteriaGenerator : LGenerator
 
             InteriaInnerIntensity iii = center.AddComponent<InteriaInnerIntensity>() as InteriaInnerIntensity;
             iii.Gen = this;
-            iii.IntensityColor = materialLookup.GetColor('1');
+            iii.KeyColor = materialLookup.GetColor('1');
 
 
             parent = center.transform;
@@ -118,12 +120,13 @@ public class LInteriaGenerator : LGenerator
 
             if(!firstObject)
             {
+                // bit clumsy but topkek
                 obj.GetComponent<MeshRenderer>().enabled = false;
             } else
             {
                 InteriaInnerIntensity iii = obj.AddComponent<InteriaInnerIntensity>() as InteriaInnerIntensity;
                 iii.Gen = this;
-                iii.IntensityColor = materialLookup.GetColor(unit.Content);
+                iii.KeyColor = materialLookup.GetColor(unit.Content);
             }
 
             firstObject = false;

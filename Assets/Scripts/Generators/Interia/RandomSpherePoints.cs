@@ -12,6 +12,8 @@ public class RandomSpherePoints : MonoBehaviour
     public float MinScale = 0.01f;
     public float MaxScale = 0.05f;
 
+    public LGenerator Gen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,8 @@ public class RandomSpherePoints : MonoBehaviour
 
             float scale = Random.Range(MinScale, MaxScale);
             obj.transform.localScale = new Vector3(scale, scale, scale);
+
+            obj.GetComponent<InteriaLittleIntensity>().Gen = Gen;
 
             // TODO: Combine Mesh?
         }

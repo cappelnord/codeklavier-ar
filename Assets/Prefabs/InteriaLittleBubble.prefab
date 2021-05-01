@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5240052077828555685}
   - component: {fileID: 3395053498150347809}
   - component: {fileID: 4412913944470856755}
+  - component: {fileID: -7888177365003036011}
   m_Layer: 0
   m_Name: InteriaLittleBubble
   m_TagString: Untagged
@@ -81,3 +82,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-7888177365003036011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5106181076514387993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7146b4e84b064254f9014ab8f17adfc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

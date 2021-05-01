@@ -5,5 +5,5 @@ using UnityEngine;
 public class IntensityBehaviour : MonoBehaviour
 {
     public LGenerator Gen;
-    public Color IntensityColor;
+    public Color KeyColor;
 }

@@ -18,17 +18,17 @@ public class InteriaInnerIntensity : IntensityBehaviour
 
         block = new MaterialPropertyBlock();
         block.SetFloat("_Phase", offset);
-        block.SetFloat("_Alpha", 0.2f);
         block.SetVector("_PhaseFrequency", new Vector4(Random.Range(1, 2), Random.Range(1, 2), Random.Range(1, 2), Random.Range(1, 2)));
         block.SetVector("_PhaseCoordOffset", new Vector4(Random.Range(1, 8), Random.Range(1, 8), Random.Range(1, 8), Random.Range(1, 8)));
 
         Color green = Color.HSVToRGB(Random.Range(0.29f, 0.3f), Random.Range(0.8f, 0.9f), Random.Range(0.5f, 0.55f));
 
         block.SetFloat("_Intensity", Gen.Intensity);
+        block.SetFloat("_ColorIntensity", Gen.ColorIntensity);
 
         block.SetColor("_Color", green);
         block.SetColor("_BackgroundColor", green * 1.4f);
-        block.SetColor("_IntensityColor", IntensityColor);
+        block.SetColor("_KeyColor", KeyColor);
 
         meshRenderer.SetPropertyBlock(block);
     }
@@ -38,6 +38,7 @@ public class InteriaInnerIntensity : IntensityBehaviour
     {
         block.SetFloat("_Phase", Time.time * 0.05f);
         block.SetFloat("_Intensity", Gen.Intensity);
+        block.SetFloat("_ColorIntensity", Gen.ColorIntensity);
         meshRenderer.SetPropertyBlock(block);
     }
 }

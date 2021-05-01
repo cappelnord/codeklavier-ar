@@ -24,7 +24,10 @@ public class BubbleSpawner : MonoBehaviour
         {
             if (Random.Range(0f, 1f) < Probability)
             {
-                herd.Objects[key].LGen.SpawnBubble(BubblePrefab);
+                if (herd.Objects[key].LGen)
+                {
+                    herd.Objects[key].LGen.SpawnBubble(BubblePrefab);
+                }
             }
         }
     }
