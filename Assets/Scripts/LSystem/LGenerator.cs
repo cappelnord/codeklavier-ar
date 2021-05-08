@@ -215,6 +215,17 @@ public class LGenerator : LSystemBehaviour
             DieIterate(child, transformDeath);
         }
 
+
+        // this fixes an issue that sometimes BubbleBehaviours are disabled in the trash .. 
+        // .. idk how this happens! This should at least take care of a build up of bubbles.
+
+        foreach(BubbleBehaviour bb in Herd.Trash.GetComponentsInChildren<BubbleBehaviour>())
+        {
+            if(!bb.enabled)
+            {
+                bb.enabled = true;
+            }
+        }
     }
 
     public virtual void DieIterate(Transform t, bool transformDeath)

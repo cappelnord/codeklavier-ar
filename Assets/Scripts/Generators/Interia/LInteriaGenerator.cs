@@ -48,6 +48,7 @@ public class LInteriaGenerator : LGenerator
     public override void Die(bool transformDeath = false)
     {
         Destroy(outer);
+        outer = null;
         base.Die(transformDeath);
     }
 
@@ -58,6 +59,8 @@ public class LInteriaGenerator : LGenerator
 
     public override void SpawnBubble(GameObject prefab)
     {
+        if (outer == null) return;
+
         float targetScale = RandomRange(0.01f, 0.06f);
         DoSpawnBubble(outer.transform, Random.insideUnitSphere.normalized * 0.51f, targetScale, prefab);
     }

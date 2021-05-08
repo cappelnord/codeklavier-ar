@@ -29,6 +29,7 @@ public class BubbleBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if(lodged)
         {
             float tn = Time.time;

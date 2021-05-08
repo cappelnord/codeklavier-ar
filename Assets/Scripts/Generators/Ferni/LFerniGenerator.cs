@@ -155,8 +155,8 @@ public class LFerniGenerator : LGenerator
                         node.Transform = obj.transform;
                         LifeBehaviour lb = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
                         lb.TargetScale = new Vector3(node.JointScale, node.JointScale, node.JointScale);
-                        lb.GrowStartTime = Time.time + (node.Generation * 0.5f);
-                        lb.GrowTime = 0.5f;
+                        lb.GrowStartTime = Time.time + (node.Generation* 0.5f);
+                        lb.GrowTime = 0.1f;
                     }
                 }
 
