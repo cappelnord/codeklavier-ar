@@ -69,7 +69,7 @@ public class LFerniGenerator : LGenerator
         {
             foreach (FerniNode node in nodes.Values)
             {
-                node.Position = node.BasePosition + ARquaticEnvironment.Instance.Current(node.BasePosition + Position) * 0.3f;
+                node.Position = node.BasePosition + ARquaticEnvironment.Instance.Current(node.BasePosition + Position) * (0.25f + (SpeedMultiplier * 0.25f));
                 if (node.Transform != null) { 
                     node.Transform.localPosition = node.Position;
                 }
@@ -121,7 +121,7 @@ public class LFerniGenerator : LGenerator
             {
                 char symbol = unit.Content;
                 pos += 1.0f;
-                nodes[unit.Id] = new FerniNode(new Vector3(pos / 20.0f, displace / 2.0f, 0.0f), generation, jointScale, branchRadius);
+                nodes[unit.Id] = new FerniNode(new Vector3(pos / 20.0f, displace / 2f, 0.0f), generation, jointScale, branchRadius);
             }
 
             displace += deltaDisplace;
@@ -148,14 +148,16 @@ public class LFerniGenerator : LGenerator
             {
                 if (nodes.ContainsKey(unit.Id) && unit.Content != '0' && unit.Children.Count > 0)
                 {
-                    
-                    GameObject obj = Object.Instantiate(JointPrefab, transform);
                     FerniNode node = nodes[unit.Id];
-                    node.Transform = obj.transform;
-                    LifeBehaviour lb = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
-                    lb.TargetScale = new Vector3(node.JointScale, node.JointScale, node.JointScale);
-                    lb.GrowStartTime = Time.time + (node.Generation * 0.5f);
-                    lb.GrowTime = 0.5f;
+                    if (node.JointScale > 0.02f)
+                    {
+                        GameObject obj = Object.Instantiate(JointPrefab, transform);
+                        node.Transform = obj.transform;
+                        LifeBehaviour lb = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
+                        lb.TargetScale = new Vector3(node.JointScale, node.JointScale, node.JointScale);
+                        lb.GrowStartTime = Time.time + (node.Generation * 0.5f);
+                        lb.GrowTime = 0.5f;
+                    }
                 }
 
                 foreach (ProcessUnit child in unit.Children)
@@ -189,7 +191,7 @@ public class LFerniGenerator : LGenerator
 
     public GameObject Spawn(Transform parent, float length, float radius)
     {
-        const int sides = 16;
+        const int sides = 12;
 
         float radiusCenter = radius;
         float radiusUp = radius * 0.7f;
