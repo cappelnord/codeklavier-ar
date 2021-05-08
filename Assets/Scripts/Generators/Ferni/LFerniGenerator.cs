@@ -5,18 +5,40 @@ using UnityEngine;
 // TODO: Could be struct for less GC
 public class FerniNode
 {
+    public Vector3 BasePosition;
     public Vector3 Position;
     public int Generation;
     public float JointScale;
     public float BranchRadius;
+    public Transform Transform;
 
     public FerniNode(Vector3 position, int generation, float jointScale, float branchRadius)
     {
+        BasePosition = position;
         Position = position;
         Generation = generation;
         JointScale = jointScale;
         BranchRadius = branchRadius;
     }
+}
+
+public class FerniBranch
+{
+    public FerniNode From;
+    public FerniNode To;
+    public Transform Transform;
+    public float BaseDistance;
+    public LinearLifeBehaviour LifeBehaviour;
+
+    public FerniBranch(Transform transform, FerniNode from, FerniNode to, float baseDistance, LinearLifeBehaviour llb)
+    {
+        LifeBehaviour = llb;
+        BaseDistance = baseDistance;
+        Transform = transform;
+        From = from;
+        To = to;
+    }
+
 }
 
 public class LFerniGenerator : LGenerator
@@ -27,6 +49,9 @@ public class LFerniGenerator : LGenerator
 
     private WedgeMeshGen wedgeMeshGen;
 
+    private Dictionary<long, FerniNode> nodes;
+    private List<FerniBranch> branches;
+
 
     // Start is called before the first frame update
     protected override void Start()
@@ -34,6 +59,42 @@ public class LFerniGenerator : LGenerator
         base.Start();
 
         wedgeMeshGen = WedgeMeshGen.Instance();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if(nodes != null)
+        {
+            foreach (FerniNode node in nodes.Values)
+            {
+                node.Position = node.BasePosition + ARquaticEnvironment.Instance.Current(node.BasePosition + Position) * 0.3f;
+                if (node.Transform != null) { 
+                    node.Transform.localPosition = node.Position;
+                }
+            }
+
+            foreach (FerniBranch branch in branches)
+            {
+                FerniNode from = branch.From;
+                FerniNode to = branch.To;
+
+                Vector3 between = to.Position - from.Position;
+                float distance = between.magnitude;
+
+                branch.Transform.localPosition = from.Position;
+                branch.Transform.localRotation = Quaternion.LookRotation(between) * Quaternion.Euler(90.0f, 0.0f, 0.0f);
+                branch.Transform.localScale = branch.LifeBehaviour.OutputScale * (distance / branch.BaseDistance);
+            }
+        }
+    }
+
+    public override void Die(bool transformDeath = false)
+    {
+        nodes = null;
+        branches = null;
+        base.Die();
     }
 
     public override void Generate()
@@ -44,11 +105,12 @@ public class LFerniGenerator : LGenerator
 
         float displace = 0.0f;
 
-        Dictionary<long, FerniNode> nodes = new Dictionary<long, FerniNode>();
+        nodes = new Dictionary<long, FerniNode>();
+        branches = new List<FerniBranch>();
 
         int generation = 0;
         float jointScale = 0.1f;
-        float branchRadius = 0.04f;
+        float branchRadius = 0.03f;
         float deltaDisplace = 1.25f;
 
         foreach (List<ProcessUnit> data in lsys.Units)
@@ -59,7 +121,6 @@ public class LFerniGenerator : LGenerator
             {
                 char symbol = unit.Content;
                 pos += 1.0f;
-
                 nodes[unit.Id] = new FerniNode(new Vector3(pos / 20.0f, displace / 2.0f, 0.0f), generation, jointScale, branchRadius);
             }
 
@@ -74,8 +135,10 @@ public class LFerniGenerator : LGenerator
 
         foreach (FerniNode node in nodes.Values)
         {
-            Vector3 position = node.Position;
-            node.Position = new Vector3(position.x + Mathf.Sin((position.x) * 8.2f) * 0.2f, position.y + Mathf.Sin(position.x  * 2.3f) * 0.6f, Mathf.Cos((position.x) * 7.5f) * 0.2f);
+            Vector3 position = node.BasePosition;
+            // base form
+            node.BasePosition = new Vector3(position.x + Mathf.Sin((position.x) * 8.2f) * 0.2f, position.y + Mathf.Sin(position.x * 2.3f) * 0.6f, Mathf.Cos((position.x) * 7.5f) * 0.2f);
+            node.Position = node.BasePosition;
         }
 
 
@@ -83,20 +146,17 @@ public class LFerniGenerator : LGenerator
         {
             foreach (ProcessUnit unit in data)
             {
-                
                 if (nodes.ContainsKey(unit.Id) && unit.Content != '0' && unit.Children.Count > 0)
                 {
                     
                     GameObject obj = Object.Instantiate(JointPrefab, transform);
                     FerniNode node = nodes[unit.Id];
-                    obj.transform.localPosition = node.Position;
+                    node.Transform = obj.transform;
                     LifeBehaviour lb = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
                     lb.TargetScale = new Vector3(node.JointScale, node.JointScale, node.JointScale);
                     lb.GrowStartTime = Time.time + (node.Generation * 0.5f);
                     lb.GrowTime = 0.5f;
-
                 }
-
 
                 foreach (ProcessUnit child in unit.Children)
                 {
@@ -111,16 +171,15 @@ public class LFerniGenerator : LGenerator
                             Vector3 between = to.Position - from.Position;
                             float distance = between.magnitude;
 
-                            GameObject obj = Spawn(transform, distance, from.BranchRadius); ;
+                            GameObject obj = Spawn(transform, distance, from.BranchRadius);
 
-                            obj.transform.localPosition = from.Position;
-                            obj.transform.localRotation = Quaternion.LookRotation(between) * Quaternion.Euler(90.0f, 0.0f, 0.0f);
 
-                            LifeBehaviour lb = obj.AddComponent<LinearLifeBehaviour>() as LifeBehaviour;
+                            LinearLifeBehaviour lb = obj.AddComponent<LinearLifeBehaviour>() as LinearLifeBehaviour;
                             lb.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
                             lb.GrowStartTime = Time.time + (from.Generation * 0.5f);
                             lb.GrowTime = 0.5f;
 
+                            branches.Add(new FerniBranch(obj.transform, from, to, distance, lb));
                         }
                     }
                 }

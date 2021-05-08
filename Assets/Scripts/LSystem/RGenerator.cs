@@ -25,7 +25,7 @@ public class RGenerator : LGenerator
     }
 
     // Update is called once per frame
-    public void Update()
+    protected override void Update()
     {
         if(ShouldAct())
         {

@@ -29,6 +29,9 @@ public class LGenerator : LSystemBehaviour
     [HideInInspector]
     public GeneratorHerd Herd;
 
+    [HideInInspector]
+    public Vector3 Position;
+
     protected float scaleMultiplier;
     protected float positionMultiplier = 1.0f;
     protected MaterialLookup materialLookup;
@@ -158,7 +161,7 @@ public class LGenerator : LSystemBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (ShouldAct())
         {
@@ -248,7 +251,7 @@ public class LGenerator : LSystemBehaviour
                 DeathBehaviour db = obj.AddComponent<DeathBehaviour>() as DeathBehaviour;
                 db.Velocity = DeathVelocity(obj);
                 db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
-                db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
+                db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center) + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
                 db.ShrinkStartTime = Time.time + RandomRange(2f, 8f);
                 db.ScaleRelativeToWorld = Herd.Trash.lossyScale.x;
             } else
@@ -256,7 +259,7 @@ public class LGenerator : LSystemBehaviour
                 TransformDeathBehaviour db = obj.AddComponent<TransformDeathBehaviour>() as TransformDeathBehaviour;
                 db.Velocity = DeathVelocity(obj) * 0.5f;
                 db.Rotation = new Vector3(RandomRange(-40.0f, 40.0f), RandomRange(-40.0f, 40.0f), RandomRange(-40.0f, 40.0f));
-                db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center);
+                db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center) + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
                 db.ShrinkStartTime = Time.time;
                 db.ScaleRelativeToWorld = Herd.Trash.lossyScale.x;
             }
@@ -308,9 +311,9 @@ public class LGenerator : LSystemBehaviour
     }
 
     virtual public void ApplyTransformSpec()
-    { 
-
-        gameObject.transform.localPosition = new Vector3(TransformSpec.Position[0] * positionMultiplier, TransformSpec.Position[1] * positionMultiplier + floatUp.Filter(), TransformSpec.Position[2] * positionMultiplier);
+    {
+        Position = new Vector3(TransformSpec.Position[0] * positionMultiplier, TransformSpec.Position[1] * positionMultiplier + floatUp.Filter(), TransformSpec.Position[2] * positionMultiplier);
+        gameObject.transform.localPosition = Position;
         gameObject.transform.localScale = new Vector3(TransformSpec.Scale[0] * scaleMultiplier, TransformSpec.Scale[1] * scaleMultiplier, TransformSpec.Scale[2] * scaleMultiplier);
         gameObject.transform.localEulerAngles = new Vector3(TransformSpec.Rotation[0], TransformSpec.Rotation[1], TransformSpec.Rotation[2]);
     }

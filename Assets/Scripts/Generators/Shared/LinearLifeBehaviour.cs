@@ -5,13 +5,16 @@ using UnityEngine;
 public class LinearLifeBehaviour : LifeBehaviour
 {
 
+    public Vector3 OutputScale = new Vector3(0f, 0f, 0f);
+
     override public void Update()
     {
         if (Time.time > GrowStartTime)
         {
             float timeSinceGrowStart = Time.time - GrowStartTime;
             float scale = Mathf.Lerp(0f, 1f, timeSinceGrowStart / GrowTime);
-            transform.localScale = TargetScale * scale;
+            // transform.localScale = TargetScale * scale;
+            OutputScale = TargetScale * scale;
         }
     }
 }
