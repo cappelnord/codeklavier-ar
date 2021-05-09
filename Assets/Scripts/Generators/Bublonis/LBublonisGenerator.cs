@@ -96,6 +96,10 @@ public class LBublonisGenerator : LGenerator
             FlowBehaviour fb = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
             fb.Gen = this;
 
+            IntensityBehaviour ib = obj.AddComponent<BublonisBranchIntensity>() as IntensityBehaviour;
+            ib.Gen = this;
+
+
 
 
             if (unit.Children.Count == 0)
@@ -106,6 +110,11 @@ public class LBublonisGenerator : LGenerator
                 LifeBehaviour lb2 = endPoint.AddComponent<LifeBehaviour>() as LifeBehaviour;
                 lb2.TargetScale = new Vector3(jointScale * 0.5f, jointScale, jointScale);
                 lb2.GrowStartTime = Time.time + (generation * 0.5f);
+
+                BublonisBubbleIntensity bbi = endPoint.AddComponent<BublonisBubbleIntensity>() as BublonisBubbleIntensity;
+                bbi.Gen = this;
+                bbi.KeyColor = materialLookup.GetColor(unit.Content);
+
             }
 
             Grow(obj.transform, unit.Children, generation + 1, thisLengthUp, thisBaseRadius, thisBendAngle, jointScale);

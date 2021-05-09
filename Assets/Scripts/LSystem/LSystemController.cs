@@ -437,6 +437,7 @@ public class LSystemController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ValueStore.Reset();
         Forest = new Dictionary<string, LSystem>();
         EventManager.InvokeViewChange("1");
     }

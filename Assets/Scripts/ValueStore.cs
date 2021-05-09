@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: Rethink if this monolithicness is needed
-
 public class ValueStore
 {
     private static Dictionary<string, float> dict = new Dictionary<string, float>();
 
     public static bool ContainsKey(string key) => dict.ContainsKey(key);
 
-    public static float Get(string key, float defaultValue=0.0f)
+    public static float Get(string key, float defaultValue = 0.0f)
     {
         if (dict.ContainsKey(key))
         {
@@ -27,5 +25,10 @@ public class ValueStore
     {
         dict[key] = value;
         EventManager.InvokeValue(key, value);
+    }
+
+    public static void Reset()
+    {
+        dict = new Dictionary<string, float>();
     }
 }

@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteriaLittleIntensity : IntensityBehaviour
+public class BublonisBubbleIntensity : IntensityBehaviour
 {
     private Vector3 scale;
     new private MeshRenderer renderer;
     private float frequency;
 
+    private Color green;
+
     // Start is called before the first frame update
     void Start()
     {
-        scale = transform.localScale;
         renderer = GetComponent<MeshRenderer>();
         frequency = Random.Range(0.5f, 3f);
+        green = new Color(80f / 255f, 198f / 255f , 29f / 255f);
+
     }
 
     // Update is called once per frame
     void Update()
     {
         float ci = Gen.ColorIntensity;
-        renderer.material.SetColor("_Color", new Color(24f / 255f + ci, 113f / 255f + ci, 0f + ci));
-        transform.localScale = scale * (1.0f + (Mathf.Sin(Time.time * frequency) * Gen.Intensity * 0.8f));
+        renderer.material.SetColor("_Color", Color.Lerp(green, KeyColor, ci));
     }
 }
