@@ -371,10 +371,10 @@ public class LGenerator : LSystemBehaviour
         speedValueFilter.Init(ValueStore.Get(speedValueKey, 0.5f));
 
         intensityValueKey = $"{lsys.Key}-intensity";
-        intensityValueFilter.Init(ValueStore.Get(intensityValueKey, 0.5f));
+        intensityValueFilter.Init(ValueStore.Get(intensityValueKey, 0.0f));
 
         colorIntensityValueKey = $"{lsys.Key}-color";
-        colorIntensityValueFilter.Init(ValueStore.Get(colorIntensityValueKey, 0.5f));
+        colorIntensityValueFilter.Init(ValueStore.Get(colorIntensityValueKey, 0.0f));
 
         base.OnLSystemSet();
     }

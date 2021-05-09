@@ -65,7 +65,9 @@ public class LBublonisGenerator : LGenerator
                 lbe.TargetScale = new Vector3(jointScale * 0.5f, jointScale, jointScale);
                 lbe.GrowStartTime = Time.time;
 
-                // FlowBehaviour fbe = endPoint.AddComponent<FlowBehaviour>() as FlowBehaviour;
+                BublonisBubbleIntensity bbi = endPoint.AddComponent<BublonisBubbleIntensity>() as BublonisBubbleIntensity;
+                bbi.Gen = this;
+                bbi.KeyColor = materialLookup.GetColor(unit.Content);
 
                 continue;
             }

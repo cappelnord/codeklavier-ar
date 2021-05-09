@@ -15,6 +15,6 @@ public class LinearLifeBehaviour : LifeBehaviour
             float scale = Mathf.Lerp(0f, 1f, timeSinceGrowStart / GrowTime);
             // transform.localScale = TargetScale * scale;
             OutputScale = TargetScale * scale;
-        }
+        } 
     }
 }

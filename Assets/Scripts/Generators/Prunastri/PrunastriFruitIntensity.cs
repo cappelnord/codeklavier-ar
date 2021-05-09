@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BublonisBranchIntensity : IntensityBehaviour
+public class PrunastriFruitIntensity : IntensityBehaviour
 {
+    private Vector3 scale;
     new private MeshRenderer renderer;
 
-    private Color grey;
     private Color green;
 
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<MeshRenderer>();
-        grey = new Color(0.8f, 0.8f, 0.8f);
-        green = new Color(30f / 255f, 120f / 255f, 10f / 255f);
+        green = new Color(80f / 255f, 198f / 255f, 29f / 255f);
 
     }
 
@@ -24,8 +23,10 @@ public class BublonisBranchIntensity : IntensityBehaviour
         float ci = Gen.ColorIntensity;
         float i = Gen.Intensity * 0.2f;
 
-        Color c = Color.Lerp(green, grey, ci);
+        Color c = Color.Lerp(green, KeyColor, ci);
 
         renderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
+
+        transform.localScale = transform.localScale * (1.0f + (2.0f * i));
     }
 }

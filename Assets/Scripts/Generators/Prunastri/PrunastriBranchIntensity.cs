@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BublonisBranchIntensity : IntensityBehaviour
+public class PrunastriBranchIntensity : IntensityBehaviour
 {
     new private MeshRenderer renderer;
 
@@ -14,8 +14,7 @@ public class BublonisBranchIntensity : IntensityBehaviour
     {
         renderer = GetComponent<MeshRenderer>();
         grey = new Color(0.8f, 0.8f, 0.8f);
-        green = new Color(30f / 255f, 120f / 255f, 10f / 255f);
-
+        green = new Color(60f / 255f, 168f / 255f, 19f / 255f);
     }
 
     // Update is called once per frame

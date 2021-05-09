@@ -75,13 +75,23 @@ public class LPrunastriGenerator : LGenerator
             FlowBehaviour fb = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
             fb.Gen = this;
 
+            if(unit.Children.Count != 0) {
+                IntensityBehaviour ib = obj.AddComponent<PrunastriBranchIntensity>() as IntensityBehaviour;
+                ib.Gen = this;
+            } else
+            {
+                IntensityBehaviour bbi = obj.AddComponent<PrunastriFruitIntensity>() as IntensityBehaviour;
+                bbi.Gen = this;
+                bbi.KeyColor = materialLookup.GetColor(unit.Content);
+            }
+
             Grow(obj.transform, unit.Children, generation + 1, thisLengthUp, thisBaseRadius, thisBendAngle);
         }
     }
 
     GameObject Spawn(Transform parent, ProcessUnit unit, float lengthUp, float baseRadius, float lastBaseRadius)
     {
-        const int sides = 16;
+        const int sides = 12;
 
         float radiusCenter = lastBaseRadius;
         float radiusUp = baseRadius;

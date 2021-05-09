@@ -73,7 +73,7 @@ public class LSystem
 
     public bool TooWide = false;
 
-    private int recursionDepth;
+    public int RecursionDepth { get; private set; }
     private LSystemController lsysController;
     private int rulesIDCounter = 0;
     private string fullStateString;
@@ -81,7 +81,7 @@ public class LSystem
 
     public LSystem(LSystemController controller, string key)
     {
-        recursionDepth = defaultRecursionDepth;
+        RecursionDepth = defaultRecursionDepth;
 
         lsysController = controller;
         Key = key;
@@ -169,7 +169,7 @@ public class LSystem
                     int gSize = int.Parse(to);
                     if (gSize < 1) gSize = 1;
                     if (gSize > maxRecursionDepth) gSize = maxRecursionDepth;
-                    recursionDepth = gSize;
+                    RecursionDepth = gSize;
                 }
                 else if (from == to)
                 {
@@ -220,7 +220,7 @@ public class LSystem
 
         List<RuleSet> sortedRules = SortedRules();
 
-        for (int i = 0; i < recursionDepth; i++)
+        for (int i = 0; i < RecursionDepth; i++)
         {
             List<ProcessUnit> list = ProcessList(Units[i], sortedRules);
             Units.Add(list);

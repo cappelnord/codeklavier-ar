@@ -157,6 +157,10 @@ public class LFerniGenerator : LGenerator
                         lb.TargetScale = new Vector3(node.JointScale, node.JointScale, node.JointScale);
                         lb.GrowStartTime = Time.time + (node.Generation* 0.5f);
                         lb.GrowTime = 0.1f;
+
+                        IntensityBehaviour ib = obj.AddComponent<FerniNodeIntensity>() as IntensityBehaviour;
+                        ib.Gen = this;
+                        ib.KeyColor = materialLookup.GetColor(unit.Content);
                     }
                 }
 
@@ -180,6 +184,10 @@ public class LFerniGenerator : LGenerator
                             lb.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
                             lb.GrowStartTime = Time.time + (from.Generation * 0.5f);
                             lb.GrowTime = 0.5f;
+
+                            IntensityBehaviour ib = obj.AddComponent<FerniBranchIntensity>() as IntensityBehaviour;
+                            ib.Gen = this;
+
 
                             branches.Add(new FerniBranch(obj.transform, from, to, distance, lb));
                         }
