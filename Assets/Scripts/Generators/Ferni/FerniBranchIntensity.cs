@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FerniBranchIntensity : IntensityBehaviour
 {
-    new private MeshRenderer renderer;
+    new private MeshRenderer meshRenderer;
 
     private Color grey;
     private Color green;
@@ -12,7 +12,7 @@ public class FerniBranchIntensity : IntensityBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
         grey = new Color(0.0f, 0.0f, 0.0f);
         green = new Color(60f / 255f, 220f / 255f, 0f / 255f);
     }
@@ -25,6 +25,6 @@ public class FerniBranchIntensity : IntensityBehaviour
 
         Color c = Color.Lerp(green, grey, ci);
 
-        renderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
+        meshRenderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
     }
 }

@@ -5,14 +5,14 @@ using UnityEngine;
 public class BublonisBubbleIntensity : IntensityBehaviour
 {
     private Vector3 scale;
-    new private MeshRenderer renderer;
+    new private MeshRenderer meshRenderer;
 
     private Color green;
 
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
         green = new Color(60f / 255f, 168f / 255f, 19f / 255f);
 
     }
@@ -25,7 +25,7 @@ public class BublonisBubbleIntensity : IntensityBehaviour
 
         Color c = Color.Lerp(green, KeyColor, ci);
 
-        renderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
+        meshRenderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
 
         transform.localScale = transform.localScale * (1.0f + (2.0f * i));
     }

@@ -1342,7 +1342,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Shape5
       value: 
-      objectReference: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece,
+      objectReference: {fileID: 3425564699107006824, guid: 33899415e02809346b9a1cd9430a051c,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
@@ -1354,7 +1354,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Shape7
       value: 
-      objectReference: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece,
+      objectReference: {fileID: 8424831950952656913, guid: 01552d74240a4d34bad0aa0508d2a165,
         type: 3}
     - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}

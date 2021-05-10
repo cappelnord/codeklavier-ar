@@ -184,7 +184,6 @@ public class LGenerator : LSystemBehaviour
         Intensity = intensityValueFilter.Filter();
         ColorIntensity = colorIntensityValueFilter.Filter();
 
-
         ApplyTransformSpec();
     }
 

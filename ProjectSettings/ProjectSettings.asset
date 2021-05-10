@@ -127,7 +127,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.0
+  bundleVersion: 1.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -863,7 +863,8 @@ PlayerSettings:
   gcWBarrierValidation: 0
   apiCompatibilityLevelPerPlatform:
     Android: 3
-    Standalone: 6
+    Standalone: 3
+    WSA: 3
     iPhone: 3
   m_RenderingPath: 1
   m_MobileRenderingPath: 1

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BublonisBranchIntensity : IntensityBehaviour
 {
-    new private MeshRenderer renderer;
+    new private MeshRenderer meshRenderer;
 
     private Color grey;
     private Color green;
@@ -12,7 +12,7 @@ public class BublonisBranchIntensity : IntensityBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponent<MeshRenderer>();
         grey = new Color(0.8f, 0.8f, 0.8f);
         green = new Color(30f / 255f, 120f / 255f, 10f / 255f);
 
@@ -26,6 +26,6 @@ public class BublonisBranchIntensity : IntensityBehaviour
 
         Color c = Color.Lerp(green, grey, ci);
 
-        renderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
+        meshRenderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
     }
 }
