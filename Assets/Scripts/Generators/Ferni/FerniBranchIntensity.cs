@@ -14,17 +14,19 @@ public class FerniBranchIntensity : IntensityBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         grey = new Color(0.0f, 0.0f, 0.0f);
-        green = new Color(60f / 255f, 220f / 255f, 0f / 255f);
+        green = new Color((60f / 255f) * 0.8f, (220f / 255f) * 0.8f, (0f / 255f) * 0.8f);
     }
 
     // Update is called once per frame
     void Update()
     {
         float ci = Gen.ColorIntensity;
-        float i = Gen.Intensity * 0.2f;
+        float i = Gen.Intensity * 0.4f;
+        float im = 1.0f + i;
+
 
         Color c = Color.Lerp(green, grey, ci);
 
-        meshRenderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
+        meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
     }
 }

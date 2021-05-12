@@ -78,7 +78,7 @@ Shader "Custom/InteriaInner"
             fixed3 bCol = lerp(_BackgroundColor.rgb, _BackgroundColor.rgb * 0.1 + _KeyColor.rgb * 0.4, pow(_ColorIntensity, 0.8));
 
 
-			o.Albedo = lerp(bCol, col, c) * (1.0 + _Intensity * 2.0); ;
+			o.Albedo = lerp(bCol, col, c) * (1.0 + _Intensity * 4.0); ;
 
             // Metallic and smoothness come from slider variables
 

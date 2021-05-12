@@ -14,7 +14,7 @@ public class BublonisBranchIntensity : IntensityBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         grey = new Color(0.8f, 0.8f, 0.8f);
-        green = new Color(30f / 255f, 120f / 255f, 10f / 255f);
+        green = new Color((30f / 255f) * 0.8f, (120f / 255f) * 0.8f, (10f / 255f) * 0.8f);
 
     }
 
@@ -22,10 +22,11 @@ public class BublonisBranchIntensity : IntensityBehaviour
     void Update()
     {
         float ci = Gen.ColorIntensity;
-        float i = Gen.Intensity * 0.2f;
+        float i = Gen.Intensity * 0.4f;
+        float im = 1.0f + i;
 
         Color c = Color.Lerp(green, grey, ci);
 
-        meshRenderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
+        meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
     }
 }

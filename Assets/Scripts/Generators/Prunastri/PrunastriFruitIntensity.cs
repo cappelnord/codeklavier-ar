@@ -13,7 +13,7 @@ public class PrunastriFruitIntensity : IntensityBehaviour
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        green = new Color(80f / 255f, 198f / 255f, 29f / 255f);
+        green = new Color((80f / 255f) * 0.8f, (198f / 255f) * 0.8f, (29f / 255f) * 0.8f);
 
     }
 
@@ -21,12 +21,13 @@ public class PrunastriFruitIntensity : IntensityBehaviour
     void Update()
     {
         float ci = Gen.ColorIntensity;
-        float i = Gen.Intensity * 0.2f;
+        float i = Gen.Intensity * 0.4f;
+        float im = 1.0f + i;
 
         Color c = Color.Lerp(green, KeyColor, ci);
 
-        meshRenderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
+        meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
 
-        transform.localScale = transform.localScale * (1.0f + (2.0f * i));
+        transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1.0f + (4.0f * i), 1.0f + (1.5f * i), 1.0f + (4.0f * i)));
     }
 }

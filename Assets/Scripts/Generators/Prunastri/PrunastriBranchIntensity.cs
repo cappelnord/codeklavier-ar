@@ -14,17 +14,18 @@ public class PrunastriBranchIntensity : IntensityBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         grey = new Color(0.8f, 0.8f, 0.8f);
-        green = new Color(60f / 255f, 168f / 255f, 19f / 255f);
+        green = new Color((60f / 255f) * 0.8f, (168f / 255f) * 0.8f, (19f / 255f) * 0.8f);
     }
 
     // Update is called once per frame
     void Update()
     {
         float ci = Gen.ColorIntensity;
-        float i = Gen.Intensity * 0.2f;
+        float i = Gen.Intensity * 0.4f;
 
         Color c = Color.Lerp(green, grey, ci);
+        float im = 1.0f + i;
 
-        meshRenderer.material.SetColor("_Color", new Color(c.r + i, c.g + i, c.b + i));
+        meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
     }
 }

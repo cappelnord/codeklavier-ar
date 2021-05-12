@@ -21,7 +21,7 @@ public class InteriaInnerIntensity : IntensityBehaviour
         block.SetVector("_PhaseFrequency", new Vector4(Random.Range(1, 2), Random.Range(1, 2), Random.Range(1, 2), Random.Range(1, 2)));
         block.SetVector("_PhaseCoordOffset", new Vector4(Random.Range(1, 8), Random.Range(1, 8), Random.Range(1, 8), Random.Range(1, 8)));
 
-        Color green = Color.HSVToRGB(Random.Range(0.29f, 0.3f), Random.Range(0.8f, 0.9f), Random.Range(0.5f, 0.55f));
+        Color green = Color.HSVToRGB(Random.Range(0.29f, 0.3f), Random.Range(0.8f, 0.9f), Random.Range(0.5f, 0.55f) * 0.8f);
 
         block.SetFloat("_Intensity", Gen.Intensity);
         block.SetFloat("_ColorIntensity", Gen.ColorIntensity);
