@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteriaLittleIntensity : IntensityBehaviour
 {
     private Vector3 scale;
-    new private MeshRenderer meshRenderer;
+    private MeshRenderer meshRenderer;
     private float frequency;
 
     // Start is called before the first frame update

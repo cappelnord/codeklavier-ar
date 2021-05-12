@@ -33,6 +33,8 @@ public class GeneratorHerd : MonoBehaviour
     public GameObject Shape6;
     public GameObject Shape7;
 
+    public GameObject OverrideShape = null;
+
     private int sparseUpdateCounter = 0;
 
     [HideInInspector]
@@ -58,6 +60,14 @@ public class GeneratorHerd : MonoBehaviour
             {"6", Shape6 },
             {"7", Shape7 }
         };
+
+        if(OverrideShape != null)
+        {
+            foreach(string key in shapeLookup.Keys)
+            {
+                shapeLookup[key] = OverrideShape;
+            }
+        }
 
         Trash = transform.Find("Trash").transform;
         Env = transform.Find("Environemt").GetComponent<ARquaticEnvironment>();

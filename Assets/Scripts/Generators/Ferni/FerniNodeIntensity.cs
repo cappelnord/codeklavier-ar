@@ -5,7 +5,7 @@ using UnityEngine;
 public class FerniNodeIntensity : IntensityBehaviour
 {
     private Vector3 scale;
-    new private MeshRenderer meshRenderer;
+    private MeshRenderer meshRenderer;
 
     private Color green;
 

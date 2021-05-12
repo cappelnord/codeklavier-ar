@@ -69,7 +69,7 @@ public class LFerniGenerator : LGenerator
         {
             foreach (FerniNode node in nodes.Values)
             {
-                node.Position = node.BasePosition + ARquaticEnvironment.Instance.Current(node.BasePosition + Position) * (0.25f + (SpeedMultiplier * 0.25f));
+                node.Position = node.BasePosition + ARquaticEnvironment.Instance.Current(node.BasePosition + Position) * (0.25f + (SpeedMultiplier * 0.25f)) * 0.5f;
                 if (node.Transform != null) { 
                     node.Transform.localPosition = node.Position;
                 }

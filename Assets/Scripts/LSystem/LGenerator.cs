@@ -5,6 +5,8 @@ using UnityEngine;
 public class LGenerator : LSystemBehaviour
 {
 
+    public bool Variety = false;
+
     [HideInInspector]
     public TransformSpec TransformSpec;
 
@@ -39,16 +41,20 @@ public class LGenerator : LSystemBehaviour
 
     private IIRFilter velocityValueFilter = new IIRFilter(0.5f, 0.01f);
     private string velValueKey;
-    private IIRFilter speedValueFilter = new IIRFilter(0.5f, 0.01f);
+    private IIRFilter speedValueFilter = new IIRFilter(0.5f, 0.003f);
     private string intensityValueKey;
-    private IIRFilter colorIntensityValueFilter = new IIRFilter(0.5f, 0.01f);
+    private IIRFilter colorIntensityValueFilter = new IIRFilter(0.0f, 0.01f);
     private string colorIntensityValueKey;
-    private IIRFilter intensityValueFilter = new IIRFilter(0.5f, 0.01f);
+    private IIRFilter intensityValueFilter = new IIRFilter(0.0f, 0.01f);
     private string speedValueKey;
     private IIRFilter floatUp = new IIRFilter(0.0f, 0.002f);
 
     private TransformSpec lastTransformSpec;
     private bool generated = true;
+
+
+    protected float SpeciesVelocityMultiplier = 1.0f;
+    protected float SpeciesSpeedMultiplier = 1.0f;
 
     protected virtual void Awake()
     {
@@ -179,8 +185,8 @@ public class LGenerator : LSystemBehaviour
 
         lastTransformSpec = TransformSpec;
 
-        scaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f);
-        SpeedMultiplier = 1.0f / speedValueFilter.Filter() * 0.25f;
+        scaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f * SpeciesVelocityMultiplier);
+        SpeedMultiplier = 0.2f + ((1.0f / speedValueFilter.Filter()) * 0.2f * SpeciesSpeedMultiplier);
         Intensity = intensityValueFilter.Filter();
         ColorIntensity = colorIntensityValueFilter.Filter();
 
@@ -200,7 +206,7 @@ public class LGenerator : LSystemBehaviour
             transforms.Add(child);
         }
 
-        if (Herd.SimpleDeath)
+        if (Herd.SimpleDeath || WorldIsBoxed.Status)
         {
             foreach (Transform child in transforms)
             {

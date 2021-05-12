@@ -96,6 +96,7 @@ public class LBublonisGenerator : LGenerator
             lb.GrowStartTime = Time.time + (generation * 0.5f);
 
             FlowBehaviour fb = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
+            fb.RotationMultiplier = 20f;
             fb.Gen = this;
 
             IntensityBehaviour ib = obj.AddComponent<BublonisBranchIntensity>() as IntensityBehaviour;
@@ -129,11 +130,12 @@ public class LBublonisGenerator : LGenerator
 
         float radiusCenter = baseRadius * 1.5f;
         float radiusUp = baseRadius;
-        float radiusDown = baseRadius * 0.25f;
-        float lengthDown = 0.15f * lengthUp;
-        float squish = 0.3f;
+        float radiusDown = baseRadius * 0.45f;
+        float lengthDown = 0.1f * lengthUp;
+        float squish = 0.4f;
         float squishUp = squish;
-        float squishDown = squish * 2.0f;
+        // put this to extreme to have thorns
+        float squishDown = squish * 3.0f;
 
         return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, BranchMaterial);
     }

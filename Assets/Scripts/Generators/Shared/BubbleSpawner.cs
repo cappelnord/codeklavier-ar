@@ -20,6 +20,11 @@ public class BubbleSpawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(WorldIsBoxed.Status)
+        {
+            return;
+        }
+
         foreach (string key in herd.Objects.Keys)
         {
             if (Random.Range(0f, 1f) < Probability)

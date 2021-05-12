@@ -16,6 +16,9 @@ public class LInteriaGenerator : LGenerator
     // Start is called before the first frame update
     protected override void Start()
     {
+
+        SpeciesVelocityMultiplier = 2.0f;
+
         base.Start();
 
         lsysController = LSystemController.Instance();

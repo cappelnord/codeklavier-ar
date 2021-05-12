@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BublonisBranchIntensity : IntensityBehaviour
 {
-    new private MeshRenderer meshRenderer;
+    private MeshRenderer meshRenderer;
 
     private Color grey;
     private Color green;

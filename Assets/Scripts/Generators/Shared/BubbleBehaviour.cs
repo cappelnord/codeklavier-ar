@@ -29,8 +29,12 @@ public class BubbleBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (WorldIsBoxed.Status)
+        {
+            return;
+        }
 
-        if(lodged)
+        if (lodged)
         {
             float tn = Time.time;
             scale = Mathf.Lerp(0, TargetScale, (tn - startTime) / (TargetTime - startTime));
@@ -53,6 +57,11 @@ public class BubbleBehaviour : MonoBehaviour
 
     public void Dislodge()
     {
+        if (WorldIsBoxed.Status)
+        {
+            return;
+        }
+
         transform.SetParent(TargetTransform);
         scaleRelativeToWorld = TargetTransform.lossyScale.x;
         lodged = false;

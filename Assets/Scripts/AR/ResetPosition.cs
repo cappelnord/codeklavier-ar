@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
+public static class WorldIsBoxed
+{
+    public static bool Status = false;
+}
 
 public class ResetPosition : MonoBehaviour, IPointerClickHandler
 {
@@ -99,11 +102,13 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
         ARWorld.transform.localPosition = PositionCube.transform.localPosition;
         ARWorld.transform.localRotation = PositionCube.transform.localRotation;
         ScaleWorld(DefaultScale * PersistentData.BaseScale);
+        WorldIsBoxed.Status = false;
     }
 
     void UnPosition()
     {
         ARWorld.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+        WorldIsBoxed.Status = true;
     }
 
     void Activate()
