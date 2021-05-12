@@ -63,7 +63,7 @@ public class GeneratorHerd : MonoBehaviour
 
         if(OverrideShape != null)
         {
-            foreach(string key in shapeLookup.Keys)
+            foreach(string key in new List<string>(shapeLookup.Keys))
             {
                 shapeLookup[key] = OverrideShape;
             }

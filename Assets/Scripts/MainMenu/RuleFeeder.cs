@@ -45,7 +45,7 @@ public class RuleFeeder : MonoBehaviour
 
 
 
-            c.Dispatch("5@g.6,*.131,1.431,4.321,3.11,2.31");
+            c.Dispatch("5@g.4,*.131,1.21,4.41,3.11,2.31");
             c.DispatchShape("5", "3");
             c.DispatchTransform("5", new TransformSpec(new float[] { 1f, -1f, 7f }, new float[] { 4f, 4f, 4f }, new float[] { 45f, 56f, 90f }));
 

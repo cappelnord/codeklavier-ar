@@ -35,11 +35,15 @@ public class LPrunastriGenerator : LGenerator
 
         Die();
 
-        Grow(transform, lsys.Units[0], 0, 0.25f, 0.1f, 20.0f);
+        Grow(transform, lsys.Units[0], 0, 0.25f, 0.03f + (lsys.Units.Count * 0.01f), 20.0f);
     }
 
     void Grow(Transform parent, List<ProcessUnit> children, int generation, float lastLengthUp, float lastBaseRadius, float lastBendAngle)
     {
+        float lengthUpMult = 1.4f - (lsys.RecursionDepth * 0.05f);
+        float bendAngleMult = 1.4f - (lsys.RecursionDepth * 0.04f);
+        float baseRadiusMult = 0.5f + (lsys.RecursionDepth * 0.04f);
+
         int childrenIndex = -1;
         foreach (ProcessUnit unit in children)
         {
@@ -50,9 +54,9 @@ public class LPrunastriGenerator : LGenerator
                 continue;
             }
 
-            float thisLengthUp = lastLengthUp * 1.25f;
-            float thisBaseRadius = lastBaseRadius * 0.666f;
-            float thisBendAngle = lastBendAngle * 1.3f; // should probably depend on number of generations in this object
+            float thisLengthUp = lastLengthUp * lengthUpMult;
+            float thisBaseRadius = lastBaseRadius * baseRadiusMult;
+            float thisBendAngle = lastBendAngle * bendAngleMult; // should probably depend on number of generations in this object
 
             // TODO: in case there is only 1 axiom we need to terminate it gracefully on the bottom
 
@@ -107,6 +111,10 @@ public class LPrunastriGenerator : LGenerator
             radiusUp = baseRadius * 4.0f;
             lengthUp = lengthUp * 0.5f;
             squishUp = 0.1f;
+        } else
+        {
+            radiusDown = baseRadius * 0.5f;
+            lengthDown = lengthDown * 1.05f;
         }
         return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, BranchMaterial);
     }

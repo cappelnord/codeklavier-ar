@@ -1398,6 +1398,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5454875826750577939, guid: bf35641110e92144a8bd460e7ec7b16b,
         type: 3}
+    - target: {fileID: 7713098529516373333, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: OverrideShape
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7713098529516373334, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_RootOrder

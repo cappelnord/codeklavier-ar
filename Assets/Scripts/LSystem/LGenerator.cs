@@ -186,7 +186,7 @@ public class LGenerator : LSystemBehaviour
         lastTransformSpec = TransformSpec;
 
         scaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f * SpeciesVelocityMultiplier);
-        SpeedMultiplier = 0.2f + ((1.0f / speedValueFilter.Filter()) * 0.2f * SpeciesSpeedMultiplier);
+        SpeedMultiplier = 0.3f + ((1.0f / speedValueFilter.Filter()) * 0.15f * SpeciesSpeedMultiplier);
         Intensity = intensityValueFilter.Filter();
         ColorIntensity = colorIntensityValueFilter.Filter();
 
