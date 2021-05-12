@@ -7,13 +7,12 @@ public class BublonisBubbleIntensity : IntensityBehaviour
     private Vector3 scale;
     private MeshRenderer meshRenderer;
 
-    private Color green;
+    public Color Green;
 
     // Start is called before the first frame update
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        green = new Color((60f / 255f) * 0.8f, (168f / 255f) * 0.8f, (19f / 255f) * 0.8f);
 
     }
 
@@ -24,7 +23,7 @@ public class BublonisBubbleIntensity : IntensityBehaviour
         float i = Gen.Intensity * 0.4f;
         float im = 1.0f + i;
 
-        Color c = Color.Lerp(green, KeyColor, ci);
+        Color c = Color.Lerp(Green, KeyColor, ci);
 
         meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
 

@@ -52,11 +52,27 @@ public class LFerniGenerator : LGenerator
     private Dictionary<long, FerniNode> nodes;
     private List<FerniBranch> branches;
 
+    private Color branchGreen;
+    private Color nodeGreen;
+    private Color branchGrey;
+
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+
+        if(!Variety)
+        {
+            nodeGreen = new Color((80f / 255f) * 0.8f, (198f / 255f) * 0.8f, (29f / 255f) * 0.8f);
+            branchGrey = new Color(0.0f, 0.0f, 0.0f);
+            branchGreen = new Color((60f / 255f) * 0.8f, (220f / 255f) * 0.8f, (0f / 255f) * 0.8f);
+        } else
+        {
+            nodeGreen = new Color((80f / 255f) * 0.8f, (158f / 255f) * 0.8f, (29f / 255f) * 0.6f);
+            branchGrey = new Color(1.0f, 1.0f, 1.0f);
+            branchGreen = new Color((60f / 255f) * 0.6f, (140f / 255f) * 0.6f, (0f / 255f) * 0.6f);
+        }
 
         wedgeMeshGen = WedgeMeshGen.Instance();
     }
@@ -113,6 +129,13 @@ public class LFerniGenerator : LGenerator
         float branchRadius = 0.03f;
         float deltaDisplace = 1.25f;
 
+        if(Variety)
+        {
+            deltaDisplace = Random.Range(0.5f, 1.5f);
+            jointScale = 0.05f;
+            branchRadius *= 0.5f;
+        }
+
         foreach (List<ProcessUnit> data in lsys.Units)
         {
 
@@ -121,7 +144,14 @@ public class LFerniGenerator : LGenerator
             {
                 char symbol = unit.Content;
                 pos += 1.0f;
-                nodes[unit.Id] = new FerniNode(new Vector3(pos / 20.0f, displace / 2f, 0.0f), generation, jointScale, branchRadius);
+
+                float posDiv = 20f;
+                if(Variety)
+                {
+                    posDiv = 10f;
+                }
+
+                nodes[unit.Id] = new FerniNode(new Vector3(pos / posDiv, displace / 2f, 0.0f), generation, jointScale, branchRadius);
             }
 
             displace += deltaDisplace;
@@ -137,7 +167,13 @@ public class LFerniGenerator : LGenerator
         {
             Vector3 position = node.BasePosition;
             // base form
-            node.BasePosition = new Vector3(position.x + Mathf.Sin((position.x) * 8.2f) * 0.2f, position.y + Mathf.Sin(position.x * 2.3f) * 0.6f, Mathf.Cos((position.x) * 7.5f) * 0.2f);
+            if(!Variety)
+            {
+                node.BasePosition = new Vector3(position.x + Mathf.Sin((position.x) * 8.2f) * 0.2f, position.y + Mathf.Sin(position.x * 2.3f) * 0.6f, Mathf.Cos((position.x) * 7.5f) * 0.2f);
+            } else
+            {
+                node.BasePosition = new Vector3(position.x + Mathf.Sin((position.x) * 9.2f) * 0.1f, position.y + Mathf.Sin(position.x * 2.3f) * 0.2f, Mathf.Cos((position.x) * 7.5f) * 0.1f);
+            }
             node.Position = node.BasePosition;
         }
 
@@ -158,9 +194,10 @@ public class LFerniGenerator : LGenerator
                         lb.GrowStartTime = Time.time + (node.Generation* 0.5f);
                         lb.GrowTime = 0.1f;
 
-                        IntensityBehaviour ib = obj.AddComponent<FerniNodeIntensity>() as IntensityBehaviour;
+                        FerniNodeIntensity ib = obj.AddComponent<FerniNodeIntensity>() as FerniNodeIntensity;
                         ib.Gen = this;
                         ib.KeyColor = materialLookup.GetColor(unit.Content);
+                        ib.Green = nodeGreen;
                     }
                 }
 
@@ -185,8 +222,10 @@ public class LFerniGenerator : LGenerator
                             lb.GrowStartTime = Time.time + (from.Generation * 0.5f);
                             lb.GrowTime = 0.5f;
 
-                            IntensityBehaviour ib = obj.AddComponent<FerniBranchIntensity>() as IntensityBehaviour;
+                            FerniBranchIntensity ib = obj.AddComponent<FerniBranchIntensity>() as FerniBranchIntensity;
                             ib.Gen = this;
+                            ib.Grey = branchGrey;
+                            ib.Green = branchGreen;
 
 
                             branches.Add(new FerniBranch(obj.transform, from, to, distance, lb));

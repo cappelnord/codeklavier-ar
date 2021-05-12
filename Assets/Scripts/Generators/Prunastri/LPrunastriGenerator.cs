@@ -11,6 +11,10 @@ public class LPrunastriGenerator : LGenerator
     private LSystemController lsysController;
     private WedgeMeshGen wedgeMeshGen;
 
+    private Color branchGrey;
+    private Color branchGreen;
+    private Color fruitGreen;
+
     static public List<List<Vector3>> StartAngles =
     new List<List<Vector3>>() {
         new List<Vector3>() {new Vector3(0.0f, 0.0f, 0.0f) },
@@ -25,6 +29,19 @@ public class LPrunastriGenerator : LGenerator
     {
         base.Start();
 
+        branchGrey = new Color(0.8f, 0.8f, 0.8f);
+
+        if(!Variety)
+        {
+            branchGreen = new Color((60f / 255f) * 0.8f, (168f / 255f) * 0.8f, (19f / 255f) * 0.8f);
+            fruitGreen = new Color((80f / 255f) * 0.8f, (198f / 255f) * 0.8f, (29f / 255f) * 0.8f);
+        } else
+        {
+            fruitGreen = new Color((40f / 255f) * 0.8f, (168f / 255f) * 0.8f, (39f / 255f) * 0.8f);
+            branchGreen = new Color((50f / 255f) * 0.8f, (198f / 255f) * 0.8f, (49f / 255f) * 0.8f);
+        }
+
+
         wedgeMeshGen = WedgeMeshGen.Instance();
         lsysController = LSystemController.Instance();
     }
@@ -35,7 +52,15 @@ public class LPrunastriGenerator : LGenerator
 
         Die();
 
-        Grow(transform, lsys.Units[0], 0, 0.25f, 0.03f + (lsys.Units.Count * 0.01f), 20.0f);
+        float startAngle = 20f;
+        float startRadius = 0.03f + (lsys.Units.Count * 0.01f);
+        if(Variety)
+        {
+            startAngle = 10f;
+            startRadius *= 0.5f;
+        }
+
+        Grow(transform, lsys.Units[0], 0, 0.25f, startRadius, startAngle);
     }
 
     void Grow(Transform parent, List<ProcessUnit> children, int generation, float lastLengthUp, float lastBaseRadius, float lastBendAngle)
@@ -43,6 +68,11 @@ public class LPrunastriGenerator : LGenerator
         float lengthUpMult = 1.4f - (lsys.RecursionDepth * 0.05f);
         float bendAngleMult = 1.4f - (lsys.RecursionDepth * 0.04f);
         float baseRadiusMult = 0.5f + (lsys.RecursionDepth * 0.04f);
+
+        if(Variety)
+        {
+            baseRadiusMult = baseRadiusMult * 0.85f;
+        }
 
         int childrenIndex = -1;
         foreach (ProcessUnit unit in children)
@@ -81,13 +111,17 @@ public class LPrunastriGenerator : LGenerator
             fb.Gen = this;
 
             if(unit.Children.Count != 0) {
-                IntensityBehaviour ib = obj.AddComponent<PrunastriBranchIntensity>() as IntensityBehaviour;
+                PrunastriBranchIntensity ib = obj.AddComponent<PrunastriBranchIntensity>() as PrunastriBranchIntensity;
                 ib.Gen = this;
+                ib.Green = branchGreen;
+                ib.Grey = branchGrey;
+
             } else
             {
-                IntensityBehaviour bbi = obj.AddComponent<PrunastriFruitIntensity>() as IntensityBehaviour;
+                PrunastriFruitIntensity bbi = obj.AddComponent<PrunastriFruitIntensity>() as PrunastriFruitIntensity;
                 bbi.Gen = this;
                 bbi.KeyColor = materialLookup.GetColor(unit.Content);
+                bbi.Green = fruitGreen;
             }
 
             Grow(obj.transform, unit.Children, generation + 1, thisLengthUp, thisBaseRadius, thisBendAngle);
@@ -106,9 +140,13 @@ public class LPrunastriGenerator : LGenerator
         float squishUp = 1.0f;
         float squishDown = 1.0f;
 
-        if(unit.Children.Count == 0)
+        if (unit.Children.Count == 0)
         {
             radiusUp = baseRadius * 4.0f;
+            if(Variety)
+            {
+                radiusDown *= 2.0f;
+            }
             lengthUp = lengthUp * 0.5f;
             squishUp = 0.1f;
         } else

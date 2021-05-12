@@ -33,7 +33,7 @@ public class WedgeMeshGen : MeshGen
     {
         
         float thresh = 0.00001f;
-        string key = $"{sides}-{Mathf.RoundToInt(radiusDown * 1000.0f)}-{Mathf.RoundToInt(lengthDown * 1000)}-{Mathf.RoundToInt(radiusUp * 1000.0f)}-{Mathf.RoundToInt(lengthUp * 1000)}-{Mathf.RoundToInt(squish * 1000)}";
+        string key = $"{sides}-{Mathf.RoundToInt(radiusCenter * 1000.0f)}-{Mathf.RoundToInt(radiusDown * 1000.0f)}-{Mathf.RoundToInt(lengthDown * 1000)}-{Mathf.RoundToInt(radiusUp * 1000.0f)}-{Mathf.RoundToInt(lengthUp * 1000)}-{Mathf.RoundToInt(squish * 1000)}-{Mathf.RoundToInt(squishUp * 1000)}-{Mathf.RoundToInt(squishDown * 1000)}";
 
         Mesh cachedMesh = GetCachedMesh(key);
         if (cachedMesh != null) return cachedMesh;

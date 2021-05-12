@@ -110,6 +110,15 @@ public class GeneratorHerd : MonoBehaviour
                 sparseUpdateCounter++;
             }
         }
+
+        // Trash is clean when world is boxed
+        if(WorldIsBoxed.Status)
+        {
+            foreach(Transform t in Trash.transform)
+            {
+                Destroy(t.gameObject);
+            }
+        }
     }
 
     GeneratorObject Create(LSystem lsys)

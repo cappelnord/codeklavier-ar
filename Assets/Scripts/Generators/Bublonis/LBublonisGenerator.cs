@@ -12,11 +12,26 @@ public class LBublonisGenerator : LGenerator
     private LSystemController lsysController;
     private WedgeMeshGen wedgeMeshGen;
 
+    private Color branchGrey;
+    private Color branchGreen;
+    private Color bubbleGreen;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+
+        branchGrey = new Color(0.8f, 0.8f, 0.8f);
+        if (!Variety)
+        {
+            branchGreen = new Color((30f / 255f) * 0.8f, (120f / 255f) * 0.8f, (10f / 255f) * 0.8f);
+            bubbleGreen = new Color((60f / 255f) * 0.8f, (168f / 255f) * 0.8f, (19f / 255f) * 0.8f);
+        }
+        else
+        {
+            branchGreen = new Color((60f / 255f) * 0.8f, (130f / 255f) * 0.8f, (10f / 255f) * 0.8f);
+            bubbleGreen = new Color((80f / 255f) * 0.8f, (168f / 255f) * 0.8f, (19f / 255f) * 0.8f);
+        }
 
         wedgeMeshGen = WedgeMeshGen.Instance();
         lsysController = LSystemController.Instance();
@@ -68,6 +83,12 @@ public class LBublonisGenerator : LGenerator
                 BublonisBubbleIntensity bbi = endPoint.AddComponent<BublonisBubbleIntensity>() as BublonisBubbleIntensity;
                 bbi.Gen = this;
                 bbi.KeyColor = materialLookup.GetColor(unit.Content);
+                bbi.Green = bubbleGreen;
+
+                if (Variety)
+                {
+                    lbe.TargetScale = lbe.TargetScale * Random.Range(0.45f, 0.6f);
+                }
 
                 continue;
             }
@@ -99,8 +120,10 @@ public class LBublonisGenerator : LGenerator
             fb.RotationMultiplier = 20f;
             fb.Gen = this;
 
-            IntensityBehaviour ib = obj.AddComponent<BublonisBranchIntensity>() as IntensityBehaviour;
+            BublonisBranchIntensity ib = obj.AddComponent<BublonisBranchIntensity>() as BublonisBranchIntensity;
             ib.Gen = this;
+            ib.Green = branchGreen;
+            ib.Grey = branchGrey;
 
 
 
@@ -112,11 +135,18 @@ public class LBublonisGenerator : LGenerator
 
                 LifeBehaviour lb2 = endPoint.AddComponent<LifeBehaviour>() as LifeBehaviour;
                 lb2.TargetScale = new Vector3(jointScale * 0.5f, jointScale, jointScale);
+
+                if(Variety)
+                {
+                    lb2.TargetScale = lb2.TargetScale * Random.Range(0.45f, 0.6f);
+                }
+
                 lb2.GrowStartTime = Time.time + (generation * 0.5f);
 
                 BublonisBubbleIntensity bbi = endPoint.AddComponent<BublonisBubbleIntensity>() as BublonisBubbleIntensity;
                 bbi.Gen = this;
                 bbi.KeyColor = materialLookup.GetColor(unit.Content);
+                bbi.Green = bubbleGreen;
 
             }
 
@@ -126,7 +156,11 @@ public class LBublonisGenerator : LGenerator
 
     GameObject Spawn(Transform parent, ProcessUnit unit, float lengthUp, float baseRadius, float lastBaseRadius)
     {
-        const int sides = 16;
+        int sides = 16;
+        if(Variety)
+        {
+            sides = 32;
+        }
 
         float radiusCenter = baseRadius * 1.5f;
         float radiusUp = baseRadius;
@@ -135,7 +169,15 @@ public class LBublonisGenerator : LGenerator
         float squish = 0.4f;
         float squishUp = squish;
         // put this to extreme to have thorns
+        
         float squishDown = squish * 3.0f;
+
+        if(Variety)
+        {
+            radiusCenter = baseRadius;
+            squishDown = squish * 30f;
+            squishUp = 1.0f;
+        }
 
         return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, BranchMaterial);
     }

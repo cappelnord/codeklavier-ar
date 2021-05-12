@@ -3940,12 +3940,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shape1: {fileID: 3425564699107006824, guid: 33899415e02809346b9a1cd9430a051c, type: 3}
   Shape2: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece, type: 3}
-  Shape3: {fileID: 8424831950952656913, guid: 01552d74240a4d34bad0aa0508d2a165, type: 3}
+  Shape3: {fileID: 7814511172469250505, guid: 1d76019eddc543a42a8a743fe1e103e9, type: 3}
   Shape4: {fileID: 1008974105662899192, guid: 5230048d5e2af8340b155f75230c4a42, type: 3}
   Shape5: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece, type: 3}
   Shape6: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece, type: 3}
   Shape7: {fileID: 8424831950952656913, guid: 01552d74240a4d34bad0aa0508d2a165, type: 3}
+  OverrideShape: {fileID: 0}
   Trash: {fileID: 0}
+  Env: {fileID: 0}
   SimpleDeath: 1
 --- !u!4 &634358977952824218
 Transform:
