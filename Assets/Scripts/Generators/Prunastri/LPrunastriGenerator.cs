@@ -52,6 +52,8 @@ public class LPrunastriGenerator : LGenerator
 
         Die();
 
+        if (IsEmpty()) return;
+
         float startAngle = 20f;
         float startRadius = 0.03f + (lsys.Units.Count * 0.01f);
         if(Variety)

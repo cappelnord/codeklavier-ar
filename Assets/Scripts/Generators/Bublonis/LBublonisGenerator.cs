@@ -43,7 +43,10 @@ public class LBublonisGenerator : LGenerator
 
         Die();
 
-        Grow(transform, lsys.Units[0], 0, 0.5f, 0.06f, 30.0f, 0.3f);
+        if (!IsEmpty())
+        {
+            Grow(transform, lsys.Units[0], 0, 0.5f, 0.06f, 30.0f, 0.3f);
+        }
     }
 
     void Grow(Transform parent, List<ProcessUnit> children, int generation, float lastLengthUp, float lastBaseRadius, float lastBendAngle, float lastJointScale)

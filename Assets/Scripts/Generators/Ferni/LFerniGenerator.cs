@@ -119,14 +119,17 @@ public class LFerniGenerator : LGenerator
 
         Die();
 
-        float displace = 0.0f;
-
         nodes = new Dictionary<long, FerniNode>();
         branches = new List<FerniBranch>();
 
+        if (IsEmpty()) return;
+
+
+        float displace = 0.0f;
+
         int generation = 0;
-        float jointScale = 0.1f;
-        float branchRadius = 0.03f;
+        float jointScale = 0.0666f;
+        float branchRadius = 0.02f;
         float deltaDisplace = 1.25f;
 
         if(Variety)

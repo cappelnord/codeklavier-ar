@@ -383,4 +383,9 @@ public class LGenerator : LSystemBehaviour
 
         base.OnLSystemSet();
     }
+
+    public bool IsEmpty()
+    {
+        return lsys.Units[0].Count == 1 && lsys.Units[0][0].Content == '0';
+    }
 }

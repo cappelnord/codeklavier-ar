@@ -30,6 +30,8 @@ public class LInteriaGenerator : LGenerator
 
         Die();
 
+        if (IsEmpty()) return;
+
         outer = Instantiate(OuterPrefab, transform);
 
         InteriaOuterIntensity ioi = outer.AddComponent<InteriaOuterIntensity>() as InteriaOuterIntensity;
@@ -50,8 +52,11 @@ public class LInteriaGenerator : LGenerator
 
     public override void Die(bool transformDeath = false)
     {
-        Destroy(outer);
-        outer = null;
+        if (outer != null)
+        {
+            Destroy(outer);
+            outer = null;
+        }
         base.Die(transformDeath);
     }
 
