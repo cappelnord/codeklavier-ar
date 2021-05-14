@@ -99,7 +99,7 @@ public class LBublonisGenerator : LGenerator
 
             // TODO: in case there is only 1 axiom we need to terminate it gracefully on the bottom
 
-            GameObject obj = Spawn(parent, unit, thisLengthUp, thisBaseRadius, lastBaseRadius);
+            GameObject obj = Spawn(parent, unit, thisLengthUp, thisBaseRadius, lastBaseRadius, generation == 0);
 
 
             if (generation == 0)
@@ -154,7 +154,7 @@ public class LBublonisGenerator : LGenerator
         }
     }
 
-    GameObject Spawn(Transform parent, ProcessUnit unit, float lengthUp, float baseRadius, float lastBaseRadius)
+    GameObject Spawn(Transform parent, ProcessUnit unit, float lengthUp, float baseRadius, float lastBaseRadius, bool isFirst)
     {
         int sides = 16;
         if(Variety)
@@ -175,8 +175,16 @@ public class LBublonisGenerator : LGenerator
         if(Variety)
         {
             radiusCenter = baseRadius;
-            squishDown = squish * 30f;
+            if (!isFirst)
+            {
+                squishDown = squish * 30f;
+            }
             squishUp = 1.0f;
+        }
+
+        if(isFirst)
+        {
+            radiusDown = radiusDown * 0.25f;
         }
 
         return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, BranchMaterial);

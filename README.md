@@ -1,9 +1,9 @@
 # codeklavier-ar
 AR extension by Patrick Borgeat for [CodeKlavier](https://codeklavier.space/) by Felipe Ignacio Noriega and Anne Veinberg.
 
-https://codeklavier.space/augmentedreality/
+https://codeklavier.space/arquatic
 
-Currently this projects uses **Unity 2020.3.7f1**.
+Currently this projects uses **Unity 2020.3.8f1**.
 
 ## Scenes
 
