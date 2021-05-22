@@ -18,6 +18,8 @@ public class BubbleBehaviour : MonoBehaviour
 
     private float scaleRelativeToWorld;
 
+    public LGenerator Gen;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,7 @@ public class BubbleBehaviour : MonoBehaviour
         {
             float tn = Time.time;
             scale = Mathf.Lerp(0, TargetScale, (tn - startTime) / (TargetTime - startTime));
+            scale = scale / Gen.transform.localScale.x;
             transform.localScale = new Vector3(scale, scale, scale);
 
             if(Time.time > TargetTime)

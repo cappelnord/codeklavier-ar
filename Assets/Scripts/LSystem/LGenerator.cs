@@ -365,6 +365,7 @@ public class LGenerator : LSystemBehaviour
         bb.TargetTime = Time.time + RandomRange(2f, 4f);
         bb.TargetScale = targetScale;
         bb.TargetTransform = Herd.Trash;
+        bb.Gen = this;
     }
 
     override public void OnLSystemSet()
