@@ -107,7 +107,7 @@ public class LBublonisGenerator : LGenerator
 
             if (generation == 0)
             {
-                obj.transform.localEulerAngles = LPrunastriGenerator.StartAngles[children.Count - 1][childrenIndex];
+                obj.transform.localEulerAngles = LPrunastriGenerator.GetStartAngle(children.Count, childrenIndex);
             }
             else
             {

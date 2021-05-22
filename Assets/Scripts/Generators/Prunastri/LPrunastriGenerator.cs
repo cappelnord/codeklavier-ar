@@ -15,13 +15,27 @@ public class LPrunastriGenerator : LGenerator
     private Color branchGreen;
     private Color fruitGreen;
 
-    static public List<List<Vector3>> StartAngles =
+    static private List<List<Vector3>> StartAngles =
     new List<List<Vector3>>() {
         new List<Vector3>() {new Vector3(0.0f, 0.0f, 0.0f) },
         new List<Vector3>() {new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 0.0f, 180.0f) },
-        new List<Vector3>() {new Vector3(0.0f, 0.0f, 0.0f), new Vector3(45.0f, -45.0f, 180.0f), new Vector3(45.0f, 135.0f, 180.0f) }
+        new List<Vector3>() {new Vector3(0.0f, 0.0f, 0.0f), new Vector3(45.0f, -45.0f, 180.0f), new Vector3(45.0f, 135.0f, 180.0f) },
+        new List<Vector3>() {new Vector3(0.0f, 0.0f, 0.0f), new Vector3(0.0f, 0.0f, 180.0f), new Vector3(0.0f, 180.0f, 0.0f), new Vector3(0.0f, 180.0f, 180.0f) }
     };
 
+
+    static public Vector3 GetStartAngle(int childrenCount, int index)
+    {
+        List<Vector3> list = LPrunastriGenerator.StartAngles[(childrenCount - 1) % 4];
+        Vector3 angle = list[index % list.Count];
+
+        if(index >= 4)
+        {
+            angle = Quaternion.Euler(0f, 0f, 90f) * angle;
+        }
+
+        return angle;
+    }
 
 
     // Start is called before the first frame update
@@ -96,7 +110,7 @@ public class LPrunastriGenerator : LGenerator
 
             if(generation == 0)
             {
-                obj.transform.localEulerAngles = LPrunastriGenerator.StartAngles[children.Count-1][childrenIndex];
+                obj.transform.localEulerAngles = LPrunastriGenerator.GetStartAngle(children.Count, childrenIndex);
             }
             else
             {
