@@ -70,7 +70,7 @@ public class GeneratorHerd : MonoBehaviour
         }
 
         Trash = transform.Find("Trash").transform;
-        Env = transform.Find("Environemt").GetComponent<ARquaticEnvironment>();
+        Env = transform.Find("Environment").GetComponent<ARquaticEnvironment>();
 
     }
 

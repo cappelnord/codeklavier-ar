@@ -24,6 +24,8 @@ public class Loader : MonoBehaviour
 
     public string AdditionalChannel;
 
+    public bool TriggerLocalNetwork = false;
+
     private bool arIsAvailable = false;
     private bool isLoading = false;
     private bool success = false;
@@ -34,6 +36,11 @@ public class Loader : MonoBehaviour
 
     void Start()
     {
+        if(TriggerLocalNetwork)
+        {
+            IOSNetworkPermission.TriggerDialog();
+        }
+
         CannotConnectNotification.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuCannotConnect;
         AppOutOfDateNotification.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuAppOutOfDate;
         TryAgainButton.GetComponentInChildren<TextMeshProUGUI>().text = ARAppUITexts.ButtonTryAgain;
