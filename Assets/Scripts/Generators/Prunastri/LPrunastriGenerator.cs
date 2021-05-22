@@ -100,8 +100,8 @@ public class LPrunastriGenerator : LGenerator
                 continue;
             }
 
-            float thisLengthUp = lastLengthUp * lengthUpMult * SymbolDynamicsMultiplier(unit.Dynamic);
-            float thisBaseRadius = lastBaseRadius * baseRadiusMult * SymbolDynamicsMultiplier(unit.Dynamic, 0.4f);
+            float thisLengthUp = lastLengthUp * lengthUpMult;
+            float thisBaseRadius = lastBaseRadius * baseRadiusMult;
             float thisBendAngle = lastBendAngle * bendAngleMult; // should probably depend on number of generations in this object
 
             // TODO: in case there is only 1 axiom we need to terminate it gracefully on the bottom

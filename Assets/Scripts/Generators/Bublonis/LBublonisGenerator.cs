@@ -96,8 +96,8 @@ public class LBublonisGenerator : LGenerator
                 continue;
             }
 
-            float thisLengthUp = lastLengthUp * 0.9f * SymbolDynamicsMultiplier(unit.Dynamic);
-            float thisBaseRadius = lastBaseRadius * 0.7f * SymbolDynamicsMultiplier(unit.Dynamic, 0.5f);
+            float thisLengthUp = lastLengthUp * 0.9f;
+            float thisBaseRadius = lastBaseRadius * 0.7f;
             float thisBendAngle = lastBendAngle *0.9f; // should probably depend on number of generations in this object
 
             // TODO: in case there is only 1 axiom we need to terminate it gracefully on the bottom
