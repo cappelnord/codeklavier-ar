@@ -16,6 +16,9 @@ public class Config : MonoBehaviour
 
     public int SetVsyncCount = -1;
 
+    public static float SymbolDynamics;
+    public float SetSymbolDynamics = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,8 @@ public class Config : MonoBehaviour
         FloatUp = SetFloatUp;
 
         QualitySettings.vSyncCount = SetVsyncCount;
+
+        SymbolDynamics = SetSymbolDynamics;
 
         Destroy(gameObject);
     }

@@ -96,8 +96,8 @@ public class LBublonisGenerator : LGenerator
                 continue;
             }
 
-            float thisLengthUp = lastLengthUp * 0.9f;
-            float thisBaseRadius = lastBaseRadius * 0.7f;
+            float thisLengthUp = lastLengthUp * 0.9f * SymbolDynamicsMultiplier(unit.Dynamic);
+            float thisBaseRadius = lastBaseRadius * 0.7f * SymbolDynamicsMultiplier(unit.Dynamic, 0.5f);
             float thisBendAngle = lastBendAngle *0.9f; // should probably depend on number of generations in this object
 
             // TODO: in case there is only 1 axiom we need to terminate it gracefully on the bottom
@@ -137,12 +137,7 @@ public class LBublonisGenerator : LGenerator
                 endPoint.transform.localPosition = new Vector3(0.0f, lastLengthUp, 0.0f);
 
                 LifeBehaviour lb2 = endPoint.AddComponent<LifeBehaviour>() as LifeBehaviour;
-                lb2.TargetScale = new Vector3(jointScale * 0.5f, jointScale, jointScale);
-
-                if(Variety)
-                {
-                    lb2.TargetScale = lb2.TargetScale * Random.Range(0.45f, 0.6f);
-                }
+                lb2.TargetScale = new Vector3(jointScale * 0.5f, jointScale, jointScale) * SymbolDynamicsMultiplier(unit.Dynamic, 0.1f);
 
                 lb2.GrowStartTime = Time.time + (generation * 0.5f);
 

@@ -154,7 +154,7 @@ public class LFerniGenerator : LGenerator
                     posDiv = 10f;
                 }
 
-                nodes[unit.Id] = new FerniNode(new Vector3(pos / posDiv, displace / 2f, 0.0f), generation, jointScale, branchRadius);
+                nodes[unit.Id] = new FerniNode(new Vector3(pos / posDiv, displace / 2f, 0.0f), generation, jointScale * SymbolDynamicsMultiplier(unit.Dynamic, 0.5f), branchRadius * SymbolDynamicsMultiplier(unit.Dynamic, 0.7f));
             }
 
             displace += deltaDisplace;

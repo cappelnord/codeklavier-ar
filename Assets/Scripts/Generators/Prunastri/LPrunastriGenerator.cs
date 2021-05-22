@@ -100,8 +100,8 @@ public class LPrunastriGenerator : LGenerator
                 continue;
             }
 
-            float thisLengthUp = lastLengthUp * lengthUpMult;
-            float thisBaseRadius = lastBaseRadius * baseRadiusMult;
+            float thisLengthUp = lastLengthUp * lengthUpMult * SymbolDynamicsMultiplier(unit.Dynamic);
+            float thisBaseRadius = lastBaseRadius * baseRadiusMult * SymbolDynamicsMultiplier(unit.Dynamic, 0.4f);
             float thisBendAngle = lastBendAngle * bendAngleMult; // should probably depend on number of generations in this object
 
             // TODO: in case there is only 1 axiom we need to terminate it gracefully on the bottom
@@ -138,6 +138,8 @@ public class LPrunastriGenerator : LGenerator
                 bbi.Gen = this;
                 bbi.KeyColor = materialLookup.GetColor(unit.Content);
                 bbi.Green = fruitGreen;
+
+                lbe.TargetScale = new Vector3(1.0f, 1.0f, 1.0f) * SymbolDynamicsMultiplier(unit.Dynamic);
             }
 
             Grow(obj.transform, unit.Children, generation + 1, thisLengthUp, thisBaseRadius, thisBendAngle);

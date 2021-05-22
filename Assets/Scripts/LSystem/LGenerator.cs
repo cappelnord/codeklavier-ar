@@ -39,7 +39,7 @@ public class LGenerator : LSystemBehaviour
     protected MaterialLookup materialLookup;
     protected Dictionary<long, ProcessUnit> visitedUnitDict;
 
-    private IIRFilter velocityValueFilter = new IIRFilter(0.5f, 0.01f);
+    private IIRFilter velocityValueFilter = new IIRFilter(0.5f, 0.005f);
     private string velValueKey;
     private IIRFilter speedValueFilter = new IIRFilter(0.5f, 0.003f);
     private string intensityValueKey;
@@ -247,6 +247,11 @@ public class LGenerator : LSystemBehaviour
         }
 
         MoveObjectToTrash(t.gameObject, transformDeath);
+    }
+
+    public virtual float SymbolDynamicsMultiplier(int dynamics, float contribution = 1.0f)
+    {
+        return 1.0f + CKARTools.LinLin(dynamics, 0, 127, -0.5f, 0.5f) * Config.SymbolDynamics * contribution;
     }
 
     virtual public void MoveObjectToTrash(GameObject obj, bool transformDeath)

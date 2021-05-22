@@ -17,7 +17,7 @@ public class LInteriaGenerator : LGenerator
     protected override void Start()
     {
 
-        SpeciesVelocityMultiplier = 2.0f;
+        SpeciesVelocityMultiplier = 1.5f;
 
         base.Start();
 
@@ -73,6 +73,12 @@ public class LInteriaGenerator : LGenerator
         DoSpawnBubble(outer.transform, Random.insideUnitSphere.normalized * 0.51f, targetScale, prefab);
     }
 
+    public override float SymbolDynamicsMultiplier(int dynamics, float contribution = 1.0f)
+    {
+        return 1.0f + CKARTools.LinLin(dynamics, 0, 127, -0.5f, 0.0f) * Config.SymbolDynamics * contribution;
+    }
+
+
     void Grow(Transform parent, List<ProcessUnit> children, int generation, float lastScale)
     {
 
@@ -122,8 +128,10 @@ public class LInteriaGenerator : LGenerator
                 obj.transform.localEulerAngles = new Vector3(0.0f, (float)childrenIndex / children.Count * 360.0f, 45.0f);
             }
 
+            float myScale = thisScale * SymbolDynamicsMultiplier(unit.Dynamic, 0.5f);
+
             LifeBehaviour lbe = obj.AddComponent<LifeBehaviour>() as LifeBehaviour;
-            lbe.TargetScale = new Vector3(thisScale, thisScale, thisScale);
+            lbe.TargetScale = new Vector3(myScale, myScale, myScale);
             lbe.GrowStartTime = Time.time + (0.5f * generation);
 
             FlowBehaviour fbe = obj.AddComponent<FlowBehaviour>() as FlowBehaviour;
