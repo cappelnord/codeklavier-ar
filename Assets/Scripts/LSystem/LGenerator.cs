@@ -206,7 +206,14 @@ public class LGenerator : LSystemBehaviour
             transforms.Add(child);
         }
 
-        if (Herd.SimpleDeath || WorldIsBoxed.Status)
+        bool simpleDeath = true;
+
+        if(Herd != null)
+        {
+            simpleDeath = Herd.SimpleDeath;
+        }
+
+        if (simpleDeath || WorldIsBoxed.Status)
         {
             foreach (Transform child in transforms)
             {

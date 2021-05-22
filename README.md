@@ -19,6 +19,8 @@ Each Scene builds its own app:
 
 Some keys can be used to toggle between different states.
 
+- **C** to toggle the display of the little center marker
+- **R** to toggle automatic stage rotation
 - **S** to toggle between the water sky box and a black background
 - **F** to toggle if camera should follow active trees
 - **M** to toggle to display the unity cage (1 cubic meter) and coordinate axis

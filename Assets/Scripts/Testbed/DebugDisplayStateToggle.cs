@@ -5,9 +5,13 @@ using UnityEngine;
 public class DebugDisplayStateToggle : MonoBehaviour
 {
     public GameObject UnityCage;
+    public GameObject CenterMark;
+    public StageRotation Rotation;
 
     private int state = 0;
     private int numStates = 3;
+
+    private bool centerMark = true;
 
 
     // Update is called once per frame
@@ -16,6 +20,17 @@ public class DebugDisplayStateToggle : MonoBehaviour
         if (Input.GetKeyDown("m"))
         {
             ToggleState();
+        }
+
+        if (Input.GetKeyDown("c"))
+        {
+            centerMark = !centerMark;
+            CenterMark.SetActive(centerMark);
+        }
+
+        if (Input.GetKeyDown("r"))
+        {
+            Rotation.enabled = !Rotation.enabled;
         }
     }
 
