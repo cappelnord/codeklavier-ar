@@ -34,7 +34,7 @@ public class LGenerator : LSystemBehaviour
     [HideInInspector]
     public Vector3 Position;
 
-    protected float scaleMultiplier;
+    public float ScaleMultiplier;
     protected float positionMultiplier = 1.0f;
     protected MaterialLookup materialLookup;
     protected Dictionary<long, ProcessUnit> visitedUnitDict;
@@ -185,7 +185,7 @@ public class LGenerator : LSystemBehaviour
 
         lastTransformSpec = TransformSpec;
 
-        scaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f * SpeciesVelocityMultiplier);
+        ScaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f * SpeciesVelocityMultiplier);
         SpeedMultiplier = 0.3f + ((1.0f / speedValueFilter.Filter()) * 0.15f * SpeciesSpeedMultiplier);
         Intensity = intensityValueFilter.Filter();
         ColorIntensity = colorIntensityValueFilter.Filter();
@@ -330,7 +330,7 @@ public class LGenerator : LSystemBehaviour
     {
         Position = new Vector3(TransformSpec.Position[0] * positionMultiplier, TransformSpec.Position[1] * positionMultiplier + floatUp.Filter(), TransformSpec.Position[2] * positionMultiplier);
         gameObject.transform.localPosition = Position;
-        gameObject.transform.localScale = new Vector3(TransformSpec.Scale[0] * scaleMultiplier, TransformSpec.Scale[1] * scaleMultiplier, TransformSpec.Scale[2] * scaleMultiplier);
+        gameObject.transform.localScale = new Vector3(TransformSpec.Scale[0] * ScaleMultiplier, TransformSpec.Scale[1] * ScaleMultiplier, TransformSpec.Scale[2] * ScaleMultiplier);
         gameObject.transform.localEulerAngles = new Vector3(TransformSpec.Rotation[0], TransformSpec.Rotation[1], TransformSpec.Rotation[2]);
     }
 
