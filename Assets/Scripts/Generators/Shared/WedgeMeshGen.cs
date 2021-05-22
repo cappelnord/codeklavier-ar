@@ -60,11 +60,15 @@ public class WedgeMeshGen : MeshGen
         }
 
         Vector3[] vertices = new Vector3[numVertices];
+        Vector2[] uvs = new Vector2[numVertices];
         int[] triangles = new int[numTriangles * 3];
 
         // up, down
         vertices[0] = new Vector3(0.0f, lengthUp, 0.0f);
         vertices[1] = new Vector3(0.0f, -lengthDown, 0.0f);
+
+        uvs[0] = new Vector2(0.5f, 0.5f + lengthUp);
+        uvs[1] = new Vector2(0.5f, 0.5f- lengthDown);
 
 
         float deltaAngle = Mathf.PI * 2.0f / sides;
@@ -85,15 +89,23 @@ public class WedgeMeshGen : MeshGen
             float ms = Mathf.Sin(rad);
             float mc = Mathf.Cos(rad);
             vertices[ringIndex + i] = new Vector3(ms * radiusCenter, 0.0f, mc * squish * radiusCenter);
-            if(upHasSurface)
+            uvs[ringIndex + i] = new Vector2((float)i / sides, 0.5f);
+
+            Debug.Log((float)i / sides);
+
+            if (upHasSurface)
             {
                 vertices[upRingIndex + i] = new Vector3(ms * radiusUp, lengthUp, mc * radiusUp * squishUp);
+                uvs[upRingIndex + i] = new Vector2((float)i / sides, 0.5f + lengthUp);
+
             }
-            if(downHasSurface)
+            if (downHasSurface)
             {
                 vertices[downRingIndex + i] = new Vector3(ms * radiusDown, -lengthDown, mc * radiusDown * squishDown);
+                uvs[downRingIndex + i] = new Vector2((float)i / sides, 0.5f - lengthDown);
+
             }
-            
+
             rad += deltaAngle;
         }
 
@@ -169,6 +181,7 @@ public class WedgeMeshGen : MeshGen
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.uv = uvs;
 
         mesh.RecalculateNormals();
         mesh.RecalculateTangents();

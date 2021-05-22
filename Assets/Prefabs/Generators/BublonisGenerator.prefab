@@ -43,11 +43,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74c863e2e3f0921458f98a9a01751a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Variety: 0
   Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   LastTimeTouched: 0
   SpeedMultiplier: 1
+  Intensity: 0
+  ColorIntensity: 0
+  Herd: {fileID: 0}
+  Position: {x: 0, y: 0, z: 0}
+  ScaleMultiplier: 0
   BranchMaterial: {fileID: 2100000, guid: 526e3245ca489c74e8dcbe114234ae0d, type: 2}
-  JointPrefab: {fileID: 688084521919281849, guid: 4eb90e4e72736534ea4471755a2d3633,
+  JointPrefab: {fileID: 688084521919281849, guid: d81ac6b90de27bb41b526062a9cb1e58,
     type: 3}
