@@ -241,7 +241,7 @@ public class LFerniGenerator : LGenerator
 
     public GameObject Spawn(Transform parent, float length, float radius)
     {
-        const int sides = 12;
+        const int sides = 16;
 
         float radiusCenter = radius;
         float radiusUp = radius * 0.7f;

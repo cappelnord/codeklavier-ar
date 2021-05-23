@@ -38,11 +38,13 @@ public class WedgeMeshGen : MeshGen
         Mesh cachedMesh = GetCachedMesh(key);
         if (cachedMesh != null) return cachedMesh;
 
+        int sidespp = sides + 1;
+
         // Vertices
         // Inner Ring + Endpoints
-        int numVertices = sides + 2;
+        int numVertices = sidespp + 2;
         // Sides
-        int numTriangles = 2 * sides;
+        int numTriangles = 2 * sidespp;
 
         bool upHasSurface = radiusUp >= thresh;
         bool downHasSurface = radiusDown >= thresh;
@@ -50,13 +52,13 @@ public class WedgeMeshGen : MeshGen
         // Down/Up Ring (if necessary)
         if (upHasSurface)
         {
-            numVertices += sides;
-            numTriangles += 2 * sides;
+            numVertices += sidespp;
+            numTriangles += 2 * sidespp;
         }
         if(downHasSurface)
         {
-            numVertices += sides;
-            numTriangles += 2 * sides;
+            numVertices += sidespp;
+            numTriangles += 2 * sidespp;
         }
 
         Vector3[] vertices = new Vector3[numVertices];
@@ -67,42 +69,40 @@ public class WedgeMeshGen : MeshGen
         vertices[0] = new Vector3(0.0f, lengthUp, 0.0f);
         vertices[1] = new Vector3(0.0f, -lengthDown, 0.0f);
 
-        uvs[0] = new Vector2(0.5f, 0.5f + lengthUp);
-        uvs[1] = new Vector2(0.5f, 0.5f- lengthDown);
+        uvs[0] = new Vector2(0.5f, 1f);
+        uvs[1] = new Vector2(0.5f, 0f);
 
 
         float deltaAngle = Mathf.PI * 2.0f / sides;
         float rad = 0.0f;
 
         int ringIndex = 2;
-        int upRingIndex = ringIndex + sides;
-        int downRingIndex = ringIndex + sides;
+        int upRingIndex = ringIndex + sidespp;
+        int downRingIndex = ringIndex + sidespp;
         if(upHasSurface)
         {
-            downRingIndex = downRingIndex + sides;
+            downRingIndex = downRingIndex + sidespp;
         }
 
 
         // circles
-        for(int i = 0; i < sides; i++)
+        for(int i = 0; i <= sides; i++)
         {
             float ms = Mathf.Sin(rad);
             float mc = Mathf.Cos(rad);
             vertices[ringIndex + i] = new Vector3(ms * radiusCenter, 0.0f, mc * squish * radiusCenter);
             uvs[ringIndex + i] = new Vector2((float)i / sides, 0.5f);
 
-            Debug.Log((float)i / sides);
-
             if (upHasSurface)
             {
                 vertices[upRingIndex + i] = new Vector3(ms * radiusUp, lengthUp, mc * radiusUp * squishUp);
-                uvs[upRingIndex + i] = new Vector2((float)i / sides, 0.5f + lengthUp);
+                uvs[upRingIndex + i] = new Vector2((float)i / sides, 1f);
 
             }
             if (downHasSurface)
             {
                 vertices[downRingIndex + i] = new Vector3(ms * radiusDown, -lengthDown, mc * radiusDown * squishDown);
-                uvs[downRingIndex + i] = new Vector2((float)i / sides, 0.5f - lengthDown);
+                uvs[downRingIndex + i] = new Vector2((float)i / sides, 0f);
 
             }
 
@@ -115,18 +115,18 @@ public class WedgeMeshGen : MeshGen
         // down
         if(!upHasSurface)
         {
-            for(int i = 0; i < sides; i++)
+            for(int i = 0; i < sidespp; i++)
             {
                 triangles[tIndex] = ringIndex + i;
-                triangles[tIndex + 1] = ringIndex + ((i + 1) % sides);
+                triangles[tIndex + 1] = ringIndex + ((i + 1) % sidespp);
                 triangles[tIndex + 2] = 0;
                 tIndex += 3;
             }
         } else
         {
-            for(int i = 0; i < sides; i++)
+            for(int i = 0; i < sidespp; i++)
             {
-                int ni = (i + 1) % sides;
+                int ni = (i + 1) % sidespp;
 
                 triangles[tIndex] = ringIndex + i;
                 triangles[tIndex + 1] = ringIndex + ni;
@@ -146,19 +146,19 @@ public class WedgeMeshGen : MeshGen
 
         if(!downHasSurface)
         {
-            for (int i = 0; i < sides; i++)
+            for (int i = 0; i < sidespp; i++)
             {
                 triangles[tIndex + 2] = ringIndex + i;
-                triangles[tIndex + 1] = ringIndex + ((i + 1) % sides);
+                triangles[tIndex + 1] = ringIndex + ((i + 1) % sidespp);
                 triangles[tIndex] = 1;
 
                 tIndex += 3;
             }
         } else
         {
-            for (int i = 0; i < sides; i++)
+            for (int i = 0; i < sidespp; i++)
             {
-                int ni = (i + 1) % sides;
+                int ni = (i + 1) % sidespp;
 
                 triangles[tIndex + 2] = ringIndex + i;
                 triangles[tIndex + 1] = ringIndex + ni;
@@ -184,7 +184,7 @@ public class WedgeMeshGen : MeshGen
         mesh.uv = uvs;
 
         mesh.RecalculateNormals();
-        mesh.RecalculateTangents();
+        // mesh.RecalculateTangents();
 
         return CacheMesh(key, mesh);
         

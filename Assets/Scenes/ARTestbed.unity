@@ -156,7 +156,7 @@ MonoBehaviour:
   SetConnectToLocal: 1
   SetFloatUp: 0
   SetVsyncCount: 1
-  SetSymbolDynamics: 0
+  SetSymbolDynamics: 1
 --- !u!4 &73183693
 Transform:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class LPrunastriGenerator : LGenerator
 {
 
     public Material BranchMaterial;
+    public Material FruitMaterial;
 
     private LSystemController lsysController;
     private WedgeMeshGen wedgeMeshGen;
@@ -68,12 +69,12 @@ public class LPrunastriGenerator : LGenerator
 
         if (IsEmpty()) return;
 
-        float startAngle = 20f;
-        float startRadius = 0.03f + (lsys.Units.Count * 0.01f);
+        float startAngle = 25f;
+        float startRadius = 0.02f + (lsys.Units.Count * 0.002f);
         if(Variety)
         {
             startAngle = 10f;
-            startRadius *= 0.5f;
+            startRadius *= 0.8f;
         }
 
         Grow(transform, lsys.Units[0], 0, 0.25f, startRadius, startAngle);
@@ -81,7 +82,13 @@ public class LPrunastriGenerator : LGenerator
 
     void Grow(Transform parent, List<ProcessUnit> children, int generation, float lastLengthUp, float lastBaseRadius, float lastBendAngle)
     {
-        float lengthUpMult = 1.4f - (lsys.RecursionDepth * 0.05f);
+        float baseLengthUp = 1.25f;
+        if(Variety)
+        {
+            baseLengthUp = 1.35f;
+        }
+
+        float lengthUpMult = baseLengthUp - (lsys.RecursionDepth * 0.05f);
         float bendAngleMult = 1.4f - (lsys.RecursionDepth * 0.04f);
         float baseRadiusMult = 0.5f + (lsys.RecursionDepth * 0.04f);
 
@@ -102,11 +109,18 @@ public class LPrunastriGenerator : LGenerator
 
             float thisLengthUp = lastLengthUp * lengthUpMult;
             float thisBaseRadius = lastBaseRadius * baseRadiusMult;
-            float thisBendAngle = lastBendAngle * bendAngleMult; // should probably depend on number of generations in this object
+            float thisBendAngle = lastBendAngle * bendAngleMult * SymbolDynamicsMultiplier(unit.Dynamic, 0.5f); // should probably depend on number of generations in this object
 
             // TODO: in case there is only 1 axiom we need to terminate it gracefully on the bottom
 
-            GameObject obj = Spawn(parent, unit, thisLengthUp, thisBaseRadius, lastBaseRadius);
+            Material mat = BranchMaterial;
+
+            if(unit.Children.Count == 0)
+            {
+                mat = FruitMaterial;
+            }
+
+            GameObject obj = Spawn(parent, unit, thisLengthUp, thisBaseRadius, lastBaseRadius, mat);
 
             if(generation == 0)
             {
@@ -146,9 +160,9 @@ public class LPrunastriGenerator : LGenerator
         }
     }
 
-    GameObject Spawn(Transform parent, ProcessUnit unit, float lengthUp, float baseRadius, float lastBaseRadius)
+    GameObject Spawn(Transform parent, ProcessUnit unit, float lengthUp, float baseRadius, float lastBaseRadius, Material mat)
     {
-        const int sides = 12;
+        const int sides = 16;
 
         float radiusCenter = lastBaseRadius;
         float radiusUp = baseRadius;
@@ -172,7 +186,7 @@ public class LPrunastriGenerator : LGenerator
             radiusDown = baseRadius * 0.5f;
             lengthDown = lengthDown * 1.05f;
         }
-        return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, BranchMaterial);
+        return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, mat);
     }
 
 }

@@ -43,9 +43,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715826a1cd133104099a7805380796ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Variety: 0
   Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   LastTimeTouched: 0
   SpeedMultiplier: 1
+  Intensity: 0
+  ColorIntensity: 0
+  Herd: {fileID: 0}
+  Position: {x: 0, y: 0, z: 0}
+  ScaleMultiplier: 0
   BranchMaterial: {fileID: 2100000, guid: 526e3245ca489c74e8dcbe114234ae0d, type: 2}
+  FruitMaterial: {fileID: 2100000, guid: d36e66558ba0b78469b55130e1286645, type: 2}

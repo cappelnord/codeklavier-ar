@@ -155,10 +155,6 @@ public class LBublonisGenerator : LGenerator
     GameObject Spawn(Transform parent, ProcessUnit unit, float lengthUp, float baseRadius, float lastBaseRadius, bool isFirst)
     {
         int sides = 16;
-        if(Variety)
-        {
-            sides = 32;
-        }
 
         float radiusCenter = baseRadius * 1.5f;
         float radiusUp = baseRadius;
