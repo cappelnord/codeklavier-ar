@@ -2549,8 +2549,8 @@ MonoBehaviour:
   VersionDisplay: {fileID: 1121583593}
   RefreshButton: {fileID: 316991473919054039}
   RefreshSpinner: {fileID: 597565684}
-  AdditionalChannel: nl
-  TriggerLocalNetwork: 1
+  AdditionalChannel: 
+  TriggerLocalNetwork: 0
 --- !u!4 &1144952403
 Transform:
   m_ObjectHideFlags: 0

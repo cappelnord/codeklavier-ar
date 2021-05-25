@@ -111,6 +111,14 @@ public class GeneratorHerd : MonoBehaviour
             }
         }
 
+        float speedMulSum = 0f;
+        foreach(GeneratorObject obj in objectsList)
+        {
+            speedMulSum += obj.LGen.SpeedMultiplier;
+        }
+
+        speedMulSum /= objectsList.Count;
+
         // Trash is clean when world is boxed
         if(WorldIsBoxed.Status)
         {
@@ -119,6 +127,8 @@ public class GeneratorHerd : MonoBehaviour
                 Destroy(t.gameObject);
             }
         }
+
+
     }
 
     GeneratorObject Create(LSystem lsys)

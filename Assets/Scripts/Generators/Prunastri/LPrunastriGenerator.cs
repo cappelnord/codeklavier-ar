@@ -59,6 +59,9 @@ public class LPrunastriGenerator : LGenerator
 
         wedgeMeshGen = WedgeMeshGen.Instance();
         lsysController = LSystemController.Instance();
+
+        SpeciesVelocityMultiplier = 1.25f;
+
     }
 
     public override void Generate()

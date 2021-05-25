@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(200)]
 public class BubbleBehaviour : MonoBehaviour
 {
 
@@ -41,16 +42,22 @@ public class BubbleBehaviour : MonoBehaviour
             float tn = Time.time;
             scale = Mathf.Lerp(0, TargetScale, (tn - startTime) / (TargetTime - startTime));
             scale = scale / Gen.ScaleMultiplier;
-            transform.localScale = new Vector3(scale, scale, scale);
 
-            if(Time.time > TargetTime)
+            Vector3 ps = transform.parent.transform.localScale;
+            if(ps.x > 0.0f && ps.y > 0.0f && ps.z > 0.0f)
+            {
+                transform.localScale = new Vector3(scale / ps.x, scale / ps.y, scale / ps.z);
+            }
+
+
+            if (Time.time > TargetTime)
             {
                 Dislodge();
             }
         } else
         {
             floatSpeed = floatSpeed * 1.025f;
-            transform.Translate((new Vector3(0f, floatSpeed, 0f) + ARquaticEnvironment.Instance.Current(transform.position) * 0.1f) * Time.deltaTime * scaleRelativeToWorld, Space.World);
+            transform.Translate((new Vector3(0f, floatSpeed, 0f) + ARquaticEnvironment.Instance.CurrentValues(transform.position) * 0.1f) * Time.deltaTime * scaleRelativeToWorld, Space.World);
             if(transform.localPosition.y > 5f)
             {
                 Destroy(gameObject);

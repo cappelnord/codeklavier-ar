@@ -53,7 +53,7 @@ public class LBublonisGenerator : LGenerator
     {
         int childrenIndex = -1;
 
-        float jointScale = lastJointScale * 0.9f;
+        float jointScale = lastJointScale * 0.85f;
 
         if (generation == 0)
         {

@@ -22,6 +22,11 @@ public class LGenerator : LSystemBehaviour
     [HideInInspector]
     public float SpeedMultiplier = 1.0f;
 
+
+    [HideInInspector]
+    public float SpeedAmplitude = 0.0f;
+
+
     [HideInInspector]
     public float Intensity = 0.0f;
 
@@ -41,12 +46,13 @@ public class LGenerator : LSystemBehaviour
 
     private IIRFilter velocityValueFilter = new IIRFilter(0.5f, 0.005f);
     private string velValueKey;
-    private IIRFilter speedValueFilter = new IIRFilter(0.5f, 0.003f);
+    private IIRFilter speedValueFilter = new IIRFilter(0.5f, 0.005f);
+    private IIRFilter speedAmplitudeFilter = new IIRFilter(0.0f, 0.02f);
+    private string speedValueKey;
     private string intensityValueKey;
     private IIRFilter colorIntensityValueFilter = new IIRFilter(0.0f, 0.01f);
     private string colorIntensityValueKey;
     private IIRFilter intensityValueFilter = new IIRFilter(0.0f, 0.01f);
-    private string speedValueKey;
     private IIRFilter floatUp = new IIRFilter(0.0f, 0.002f);
 
     private TransformSpec lastTransformSpec;
@@ -99,6 +105,11 @@ public class LGenerator : LSystemBehaviour
         {
             colorIntensityValueFilter.Set(value);
         }
+
+        // speedValueFilter.Set(0.1f);
+        // speedValueFilter.Set(1.0f);
+
+
     }
 
     protected void PreGenerate()
@@ -186,7 +197,10 @@ public class LGenerator : LSystemBehaviour
         lastTransformSpec = TransformSpec;
 
         ScaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f * SpeciesVelocityMultiplier);
-        SpeedMultiplier = 0.3f + ((1.0f / speedValueFilter.Filter()) * 0.15f * SpeciesSpeedMultiplier);
+        SpeedMultiplier = 0.25f + ((1.0f / speedValueFilter.Filter()) * 0.12f * SpeciesSpeedMultiplier);
+
+        SpeedAmplitude = speedAmplitudeFilter.Filter(0.25f + SpeedMultiplier * 0.3f);
+
         Intensity = intensityValueFilter.Filter();
         ColorIntensity = colorIntensityValueFilter.Filter();
 
@@ -351,13 +365,19 @@ public class LGenerator : LSystemBehaviour
         List<Transform> transforms = new List<Transform>(GetComponentsInChildren<Transform>());
         Transform target = transforms[Random.Range(0, transforms.Count)];
 
+        BubbleBehaviour test = target.gameObject.GetComponent<BubbleBehaviour>();
+        if(test != null)
+        {
+            return;
+        }
+
         MeshFilter mf = target.gameObject.GetComponent<MeshFilter>();
 
         if (mf)
         {
             Mesh mesh = mf.mesh;
 
-            float targetScale = RandomRange(0.01f, 0.06f);
+            float targetScale = RandomRange(0.01f, 0.04f);
 
             Vector3[] vertices = mesh.vertices;
             Vector3 randomVertex = vertices[Random.Range(0, vertices.Length)] * (1f + targetScale);

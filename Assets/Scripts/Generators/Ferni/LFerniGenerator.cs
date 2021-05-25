@@ -5,20 +5,34 @@ using UnityEngine;
 // TODO: Could be struct for less GC
 public class FerniNode
 {
+    public long Id;
+    public FerniNode Parent;
     public Vector3 BasePosition;
     public Vector3 Position;
+    public Vector3 RelativePosition;
     public int Generation;
     public float JointScale;
     public float BranchRadius;
     public Transform Transform;
 
-    public FerniNode(Vector3 position, int generation, float jointScale, float branchRadius)
+    public double PhaseX;
+    public double PhaseY;
+    public double PhaseZ;
+
+    public FerniNode(long id, FerniNode parent, Vector3 position, int generation, float jointScale, float branchRadius)
     {
+        Id = id;
+        Parent = parent;
         BasePosition = position;
         Position = position;
         Generation = generation;
         JointScale = jointScale;
         BranchRadius = branchRadius;
+
+        Vector3 cv = ARquaticEnvironment.Instance.CurrentValues(position);
+        PhaseX = cv.x * 4.0;
+        PhaseY = cv.y * 4.0;
+        PhaseZ = cv.z * 4.0;
     }
 }
 
@@ -85,7 +99,19 @@ public class LFerniGenerator : LGenerator
         {
             foreach (FerniNode node in nodes.Values)
             {
-                node.Position = node.BasePosition + ARquaticEnvironment.Instance.Current(node.BasePosition + Position) * (0.25f + (SpeedMultiplier * 0.25f)) * 0.5f;
+                Vector3 cw = ARquaticEnvironment.Instance.CurrentWeights(node.Position);
+                node.PhaseX += cw.x * Time.deltaTime * SpeedMultiplier;
+                node.PhaseY += cw.y * Time.deltaTime * SpeedMultiplier;
+                node.PhaseZ += cw.z * Time.deltaTime * SpeedMultiplier;
+
+                Vector3 deltaPosition = new Vector3(Mathf.Sin((float)node.PhaseX), Mathf.Sin((float)node.PhaseY), Mathf.Sin((float)node.PhaseZ)) * SpeedAmplitude * 0.25f;
+                FerniNode parent = node.Parent;
+                if(parent == null)
+                {
+                    continue;
+                }
+                node.Position = parent.Position + node.RelativePosition + deltaPosition;
+
                 if (node.Transform != null) { 
                     node.Transform.localPosition = node.Position;
                 }
@@ -134,10 +160,13 @@ public class LFerniGenerator : LGenerator
 
         if(Variety)
         {
-            deltaDisplace = Random.Range(0.5f, 1.5f);
+            deltaDisplace = Random.Range(0.9f, 1.2f);
             jointScale = 0.05f;
             branchRadius *= 0.5f;
         }
+
+        FerniNode nullNode = new FerniNode(-1, null, Vector3.zero, 0, 0.0f, 0.0f);
+        nodes[-1] = nullNode;
 
         foreach (List<ProcessUnit> data in lsys.Units)
         {
@@ -154,7 +183,7 @@ public class LFerniGenerator : LGenerator
                     posDiv = 10f;
                 }
 
-                nodes[unit.Id] = new FerniNode(new Vector3(pos / posDiv, displace / 2f, 0.0f), generation, jointScale * SymbolDynamicsMultiplier(unit.Dynamic, 0.5f), branchRadius);
+                nodes[unit.Id] = new FerniNode(unit.Id, nullNode, new Vector3(pos / posDiv, displace / 2f, 0.0f), generation, jointScale * SymbolDynamicsMultiplier(unit.Dynamic, 0.5f), branchRadius);
             }
 
             displace += deltaDisplace;
@@ -172,14 +201,32 @@ public class LFerniGenerator : LGenerator
             // base form
             if(!Variety)
             {
-                node.BasePosition = new Vector3(position.x + Mathf.Sin((position.x) * 8.2f) * 0.2f, position.y + Mathf.Sin(position.x * 2.3f) * 0.6f, Mathf.Cos((position.x) * 7.5f) * 0.2f);
+                node.BasePosition = new Vector3(position.x + Mathf.Sin((position.x) * 6.2f) * 0.2f, position.y + Mathf.Sin(position.x * 2.3f) * 0.6f, Mathf.Cos((position.x) * 4.5f) * 0.2f);
             } else
             {
-                node.BasePosition = new Vector3(position.x + Mathf.Sin((position.x) * 9.2f) * 0.1f, position.y + Mathf.Sin(position.x * 2.3f) * 0.2f, Mathf.Cos((position.x) * 7.5f) * 0.1f);
+                node.BasePosition = new Vector3(position.x + Mathf.Sin((position.x) * 4.2f) * 0.1f, position.y + Mathf.Sin(position.x * 2.3f) * 0.2f, Mathf.Cos((position.x) * 3.5f) * 0.1f);
             }
             node.Position = node.BasePosition;
         }
 
+        // assign parents
+
+        foreach (List<ProcessUnit> data in lsys.Units)
+        {
+            foreach (ProcessUnit unit in data)
+            {
+                FerniNode thisNode = nodes[unit.Id];
+
+                foreach(ProcessUnit child in unit.Children) {
+                    if (nodes.ContainsKey(child.Id))
+                    {
+                        FerniNode childNode = nodes[child.Id];
+                        childNode.Parent = thisNode;
+                        childNode.RelativePosition = childNode.BasePosition - thisNode.BasePosition;
+                    }
+                }
+            }
+        }
 
         foreach (List<ProcessUnit> data in lsys.Units)
         {
@@ -220,12 +267,12 @@ public class LFerniGenerator : LGenerator
                             GameObject obj = Spawn(transform, distance, from.BranchRadius);
 
 
-                            LinearLifeBehaviour lb = obj.AddComponent<LinearLifeBehaviour>() as LinearLifeBehaviour;
+                            LinearLifeBehaviour lb = obj.AddComponent<LinearLifeBehaviour>();
                             lb.TargetScale = new Vector3(1.0f, 1.0f, 1.0f);
                             lb.GrowStartTime = Time.time + (from.Generation * 0.5f);
                             lb.GrowTime = 0.5f;
 
-                            FerniBranchIntensity ib = obj.AddComponent<FerniBranchIntensity>() as FerniBranchIntensity;
+                            FerniBranchIntensity ib = obj.AddComponent<FerniBranchIntensity>();
                             ib.Gen = this;
                             ib.Grey = branchGrey;
                             ib.Green = branchGreen;

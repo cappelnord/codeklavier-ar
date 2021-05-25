@@ -228,6 +228,8 @@ public class WebsocketConsumer : MonoBehaviour
 
     private Coroutine currentCoroutine;
 
+    private string messageBuffer = null;
+
 
 
     void Start()
@@ -339,12 +341,12 @@ public class WebsocketConsumer : MonoBehaviour
     {
         bool doTryConnect = true;
         doTryConnect = doTryConnect && !connected && UriString != "";
-        if(cws != null)
+        if (cws != null)
         {
             doTryConnect = doTryConnect && (cws.State == WebSocketState.Closed || cws.State == WebSocketState.Aborted);
         }
 
-        if(doTryConnect)
+        if (doTryConnect)
         {
             connected = true;
             cws = null;
@@ -352,14 +354,27 @@ public class WebsocketConsumer : MonoBehaviour
         }
 
         CKARNetworkState state;
-        while(stateQueue.Dequeue(out state))
+        while (stateQueue.Dequeue(out state))
         {
             EventManager.InvokeNetworkStateChange(state);
         }
 
         string msgString;
-        while(queue.Dequeue(out msgString))
+        while (queue.Dequeue(out msgString))
         {
+            if (messageBuffer != null)
+            {
+                msgString = messageBuffer + msgString;
+            }
+
+            if (!msgString.EndsWith("}"))
+            {
+                messageBuffer = msgString;
+                continue;
+            }
+
+            messageBuffer = null;
+
             // Debug.Log(msgString);
             if(msgString.Contains("\"type\": \"transform\""))
             {

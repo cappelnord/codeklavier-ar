@@ -27,6 +27,6 @@ public class BublonisBubbleIntensity : IntensityBehaviour
 
         meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
 
-        transform.localScale = transform.localScale * (1.0f + (3.0f * i));
+        transform.localScale = transform.localScale * (1.0f + (2.0f * i));
     }
 }

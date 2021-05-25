@@ -19,13 +19,24 @@ public class ARquaticEnvironment : MonoBehaviour
         
     }
 
-    public Vector3 Current(Vector3 position)
+    public Vector3 CurrentValues(Vector3 position)
     {
         // might be dumb ...
         return new Vector3(
-            Mathf.Sin((position.x * 4.0f) + Time.time * 0.13f),
-            Mathf.Sin((position.z + position.y) * 5.0f + Time.time * 0.135f) * 0.1f,
-            Mathf.Sin((position.y + position.y) * 4.5f + Time.time * 0.133f) * 0.4f
+            Mathf.Sin((position.x * 4.0f) + Time.time * 0.121f),
+            Mathf.Sin((position.z + position.y) * 5.0f + Time.time * 0.121f) * 0.1f,
+            Mathf.Sin((position.y + position.y) * 4.5f + Time.time * 0.123f) * 0.4f
        );
     }
+
+    public Vector3 CurrentWeights(Vector3 position)
+    {
+        // might be dumb ...
+        return new Vector3(
+            Mathf.Sin((position.x * 4.0f) + Time.time * 0.121f),
+            Mathf.Sin((position.z + position.y) * 5.0f + Time.time * 0.121f) * 0.5f,
+            Mathf.Sin((position.y + position.y) * 4.5f + Time.time * 0.123f) * 0.75f
+       );
+    }
+
 }
