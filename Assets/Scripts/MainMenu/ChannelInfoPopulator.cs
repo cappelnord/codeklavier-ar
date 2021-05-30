@@ -119,15 +119,19 @@ public class ChannelInfoPopulator : MonoBehaviour
 
                 Button button = joinButton.GetComponent<Button>();
 
+                float baseDistance = info.baseDistance;
+                float baseScale = info.baseScale;
+                float brightnessMultiplier = info.brightnessMultiplier;
+
                 button.onClick.AddListener(delegate() {
                     if (startedTransitionToAR) return;
                     startedTransitionToAR = true;
 
                     PersistentData.SelectedChannel = id;
                     PersistentData.FromMainMenu = true;
-                    PersistentData.BaseDistance = info.baseDistance;
-                    PersistentData.BaseScale = info.baseScale;
-                    PersistentData.BrightnessMultiplier = info.brightnessMultiplier;
+                    PersistentData.BaseDistance = baseDistance;
+                    PersistentData.BaseScale = baseScale;
+                    PersistentData.BrightnessMultiplier = brightnessMultiplier;
 
 
                     ToARBlack.GetComponent<RawImage>().enabled = true;
