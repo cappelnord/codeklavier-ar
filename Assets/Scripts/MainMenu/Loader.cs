@@ -36,7 +36,9 @@ public class Loader : MonoBehaviour
 
     void Start()
     {
-        if(TriggerLocalNetwork)
+        Screen.sleepTimeout = SleepTimeout.SystemSetting;
+
+        if (TriggerLocalNetwork)
         {
             IOSNetworkPermission.TriggerDialog();
         }

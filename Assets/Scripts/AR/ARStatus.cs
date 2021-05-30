@@ -11,6 +11,7 @@ public class ARStatus : MonoBehaviour
 {
     public ARSession Session = null;
     public ResetPosition ResetPosition;
+    public ARCameraManager CameraManager;
 
     private TextMeshProUGUI tmp;
     private Image img;
@@ -21,6 +22,8 @@ public class ARStatus : MonoBehaviour
 
     IEnumerator Start()
     {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
         tmp = GetComponentInChildren<TextMeshProUGUI>();
         img = GetComponent<Image>();
         tmp.text = ARAppUITexts.ARStatusWaitingForTracking;
@@ -95,6 +98,11 @@ public class ARStatus : MonoBehaviour
                 break;
             case NotTrackingReason.Unsupported:
                 break;
+        }
+
+        if (!CameraManager.permissionGranted)
+        {
+            NotTracking(ARAppUITexts.ARStatusGrantCameraPermissions);
         }
 
         if (ResetPosition.Active && !tmp.enabled)

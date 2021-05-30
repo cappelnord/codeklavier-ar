@@ -1702,6 +1702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Session: {fileID: 1094446299}
   ResetPosition: {fileID: 502165632}
+  CameraManager: {fileID: 1464361634}
   StatusVisible: 1
 --- !u!1 &1997535667
 GameObject:

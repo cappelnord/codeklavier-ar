@@ -1,7 +1,7 @@
 
 public static class ARAppUITexts
 {
-    public const string VersionString = "Version 1.2 - Internal";
+    public const string VersionString = "Version 1.2";
     public const string DateDisplayCulture = "en-GB";
 
     // in case one cannot connect to the server
@@ -35,6 +35,7 @@ public static class ARAppUITexts
 
     public const string ARStatusInsufficientLight = "Insufficient light in your environment to establish stable tracking.";
     public const string ARStatusInsufficientFeatures = "Insufficient optical features in your view to establish stable tracking.";
+    public const string ARStatusGrantCameraPermissions = "Camera permissions are required for this AR experience. Please exit and try again!";
 
     static public void PopulateAbout(AboutPopulator x)
     {
