@@ -72,7 +72,7 @@ public class LightEstimation : MonoBehaviour
     public SphericalHarmonicsL2? sphericalHarmonics { get; private set; }
 
     [SerializeField]
-    float m_BrightnessMod = 2.0f;
+    public float m_BrightnessMod = 2.0f;
 
     void Awake()
     {

@@ -21,6 +21,7 @@ public class MasterResponseChannelInfo
     public bool visible;
     public float baseDistance;
     public float baseScale;
+    public float brightnessMultiplier;
 }
 
 [Serializable]

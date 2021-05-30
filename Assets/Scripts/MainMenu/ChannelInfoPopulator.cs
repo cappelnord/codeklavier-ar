@@ -127,6 +127,7 @@ public class ChannelInfoPopulator : MonoBehaviour
                     PersistentData.FromMainMenu = true;
                     PersistentData.BaseDistance = info.baseDistance;
                     PersistentData.BaseScale = info.baseScale;
+                    PersistentData.BrightnessMultiplier = info.brightnessMultiplier;
 
 
                     ToARBlack.GetComponent<RawImage>().enabled = true;
