@@ -1,11 +1,12 @@
 
 public static class ARAppUITexts
 {
-    public const string VersionString = "Version 1.2";
+    public const string VersionString = "Version 1.3";
     public const string DateDisplayCulture = "en-GB";
 
     // in case one cannot connect to the server
     public const string ButtonTryAgain = "Try again!";
+    public const string ButtonNoARContinue = "Continue";
     public const string ButtonRefresh = "Refresh";
 
     // button to join a channel
@@ -16,8 +17,8 @@ public static class ARAppUITexts
 
     // text that might be displayed on startup
     public const string PreMenuCannotConnect = "Cannot connect to ARquatic server. Please connect to the Internet or try again later.";
-    public const string PreMenuNotCompatibleApple = "Your device is not compatible with ARKit. Unfortunately ARquatic will not run on your device.";
-    public const string PreMenuNotCompatibleAndroid = "Your device is not compatible with ARCore. Unfortunately ARquatic will not run on your device.";
+    public const string PreMenuNotCompatibleApple = "Unfortunately ARKit is not supported on your device. Instead of showing you the visuals in Augmented Reality they will be displayed for you in a virtual scene on your screen.";
+    public const string PreMenuNotCompatibleAndroid = "Unfortunately ARCore is not supported on your device. Instead of showing you the visuals in Augmented Reality they will be displayed for you in a virtual scene on your screen.";
     public const string PreMenuAppOutOfDate = "Your ARquatic app is out of date. Please update your app in order to experience ARquatic.";
     public const string PreMenuARNeedsInstall = "In order to run this app ARCore needs to be installed from the Play Store. Your device should display a prompt for that.";
 

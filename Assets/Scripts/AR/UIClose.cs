@@ -18,7 +18,7 @@ public class UIClose : MonoBehaviour, IPointerClickHandler
     void Start()
     {
         
-        if(!PersistentData.FromMainMenu)
+        if(!PersistentData.FromMainMenu && !PersistentData.TestbedFakeAR)
         {
             gameObject.SetActive(false);
         }

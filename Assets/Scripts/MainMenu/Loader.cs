@@ -15,6 +15,7 @@ public class Loader : MonoBehaviour
     public GameObject CannotConnectNotification;
     public GameObject AppOutOfDateNotification;
     public GameObject TryAgainButton;
+    public GameObject NoARContinueButton;
     public GameObject ARNeedsInstall;
     public GameObject ARIsNotSupported;
     public GameObject VersionDisplay;
@@ -46,6 +47,7 @@ public class Loader : MonoBehaviour
         CannotConnectNotification.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuCannotConnect;
         AppOutOfDateNotification.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuAppOutOfDate;
         TryAgainButton.GetComponentInChildren<TextMeshProUGUI>().text = ARAppUITexts.ButtonTryAgain;
+        NoARContinueButton.GetComponentInChildren<TextMeshProUGUI>().text = ARAppUITexts.ButtonNoARContinue;
         ARNeedsInstall.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.PreMenuARNeedsInstall;
 
         VersionDisplay.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.VersionString;
@@ -69,11 +71,23 @@ public class Loader : MonoBehaviour
         StartCoroutine(FirstLoad());
     }
 
+    public void NoARContinue()
+    {
+        // this is a lie!
+        arIsAvailable = true;
+        PersistentData.TestbedFakeAR = true;
+        ARIsNotSupported.SetActive(false);
+        NoARContinueButton.SetActive(false);
+        StartCoroutine(FirstLoad());
+    }
+
     private IEnumerator FirstLoad()
     {
 
 #if !UNITY_EDITOR
-        yield return CheckARAvailability();
+        if(!arIsAvailable) {
+           yield return CheckARAvailability();
+        }
 #else
         Debug.Log("Skipping AR availability check");
         arIsAvailable = true;
@@ -153,14 +167,20 @@ public class Loader : MonoBehaviour
     private IEnumerator CheckARAvailability()
     {
         yield return ARSession.CheckAvailability();
-        
-        switch(ARSession.state)
+
+        switch (ARSession.state)
         {
             case ARSessionState.Unsupported:
 
                 // do not continue, keep unsupported warning visible
-                ARIsNotSupported.SetActive(true);
-                arIsAvailable = false;
+                if (!PersistentData.TestbedFakeAR) {
+                    ARIsNotSupported.SetActive(true);
+                    NoARContinueButton.SetActive(true);
+                    arIsAvailable = false;
+                } else
+                {
+                    NoARContinue();
+                }
                 break;
 
             case ARSessionState.NeedsInstall:

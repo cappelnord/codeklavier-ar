@@ -138,7 +138,12 @@ public class ChannelInfoPopulator : MonoBehaviour
                     ToARBlack.GetComponent<FadeRawImageAlpha>().Start();
                     ToARBlack.GetComponent<FadeRawImageAlpha>().StartFade(1f, 0.5f, delegate ()
                     {
-                        SceneManager.LoadScene("TheAR");
+                        string scene = "TheAR";
+                        if(PersistentData.TestbedFakeAR)
+                        {
+                            scene = "ARTestbed";
+                        }
+                        SceneManager.LoadScene(scene);
                     });
 
                 });

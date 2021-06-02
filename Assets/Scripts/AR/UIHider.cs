@@ -20,6 +20,11 @@ public class UIHider : MonoBehaviour
     void Start()
     {
         lastTimeActive = Time.time;
+
+        if(PersistentData.TestbedFakeAR)
+        {
+            UIHidden = false;
+        }
     }
 
     void Update()
@@ -29,7 +34,13 @@ public class UIHider : MonoBehaviour
 
         float now = Time.time;
 
-        if (Input.touchCount > 0 || Input.GetMouseButtonDown(0) || ARStatus.StatusVisible)
+        bool arStatusVisible = false;
+        if(ARStatus != null)
+        {
+            arStatusVisible = ARStatus.StatusVisible;
+        }
+
+        if (Input.touchCount > 0 || Input.GetMouseButtonDown(0) || arStatusVisible)
         {
             lastTimeActive = now;
             UIHidden = false;
@@ -60,8 +71,11 @@ public class UIHider : MonoBehaviour
 
     private void ApplyAlpha(GameObject obj, float alpha)
     {
-        Image img = obj.GetComponent<Image>();
-        Color c = img.color;
-        img.color = new Color(c.r, c.g, c.b, alpha);
+        if (obj)
+        {
+            Image img = obj.GetComponent<Image>();
+            Color c = img.color;
+            img.color = new Color(c.r, c.g, c.b, alpha);
+        }
     }
 }
