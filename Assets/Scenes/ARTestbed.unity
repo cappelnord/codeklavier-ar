@@ -1298,7 +1298,7 @@ MonoBehaviour:
   DebugDisplayState: {fileID: 326443181}
   OverlayUI: {fileID: 1640193072}
   UI: {fileID: 3183970496988200279}
-  EventSystem: {fileID: 0}
+  EventSystem: {fileID: 1428877496}
   Rotation: {fileID: 873182071}
 --- !u!4 &1961435264
 Transform:

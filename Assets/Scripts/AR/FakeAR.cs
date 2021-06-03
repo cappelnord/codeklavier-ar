@@ -18,6 +18,8 @@ public class FakeAR : MonoBehaviour
     {
         if (PersistentData.TestbedFakeAR)
         {
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
             Destroy(CenterMark);
             Destroy(Options);
             Destroy(DebugDisplayState);
