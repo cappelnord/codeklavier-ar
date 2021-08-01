@@ -71,7 +71,7 @@ public class LTestGenerator : LGenerator
             displace += 1.25f;
         }
 
-        float connectionsZ = -0.3333f;
+        float connectionsZ = 0.6f;
 
         foreach (List<ProcessUnit> data in lsys.Units)
         {
