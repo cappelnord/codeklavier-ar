@@ -19,10 +19,12 @@ public class Config : MonoBehaviour
     public static float SymbolDynamics;
     public float SetSymbolDynamics = 1.0f;
 
+    public int TargetFramerate = -1;
+
     // Start is called before the first frame update
     void Start()
     {
-        Application.targetFrameRate = -1;
+        Application.targetFrameRate = TargetFramerate;
 
         WorldIsAR = SetWorldIsAR;
         ConnectToLocal = SetConnectToLocal;
