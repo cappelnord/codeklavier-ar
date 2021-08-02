@@ -49,7 +49,7 @@ public static class ARAppUITexts
         x.ParagraphDivider();
 
         x.Headline("Credits");
-        x.Paragraph("Anne Veinberg - piano\nFelipe Ignacio Noriega - laptop audio\nPatrick Borgeat - visuals");
+        x.Paragraph("Anne Veinberg - piano\nFelipe Ignacio Noriega - live electronics\nPatrick Borgeat - visuals, app development");
 
         x.ParagraphDivider();
 
