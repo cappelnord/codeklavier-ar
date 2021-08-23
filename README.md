@@ -17,7 +17,7 @@ Each Scene builds its own app:
 
 ### ARTestbed
 
-Some keys can be used to toggle between different states.
+Some keys can be used to toggle between different states and enable other features.
 
 - **C** to toggle the display of the little center marker
 - **R** to toggle automatic stage rotation
@@ -25,6 +25,7 @@ Some keys can be used to toggle between different states.
 - **F** to toggle if camera should follow active trees
 - **M** to toggle to display the unity cage (1 cubic meter) and coordinate axis
 - **O** hides the options button
+- **X** take a high resolution screenshot (with alpha)
 
 ## Tech
 
