@@ -3,7 +3,7 @@ AR extension by Patrick Borgeat for [CodeKlavier](https://codeklavier.space/) by
 
 https://codeklavier.space/arquatic
 
-Currently this projects uses **Unity 2020.3.9f1**.
+Currently this projects uses **Unity 2020.3.16f1**.
 
 ## Scenes
 
@@ -11,7 +11,7 @@ Each Scene builds its own app:
 
 - **Visualizer** is a tool used by the pianist for coding/visualizng the structure of the L-Systems
 - **ARTestbed** is a pre-vis tool for the final AR visuals
-- **TheAR** is the AR application
+- **TheAR** is the AR application (iOS, Android)
 
 ## Controls
 
@@ -31,10 +31,6 @@ Some keys can be used to toggle between different states and enable other featur
 
 Use in conjunction with the websockets server:
 https://github.com/narcode/codeklavier-extras
-
-### Marker Transforms
-
-Marker transforms are defined in the server configuration and specify the relation of tracking markers to the desired position/rotation/scale of the visuals. Currently there are still issues and it might need a rework.
 
 ## Acknowledgments
 
