@@ -3,8 +3,6 @@ AR extension by Patrick Borgeat for [CodeKlavier](https://codeklavier.space/) by
 
 https://codeklavier.space/arquatic
 
-Currently this projects uses **Unity 2020.3.16f1**.
-
 ## Scenes
 
 Each Scene builds its own app:
