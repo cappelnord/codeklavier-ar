@@ -22,6 +22,7 @@ public class MasterResponseChannelInfo
     public float baseDistance;
     public float baseScale;
     public float brightnessMultiplier;
+    public bool nightMode;
 }
 
 [Serializable]

@@ -76,6 +76,11 @@ public class LightEstimation : MonoBehaviour
 
     void Awake()
     {
+        if(PersistentData.NightMode)
+        {
+            Destroy(this);
+        }
+
         m_Light = GetComponent<Light>();
     }
 

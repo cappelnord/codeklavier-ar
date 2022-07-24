@@ -37,6 +37,10 @@ public class Loader : MonoBehaviour
 
     void Start()
     {
+        // see that we start with a fresh AR session
+        LoaderUtility.Deinitialize();
+        LoaderUtility.Initialize();
+
         Screen.sleepTimeout = SleepTimeout.SystemSetting;
 
         if (TriggerLocalNetwork)

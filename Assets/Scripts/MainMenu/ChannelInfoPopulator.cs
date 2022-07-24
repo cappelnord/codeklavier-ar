@@ -122,6 +122,7 @@ public class ChannelInfoPopulator : MonoBehaviour
                 float baseDistance = info.baseDistance;
                 float baseScale = info.baseScale;
                 float brightnessMultiplier = info.brightnessMultiplier;
+                bool nightMode = info.nightMode;
 
                 button.onClick.AddListener(delegate() {
                     if (startedTransitionToAR) return;
@@ -132,6 +133,7 @@ public class ChannelInfoPopulator : MonoBehaviour
                     PersistentData.BaseDistance = baseDistance;
                     PersistentData.BaseScale = baseScale;
                     PersistentData.BrightnessMultiplier = brightnessMultiplier;
+                    PersistentData.NightMode = nightMode;
 
 
                     ToARBlack.GetComponent<RawImage>().enabled = true;

@@ -6,6 +6,14 @@ public class ApplyLightMultiplier : MonoBehaviour
 {
     public float BaseModifier = 1f;
 
+    private void Awake()
+    {
+        if (PersistentData.NightMode)
+        {
+            Destroy(this);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -1,7 +1,7 @@
 
 public static class ARAppUITexts
 {
-    public const string VersionString = "Version 1.3.1";
+    public const string VersionString = "Version 1.4";
     public const string DateDisplayCulture = "en-GB";
 
     // in case one cannot connect to the server
