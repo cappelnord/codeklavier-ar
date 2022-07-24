@@ -71,8 +71,8 @@ public class LightEstimation : MonoBehaviour
     /// </summary>
     public SphericalHarmonicsL2? sphericalHarmonics { get; private set; }
 
-    [SerializeField]
-    public float m_BrightnessMod = 2.0f;
+    [HideInInspector]
+    public float m_BrightnessMod = 1.0f;
 
     void Awake()
     {
@@ -131,7 +131,7 @@ public class LightEstimation : MonoBehaviour
         if (args.lightEstimation.mainLightIntensityLumens.HasValue)
         {
             mainLightIntensityLumens = args.lightEstimation.mainLightIntensityLumens;
-            m_Light.intensity = args.lightEstimation.averageMainLightBrightness.Value;
+            m_Light.intensity = args.lightEstimation.averageMainLightBrightness.Value * m_BrightnessMod;
         }
 
         if (args.lightEstimation.ambientSphericalHarmonics.HasValue)
