@@ -163,7 +163,7 @@ PlayerSettings:
     iPhone: 5
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 5
+  AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 24
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
@@ -250,7 +250,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/patri/Dropbox/CodeklaviAR/Keystore/user.keystore
+  AndroidKeystoreName: /Users/patri/Dropbox/CodeklaviAR/Keystore/user.keystore
   AndroidKeyaliasName: arquatic
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
