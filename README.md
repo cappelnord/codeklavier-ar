@@ -8,7 +8,8 @@ https://codeklavier.space/arquatic
 Each Scene builds its own app:
 
 - **Visualizer** is a tool used by the pianist for coding/visualizng the structure of the L-Systems
-- **ARTestbed** is a pre-vis tool for the final AR visuals
+- **ARTestbed** is a pre-vis tool for the final AR visuals but also used for Android devices that don't support ARCore
+- **ARTestbed-Flyer** copy of the pre-vis tool but used to make high resolution screenshots with various backgrounds
 - **TheAR** is the AR application (iOS, Android)
 
 ## Controls
