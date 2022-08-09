@@ -17,7 +17,7 @@ public class ApplyLightMultiplier : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LightEstimation le = GetComponent<LightEstimation>();
+        LightEstimationLight le = GetComponent<LightEstimationLight>();
         le.m_BrightnessMod = BaseModifier * PersistentData.BrightnessMultiplier;
     }
 }
