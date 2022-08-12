@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)] 
 public class ApplyLightMultiplier : MonoBehaviour
 {
     public float BaseModifier = 1f;
@@ -12,11 +13,7 @@ public class ApplyLightMultiplier : MonoBehaviour
         {
             Destroy(this);
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
         LightEstimationLight le = GetComponent<LightEstimationLight>();
         le.m_BrightnessMod = BaseModifier * PersistentData.BrightnessMultiplier;
     }

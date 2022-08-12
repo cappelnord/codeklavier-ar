@@ -52,6 +52,15 @@ public class LightEstimationLight : MonoBehaviour
     void Awake()
     {
         mainLight = GetComponent<Light>();
+
+        if (PersistentData.NightMode)
+        {
+            Destroy(this);
+            mainLight.intensity = m_BrightnessMod;
+            return;
+        }
+
+        mainLight = GetComponent<Light>();
         arCameraManager = FindObjectOfType<ARCameraManager>();
 
         if (arCameraManager == null)
