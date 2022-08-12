@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -375,7 +375,7 @@ LightingSettings:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Settings.lighting
-  serializedVersion: 2
+  serializedVersion: 3
   m_GIWorkflowMode: 0
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 1
@@ -397,7 +397,7 @@ LightingSettings:
   m_MixedBakeMode: 2
   m_LightmapsBakeMode: 1
   m_FilterMode: 1
-  m_LightmapParameters: {fileID: 0}
+  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
   m_ExportTrainingData: 0
   m_TrainingDataDestination: TrainingData
   m_RealtimeResolution: 2
@@ -414,7 +414,7 @@ LightingSettings:
   m_PVREnvironmentReferencePointCount: 2048
   m_LightProbeSampleCountMultiplier: 4
   m_PVRBounces: 2
-  m_PVRRussianRouletteStartBounce: 2
+  m_PVRMinBounces: 1
   m_PVREnvironmentMIS: 0
   m_PVRFilteringMode: 2
   m_PVRDenoiserTypeDirect: 0
@@ -475,6 +475,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9111b07d8df9b48b405944df123f44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1042782846
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.6000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.038502
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.80807
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817449603231043377, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4548937940536455988, guid: 8e1d4cccba5284435b693df89444e326,
+        type: 3}
+      propertyPath: m_Name
+      value: SetLanguage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8e1d4cccba5284435b693df89444e326, type: 3}
 --- !u!1 &1052404555
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,11 +587,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0edcfd4a7cf3afe429d3835f23e38e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Variety: 0
   Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   LastTimeTouched: 0
   SpeedMultiplier: 1
+  SpeedAmplitude: 0
+  Intensity: 0
+  ColorIntensity: 0
+  Herd: {fileID: 0}
+  Position: {x: 0, y: 0, z: 0}
+  ScaleMultiplier: 0
   Prefabs:
   - {fileID: 3609570805101532433, guid: 32ef01be4e7127f40ad1872b1d01d8fc, type: 3}
   - {fileID: 5322915186494964522, guid: f2689e13d3e1b5b4b88ecafd312378d6, type: 3}
@@ -812,6 +888,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1293995769
@@ -1370,11 +1447,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0593d105474e9459d0baecaa1db7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Variety: 0
   Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   LastTimeTouched: 0
   SpeedMultiplier: 1
+  SpeedAmplitude: 0
+  Intensity: 0
+  ColorIntensity: 0
+  Herd: {fileID: 0}
+  Position: {x: 0, y: 0, z: 0}
+  ScaleMultiplier: 0
   Prefabs:
   - {fileID: 3609570805101532433, guid: 32ef01be4e7127f40ad1872b1d01d8fc, type: 3}
   - {fileID: 563909374382983554, guid: 5c1b08c34cac7dd4cafc23c8d272f19d, type: 3}
@@ -1426,11 +1510,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2766494fe14ef2c499495a6251fc51d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Variety: 0
   Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   LastTimeTouched: 0
   SpeedMultiplier: 1
+  SpeedAmplitude: 0
+  Intensity: 0
+  ColorIntensity: 0
+  Herd: {fileID: 0}
+  Position: {x: 0, y: 0, z: 0}
+  ScaleMultiplier: 0
   Prefabs:
   - {fileID: 3609570805101532433, guid: 32ef01be4e7127f40ad1872b1d01d8fc, type: 3}
   - {fileID: 5322915186494964522, guid: f2689e13d3e1b5b4b88ecafd312378d6, type: 3}
@@ -1573,6 +1664,8 @@ MonoBehaviour:
   SetConnectToLocal: 1
   SetFloatUp: 0
   SetVsyncCount: 2
+  SetSymbolDynamics: 1
+  TargetFramerate: -1
 --- !u!4 &2056391687
 Transform:
   m_ObjectHideFlags: 0
@@ -1695,3 +1788,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ae35ff67e32c04e9703155844467f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LockKey: 

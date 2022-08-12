@@ -65,7 +65,13 @@ public class ChannelInfoPopulator : MonoBehaviour
             }
 
             GameObject name = Instantiate(ChannelNamePrefab, Content);
-            name.GetComponent<TextMeshProUGUI>().text = info.name;
+
+            string nameString = info.name;
+            if(info.name_nl != "" && ARAppUITexts.IsDutch()) {
+                nameString = info.name_nl;
+            }
+
+            name.GetComponent<TextMeshProUGUI>().text = nameString;
 
             GameObject status = Instantiate(ChannelStatusPrefab, Content);
 
@@ -108,7 +114,13 @@ public class ChannelInfoPopulator : MonoBehaviour
             }
 
             GameObject description = Instantiate(ChannelDescriptionPrefab, Content);
-            description.GetComponent<TextMeshProUGUI>().text = info.description;
+
+            string descriptionString = info.description;
+            if(info.description_nl != "" && ARAppUITexts.IsDutch()) {
+                descriptionString = info.description_nl;
+            }
+
+            description.GetComponent<TextMeshProUGUI>().text = descriptionString;
 
             bool hadButton = false;
 

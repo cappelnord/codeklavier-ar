@@ -15,6 +15,8 @@ public class MasterResponseChannelInfo
     public string status;
     public string name;
     public string description;
+    public string name_nl;
+    public string description_nl;
     public string eventISODate;
     public string eventURL;
     public string websocketBaseURL;
