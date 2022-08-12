@@ -159,42 +159,42 @@ public static class ARAppUITexts
 
     static private void SetNL() {
 
-        VersionString = "Version " + Version;
+        VersionString = "Versie " + Version;
         DateDisplayCulture = "nl-NL";
 
         // in case one cannot connect to the server
-        ButtonTryAgain = "Try again!";
-        ButtonNoARContinue = "Continue";
-        ButtonRefresh = "Refresh";
+        ButtonTryAgain = "Probeer nog een keer!";
+        ButtonNoARContinue = "Doorgaan";
+        ButtonRefresh = "Ververs";
 
         // button to join a channel
         ButtonJoin = "NL Start NL";
 
         // button to get more info
-        ButtonMoreInformation = "More Information";
+        ButtonMoreInformation = "Meer informatie";
 
         // text that might be displayed on startup
-        PreMenuCannotConnect = "Cannot connect to ARquatic server. Please connect to the Internet or try again later.";
-        PreMenuNotCompatibleApple = "Unfortunately ARKit is not supported on your device. Instead of showing you the visuals in Augmented Reality they will be displayed for you in a virtual scene on your screen.";
-        PreMenuNotCompatibleAndroid = "Unfortunately ARCore is not supported on your device. Instead of showing you the visuals in Augmented Reality they will be displayed for you in a virtual scene on your screen.";
-        PreMenuAppOutOfDate = "Your ARquatic app is out of date. Please update your app in order to experience ARquatic.";
-        PreMenuARNeedsInstall = "In order to run this app ARCore needs to be installed from the Play Store. Your device should display a prompt for that.";
+        PreMenuCannotConnect = "Kan geen verbinding maken met ARquatic server. Maak verbinding met het internet of probeer later nog een keer.";
+        PreMenuNotCompatibleApple = "Helaas wordt ARKit niet ondersteund op uw apparaat. In plaats van het tonen van de beelden in Augmented Reality, zullen zij getoond worden in een virtuele scene op het scherm.";
+        PreMenuNotCompatibleAndroid = "Helaas wordt ARCore niet ondersteund op uw apparaat. In plaats van het tonen van de beelden in Augmented Reality, zullen zij getoond worden in een virtuele scene op het scherm.";
+        PreMenuAppOutOfDate = "Uw ARquatic app is verouderd. Werk uw app bij om ARquatic te kunnen ervaren.";
+        PreMenuARNeedsInstall = "Om deze app te kunnen draaien dient u ARCoord uit de Play Store te installeren. Uw apparaat zou dit moeten aangeven.";
 
-        MainMenuAvailableChannelsLabel = "Available Channels";
-        MainMenuInformationLabel = "Information";
+        MainMenuAvailableChannelsLabel = "Beschikbare kanalen";
+        MainMenuInformationLabel = "Informatie";
 
-        MainMenuChannelInformationError = "Could not refresh channel information ...";
+        MainMenuChannelInformationError = "Kon de kanaalinformatie niet verversen ...";
 
         MainMenuStatusOnline = "online";
         MainMenuStatusOffline = "offline";
 
         // status messages displayed in the AR experience
-        ARStatusWaitingForTracking = "Move your device slowly to establish tracking!";
-        ARStatusTapOnCube = "Tap to place the AR!";
+        ARStatusWaitingForTracking = "Beweeg uw apparaat langzaam om het trekken te activeren.";
+        ARStatusTapOnCube = "Klik om AR te plaatsen!";
 
-        ARStatusInsufficientLight = "Insufficient light in your environment to establish stable tracking.";
-        ARStatusInsufficientFeatures = "Insufficient optical features in your view to establish stable tracking.";
-        ARStatusGrantCameraPermissions = "Camera permissions are required for this AR experience. Please exit and try again!";
+        ARStatusInsufficientLight = "Onvoldoende licht in uw omgeving om een stabiele trekking te krijgen.";
+        ARStatusInsufficientFeatures = "Onvoldoende optische kenmerken in uw beeld om een stabiele trekking te krijgen.";
+        ARStatusGrantCameraPermissions = "Er is toegang tot uw camera nodig voor deze AR ervaring. Sluit af en probeer opnieuw.";
 
     } 
 
