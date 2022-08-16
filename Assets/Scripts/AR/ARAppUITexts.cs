@@ -225,7 +225,7 @@ public static class ARAppUITexts
 
         x.Headline("Privacy");
         x.ParagraphDivider();
-        x.LinkButton("ARquatic Privacy Polic Beleid "https://codeklavier.space/privacy");
+        x.LinkButton("ARquatic Privacy Polic Beleid", "https://codeklavier.space/privacy");
 #if UNITY_ANDROID
         x.ParagraphDivider();
         x.Paragraph("Deze applicatie draait op Google Play Services for AR (ARCore), welke door Google wordt aangeboden en valt onder de Google Privacy Policy.");
