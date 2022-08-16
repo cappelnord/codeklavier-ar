@@ -168,7 +168,7 @@ public static class ARAppUITexts
         ButtonRefresh = "Ververs";
 
         // button to join a channel
-        ButtonJoin = "NL Start NL";
+        ButtonJoin = "Start";
 
         // button to get more info
         ButtonMoreInformation = "Meer informatie";
@@ -178,7 +178,7 @@ public static class ARAppUITexts
         PreMenuNotCompatibleApple = "Helaas wordt ARKit niet ondersteund op uw apparaat. In plaats van het tonen van de beelden in Augmented Reality, zullen zij getoond worden in een virtuele scene op het scherm.";
         PreMenuNotCompatibleAndroid = "Helaas wordt ARCore niet ondersteund op uw apparaat. In plaats van het tonen van de beelden in Augmented Reality, zullen zij getoond worden in een virtuele scene op het scherm.";
         PreMenuAppOutOfDate = "Uw ARquatic app is verouderd. Werk uw app bij om ARquatic te kunnen ervaren.";
-        PreMenuARNeedsInstall = "Om deze app te kunnen draaien dient u ARCoord uit de Play Store te installeren. Uw apparaat zou dit moeten aangeven.";
+        PreMenuARNeedsInstall = "Om deze app te kunnen draaien dient u ARCore uit de Play Store te installeren. Uw apparaat zou dit moeten aangeven.";
 
         MainMenuAvailableChannelsLabel = "Beschikbare kanalen";
         MainMenuInformationLabel = "Informatie";
@@ -219,7 +219,7 @@ public static class ARAppUITexts
         x.ParagraphDivider();
 
         x.Headline("Motivatie");
-        x.Paragraph("Onze inspiratie voor het werken met L-systemen komt voort uit de verbinding met de natuur en organische groei. Deze elementen willen we graag naar muzikale en progammeerparadigma brengen. L-systemen wordt al veelvuldig gebruikt in generatieve kunst en muziek, maar wij zijn juist geboeid door de zoektocht hoe dit simpele model is in te zetten door een piano programmeur om complexe structuren uit te drukken en hoe de regels van het systeem invloed hebben op de pianistische improvisatie. Daarnaast werkte Lindemayer in Nederland en daarom  is dit een geschikte plek om ons project dat voortbouwt op zijn werk te presenteren.");
+        x.Paragraph("Onze inspiratie voor het werken met L-systemen komt voort uit de verbinding met de natuur en organische groei. Deze elementen willen we graag naar muzikale en progammeerparadigma brengen. L-systemen wordt al veelvuldig gebruikt in generatieve kunst en muziek, maar wij zijn juist geboeid door de zoektocht hoe dit simpele model is in te zetten door een piano programmeur om complexe structuren uit te drukken en hoe de regels van het systeem invloed hebben op de pianistische improvisatie. Daarnaast werkte Lindemayer in Nederland en daarom is dit een geschikte plek om ons project dat voortbouwt op zijn werk te presenteren.");
 
         x.ParagraphDivider();
 
