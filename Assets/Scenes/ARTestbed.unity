@@ -2129,6 +2129,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demo-Light-Rig
       objectReference: {fileID: 0}
+    - target: {fileID: 6933280382621988296, guid: 5eace1aa8095f124cbabbc60bcc88473,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6933280382993981915, guid: 5eace1aa8095f124cbabbc60bcc88473,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6933280383142705238, guid: 5eace1aa8095f124cbabbc60bcc88473,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6933280383231764126, guid: 5eace1aa8095f124cbabbc60bcc88473,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5eace1aa8095f124cbabbc60bcc88473, type: 3}
 --- !u!1001 &7713098529318963263
