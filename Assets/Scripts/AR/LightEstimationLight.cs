@@ -95,7 +95,7 @@ public class LightEstimationLight : MonoBehaviour
         intensity *= 1.25f;
         
         if(intensity > 0.95f) intensity = 0.95f;
-        if(intensity < 0.3f) intensity = 0.3f;
+        if(intensity < 0.45f) intensity = 0.45f;
 
         return intensity * m_BrightnessMod;
     }
@@ -107,20 +107,20 @@ public class LightEstimationLight : MonoBehaviour
         if(color.g > maxChannel) maxChannel = color.g;
         if(color.b > maxChannel) maxChannel = color.b;
 
-        float maxAllowedValue = 0.9f / referenceIntensity;
+        float maxAllowedValue = 0.95f / referenceIntensity;
         if(maxChannel > maxAllowedValue) {
             color = color * (maxAllowedValue / maxChannel);
         } else {
             color = color;
         }
 
-        color = color * 0.55f;
+        color = color * 0.8f;
 
         // See that grayscale value is at least 0.5f
 
         float grey = color.grayscale;
-        if(grey < 0.4f) {
-            color = color * (0.4f / grey);
+        if(grey < 0.5f) {
+            color = color * (0.5f / grey);
         }
 
         color = color * m_BrightnessMod;
