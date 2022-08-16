@@ -49,6 +49,7 @@ public class LightEstimationLight : MonoBehaviour
     [HideInInspector]
     public float m_BrightnessMod = 1.0f;
 
+
     void Awake()
     {
         mainLight = GetComponent<Light>();
@@ -60,7 +61,6 @@ public class LightEstimationLight : MonoBehaviour
             return;
         }
 
-        mainLight = GetComponent<Light>();
         arCameraManager = FindObjectOfType<ARCameraManager>();
 
         if (arCameraManager == null)
@@ -97,7 +97,8 @@ public class LightEstimationLight : MonoBehaviour
         if(intensity > 0.95f) intensity = 0.95f;
         if(intensity < 0.45f) intensity = 0.45f;
 
-        return intensity * m_BrightnessMod;
+        // not 100% sure why sqrt makes sense but it helps
+        return intensity * Mathf.Sqrt(m_BrightnessMod);
     }
 
     public Color ConditionHDRColor(Color color) {
