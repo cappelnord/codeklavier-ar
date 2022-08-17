@@ -111,9 +111,9 @@ public class LightEstimationLight : MonoBehaviour
         float maxAllowedValue = 0.95f / referenceIntensity;
         if(maxChannel > maxAllowedValue) {
             color = color * (maxAllowedValue / maxChannel);
-        } else {
+        }/* else {
             color = color;
-        }
+        }*/
 
         color = color * 0.8f;
 
