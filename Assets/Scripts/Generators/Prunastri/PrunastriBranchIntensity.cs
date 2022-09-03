@@ -18,6 +18,7 @@ public class PrunastriBranchIntensity : IntensityBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         float ci = Gen.ColorIntensity;
         float i = Gen.Intensity * 0.4f;
 
@@ -25,5 +26,6 @@ public class PrunastriBranchIntensity : IntensityBehaviour
         float im = 1.0f + i;
 
         meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
+        */
     }
 }
