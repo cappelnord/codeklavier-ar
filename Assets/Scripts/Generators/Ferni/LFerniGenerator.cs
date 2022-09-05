@@ -79,13 +79,15 @@ public class LFerniGenerator : LGenerator
         if(!Variety)
         {
             nodeGreen = new Color((80f / 255f) * 0.8f, (198f / 255f) * 0.8f, (29f / 255f) * 0.8f);
-            branchGrey = new Color(0.0f, 0.0f, 0.0f);
+            // branchGrey = new Color(0.0f, 0.0f, 0.0f);
             branchGreen = new Color((60f / 255f) * 0.8f, (220f / 255f) * 0.8f, (0f / 255f) * 0.8f);
+            branchGrey = new Color((60f / 255f) * 1.0f, (220f / 255f) * 0.9f, (0f / 255f) * 0.9f);
         } else
         {
             nodeGreen = new Color((80f / 255f) * 0.8f, (158f / 255f) * 0.8f, (29f / 255f) * 0.6f);
-            branchGrey = new Color(1.0f, 1.0f, 1.0f);
+            // branchGrey = new Color(1.0f, 1.0f, 1.0f);
             branchGreen = new Color((60f / 255f) * 0.6f, (140f / 255f) * 0.6f, (0f / 255f) * 0.6f);
+            branchGrey = new Color((60f / 255f) * 0.9f, (140f / 255f) * 0.8f, (0f / 255f) * 0.8f);
         }
 
         wedgeMeshGen = WedgeMeshGen.Instance();

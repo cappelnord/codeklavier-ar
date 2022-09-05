@@ -21,16 +21,18 @@ public class LBublonisGenerator : LGenerator
     {
         base.Start();
 
-        branchGrey = new Color(0.8f, 0.8f, 0.8f);
+        // branchGrey = new Color(0.8f, 0.8f, 0.8f);
         if (!Variety)
         {
             branchGreen = new Color((30f / 255f) * 0.8f, (120f / 255f) * 0.8f, (10f / 255f) * 0.8f);
             bubbleGreen = new Color((60f / 255f) * 0.8f, (168f / 255f) * 0.8f, (19f / 255f) * 0.8f);
+            branchGrey = new Color((30f / 255f) * 1.0f, (120f / 255f) * 0.9f, (10f / 255f) * 0.9f);
         }
         else
         {
             branchGreen = new Color((60f / 255f) * 0.8f, (130f / 255f) * 0.8f, (10f / 255f) * 0.8f);
             bubbleGreen = new Color((80f / 255f) * 0.8f, (168f / 255f) * 0.8f, (19f / 255f) * 0.8f);
+            branchGrey = new Color((60f / 255f) * 1.0f, (130f / 255f) * 0.9f, (10f / 255f) * 0.9f);
         }
 
         wedgeMeshGen = WedgeMeshGen.Instance();

@@ -18,7 +18,7 @@ public class FerniBranchIntensity : IntensityBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         float ci = Gen.ColorIntensity;
         float i = Gen.Intensity * 0.4f;
         float im = 1.0f + i;
@@ -26,6 +26,6 @@ public class FerniBranchIntensity : IntensityBehaviour
         Color c = Color.Lerp(Green, Grey, ci);
 
         meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
-        */
+        
     }
 }

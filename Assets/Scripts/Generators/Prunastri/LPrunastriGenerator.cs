@@ -44,16 +44,18 @@ public class LPrunastriGenerator : LGenerator
     {
         base.Start();
 
-        branchGrey = new Color(0.8f, 0.8f, 0.8f);
+        // branchGrey = new Color(0.8f, 0.8f, 0.8f);
 
         if(!Variety)
         {
             branchGreen = new Color((60f / 255f) * 0.8f, (168f / 255f) * 0.8f, (19f / 255f) * 0.8f);
             fruitGreen = new Color((80f / 255f) * 0.8f, (198f / 255f) * 0.8f, (29f / 255f) * 0.8f);
+            branchGrey = new Color((60f / 255f) * 1.0f, (168f / 255f) * 0.9f, (19f / 255f) * 0.9f);
         } else
         {
             fruitGreen = new Color((40f / 255f) * 0.8f, (168f / 255f) * 0.8f, (39f / 255f) * 0.8f);
             branchGreen = new Color((50f / 255f) * 0.8f, (198f / 255f) * 0.8f, (49f / 255f) * 0.8f);
+            branchGrey = new Color((60f / 255f) * 1.0f, (168f / 255f) * 0.9f, (19f / 255f) * 0.9f);
         }
 
 
