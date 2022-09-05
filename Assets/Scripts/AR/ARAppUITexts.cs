@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class ARAppUITexts
 {
-    public const string Version = "1.4";
+    public const string Version = "1.4.1";
 
     public static string VersionString;
     public static string DateDisplayCulture;
