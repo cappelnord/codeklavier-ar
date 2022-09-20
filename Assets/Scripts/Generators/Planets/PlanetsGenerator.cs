@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using ARquatic.Visuals;
+using ARquatic.LSystem;
+
+
 public class PlanetsGenerator : LGenerator
 {
 

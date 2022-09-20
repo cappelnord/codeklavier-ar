@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using ARquatic.Visuals;
+
 public class LGeneratorScaler : MonoBehaviour
 {
 

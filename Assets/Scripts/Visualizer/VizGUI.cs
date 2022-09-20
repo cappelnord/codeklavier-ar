@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using ARquatic.LSystem;
+
 public class VizGUI : MonoBehaviour
 {
 

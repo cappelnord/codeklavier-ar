@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using ARquatic.LSystem;
+using ARquatic.Visuals;
+
 public class ActivityFollower : MonoBehaviour
 {
     public GeneratorHerd Herd;
