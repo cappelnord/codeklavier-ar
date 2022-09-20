@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using ARquatic;
+
 namespace ARquatic.LSystem {
 public class GeneratorObject
 {

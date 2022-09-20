@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace ARquatic.App {
+
 [DefaultExecutionOrder(-1000)]
 public class SetLanguage : MonoBehaviour
 {
@@ -8,4 +10,5 @@ public class SetLanguage : MonoBehaviour
         ARAppUITexts.SwitchLanguage();
         Destroy(gameObject);
     }
+}
 }

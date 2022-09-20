@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.Visualizer {
 
 public class CubeGrower : MonoBehaviour
 {
@@ -28,4 +29,5 @@ public class CubeGrower : MonoBehaviour
             Destroy(gameObject);
         }
     }
+}
 }

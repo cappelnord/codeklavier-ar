@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.Testbed {
+
 public class LightRotator : MonoBehaviour
 {
 
@@ -50,4 +52,5 @@ public class LightRotator : MonoBehaviour
 
 
     }
+}
 }

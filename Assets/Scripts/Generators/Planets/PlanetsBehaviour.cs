@@ -4,6 +4,7 @@ using UnityEngine;
 using ARquatic.LSystem;
 using ARquatic.Visuals;
 
+namespace ARquatic.OldVisuals {
 
 public class PlanetsBehaviour : MonoBehaviour
 {
@@ -40,4 +41,5 @@ public class PlanetsBehaviour : MonoBehaviour
         alive = false;
         TargetScale = 0.0f;
     }
+}
 }

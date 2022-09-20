@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+namespace ARquatic.App {
+
 public class ChannelInfoPopulator : MonoBehaviour
 {
     public Transform Content;
@@ -187,4 +189,5 @@ public class ChannelInfoPopulator : MonoBehaviour
         }
 
     }
+}
 }

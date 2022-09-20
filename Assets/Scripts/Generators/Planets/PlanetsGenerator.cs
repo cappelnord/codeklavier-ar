@@ -5,6 +5,7 @@ using UnityEngine;
 using ARquatic.Visuals;
 using ARquatic.LSystem;
 
+namespace ARquatic.OldVisuals {
 
 public class PlanetsGenerator : LGenerator
 {
@@ -107,4 +108,5 @@ public class PlanetsGenerator : LGenerator
 
         return obj;
     }
+}
 }

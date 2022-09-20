@@ -4,6 +4,8 @@ using UnityEngine;
 using ARquatic.LSystem;
 using ARquatic.Visuals;
 
+namespace ARquatic.OldVisuals {
+
 public class OpCubeBehaviour : MonoBehaviour
 {
 
@@ -36,4 +38,5 @@ public class OpCubeBehaviour : MonoBehaviour
         alive = false;
         TargetScale = 0.0f;
     }
+}
 }

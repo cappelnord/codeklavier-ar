@@ -5,6 +5,8 @@ using UnityEngine;
 using ARquatic.LSystem;
 using ARquatic.Visuals;
 
+namespace ARquatic.Testbed {
+
 public class ActivityFollower : MonoBehaviour
 {
     public GeneratorHerd Herd;
@@ -57,4 +59,5 @@ public class ActivityFollower : MonoBehaviour
         transform.LookAt(filteredActivityCenter, Vector3.up);
         cam.fieldOfView = fovFilter.Filter(calcFOV);
     }
+}
 }

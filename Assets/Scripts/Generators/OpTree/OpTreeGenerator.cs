@@ -5,6 +5,7 @@ using ARquatic.LSystem;
 using ARquatic.Visuals;
 
 
+namespace ARquatic.OldVisuals {
 
 public class OpTreeGenerator : LGenerator
 {
@@ -153,4 +154,5 @@ public class OpTreeGenerator : LGenerator
         }
 
     }
+}
 }

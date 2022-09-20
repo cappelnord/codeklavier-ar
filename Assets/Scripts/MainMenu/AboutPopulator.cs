@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+namespace ARquatic.App {
+
 public class AboutPopulator : MonoBehaviour
 {
     public Transform Content;
@@ -61,4 +63,5 @@ public class AboutPopulator : MonoBehaviour
     {
         Instantiate(ParagraphDividerPrefab, Content);
     }
+}
 }

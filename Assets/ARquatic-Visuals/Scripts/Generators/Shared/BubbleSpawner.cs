@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using ARquatic.LSystem;
 
+using ARquatic;
+
 
 namespace ARquatic.Visuals {
 public class BubbleSpawner : MonoBehaviour

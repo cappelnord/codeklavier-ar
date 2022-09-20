@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using ARquatic.App;
+
+namespace ARquatic.Testbed {
+
 public class DebugDisplayStateToggle : MonoBehaviour
 {
     public GameObject UnityCage;
@@ -58,4 +62,5 @@ public class DebugDisplayStateToggle : MonoBehaviour
                 break;
         }
     }
+}
 }

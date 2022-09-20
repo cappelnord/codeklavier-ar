@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
+namespace ARquatic.App {
+
 
 public class UIScreenshot : MonoBehaviour, IPointerClickHandler
 {
@@ -30,4 +32,5 @@ public class UIScreenshot : MonoBehaviour, IPointerClickHandler
     {
         UI.GetComponent<Canvas>().enabled = true;
     }
+}
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 using ARquatic.LSystem;
 using ARquatic.Visuals;
 
+namespace ARquatic.OldVisuals {
+
 public class OpCubesGenerator : LGenerator
 {
 
@@ -116,4 +118,5 @@ public class OpCubesGenerator : LGenerator
 
         return obj;
     }
+}
 }

@@ -3,6 +3,8 @@ using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
 
+namespace ARquatic.App {
+
 public class IOSNetworkPermission
 {
     //connect to broadcast address to send data and trigger network permission dialog in iOS 14
@@ -21,4 +23,5 @@ public class IOSNetworkPermission
         }
         client?.Close();
     }
+}
 }

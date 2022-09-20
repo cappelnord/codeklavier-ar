@@ -6,6 +6,7 @@ using UnityEngine.XR.ARSubsystems;
 
 using TMPro;
 
+namespace ARquatic.App {
 
 public class ARStatus : MonoBehaviour
 {
@@ -129,4 +130,5 @@ public class ARStatus : MonoBehaviour
         StatusVisible = true;
         ResetPosition.Hide();
     }
+}
 }

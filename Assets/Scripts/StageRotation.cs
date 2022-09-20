@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
 public class StageRotation : MonoBehaviour
 {
     public float DegreesPerSecond = 1.0f;
@@ -10,4 +11,5 @@ public class StageRotation : MonoBehaviour
     {
         transform.Rotate(new Vector3(0.0f, DegreesPerSecond * Time.deltaTime, 0.0f), Space.Self);
     }
+}
 }

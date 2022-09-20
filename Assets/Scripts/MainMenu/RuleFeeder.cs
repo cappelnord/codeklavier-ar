@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ARquatic.LSystem;
 
+namespace ARquatic.App {
 
 [DefaultExecutionOrder(100)]
 public class RuleFeeder : MonoBehaviour
@@ -61,4 +62,5 @@ public class RuleFeeder : MonoBehaviour
             didDispatch = true;
         }
     }
+}
 }

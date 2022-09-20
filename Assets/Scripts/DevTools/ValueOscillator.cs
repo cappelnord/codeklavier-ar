@@ -5,6 +5,8 @@ using UnityEngine;
 using ARquatic.LSystem;
 using ARquatic.Visuals;
 
+namespace ARquatic.Testbed {
+
 public class ValueOscillator : MonoBehaviour
 {
 
@@ -17,4 +19,5 @@ public class ValueOscillator : MonoBehaviour
     {
         ValueStore.Set(Key, CKARTools.LinLin(Mathf.Sin(Time.time * Frequency), -1f, 1f, Min, Max));
     }
+}
 }

@@ -6,6 +6,8 @@ using UnityEngine;
 
 using UnityOSC;
 
+namespace ARquatic.App {
+
 public class OSCController : MonoBehaviour
 {
     private OSCClient client;
@@ -60,4 +62,5 @@ public class OSCController : MonoBehaviour
     {
         Close();
     }
+}
 }

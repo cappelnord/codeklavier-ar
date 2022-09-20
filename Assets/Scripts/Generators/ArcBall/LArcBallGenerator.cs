@@ -4,6 +4,8 @@ using UnityEngine;
 
 using ARquatic.LSystem;
 
+namespace ARquatic.OldVisuals {
+
 
 class RingSegment
 {
@@ -128,4 +130,5 @@ public class LArcBallGenerator : LGenerator {
             scale += 0.1f;
         }
     }
+}
 }

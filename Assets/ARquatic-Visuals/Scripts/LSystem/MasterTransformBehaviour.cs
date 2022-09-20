@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ARquatic.LSystem;
 
+namespace ARquatic.LSystem {
 
 public class MasterTransformBehaviour : MonoBehaviour
 {
@@ -49,4 +49,5 @@ public class MasterTransformBehaviour : MonoBehaviour
             gameObject.transform.localScale = new Vector3(ts.Scale[0], ts.Scale[1], ts.Scale[2]);
         }
     }
+}
 }

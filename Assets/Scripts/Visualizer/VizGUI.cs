@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 using ARquatic.LSystem;
+using ARquatic.App;
+using ARquatic.OldVisuals;
 
+namespace ARquatic.Visualizer {
 public class VizGUI : MonoBehaviour
 {
 
@@ -204,4 +207,5 @@ public class VizGUI : MonoBehaviour
 
         lgen.Generate();
     }
+}
 }

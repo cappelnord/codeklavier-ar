@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
+
 public class ScreenshotProvider : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -39,4 +41,5 @@ public class ScreenshotProvider : MonoBehaviour
 
     */
 
+}
 }

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using ARquatic.LSystem;
+using ARquatic.App;
+using ARquatic.OldVisuals;
+
+namespace ARquatic.Visualizer {
 
 [DefaultExecutionOrder(-1000)]
 public class Persistence : MonoBehaviour
@@ -113,4 +117,5 @@ public class Persistence : MonoBehaviour
 
         PlayerPrefs.Save();
     }
+}
 }

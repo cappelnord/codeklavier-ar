@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using ARquatic.App;
+
+namespace ARquatic.Testbed {
+
 [DefaultExecutionOrder(-1000)]
 public class TestbedGUI : MonoBehaviour
 {
@@ -98,4 +102,5 @@ public class TestbedGUI : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+}
 }

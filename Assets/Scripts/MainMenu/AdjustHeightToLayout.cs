@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace ARquatic.App {
+
 public class AdjustHeightToLayout : MonoBehaviour
 {
     private RectTransform rectTransform;
@@ -25,4 +27,5 @@ public class AdjustHeightToLayout : MonoBehaviour
 
         rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, sum + 100f);
     }
+}
 }

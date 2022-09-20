@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ARquatic.LSystem;
 
+namespace ARquatic.OldVisuals {
 
 public class RingBehaviour : MonoBehaviour
 {
@@ -39,4 +40,5 @@ public class RingBehaviour : MonoBehaviour
         destruct = true;
         TargetScale = -5.0f;
     }
+}
 }

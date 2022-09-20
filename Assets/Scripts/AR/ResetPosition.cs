@@ -4,11 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public static class WorldIsBoxed
-{
-    public static bool Status = false;
-}
-
+namespace ARquatic.App {
+    
 public class ResetPosition : MonoBehaviour, IPointerClickHandler
 {
 
@@ -162,4 +159,5 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
             Activate();
         }
     }
+}
 }

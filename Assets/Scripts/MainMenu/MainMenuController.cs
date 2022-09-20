@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
+
 public class MainMenuController : MonoBehaviour
 {
 
@@ -24,4 +26,5 @@ public class MainMenuController : MonoBehaviour
         Channels.SetActive(false);
         About.SetActive(true);
     }
+}
 }

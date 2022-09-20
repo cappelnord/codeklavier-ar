@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
+
 public class FakeAR : MonoBehaviour
 {
     public GameObject CenterMark;
@@ -34,4 +36,5 @@ public class FakeAR : MonoBehaviour
 
         Destroy(gameObject);
     }
+}
 }

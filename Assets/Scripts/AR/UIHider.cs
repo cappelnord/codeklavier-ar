@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+namespace ARquatic.App {
 
 public class UIHider : MonoBehaviour
 {
@@ -78,4 +79,5 @@ public class UIHider : MonoBehaviour
             img.color = new Color(c.r, c.g, c.b, alpha);
         }
     }
+}
 }

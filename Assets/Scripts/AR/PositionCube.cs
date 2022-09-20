@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
+
 public class PositionCube : MonoBehaviour
 {
 
@@ -22,4 +24,5 @@ public class PositionCube : MonoBehaviour
         transform.localPosition = position;
         transform.localEulerAngles = new Vector3(0.0f, ARCamera.transform.localEulerAngles.y, 0.0f);
     }
+}
 }

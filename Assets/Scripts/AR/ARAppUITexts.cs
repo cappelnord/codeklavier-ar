@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace ARquatic.App {
+
 public static class ARAppUITexts
 {
     public const string Version = "1.4.3";
@@ -232,4 +234,5 @@ public static class ARAppUITexts
         x.LinkButton("Google Privacy Policy", "https://policies.google.com/privacy");
 #endif
     }
+}
 }

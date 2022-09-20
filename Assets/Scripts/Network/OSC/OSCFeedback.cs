@@ -5,6 +5,8 @@ using ARquatic.LSystem;
 
 
 using UnityOSC;
+namespace ARquatic.App {
+
 
 public class OSCFeedback : MonoBehaviour
 {
@@ -43,7 +45,7 @@ public class OSCFeedback : MonoBehaviour
 
         foreach (string key in keyList)
         {
-            LSystem lsys = lsysController.Forest[key];
+            var lsys = lsysController.Forest[key];
             int numResults = lsys.Results.Count;
 
             if (numResults > 0) {
@@ -102,4 +104,5 @@ public class OSCFeedback : MonoBehaviour
 
         osc.Send(msg);
     }
+}
 }

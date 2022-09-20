@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
+namespace ARquatic.App {
 
 public class FadeRawImageAlpha : MonoBehaviour
 {
@@ -70,4 +71,5 @@ public class FadeRawImageAlpha : MonoBehaviour
         toTime = Time.time + time;
         this.actionOnFinish = action;
     }
+}
 }

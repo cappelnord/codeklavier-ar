@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
+
 public class SwimmingCamera : MonoBehaviour
 {
 
@@ -36,4 +38,5 @@ public class SwimmingCamera : MonoBehaviour
         transform.localPosition = position + deltaPosition;
         transform.rotation = rotation * Quaternion.Euler(deltaRotation);
     }
+}
 }

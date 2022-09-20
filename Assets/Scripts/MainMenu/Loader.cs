@@ -8,6 +8,8 @@ using UnityEngine.Networking;
 using UnityEngine.XR.ARFoundation;
 using TMPro;
 
+namespace ARquatic.App {
+
 public class Loader : MonoBehaviour
 {
     public GameObject UnityGray;
@@ -263,4 +265,5 @@ public class Loader : MonoBehaviour
             LoadingSpinner.SetActive(true);
         }
     }
+}
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.EventSystems;
 
+namespace ARquatic.App {
 
 public class MainMenuAboutButton : MonoBehaviour, IPointerClickHandler
 {
@@ -13,4 +14,5 @@ public class MainMenuAboutButton : MonoBehaviour, IPointerClickHandler
     {
         Controller.DisplayAbout();
     }
+}
 }

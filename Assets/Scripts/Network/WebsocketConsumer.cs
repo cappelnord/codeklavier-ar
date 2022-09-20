@@ -11,6 +11,9 @@ using System.Net.Sockets;
 
 using ARquatic.LSystem;
 
+namespace ARquatic.App {
+
+
 public class SingleLinkNode<T>
 {
     // Note; the Next member cannot be a property since
@@ -144,29 +147,6 @@ public class LockFreeQueue<T>
             }
         }
         return true;
-    }
-}
-
-public enum CKARNetworkStateType
-{
-    ConnectingToMaster,
-    ConnectedToMaster,
-    FailedConnectingToMaster,
-    ConnectingToLocal,
-    ConnectingToServer,
-    ConnectedToServer,
-    DisconnectedFromServer
-}
-
-public class CKARNetworkState
-{
-    public CKARNetworkStateType Type { get; private set; }
-    public string Message { get; private set; }
-
-    public CKARNetworkState(CKARNetworkStateType type, string message)
-    {
-        Type = type;
-        Message = message;
     }
 }
 
@@ -455,4 +435,5 @@ public class WebsocketConsumer : MonoBehaviour
         Debug.Log("WebsocketConsumer Destroy");
         Disconnect();
     }
+}
 }

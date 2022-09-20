@@ -2,6 +2,7 @@
 using UnityEngine;
 using TMPro;
 
+namespace ARquatic.App {
 
 public class MainMenuSetMiscTexts : MonoBehaviour
 {
@@ -17,4 +18,5 @@ public class MainMenuSetMiscTexts : MonoBehaviour
 
         Destroy(gameObject);
     }
+}
 }

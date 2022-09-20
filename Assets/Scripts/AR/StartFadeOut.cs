@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
+
 [DefaultExecutionOrder(100)]
 public class StartFadeOut : MonoBehaviour
 {
@@ -10,4 +12,5 @@ public class StartFadeOut : MonoBehaviour
     {
         GetComponent<FadeRawImageAlpha>().StartFade(0f, 0.5f);
     }
+}
 }

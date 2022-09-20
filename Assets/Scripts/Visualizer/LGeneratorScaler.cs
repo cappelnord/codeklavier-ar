@@ -4,6 +4,8 @@ using UnityEngine;
 
 using ARquatic.Visuals;
 
+namespace ARquatic.Visualizer {
+
 public class LGeneratorScaler : MonoBehaviour
 {
 
@@ -101,4 +103,5 @@ public class LGeneratorScaler : MonoBehaviour
         }
         return bounds;
     }
+}
 }

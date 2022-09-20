@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ARquatic.LSystem;
 
-
+namespace ARquatic.Visualizer {
 public class VisualizerViewResponder : MonoBehaviour
 {
 
@@ -32,7 +32,7 @@ public class VisualizerViewResponder : MonoBehaviour
 
         key = newViewKey;
         GetComponent<TextMesh>().text = key;
-        LSystem lsys = LSystemController.Instance().GetLSystem(key);
+        var lsys = LSystemController.Instance().GetLSystem(key);
         GameObject.Find("LGenerator").GetComponent<LGenerator>().SetLSystem(lsys);
         GameObject.Find("AGenerator").GetComponent<LGenerator>().SetLSystem(lsys);
         GameObject.Find("RGenerator").GetComponent<LGenerator>().SetLSystem(lsys);
@@ -40,7 +40,7 @@ public class VisualizerViewResponder : MonoBehaviour
 
     public void TestIfTooWide(LSystemController controler)
     {
-        LSystem lsys = controler.GetLSystem(key);
+        var lsys = controler.GetLSystem(key);
         if(lsys.TooWide)
         {
             GetComponent<TextMesh>().color = Color.red;
@@ -49,4 +49,5 @@ public class VisualizerViewResponder : MonoBehaviour
             GetComponent<TextMesh>().color = Color.white;
         }
     }
+}
 }

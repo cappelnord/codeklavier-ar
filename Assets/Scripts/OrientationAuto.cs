@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
 public class OrientationAuto : MonoBehaviour
 {
     void Start()
@@ -9,4 +10,5 @@ public class OrientationAuto : MonoBehaviour
         Screen.orientation = ScreenOrientation.AutoRotation;
         Destroy(gameObject);
     }
+}
 }

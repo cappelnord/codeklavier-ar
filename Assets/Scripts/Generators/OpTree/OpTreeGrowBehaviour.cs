@@ -4,6 +4,7 @@ using UnityEngine;
 using ARquatic.LSystem;
 using ARquatic.Visuals;
 
+namespace ARquatic.OldVisuals {
 
 public class OpTreeGrowBehaviour : MonoBehaviour
 {
@@ -98,4 +99,5 @@ public class OpTreeGrowBehaviour : MonoBehaviour
             child.gameObject.GetComponent<OpTreeGrowBehaviour>().Die();
         }
     }
+}
 }

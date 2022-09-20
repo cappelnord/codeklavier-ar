@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.LSystem {
 public class ARquaticEnvironment : MonoBehaviour
 {
     public static ARquaticEnvironment Instance;
@@ -39,4 +40,5 @@ public class ARquaticEnvironment : MonoBehaviour
        );
     }
 
+}
 }

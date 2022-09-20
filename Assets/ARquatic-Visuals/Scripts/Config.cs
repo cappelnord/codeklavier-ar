@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic {
 [DefaultExecutionOrder(-500)]
 public class Config : MonoBehaviour
 {
@@ -36,4 +37,5 @@ public class Config : MonoBehaviour
 
         Destroy(gameObject);
     }
+}
 }

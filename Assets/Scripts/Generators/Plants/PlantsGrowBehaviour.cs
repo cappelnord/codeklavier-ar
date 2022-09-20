@@ -4,6 +4,9 @@ using UnityEngine;
 
 using ARquatic.LSystem;
 
+namespace ARquatic.OldVisuals {
+
+
 public class PlantsGrowBehaviour : MonoBehaviour
 {
     [HideInInspector]
@@ -86,4 +89,5 @@ public class PlantsGrowBehaviour : MonoBehaviour
             child.gameObject.GetComponent<PlantsGrowBehaviour>().Die();
         }
     }
+}
 }

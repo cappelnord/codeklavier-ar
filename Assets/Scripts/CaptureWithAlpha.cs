@@ -2,6 +2,7 @@ using UnityEngine;
 using System.IO;
 using System;
 
+namespace ARquatic.App {
 // http://entitycrisis.blogspot.com/2017/02/take-unity-screenshot-with-alpha.html
 
 [RequireComponent(typeof(Camera))]
@@ -50,4 +51,5 @@ public class CaptureWithAlpha : MonoBehaviour
         var filename = "SS-" + DateTime.Now.ToString("yyyy.MM.dd.HH.mm.ss") + ".png";
         File.WriteAllBytes(Path.Combine(path, filename), Screenshot().EncodeToPNG());
     }
+}
 }

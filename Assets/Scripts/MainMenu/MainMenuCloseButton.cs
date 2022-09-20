@@ -4,6 +4,7 @@ using UnityEngine;
 
 using UnityEngine.EventSystems;
 
+namespace ARquatic.App {
 
 public class MainMenuCloseButton : MonoBehaviour, IPointerClickHandler
 {
@@ -13,4 +14,5 @@ public class MainMenuCloseButton : MonoBehaviour, IPointerClickHandler
     {
         Controller.DisplayChannels();
     }
+}
 }

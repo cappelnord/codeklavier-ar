@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using ARquatic.LSystem;
+
+namespace ARquatic.App {
+
 public class NetworkResponderUI : NetworkResponder
 {
 
@@ -48,4 +52,5 @@ public class NetworkResponderUI : NetworkResponder
                 }
         }
     }
+}
 }

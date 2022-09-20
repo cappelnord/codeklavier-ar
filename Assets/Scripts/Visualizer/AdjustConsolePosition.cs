@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.Visualizer {
+
 public class AdjustConsolePosition : MonoBehaviour
 {
     void Update()
@@ -15,4 +17,5 @@ public class AdjustConsolePosition : MonoBehaviour
             transform.localPosition = new Vector3(0.9f, 1.15f, -10.0f);
         }
     }
+}
 }

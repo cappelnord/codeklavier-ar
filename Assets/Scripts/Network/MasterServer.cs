@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
+
 public static class MasterServer
 {
     public const string BaseURL = "https://ar.codeklavier.space/master/";
@@ -39,4 +41,5 @@ public class MasterResponseAppInfo
 {
     public int protocol;
     public MasterResponseChannelInfoPair[] channelList;
+}
 }

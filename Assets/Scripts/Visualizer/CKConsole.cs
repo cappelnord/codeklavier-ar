@@ -4,6 +4,8 @@ using UnityEngine;
 
 using ARquatic.LSystem;
 
+namespace ARquatic.Visualizer {
+
 public class CKConsole : MonoBehaviour
 {
 
@@ -107,4 +109,5 @@ public class CKConsole : MonoBehaviour
         GameObject obj = Object.Instantiate(CodeLabel, gameObject.transform);
         obj.GetComponent<TextMesh>().text = s;
     }
+}
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
+namespace ARquatic.App {
 
 public class UIClose : MonoBehaviour, IPointerClickHandler
 {
@@ -39,4 +40,5 @@ public class UIClose : MonoBehaviour, IPointerClickHandler
             SceneManager.LoadScene("MainMenu");
         });
     }
+}
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.Testbed {
+
 public class SkyboxStateToggle : MonoBehaviour
 {
 
@@ -39,4 +41,5 @@ public class SkyboxStateToggle : MonoBehaviour
                 break;
         }
     }
+}
 }

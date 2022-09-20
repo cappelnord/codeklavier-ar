@@ -4,6 +4,8 @@ using UnityEngine;
 
 using ARquatic.Visuals;
 
+namespace ARquatic.OldVisuals {
+
 public class ArcMeshGen : MeshGen
 {
 
@@ -217,4 +219,5 @@ public class ArcMeshGen : MeshGen
 
         return CacheMesh(key, mesh);
     }
+}
 }

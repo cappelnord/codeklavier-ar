@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ARquatic.LSystem {
+using ARquatic.LSystem;
+
+namespace ARquatic.Visualizer {
 public class LTestGenerator : LGenerator
 {
     public GameObject[] Prefabs = new GameObject[10];

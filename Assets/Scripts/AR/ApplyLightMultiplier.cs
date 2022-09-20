@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace ARquatic.App {
+
 [DefaultExecutionOrder(-100)] 
 public class ApplyLightMultiplier : MonoBehaviour
 {
@@ -17,4 +19,5 @@ public class ApplyLightMultiplier : MonoBehaviour
         LightEstimationLight le = GetComponent<LightEstimationLight>();
         le.m_BrightnessMod = BaseModifier * PersistentData.BrightnessMultiplier;
     }
+}
 }

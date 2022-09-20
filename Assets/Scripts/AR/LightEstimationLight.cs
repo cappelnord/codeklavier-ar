@@ -3,6 +3,8 @@ using UnityEngine.Rendering;
 using UnityEngine.XR.ARFoundation;
 
 // https://tutorialsforar.com/using-light-estimation-in-ar-using-arkit-and-arcore-with-unity/
+namespace ARquatic.App {
+
 
 [RequireComponent(typeof(Light))]
 public class LightEstimationLight : MonoBehaviour
@@ -217,4 +219,5 @@ public class LightEstimationLight : MonoBehaviour
             */
         }
     }
+}
 }
