@@ -10,6 +10,7 @@ public class LBublonisGenerator : LGenerator
 
     public Material BranchMaterial;
     public GameObject JointPrefab;
+    public Material BaseJointMaterial;
 
     private LSystemController lsysController;
     private WedgeMeshGen wedgeMeshGen;
@@ -17,6 +18,8 @@ public class LBublonisGenerator : LGenerator
     private Color branchGrey;
     private Color branchGreen;
     private Color bubbleGreen;
+
+    private Material[] jointMaterials = new Material[10];
 
     // Start is called before the first frame update
     protected override void Start()
@@ -46,6 +49,10 @@ public class LBublonisGenerator : LGenerator
         PreGenerate();
 
         Die();
+        
+        for(int i = 0; i < 10; i++) {
+            jointMaterials[i] = Instantiate(BaseJointMaterial);
+        }
 
         if (!IsEmpty())
         {
@@ -74,6 +81,9 @@ public class LBublonisGenerator : LGenerator
 
         }
 
+        bool didAddBranchIntensity = false;
+        Material branchMaterialCopy = Instantiate(BranchMaterial);
+
         foreach (ProcessUnit unit in children)
         {
             childrenIndex++;
@@ -86,6 +96,9 @@ public class LBublonisGenerator : LGenerator
                 LifeBehaviour lbe = endPoint.AddComponent<LifeBehaviour>() as LifeBehaviour;
                 lbe.TargetScale = new Vector3(jointScale * 0.5f, jointScale, jointScale);
                 lbe.GrowStartTime = Time.time;
+
+                int materialIndex = (int) char.GetNumericValue(unit.Content);
+                endPoint.GetComponent<MeshRenderer>().sharedMaterial = jointMaterials[materialIndex];
 
                 BublonisBubbleIntensity bbi = endPoint.AddComponent<BublonisBubbleIntensity>() as BublonisBubbleIntensity;
                 bbi.Gen = this;
@@ -107,6 +120,7 @@ public class LBublonisGenerator : LGenerator
             // TODO: in case there is only 1 axiom we need to terminate it gracefully on the bottom
 
             GameObject obj = Spawn(parent, unit, thisLengthUp, thisBaseRadius, lastBaseRadius, generation == 0);
+            obj.GetComponent<MeshRenderer>().sharedMaterial = branchMaterialCopy;
 
 
             if (generation == 0)
@@ -127,10 +141,14 @@ public class LBublonisGenerator : LGenerator
             fb.RotationMultiplier = 20f;
             fb.Gen = this;
 
-            BublonisBranchIntensity ib = obj.AddComponent<BublonisBranchIntensity>() as BublonisBranchIntensity;
-            ib.Gen = this;
-            ib.Green = branchGreen;
-            ib.Grey = branchGrey;
+            if(!didAddBranchIntensity) {
+                BublonisBranchIntensity ib = obj.AddComponent<BublonisBranchIntensity>() as BublonisBranchIntensity;
+                ib.Gen = this;
+                ib.Green = branchGreen;
+                ib.Grey = branchGrey;
+
+                didAddBranchIntensity = true;
+            }
 
 
 
@@ -149,6 +167,8 @@ public class LBublonisGenerator : LGenerator
                 bbi.Gen = this;
                 bbi.KeyColor = materialLookup.GetColor(unit.Content);
                 bbi.Green = bubbleGreen;
+
+                endPoint.GetComponent<MeshRenderer>().sharedMaterial = jointMaterials[(int) char.GetNumericValue(unit.Content)];
 
             }
 

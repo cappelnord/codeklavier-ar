@@ -100,3 +100,5 @@ MonoBehaviour:
   MinScale: 0.015
   MaxScale: 0.02
   Gen: {fileID: 0}
+  InteriaLittleMaterial: {fileID: 2100000, guid: d9795ce97f11b764ca1518d8f6b165ee,
+    type: 2}

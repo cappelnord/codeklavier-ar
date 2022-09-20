@@ -16,6 +16,8 @@ public class RandomSpherePoints : MonoBehaviour
 
     public LGenerator Gen;
 
+    public Material InteriaLittleMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,8 @@ public class RandomSpherePoints : MonoBehaviour
     private void Generate()
     {
         // not linked to RNG System; probably needs to be injected.
+
+        Material littleMaterialCopy = Instantiate(InteriaLittleMaterial);
 
         for(int i = 0; i < Number; i++)
         {
@@ -39,6 +43,9 @@ public class RandomSpherePoints : MonoBehaviour
             obj.transform.localScale = new Vector3(scale, scale, scale);
 
             obj.GetComponent<InteriaLittleIntensity>().Gen = Gen;
+            obj.GetComponent<MeshRenderer>().sharedMaterial = littleMaterialCopy;
+
+            if(i > 0) Destroy(obj.GetComponent<InteriaLittleIntensity>());
 
             // TODO: Combine Mesh?
         }

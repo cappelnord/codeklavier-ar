@@ -21,7 +21,7 @@ public class InteriaLittleIntensity : IntensityBehaviour
     void Update()
     {
         float ci = Gen.ColorIntensity;
-        meshRenderer.material.SetColor("_Color", new Color(24f / 255f + ci, 113f / 255f + ci, 0f + ci));
+        meshRenderer.sharedMaterial.SetColor("_Color", new Color(24f / 255f + ci, 113f / 255f + ci, 0f + ci));
         transform.localScale = scale * (1.0f + (Mathf.Sin(Time.time * frequency) * Gen.Intensity * 0.8f));
     }
 }
