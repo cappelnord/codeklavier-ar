@@ -32,9 +32,14 @@ public class LGenerator : LSystemBehaviour
 
     [HideInInspector]
     public float Intensity = 0.0f;
+    private float lastIntensity = 0f;
 
     [HideInInspector]
     public float ColorIntensity = 0.0f;
+    private float lastColorIntensity = 0f;
+
+    [HideInInspector]
+    public bool IntensityHasChanged = true;
 
     [HideInInspector]
     public GeneratorHerd Herd;
@@ -206,6 +211,13 @@ public class LGenerator : LSystemBehaviour
 
         Intensity = intensityValueFilter.Filter();
         ColorIntensity = colorIntensityValueFilter.Filter();
+
+        IntensityHasChanged = Mathf.Abs(lastIntensity - Intensity) > 0.001 || Mathf.Abs(lastColorIntensity - ColorIntensity) > 0.001;
+        
+        if(IntensityHasChanged) {
+            lastIntensity = Intensity;
+            lastColorIntensity = ColorIntensity;
+        }
 
         ApplyTransformSpec();
     }

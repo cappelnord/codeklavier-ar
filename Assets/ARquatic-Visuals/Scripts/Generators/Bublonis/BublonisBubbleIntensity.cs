@@ -20,6 +20,8 @@ public class BublonisBubbleIntensity : IntensityBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!Gen.IntensityHasChanged) return;
+
         float ci = Gen.ColorIntensity;
         float i = Gen.Intensity * 0.4f;
         float im = 1.0f + i;
