@@ -18,9 +18,9 @@ public class FerniNode
     public float BranchRadius;
     public Transform Transform;
 
-    public double PhaseX;
-    public double PhaseY;
-    public double PhaseZ;
+    public float PhaseX;
+    public float PhaseY;
+    public float PhaseZ;
 
 
     public FerniNode(long id, FerniNode parent, Vector3 position, int generation, float jointScale, float branchRadius)
@@ -34,9 +34,9 @@ public class FerniNode
         BranchRadius = branchRadius;
 
         Vector3 cv = ARquaticEnvironment.Instance.CurrentValues(position);
-        PhaseX = cv.x * 4.0;
-        PhaseY = cv.y * 4.0;
-        PhaseZ = cv.z * 4.0;
+        PhaseX = cv.x * 4.0f;
+        PhaseY = cv.y * 4.0f;
+        PhaseZ = cv.z * 4.0f;
     }
 }
 
@@ -115,7 +115,7 @@ public class LFerniGenerator : LGenerator
                 node.PhaseY += cw.y * Time.deltaTime * SpeedMultiplier;
                 node.PhaseZ += cw.z * Time.deltaTime * SpeedMultiplier;
 
-                Vector3 deltaPosition = new Vector3(Mathf.Sin((float)node.PhaseX), Mathf.Sin((float)node.PhaseY), Mathf.Sin((float)node.PhaseZ)) * SpeedAmplitude * 0.25f;
+                Vector3 deltaPosition = new Vector3(Mathf.Sin(node.PhaseX), Mathf.Sin(node.PhaseY), Mathf.Sin(node.PhaseZ)) * SpeedAmplitude * 0.25f;
                 FerniNode parent = node.Parent;
                 if(parent == null)
                 {
