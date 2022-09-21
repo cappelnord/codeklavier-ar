@@ -21,6 +21,9 @@ public class LBublonisGenerator : LGenerator
 
     private Material[] jointMaterials = new Material[10];
 
+    private bool didAddBranchIntensity = false;
+    private Material branchMaterialCopy;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -54,6 +57,10 @@ public class LBublonisGenerator : LGenerator
             jointMaterials[i] = Instantiate(BaseJointMaterial);
         }
 
+        didAddBranchIntensity = true;
+        branchMaterialCopy = Instantiate(BranchMaterial);
+
+
         if (!IsEmpty())
         {
             Grow(transform, lsys.Units[0], 0, 0.5f, 0.06f, 30.0f, 0.3f);
@@ -80,9 +87,6 @@ public class LBublonisGenerator : LGenerator
             */
 
         }
-
-        bool didAddBranchIntensity = false;
-        Material branchMaterialCopy = Instantiate(BranchMaterial);
 
         foreach (ProcessUnit unit in children)
         {
@@ -205,7 +209,7 @@ public class LBublonisGenerator : LGenerator
             radiusDown = radiusDown * 0.25f;
         }
 
-        return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, BranchMaterial);
+        return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, null);
     }
 
 }

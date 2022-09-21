@@ -18,6 +18,10 @@ public class LPrunastriGenerator : LGenerator
     private Color branchGreen;
     private Color fruitGreen;
 
+    private Material[] jointMaterials = new Material[10];
+    private Material branchMaterialCopy;
+    private bool didAddBranchIntensity = false;
+
     static private List<List<Vector3>> StartAngles =
     new List<List<Vector3>>() {
         new List<Vector3>() {new Vector3(0.0f, 0.0f, 0.0f) },
@@ -76,6 +80,13 @@ public class LPrunastriGenerator : LGenerator
 
         if (IsEmpty()) return;
 
+        for(int i = 0; i < 10; i++) {
+            jointMaterials[i] = Instantiate(FruitMaterial);
+        }
+
+        didAddBranchIntensity = true;
+        branchMaterialCopy = Instantiate(BranchMaterial);
+
         float startAngle = 25f;
         float startRadius = 0.02f + (lsys.Units.Count * 0.002f);
         if(Variety)
@@ -120,14 +131,17 @@ public class LPrunastriGenerator : LGenerator
 
             // TODO: in case there is only 1 axiom we need to terminate it gracefully on the bottom
 
-            Material mat = BranchMaterial;
+            Material mat = branchMaterialCopy;
 
             if(unit.Children.Count == 0)
             {
-                mat = FruitMaterial;
+                int materialIndex = (int) char.GetNumericValue(unit.Content);
+                mat = jointMaterials[materialIndex];
             }
 
-            GameObject obj = Spawn(parent, unit, thisLengthUp, thisBaseRadius, lastBaseRadius, mat);
+            GameObject obj = Spawn(parent, unit, thisLengthUp, thisBaseRadius, lastBaseRadius, null);
+            obj.GetComponent<MeshRenderer>().sharedMaterial = mat;
+
 
             if(generation == 0)
             {
@@ -148,10 +162,13 @@ public class LPrunastriGenerator : LGenerator
             fb.Gen = this;
 
             if(unit.Children.Count != 0) {
-                PrunastriBranchIntensity ib = obj.AddComponent<PrunastriBranchIntensity>() as PrunastriBranchIntensity;
-                ib.Gen = this;
-                ib.Green = branchGreen;
-                ib.Grey = branchGrey;
+                if(!didAddBranchIntensity) {
+                    PrunastriBranchIntensity ib = obj.AddComponent<PrunastriBranchIntensity>() as PrunastriBranchIntensity;
+                    ib.Gen = this;
+                    ib.Green = branchGreen;
+                    ib.Grey = branchGrey;
+                    didAddBranchIntensity = true;
+                }
 
             } else
             {

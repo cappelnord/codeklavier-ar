@@ -22,6 +22,7 @@ public class FerniNode
     public double PhaseY;
     public double PhaseZ;
 
+
     public FerniNode(long id, FerniNode parent, Vector3 position, int generation, float jointScale, float branchRadius)
     {
         Id = id;
@@ -63,6 +64,8 @@ public class LFerniGenerator : LGenerator
 
     public Material BranchMaterial;
     public GameObject JointPrefab;
+    public Material BaseJointMaterial;
+
 
     private WedgeMeshGen wedgeMeshGen;
 
@@ -73,6 +76,9 @@ public class LFerniGenerator : LGenerator
     private Color nodeGreen;
     private Color branchGrey;
 
+    private Material[] jointMaterials = new Material[10];
+    private Material branchMaterialCopy;
+    private bool didAddBranchIntensity = false;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -150,10 +156,18 @@ public class LFerniGenerator : LGenerator
 
         Die();
 
+
         nodes = new Dictionary<long, FerniNode>();
         branches = new List<FerniBranch>();
 
         if (IsEmpty()) return;
+
+       for(int i = 0; i < 10; i++) {
+            jointMaterials[i] = Instantiate(BaseJointMaterial);
+        }
+
+        didAddBranchIntensity = true;
+        branchMaterialCopy = Instantiate(BranchMaterial);
 
 
         float displace = 0.0f;
@@ -249,6 +263,9 @@ public class LFerniGenerator : LGenerator
                         lb.GrowStartTime = Time.time + (node.Generation* 0.5f);
                         lb.GrowTime = 0.1f;
 
+                        int materialIndex = (int) char.GetNumericValue(unit.Content);
+                        obj.GetComponent<MeshRenderer>().sharedMaterial = jointMaterials[materialIndex];
+
                         FerniNodeIntensity ib = obj.AddComponent<FerniNodeIntensity>() as FerniNodeIntensity;
                         ib.Gen = this;
                         ib.KeyColor = materialLookup.GetColor(unit.Content);
@@ -270,6 +287,7 @@ public class LFerniGenerator : LGenerator
                             float distance = between.magnitude;
 
                             GameObject obj = Spawn(transform, distance, from.BranchRadius);
+                            obj.GetComponent<MeshRenderer>().sharedMaterial = branchMaterialCopy;
 
 
                             LinearLifeBehaviour lb = obj.AddComponent<LinearLifeBehaviour>();
@@ -277,10 +295,15 @@ public class LFerniGenerator : LGenerator
                             lb.GrowStartTime = Time.time + (from.Generation * 0.5f);
                             lb.GrowTime = 0.5f;
 
-                            FerniBranchIntensity ib = obj.AddComponent<FerniBranchIntensity>();
-                            ib.Gen = this;
-                            ib.Grey = branchGrey;
-                            ib.Green = branchGreen;
+
+                            if(!didAddBranchIntensity) {
+                                FerniBranchIntensity ib = obj.AddComponent<FerniBranchIntensity>();
+                                ib.Gen = this;
+                                ib.Grey = branchGrey;
+                                ib.Green = branchGreen;
+
+                                didAddBranchIntensity = true;
+                            }
 
 
                             branches.Add(new FerniBranch(obj.transform, from, to, distance, lb));
@@ -306,7 +329,7 @@ public class LFerniGenerator : LGenerator
         float squishUp = 1.0f;
         float squishDown = 1.0f;
 
-        return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, BranchMaterial);
+        return wedgeMeshGen.GetWedgeObject(sides, radiusCenter, radiusUp, lengthUp, radiusDown, lengthDown, squish, squishUp, squishDown, parent, null);
 
     }
 }

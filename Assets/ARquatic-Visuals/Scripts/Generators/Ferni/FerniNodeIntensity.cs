@@ -27,7 +27,7 @@ public class FerniNodeIntensity : IntensityBehaviour
 
         Color c = Color.Lerp(Green, KeyColor, ci);
 
-        meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
+        meshRenderer.sharedMaterial.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
 
         transform.localScale = transform.localScale * (1.0f + (5.0f * i));
     }

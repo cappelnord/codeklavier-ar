@@ -49,10 +49,14 @@ MonoBehaviour:
     m_Extent: {x: 0, y: 0, z: 0}
   LastTimeTouched: 0
   SpeedMultiplier: 1
+  SpeedAmplitude: 0
   Intensity: 0
   ColorIntensity: 0
+  IntensityHasChanged: 1
   Herd: {fileID: 0}
   Position: {x: 0, y: 0, z: 0}
+  ScaleMultiplier: 0
   BranchMaterial: {fileID: 2100000, guid: 0358bfd224f6796429096b06d52fecb4, type: 2}
   JointPrefab: {fileID: 688084521919281849, guid: 4eb90e4e72736534ea4471755a2d3633,
     type: 3}
+  BaseJointMaterial: {fileID: 2100000, guid: 36b2a451d93077b439b903163e69fdaa, type: 2}

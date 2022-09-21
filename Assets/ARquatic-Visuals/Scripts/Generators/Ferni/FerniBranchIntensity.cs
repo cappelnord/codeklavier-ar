@@ -27,7 +27,7 @@ public class FerniBranchIntensity : IntensityBehaviour
 
         Color c = Color.Lerp(Green, Grey, ci);
 
-        meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
+        meshRenderer.sharedMaterial.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
         
     }
 }

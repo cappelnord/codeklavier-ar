@@ -37,7 +37,10 @@ public class MeshGen : MonoBehaviour
     {
         GameObject obj = GameObject.Instantiate(protoObject, parent);
         obj.GetComponent<MeshFilter>().mesh = mesh;
-        obj.GetComponent<MeshRenderer>().material = material;
+
+        if(material != null) {
+            obj.GetComponent<MeshRenderer>().material = material;
+        }
 
         MeshCollider collider = obj.GetComponent<MeshCollider>();
         if(collider != null)
