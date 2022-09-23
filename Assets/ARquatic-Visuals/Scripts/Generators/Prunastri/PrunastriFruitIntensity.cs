@@ -19,17 +19,18 @@ public class PrunastriFruitIntensity : IntensityBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!Gen.IntensityHasChanged) return;
 
-        float ci = Gen.ColorIntensity;
         float i = Gen.Intensity * 0.4f;
-        float im = 1.0f + i;
-
-        Color c = Color.Lerp(Green, KeyColor, ci);
-
-        meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
-
         transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1.0f + (4.0f * i), 1.0f + (1.5f * i), 1.0f + (4.0f * i)));
+
+        if(Gen.IntensityHasChanged) {
+            float ci = Gen.ColorIntensity;
+            float im = 1.0f + i;
+
+            Color c = Color.Lerp(Green, KeyColor, ci);
+
+            meshRenderer.material.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
+        }
     }
 }
 }

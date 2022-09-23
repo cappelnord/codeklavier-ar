@@ -19,17 +19,17 @@ public class FerniNodeIntensity : IntensityBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!Gen.IntensityHasChanged) return;
-
-        float ci = Gen.ColorIntensity;
         float i = Gen.Intensity * 0.4f;
-        float im = 1.0f + i;
-
-        Color c = Color.Lerp(Green, KeyColor, ci);
-
-        meshRenderer.sharedMaterial.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
-
         transform.localScale = transform.localScale * (1.0f + (5.0f * i));
+        
+        if(Gen.IntensityHasChanged) {
+            float ci = Gen.ColorIntensity;
+            float im = 1.0f + i;
+
+            Color c = Color.Lerp(Green, KeyColor, ci);
+
+            meshRenderer.sharedMaterial.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
+        }
     }
 }
 }
