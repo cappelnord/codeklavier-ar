@@ -4,7 +4,7 @@ namespace ARquatic.App {
 
 public static class ARAppUITexts
 {
-    public const string Version = "1.4.3";
+    public const string Version = "1.5";
 
     public static string VersionString;
     public static string DateDisplayCulture;
