@@ -25,6 +25,7 @@ namespace ARquatic
     {
         public TextAsset LogFile;
         public JSONProcessor JSONProcessor;
+        public float LogOffset = 0f;
 
         private AudioSource audioSource;
 
@@ -49,9 +50,11 @@ namespace ARquatic
             
             float currentPlaybackTime = audioSource.timeSamples / (float) audioSource.clip.frequency;
 
-            while(currentIndex < entries.Length && entries[currentIndex].time <= currentPlaybackTime) {
+            while(currentIndex < entries.Length && entries[currentIndex].time <= currentPlaybackTime + LogOffset) {
                 try {
                     JSONProcessor.Process(entries[currentIndex].payload);
+                    Debug.Log(currentPlaybackTime);
+
                 } catch(Exception e) {
                     Debug.Log(entries[currentIndex].payload);
                     Debug.Log(e);

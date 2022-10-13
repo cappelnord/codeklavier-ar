@@ -618,8 +618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b7c956eb63b409ca1ee34b78763498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LogFile: {fileID: 4900000, guid: 18a67012c0152420cbb6ae2ce587ad6c, type: 3}
+  LogFile: {fileID: 4900000, guid: 48957b09336864231a2ff406dab3b0ee, type: 3}
   JSONProcessor: {fileID: 476830225}
+  LogOffset: 77.5
 --- !u!82 &752006243
 AudioSource:
   m_ObjectHideFlags: 0
@@ -630,7 +631,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 00fefda59476b4254840b415edff21b5, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d60cb9166f0924154afab762020560e7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
