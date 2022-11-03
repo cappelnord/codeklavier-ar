@@ -11,6 +11,8 @@ public class TransformDeathBehaviour : MonoBehaviour
     public float Velocity;
     public float WaitUntilShrink;
     public float ShrinkStartTime;
+    public Transform FloorTransform;
+    public float FloorDistance = 1f;
 
     public float ScaleRelativeToWorld = 1.0f;
 
@@ -28,7 +30,21 @@ public class TransformDeathBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate((Direction * Velocity + new Vector3(0f, up, 0f)) * Time.deltaTime * ScaleRelativeToWorld, Space.World);
+        Vector3 ThisDirection = Direction;
+
+        if(FloorTransform != null) {
+            float distanceToFloor = transform.position.y - FloorTransform.position.y;
+            if(distanceToFloor < FloorDistance) {
+                if(distanceToFloor < 0) distanceToFloor = 0f;
+                ThisDirection.y = ThisDirection.y * (distanceToFloor / FloorDistance);
+                up *= 1.005f;
+            }
+        }
+
+        Vector3 GeneralDirection = (ThisDirection  * Velocity + new Vector3(0f, up, 0f));
+
+        transform.Translate(GeneralDirection * Time.deltaTime * ScaleRelativeToWorld, Space.World);
+        
         transform.Rotate(Rotation * Time.deltaTime);
 
         if (up < 0.7)

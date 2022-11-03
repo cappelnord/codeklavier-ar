@@ -306,6 +306,8 @@ public class LGenerator : LSystemBehaviour
             if (!transformDeath)
             {
                 DeathBehaviour db = obj.AddComponent<DeathBehaviour>() as DeathBehaviour;
+                db.FloorTransform = Herd.FloorTransform;
+                db.FloorDistance = Herd.FloorDistance;
                 db.Velocity = DeathVelocity(obj);
                 db.Rotation = new Vector3(RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f), RandomRange(-20.0f, 20.0f));
                 db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center) + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
@@ -314,6 +316,8 @@ public class LGenerator : LSystemBehaviour
             } else
             {
                 TransformDeathBehaviour db = obj.AddComponent<TransformDeathBehaviour>() as TransformDeathBehaviour;
+                db.FloorTransform = Herd.FloorTransform;
+                db.FloorDistance = Herd.FloorDistance;
                 db.Velocity = DeathVelocity(obj) * 0.5f;
                 db.Rotation = new Vector3(RandomRange(-40.0f, 40.0f), RandomRange(-40.0f, 40.0f), RandomRange(-40.0f, 40.0f));
                 db.Direction = Vector3.Normalize(obj.transform.position - Bounds.center) + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));

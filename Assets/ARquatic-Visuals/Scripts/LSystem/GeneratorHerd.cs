@@ -38,6 +38,10 @@ public class GeneratorHerd : MonoBehaviour
 
     public GameObject OverrideShape = null;
 
+    public Transform FloorTransform = null;
+
+    public float FloorDistance = 1.5f;
+
     private int sparseUpdateCounter = 0;
 
     [HideInInspector]
