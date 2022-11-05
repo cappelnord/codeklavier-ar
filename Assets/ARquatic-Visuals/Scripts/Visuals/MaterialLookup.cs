@@ -26,5 +26,10 @@ public class MaterialLookup : MonoBehaviour
 
     public Material Get(char symbol) => materials[(int) char.GetNumericValue(symbol)];
     public Color GetColor(char symbol) => colors[(int) char.GetNumericValue(symbol)];
+
+    void OnDestroy()
+    {
+        instance = null;
+    }
 }
 }

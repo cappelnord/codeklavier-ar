@@ -40,5 +40,10 @@ public class ARquaticEnvironment : MonoBehaviour
        );
     }
 
+    void OnDestroy()
+    {
+        Instance = null;
+    }
+
 }
 }
