@@ -10,6 +10,10 @@ public class LGenerator : LSystemBehaviour
 
     public bool Variety = false;
 
+    public float MinBubbleScale = 0.01f;
+    public float MaxBubbleScale = 0.04f;
+
+
     [HideInInspector]
     public TransformSpec TransformSpec;
 
@@ -396,7 +400,7 @@ public class LGenerator : LSystemBehaviour
         {
             Mesh mesh = mf.mesh;
 
-            float targetScale = RandomRange(0.01f, 0.04f);
+            float targetScale = RandomRange(MinBubbleScale, MaxBubbleScale) * BubbleSpawner.OverallScale;
 
             Vector3[] vertices = mesh.vertices;
             Vector3 randomVertex = vertices[Random.Range(0, vertices.Length)] * (1f + targetScale);

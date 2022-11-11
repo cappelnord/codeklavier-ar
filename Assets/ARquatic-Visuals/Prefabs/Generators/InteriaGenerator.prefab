@@ -43,11 +43,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 940f67d3c1fad0446a35542e6505ff2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Variety: 0
+  MinBubbleScale: 0.01
+  MaxBubbleScale: 0.06
   Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   LastTimeTouched: 0
   SpeedMultiplier: 1
+  SpeedAmplitude: 0
+  Intensity: 0
+  ColorIntensity: 0
+  IntensityHasChanged: 1
+  Herd: {fileID: 0}
+  Position: {x: 0, y: 0, z: 0}
+  ScaleMultiplier: 0
   OuterPrefab: {fileID: 1177831921868156793, guid: 1977d0c5006a1864fbaaccafea107727,
     type: 3}
   InnerPrefab: {fileID: 2166031849323146203, guid: a039452e4e1a9d541a416a49498cc12d,

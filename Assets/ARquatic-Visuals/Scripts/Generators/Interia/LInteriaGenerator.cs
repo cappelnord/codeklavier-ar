@@ -70,7 +70,7 @@ public class LInteriaGenerator : LGenerator
     {
         if (outer == null) return;
 
-        float targetScale = RandomRange(0.01f, 0.06f);
+        float targetScale = RandomRange(MinBubbleScale, MaxBubbleScale) * BubbleSpawner.OverallScale;
         DoSpawnBubble(outer.transform, Random.insideUnitSphere.normalized * 0.51f, targetScale, prefab);
     }
 

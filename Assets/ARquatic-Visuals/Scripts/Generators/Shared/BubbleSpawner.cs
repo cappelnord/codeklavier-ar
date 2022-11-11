@@ -11,14 +11,17 @@ public class BubbleSpawner : MonoBehaviour
 {
     public GameObject BubblePrefab;
     public float Probability = 0.05f;
+    public float ScaleMultiplier = 1f;
 
     private GeneratorHerd herd;
 
+    public static float OverallScale = 1f;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        OverallScale = ScaleMultiplier;
         herd = transform.parent.GetComponent<GeneratorHerd>();
     }
 
