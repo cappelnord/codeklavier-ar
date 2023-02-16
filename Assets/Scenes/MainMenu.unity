@@ -3107,7 +3107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.14117648, g: 0.1254902, b: 0.12156863, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4286,6 +4286,8 @@ MonoBehaviour:
   Shape6: {fileID: 5354513745151009780, guid: 034bb6dbef35d1d46951b3d62fe33ece, type: 3}
   Shape7: {fileID: 8424831950952656913, guid: 01552d74240a4d34bad0aa0508d2a165, type: 3}
   OverrideShape: {fileID: 0}
+  FloorTransform: {fileID: 0}
+  FloorDistance: 1.5
   Trash: {fileID: 0}
   Env: {fileID: 0}
   SimpleDeath: 1

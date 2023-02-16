@@ -206,7 +206,7 @@ PlayerSettings:
     type: 3}
   iOSLaunchScreenBackgroundColor:
     serializedVersion: 2
-    rgba: 2039844
+    rgba: 0
   iOSLaunchScreenFillPct: 1
   iOSLaunchScreenSize: 0
   iOSLaunchScreenCustomXibPath: 
@@ -215,7 +215,7 @@ PlayerSettings:
     type: 3}
   iOSLaunchScreeniPadBackgroundColor:
     serializedVersion: 2
-    rgba: 2039844
+    rgba: 0
   iOSLaunchScreeniPadFillPct: 1
   iOSLaunchScreeniPadSize: 0
   iOSLaunchScreeniPadCustomXibPath: 
