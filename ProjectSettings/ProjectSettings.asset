@@ -253,7 +253,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 2
   androidSplashScreen: {fileID: 2800000, guid: f158e54e3ffad4fb8ba2258bbf4da537, type: 3}
-  AndroidKeystoreName: /Users/patri/Dropbox/CodeklaviAR/Keystore/user.keystore
+  AndroidKeystoreName: '{dedicated}: user.keystore'
   AndroidKeyaliasName: arquatic
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
