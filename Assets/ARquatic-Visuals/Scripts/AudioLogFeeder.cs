@@ -26,11 +26,22 @@ namespace ARquatic
         public TextAsset LogFile;
         public JSONProcessor JSONProcessor;
         public float LogOffset = 0f;
+        public bool PlayOnAwake = false;
 
         private AudioSource audioSource;
 
         private int currentIndex = 0;
         private JSONLogEntry[] entries = null;
+
+        private float lastPlaybackTime = -1f;
+
+        private bool isPlaying = false;
+
+        public void Play() {
+            if(isPlaying) return;
+            audioSource.Play();
+
+        }
 
         void Awake() {
             audioSource = GetComponent<AudioSource>();
@@ -39,7 +50,14 @@ namespace ARquatic
             JSONLogFile file = JsonUtility.FromJson<JSONLogFile>(logString);
             entries = file.data;
 
-            audioSource.Play();
+            if(PlayOnAwake) {
+                Play();
+            }
+        }
+
+        private void AudioHasLooped() {
+            currentIndex = 0;
+            // TODO: We should probably reset it?
         }
 
         void Update()
@@ -50,14 +68,20 @@ namespace ARquatic
             
             float currentPlaybackTime = audioSource.timeSamples / (float) audioSource.clip.frequency;
 
+            if(lastPlaybackTime > currentPlaybackTime) {
+                AudioHasLooped();
+            }
+
+            lastPlaybackTime = currentPlaybackTime;
+
             while(currentIndex < entries.Length && entries[currentIndex].time <= currentPlaybackTime + LogOffset) {
                 try {
                     JSONProcessor.Process(entries[currentIndex].payload);
-                    Debug.Log(currentPlaybackTime);
+                    // Debug.Log(currentPlaybackTime);
 
                 } catch(Exception e) {
-                    Debug.Log(entries[currentIndex].payload);
-                    Debug.Log(e);
+                    // Debug.Log(entries[currentIndex].payload);
+                    // Debug.Log(e);
                 }
                 currentIndex++;
             }

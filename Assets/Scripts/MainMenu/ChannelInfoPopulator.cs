@@ -160,9 +160,9 @@ public class ChannelInfoPopulator : MonoBehaviour
                     PersistentData.IsBundledChannel = isBundled;
 
                     if(isBundled) {
-                        PersistentData.BundleID = info.bundleID;
+                        PersistentData.BundledID = info.bundledID;
                     } else {
-                        PersistentData.BundleID = null;
+                        PersistentData.BundledID = null;
                     }
 
                     ToARBlack.GetComponent<RawImage>().enabled = true;
