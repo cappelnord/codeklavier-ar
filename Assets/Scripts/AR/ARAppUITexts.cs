@@ -16,6 +16,7 @@ public static class ARAppUITexts
 
     // button to join a channel
     public static string ButtonJoin;
+    public static string ButtonStartBundled;
 
     // button to get more info
     public static string ButtonMoreInformation;
@@ -89,6 +90,7 @@ public static class ARAppUITexts
 
         // button to join a channel
         ButtonJoin = "Start";
+        ButtonStartBundled = "Start";
 
         // button to get more info
         ButtonMoreInformation = "More Information";
@@ -171,6 +173,7 @@ public static class ARAppUITexts
 
         // button to join a channel
         ButtonJoin = "Start";
+        ButtonStartBundled = "Start";
 
         // button to get more info
         ButtonMoreInformation = "Meer informatie";

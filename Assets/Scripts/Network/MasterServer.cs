@@ -22,6 +22,7 @@ public class MasterResponseChannelInfo
     public string eventISODate;
     public string eventURL;
     public string websocketBaseURL;
+    public string bundleID;
     public bool visible;
     public float baseDistance;
     public float baseScale;

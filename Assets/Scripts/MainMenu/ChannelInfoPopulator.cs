@@ -85,6 +85,8 @@ public class ChannelInfoPopulator : MonoBehaviour
             {
                 status.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.MainMenuStatusOffline;
                 status.GetComponent<TextMeshProUGUI>().color = new Color(1f, 0.4f, 0.4f, 1.0f);
+            } else if(info.status == "bundled") {
+                status.GetComponent<TextMeshProUGUI>().text = "";
             } else
             {
                 status.GetComponent<TextMeshProUGUI>().text = info.status;
@@ -125,11 +127,17 @@ public class ChannelInfoPopulator : MonoBehaviour
             description.GetComponent<TextMeshProUGUI>().text = descriptionString;
 
             bool hadButton = false;
+            bool isBundled = info.status == "bundled";
 
-            if(info.status == "online")
+            if(info.status == "online" || isBundled)
             {
                 GameObject joinButton = Instantiate(ChannelJoinButtonPrefab, Content);
-                joinButton.GetComponentInChildren<TextMeshProUGUI>().text = ARAppUITexts.ButtonJoin;
+
+                if(isBundled) {
+                    joinButton.GetComponentInChildren<TextMeshProUGUI>().text = ARAppUITexts.ButtonStartBundled;
+                }   else {
+                    joinButton.GetComponentInChildren<TextMeshProUGUI>().text = ARAppUITexts.ButtonJoin;
+                }
 
                 Button button = joinButton.GetComponent<Button>();
 
@@ -149,6 +157,13 @@ public class ChannelInfoPopulator : MonoBehaviour
                     PersistentData.BrightnessMultiplier = brightnessMultiplier;
                     PersistentData.NightMode = nightMode;
 
+                    PersistentData.IsBundledChannel = isBundled;
+
+                    if(isBundled) {
+                        PersistentData.BundleID = info.bundleID;
+                    } else {
+                        PersistentData.BundleID = null;
+                    }
 
                     ToARBlack.GetComponent<RawImage>().enabled = true;
                     ToARBlack.GetComponent<FadeRawImageAlpha>().Start();
