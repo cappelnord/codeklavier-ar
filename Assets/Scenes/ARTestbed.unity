@@ -1463,18 +1463,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1526224605 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6254708282866515675, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7713098529318963263}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba21653ad4e1c4d5da2de1fb08cb0998, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1640193072 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4271976799062746697, guid: 02a7f64199c43334392293503f6c8abf,
@@ -2342,6 +2330,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1919123024}
     m_Modifications:
+    - target: {fileID: 621027307771777302, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 715084295285601964, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_RootOrder
@@ -2357,10 +2350,20 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4189034992226873003, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4781549529534720352, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5558849876456373877, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: ForceStartBundledID
+      value: hashi
       objectReference: {fileID: 0}
     - target: {fileID: 5931560324050426411, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
@@ -2533,9 +2536,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7753753291381842211, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
-      propertyPath: JSONProcessor
-      value: 
-      objectReference: {fileID: 1526224605}
+      propertyPath: PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddb977535cb80c4b9e42ecaeaf2df3e, type: 3}
 --- !u!114 &7713098529318963264 stripped

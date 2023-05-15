@@ -4,8 +4,6 @@ namespace ARquatic.App {
 
 public static class ARAppUITexts
 {
-    public const string Version = "1.5";
-
     public static string VersionString;
     public static string DateDisplayCulture;
 
@@ -80,7 +78,7 @@ public static class ARAppUITexts
 
     static private void SetEN() {
 
-        VersionString = "Version " + Version;
+        VersionString = "Version " + Application.version;
         DateDisplayCulture = "en-GB";
 
         // in case one cannot connect to the server
@@ -163,7 +161,7 @@ public static class ARAppUITexts
 
     static private void SetNL() {
 
-        VersionString = "Versie " + Version;
+        VersionString = "Versie " + Application.version;
         DateDisplayCulture = "nl-NL";
 
         // in case one cannot connect to the server

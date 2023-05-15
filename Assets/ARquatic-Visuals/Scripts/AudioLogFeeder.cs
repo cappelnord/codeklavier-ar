@@ -3,6 +3,7 @@ using System.Collections;
 using System.Text;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 using ARquatic.LSystem;
 
@@ -28,6 +29,8 @@ namespace ARquatic
         public float LogOffset = 0f;
         public bool PlayOnAwake = false;
 
+        public AudioMixer Mixer;
+
         private AudioSource audioSource;
 
         private int currentIndex = 0;
@@ -39,11 +42,12 @@ namespace ARquatic
 
         public void Play() {
             if(isPlaying) return;
+            Mixer.SetFloat("Volume", 0f);
             audioSource.Play();
 
         }
 
-        void Awake() {
+        void Start() {
             audioSource = GetComponent<AudioSource>();
 
             string logString = LogFile.ToString();

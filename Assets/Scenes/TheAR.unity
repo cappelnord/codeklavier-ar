@@ -465,6 +465,7 @@ MonoBehaviour:
   ARWorld: {fileID: 684177375}
   MinimumScale: 0.05
   MaximumScale: 1
+  Feeder: {fileID: 1819146719}
   UIHider: {fileID: 1997535672}
 --- !u!1 &579449824
 GameObject:
@@ -554,6 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a93fde898e0be8419479c9fed00db0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mixer: {fileID: 24100000, guid: d839fb62ff3c4440eba130bf0693579d, type: 2}
   UnityGray: {fileID: 1423658817}
   UIHider: {fileID: 1997535672}
 --- !u!1 &599303493
@@ -1419,6 +1421,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddb977535cb80c4b9e42ecaeaf2df3e, type: 3}
+--- !u!114 &1819146719 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7753753291381842211, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1819146718}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b7c956eb63b409ca1ee34b78763498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1888678862
 GameObject:
   m_ObjectHideFlags: 0

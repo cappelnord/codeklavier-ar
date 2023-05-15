@@ -17,7 +17,7 @@ public class NetworkResponderUI : NetworkResponder
     private Image img;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         img = GetComponent<Image>();
         img.sprite = Pending;

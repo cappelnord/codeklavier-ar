@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ARquatic.LSystem;
 
 
 namespace ARquatic.App {
@@ -42,6 +43,12 @@ namespace ARquatic.App {
             } else {
                 Destroy(transform.Find("BundledPlayer").gameObject);
             } 
+        }
+
+        public void Start() {
+            if(PersistentData.IsBundledChannel) {
+                EventManager.InvokeNetworkStateChange(new CKARNetworkState(CKARNetworkStateType.ConnectedToServer, "fake connection"));
+            }
         }
     }
 }

@@ -20,6 +20,8 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
     public float MinimumScale = 0.05f;
     public float MaximumScale = 1.0f;
 
+    public AudioLogFeeder Feeder;
+
     private Image button;
 
     private bool registeredTouchBegan = false;
@@ -100,6 +102,10 @@ public class ResetPosition : MonoBehaviour, IPointerClickHandler
         ARWorld.transform.localRotation = PositionCube.transform.localRotation;
         ScaleWorld(DefaultScale * PersistentData.BaseScale);
         WorldIsBoxed.Status = false;
+
+        if(Feeder) {
+            Feeder.Play();
+        }
     }
 
     void UnPosition()
