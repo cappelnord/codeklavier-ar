@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.27755368, g: 0.4559893, b: 0.52366436, a: 1}
+  m_IndirectSpecularColor: {r: 0.27373624, g: 0.45336843, b: 0.52023405, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -458,6 +458,8 @@ MonoBehaviour:
   LogFile: {fileID: 4900000, guid: 48957b09336864231a2ff406dab3b0ee, type: 3}
   JSONProcessor: {fileID: 0}
   LogOffset: 77.5
+  PlayOnAwake: 0
+  Mixer: {fileID: 0}
 --- !u!82 &752006243
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1812,6 +1814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a93fde898e0be8419479c9fed00db0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Mixer: {fileID: 0}
   UnityGray: {fileID: 3183970496506661797}
   UIHider: {fileID: 3183970496988200284}
 --- !u!1 &3183970497885402884
