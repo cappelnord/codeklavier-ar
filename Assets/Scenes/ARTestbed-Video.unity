@@ -1243,7 +1243,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 0
+  m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -2364,7 +2364,7 @@ PrefabInstance:
     - target: {fileID: 5558849876456373877, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: ForceStartBundledID
-      value: hashi
+      value: hashi-5
       objectReference: {fileID: 0}
     - target: {fileID: 5931560324050426411, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
@@ -2464,8 +2464,7 @@ PrefabInstance:
         type: 3}
       propertyPath: OverrideShape
       value: 
-      objectReference: {fileID: 1008974105662899192, guid: 5230048d5e2af8340b155f75230c4a42,
-        type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7713098529516373334, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_RootOrder

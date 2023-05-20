@@ -103,6 +103,7 @@ namespace ARquatic.LSystem {
 
                 if (msg.type == "lsys")
                 {
+                    Debug.Log($"LSys: {msg.payload}");
                     lsysController.Dispatch(msg.payload);
                 }
 

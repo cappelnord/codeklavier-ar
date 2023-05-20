@@ -40,11 +40,15 @@ namespace ARquatic
 
         private bool isPlaying = false;
 
+        private int framesUntilPlay = 5;
+
         public void Play() {
             if(isPlaying) return;
+            if(framesUntilPlay > 0) return;
+
             Mixer.SetFloat("Volume", 0f);
             audioSource.Play();
-
+            isPlaying = true;
         }
 
         void Start() {
@@ -53,10 +57,6 @@ namespace ARquatic
             string logString = LogFile.ToString();
             JSONLogFile file = JsonUtility.FromJson<JSONLogFile>(logString);
             entries = file.data;
-
-            if(PlayOnAwake) {
-                Play();
-            }
         }
 
         private void AudioHasLooped() {
@@ -66,7 +66,13 @@ namespace ARquatic
 
         void Update()
         {
-            if(!audioSource.isPlaying) return;
+            framesUntilPlay--;
+            if(framesUntilPlay > 0) return;
+
+            if(PlayOnAwake) {
+                Play();
+            }
+
             if(entries == null) return;
             if(currentIndex >= entries.Length) return;
             
@@ -87,6 +93,7 @@ namespace ARquatic
                     // Debug.Log(entries[currentIndex].payload);
                     // Debug.Log(e);
                 }
+                // Debug.Log(currentIndex);
                 currentIndex++;
             }
         }

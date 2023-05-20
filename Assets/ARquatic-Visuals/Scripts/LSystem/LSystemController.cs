@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -119,6 +120,12 @@ public class LSystem
         foreach (string rule in items)
         {
             string[] pair = rule.Split('.');
+
+            if(pair.Length < 2) {
+                Debug.Log($"Invalid rule part: {rule}");
+                continue;
+            }
+
             string from = pair[0];
             string to = pair[1];
 
@@ -184,6 +191,8 @@ public class LSystem
                         rulesIDCounter++;
                     }
                 }
+            } else {
+                Debug.Log($"Invalid rule part: {rule}");
             }
         }
     }
@@ -401,8 +410,14 @@ public class LSystemController : MonoBehaviour
             return;
         }
 
-        Parse(data);
-        Generate();
+        try {
+
+            Parse(data);
+            Generate();
+
+        } catch(Exception e) {
+            Debug.Log(e);
+        }
     }
 
     public void DispatchShape(string key, string shape)
