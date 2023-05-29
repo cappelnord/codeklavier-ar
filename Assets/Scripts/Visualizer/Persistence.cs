@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -36,12 +37,16 @@ public class Persistence : MonoBehaviour
 
     void Load()
     {
+        try {
         _Channel = PlayerPrefs.GetString("Channel", GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel);
         _ConnectToLocal = PlayerPrefs.GetInt("ConnectToLocal", GameObject.Find("Config").GetComponent<Config>().SetConnectToLocal ? 1 : 0) != 0;
         _ServerIP = PlayerPrefs.GetString("ServerIP", GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString());
         _Port = PlayerPrefs.GetInt("Port", GameObject.Find("OSCController").GetComponent<OSCController>().Port);
 
         _SendToLocalhostToo = PlayerPrefs.GetInt("SendToLocalhostToo", GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo ? 1 : 0) != 0;
+        } catch(Exception e) {
+            Debug.Log(e);
+        }
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();
 
@@ -52,18 +57,28 @@ public class Persistence : MonoBehaviour
         _HideCubes = PlayerPrefs.GetInt("HideCubes", lgen.HideCubes ? 1 : 0) != 0;
         _HideConnections = PlayerPrefs.GetInt("HideConnections", lgen.HideConnections ? 1 : 0) != 0;
         _HideDynamics = PlayerPrefs.GetInt("HideDynamics", lgen.HideDynamics ? 1 : 0) != 0;
+
+        _DynamicsToSize = false;
+        _ConnectionSpheres = false;
+        _HideDynamics = true;
     }
     
     void Commit()
     {
-        GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP = _ServerIP;
-        GameObject.Find("OSCController").GetComponent<OSCController>().Port = _Port;
-        GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo = _SendToLocalhostToo;
-        GameObject.Find("OSCController").GetComponent<OSCController>().Connect();
+        try {
+            GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP = _ServerIP;
+            GameObject.Find("OSCController").GetComponent<OSCController>().Port = _Port;
+            GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo = _SendToLocalhostToo;
+            GameObject.Find("OSCController").GetComponent<OSCController>().Connect();
+            GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel = _Channel;
+        } catch(Exception e) {
+            Debug.Log(e);
+        }
+
+
 
         GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active = _FitToScreen;
 
-        GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel = _Channel;
         GameObject.Find("Config").GetComponent<Config>().SetConnectToLocal = _ConnectToLocal;
 
         LTestGenerator lgen = GameObject.Find("LGenerator").GetComponent<LTestGenerator>();

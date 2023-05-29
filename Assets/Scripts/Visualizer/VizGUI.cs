@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -59,11 +60,15 @@ public class VizGUI : MonoBehaviour
             if (GUI.Button(new Rect(10, 10, bw, h), "Options"))
             {
                 active = true;
+                try {
                 channel = GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>().Channel;
                 connectToLocal = Config.ConnectToLocal;
                 serverIP = GameObject.Find("OSCController").GetComponent<OSCController>().ServerIP.ToString();
                 portString = GameObject.Find("OSCController").GetComponent<OSCController>().Port.ToString();
                 sendToLocalhostToo = GameObject.Find("OSCController").GetComponent<OSCController>().SendToLocalhostToo;
+                } catch(Exception e) {
+                    Debug.Log(e);
+                }
 
                 fitToScreen = GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active;
 
@@ -169,12 +174,32 @@ public class VizGUI : MonoBehaviour
 
     private void CommitChanges()
     {
-        OSCController oscc = GameObject.Find("OSCController").GetComponent<OSCController>();
-        oscc.ServerIP = serverIP;
-        oscc.Port = int.Parse(portString);
-        oscc.SendToLocalhostToo = sendToLocalhostToo;
+        try {
+            OSCController oscc = GameObject.Find("OSCController").GetComponent<OSCController>();
+            oscc.ServerIP = serverIP;
+            oscc.Port = int.Parse(portString);
+            oscc.SendToLocalhostToo = sendToLocalhostToo;
 
-        oscc.Connect();
+            oscc.Connect();
+
+            WebsocketConsumer ws = GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>();
+
+            bool needsReconnect = ws.Channel != channel || Config.ConnectToLocal != connectToLocal;
+
+            ws.Channel = channel;
+            Config.ConnectToLocal = connectToLocal;
+
+            GameObject.Find("Persistence").GetComponent<Persistence>().Save();
+
+
+
+            if(needsReconnect)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+        } catch(Exception e) {
+            Debug.Log(e);
+        }
 
         GameObject.Find("LGeneratorScaler").GetComponent<LGeneratorScaler>().Active = fitToScreen;
 
@@ -189,21 +214,6 @@ public class VizGUI : MonoBehaviour
         GameObject.Find("VisualizerViewResponder").GetComponent<VisualizerViewResponder>().LockKey = lockKey;
         GameObject.Find("VisualizerViewResponder").GetComponent<VisualizerViewResponder>().SwitchView(lockKey);
 
-        WebsocketConsumer ws = GameObject.Find("WebsocketController").GetComponent<WebsocketConsumer>();
-
-        bool needsReconnect = ws.Channel != channel || Config.ConnectToLocal != connectToLocal;
-
-        ws.Channel = channel;
-        Config.ConnectToLocal = connectToLocal;
-
-        GameObject.Find("Persistence").GetComponent<Persistence>().Save();
-
-
-
-        if(needsReconnect)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
 
         lgen.Generate();
     }

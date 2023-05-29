@@ -290,11 +290,7 @@ GameObject:
   - component: {fileID: 7713098529516373334}
   - component: {fileID: 7713098529516373333}
   - component: {fileID: 5558849876456373877}
-  - component: {fileID: 8273182087809433899}
   - component: {fileID: 215172791094239450}
-  - component: {fileID: 5293229934501751410}
-  - component: {fileID: 8178866169825962141}
-  - component: {fileID: 8377068227194629607}
   m_Layer: 0
   m_Name: CKARPrefab
   m_TagString: Untagged
@@ -363,22 +359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ForceStartBundledID: 
---- !u!114 &8273182087809433899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7713098529516373335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179827e9f5bc14aa8a16f23249071a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BundledID: artplus
-  Audio: {fileID: 8300000, guid: 7efa85ba7f8514e51aa894d6a138a0f1, type: 3}
-  Log: {fileID: 4900000, guid: 2951800e250864442ab4524eb6cb9a83, type: 3}
-  LogOffset: 83.45
 --- !u!114 &215172791094239450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,58 +371,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 179827e9f5bc14aa8a16f23249071a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BundledID: hashi-1
-  Audio: {fileID: 8300000, guid: 25fce88eb0d874dde9d5d55780aba71c, type: 3}
+  BundledID: hashi
+  Audio: {fileID: 8300000, guid: 6d7f744e941904f58b9aedcdcc25f048, type: 3}
   Log: {fileID: 4900000, guid: 31219e2ac77ae4605a9ede30d2aad807, type: 3}
   LogOffset: 209.65
---- !u!114 &5293229934501751410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7713098529516373335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179827e9f5bc14aa8a16f23249071a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BundledID: hashi-2
-  Audio: {fileID: 8300000, guid: 833055fc00ceb46cfb4ea41b019aeea6, type: 3}
-  Log: {fileID: 4900000, guid: 607a6654337fc444bac611601a602b69, type: 3}
-  LogOffset: 47.5
---- !u!114 &8178866169825962141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7713098529516373335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179827e9f5bc14aa8a16f23249071a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BundledID: hashi-4
-  Audio: {fileID: 8300000, guid: a9836ccf3d52b4d4c8651e6a8986e353, type: 3}
-  Log: {fileID: 4900000, guid: 100f42a32ef92441b8ad19e63cbb0da3, type: 3}
-  LogOffset: 169.2
---- !u!114 &8377068227194629607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7713098529516373335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179827e9f5bc14aa8a16f23249071a1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BundledID: hashi-5
-  Audio: {fileID: 8300000, guid: cb7a3649229c14083bb257bc14ed9e39, type: 3}
-  Log: {fileID: 4900000, guid: 51819194adeff4b9394d66748b15022a, type: 3}
-  LogOffset: 145
 --- !u!1 &7713098530039918724
 GameObject:
   m_ObjectHideFlags: 0

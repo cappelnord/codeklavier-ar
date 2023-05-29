@@ -34,6 +34,9 @@ public static class ARAppUITexts
     public static string MainMenuStatusOnline;
     public static string MainMenuStatusOffline;
 
+    public static string MainMenuStatusBundled;
+
+
     // status messages displayed in the AR experience
     public static string ARStatusWaitingForTracking;
     public static string ARStatusTapOnCube;
@@ -100,13 +103,14 @@ public static class ARAppUITexts
         PreMenuAppOutOfDate = "Your ARquatic app is out of date. Please update your app in order to experience ARquatic.";
         PreMenuARNeedsInstall = "In order to run this app ARCore needs to be installed from the Play Store. Your device should display a prompt for that.";
 
-        MainMenuAvailableChannelsLabel = "Available Channels";
+        MainMenuAvailableChannelsLabel = "Channels";
         MainMenuInformationLabel = "Information";
 
         MainMenuChannelInformationError = "Could not refresh channel information ...";
 
         MainMenuStatusOnline = "online";
         MainMenuStatusOffline = "offline";
+        MainMenuStatusBundled = "bundled";
 
         // status messages displayed in the AR experience
         ARStatusWaitingForTracking = "Move your device slowly to establish tracking!";
@@ -183,13 +187,14 @@ public static class ARAppUITexts
         PreMenuAppOutOfDate = "Uw ARquatic app is verouderd. Werk uw app bij om ARquatic te kunnen ervaren.";
         PreMenuARNeedsInstall = "Om deze app te kunnen draaien dient u ARCore uit de Play Store te installeren. Uw apparaat zou dit moeten aangeven.";
 
-        MainMenuAvailableChannelsLabel = "Beschikbare kanalen";
+        MainMenuAvailableChannelsLabel = "Kanalen";
         MainMenuInformationLabel = "Informatie";
 
         MainMenuChannelInformationError = "Kon de kanaalinformatie niet verversen ...";
 
         MainMenuStatusOnline = "online";
         MainMenuStatusOffline = "offline";
+        MainMenuStatusBundled = "gebundeld";
 
         // status messages displayed in the AR experience
         ARStatusWaitingForTracking = "Beweeg uw apparaat langzaam om het trekken te activeren.";
