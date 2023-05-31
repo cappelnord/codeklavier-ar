@@ -43,6 +43,12 @@ public class LGenerator : LSystemBehaviour
     private float lastColorIntensity = 0f;
 
     [HideInInspector]
+    public float Speed = 0.0f;
+
+    [HideInInspector]
+    public float Velocity = 0.0f;
+
+    [HideInInspector]
     public bool IntensityHasChanged = true;
 
     [HideInInspector]
@@ -100,28 +106,44 @@ public class LGenerator : LSystemBehaviour
 
         if (key == velValueKey)
         {
-            velocityValueFilter.Set(value);
+            SetVelocityValue(value);
         }
 
         if (key == speedValueKey)
         {
-            speedValueFilter.Set(value);
+            SetSpeedValue(value);
         }
 
         if (key == intensityValueKey)
         {
-            intensityValueFilter.Set(value);
+            SetIntensityValue(value);
         }
 
         if (key == colorIntensityValueKey)
         {
-            colorIntensityValueFilter.Set(value);
+            SetColorIntensityValue(value);
         }
 
         // speedValueFilter.Set(0.1f);
         // speedValueFilter.Set(1.0f);
 
 
+    }
+
+    public void SetVelocityValue(float value) {
+        velocityValueFilter.Set(value);
+    }
+
+    public void SetSpeedValue(float value) {
+        speedValueFilter.Set(value);
+    }
+
+    public void SetIntensityValue(float value) {
+        intensityValueFilter.Set(value);
+    }
+
+    public void SetColorIntensityValue(float value) {
+        colorIntensityValueFilter.Set(value);
     }
 
     protected void PreGenerate()
@@ -208,8 +230,11 @@ public class LGenerator : LSystemBehaviour
 
         lastTransformSpec = TransformSpec;
 
-        ScaleMultiplier = 0.25f + (velocityValueFilter.Filter() * 1.75f * SpeciesVelocityMultiplier);
-        SpeedMultiplier = 0.25f + ((1.0f / speedValueFilter.Filter()) * 0.12f * SpeciesSpeedMultiplier);
+        Velocity = velocityValueFilter.Filter();
+        Speed = speedValueFilter.Filter();
+
+        ScaleMultiplier = 0.25f + (Velocity * 1.75f * SpeciesVelocityMultiplier);
+        SpeedMultiplier = 0.25f + ((1.0f / Speed) * 0.12f * SpeciesSpeedMultiplier);
 
         SpeedAmplitude = speedAmplitudeFilter.Filter(0.25f + SpeedMultiplier * 0.3f);
 

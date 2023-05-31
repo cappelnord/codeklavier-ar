@@ -10,6 +10,8 @@ public class FerniNodeIntensity : IntensityBehaviour
 
     public Color Green;
 
+    private bool firstUpdate = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,13 +24,15 @@ public class FerniNodeIntensity : IntensityBehaviour
         float i = Gen.Intensity * 0.4f;
         transform.localScale = transform.localScale * (1.0f + (5.0f * i));
         
-        if(Gen.IntensityHasChanged) {
+        if(Gen.IntensityHasChanged || firstUpdate) {
             float ci = Gen.ColorIntensity;
             float im = 1.0f + i;
 
             Color c = Color.Lerp(Green, KeyColor, ci);
 
             meshRenderer.sharedMaterial.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
+
+            firstUpdate = false;
         }
     }
 }

@@ -9,6 +9,8 @@ public class InteriaLittleIntensity : IntensityBehaviour
     private MeshRenderer meshRenderer;
     private float frequency;
 
+    private bool firstUpdate = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +22,11 @@ public class InteriaLittleIntensity : IntensityBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Gen.IntensityHasChanged) {
+        if(Gen.IntensityHasChanged || firstUpdate) {
             float ci = Gen.ColorIntensity;
             meshRenderer.sharedMaterial.SetColor("_Color", new Color(24f / 255f + ci, 113f / 255f + ci, 0f + ci));
+
+            firstUpdate = false;
         }
         transform.localScale = scale * (1.0f + (Mathf.Sin(Time.time * frequency) * Gen.Intensity * 0.8f));
     }

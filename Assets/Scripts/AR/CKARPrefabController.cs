@@ -39,6 +39,7 @@ namespace ARquatic.App {
 
                 feeder.LogFile = data.log;
                 feeder.LogOffset = data.logOffset;
+                bundledPlayer.GetComponent<AudioSource>().time = data.playbackPositionStart;
 
             } else {
                 Destroy(transform.Find("BundledPlayer").gameObject);

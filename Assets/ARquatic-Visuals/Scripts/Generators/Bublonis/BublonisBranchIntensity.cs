@@ -10,6 +10,8 @@ public class BublonisBranchIntensity : IntensityBehaviour
     public Color Grey;
     public Color Green;
 
+    private bool firstUpdate = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class BublonisBranchIntensity : IntensityBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!Gen.IntensityHasChanged) return;
+        if(!Gen.IntensityHasChanged && !firstUpdate) return;
         
         float ci = Gen.ColorIntensity;
         float i = Gen.Intensity * 0.4f;
@@ -28,7 +30,8 @@ public class BublonisBranchIntensity : IntensityBehaviour
         Color c = Color.Lerp(Green, Grey, ci);
 
         meshRenderer.sharedMaterial.SetColor("_Color", new Color(c.r * im, c.g * im, c.b * im));
-        
+
+        firstUpdate = false;        
     }
 }
 }

@@ -89,13 +89,29 @@ public class GeneratorHerd : MonoBehaviour
             // TODO: Bit weird logic, maybe use 2 distinct variables
             
             bool create = !Objects.ContainsKey(key);
+
+            bool setOldValues = false;
+            float oldSpeed = 1f;
+            float oldVelocity = 0f;
+            float oldIntensity = 0f;
+            float oldColorIntensity = 0f;
+
             if(!create)
             {
                 create = Objects[key].Shape != LSysController.Forest[key].Shape;
 
                 if(create)
                 {
-                    Objects[key].Obj.GetComponent<LGenerator>().Die();
+                    setOldValues = true;
+
+                    LGenerator lgen = Objects[key].Obj.GetComponent<LGenerator>();
+
+                    oldVelocity = lgen.Velocity;
+                    oldSpeed = lgen.Speed;
+                    oldIntensity= lgen.Intensity;
+                    oldColorIntensity = lgen.ColorIntensity;
+
+                    lgen.Die();
                     Destroy(Objects[key].Obj);
                 }
             }
@@ -103,6 +119,14 @@ public class GeneratorHerd : MonoBehaviour
             if(create)
             {
                 Objects[key] = Create(LSysController.Forest[key]);
+
+                LGenerator newLGen = Objects[key].Obj.GetComponent<LGenerator>();
+                if(setOldValues) {
+                    newLGen.SetSpeedValue(oldSpeed);
+                    newLGen.SetColorIntensityValue(oldColorIntensity);
+                    newLGen.SetIntensityValue(oldIntensity);
+                    newLGen.SetVelocityValue(oldVelocity);
+                }
             }
         }
 
