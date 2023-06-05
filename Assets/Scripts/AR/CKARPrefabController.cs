@@ -48,7 +48,14 @@ namespace ARquatic.App {
 
         public void Start() {
             if(PersistentData.IsBundledChannel) {
+                StartCoroutine(FakeNetworkConnection());
+            }
+        }
+
+        private IEnumerator FakeNetworkConnection() {
+            for(int i = 0; i < 20; i++) {
                 EventManager.InvokeNetworkStateChange(new CKARNetworkState(CKARNetworkStateType.ConnectedToServer, "fake connection"));
+                yield return new WaitForSeconds(0.05f);
             }
         }
     }
