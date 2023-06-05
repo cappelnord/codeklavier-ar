@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TheAR.unity
     guid: 846669191c82213418e8164783580538
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ARTestbed.unity
     guid: 39b90f02d85aa124ca0cdbb79de68b2c
   - enabled: 0
