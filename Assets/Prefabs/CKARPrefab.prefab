@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 621027307771777302}
   - component: {fileID: 9187072731168584557}
   - component: {fileID: 7753753291381842211}
+  - component: {fileID: 8424395142145832818}
   m_Layer: 0
   m_Name: BundledPlayer
   m_TagString: Untagged
@@ -47,7 +48,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -146,6 +147,18 @@ MonoBehaviour:
   LogOffset: 0
   PlayOnAwake: 0
   Mixer: {fileID: 24100000, guid: d839fb62ff3c4440eba130bf0693579d, type: 2}
+--- !u!114 &8424395142145832818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828725142830853758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5cee6368416d4a8ea4c5d01b4f39258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2059599872457515468
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,9 +385,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BundledID: hashi
-  Audio: {fileID: 8300000, guid: 1b1d39e24c13f4f12987366c070942d8, type: 3}
-  Log: {fileID: 4900000, guid: 31219e2ac77ae4605a9ede30d2aad807, type: 3}
-  LogOffset: 209.65
+  Audio: {fileID: 8300000, guid: fe765632de9924855b4dde2148cb2818, type: 3}
+  Log: {fileID: 4900000, guid: 5f571b48ff8fe4820bb5e82a3bab3a96, type: 3}
+  LogOffset: 209.8
+  PlaybackPositionStart: 0
 --- !u!1 &7713098530039918724
 GameObject:
   m_ObjectHideFlags: 0

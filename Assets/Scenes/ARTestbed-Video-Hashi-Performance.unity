@@ -2331,11 +2331,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1919123024}
     m_Modifications:
-    - target: {fileID: 215172791094239450, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
-        type: 3}
-      propertyPath: PlaybackPositionStart
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 621027307771777302, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
         type: 3}
       propertyPath: m_RootOrder
@@ -2549,6 +2544,41 @@ PrefabInstance:
         type: 3}
       propertyPath: PlayOnAwake
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424395142145832818, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: OnAudioFinished.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424395142145832818, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: OnAudioFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424395142145832818, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: OnAudioFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3183970497885402880}
+    - target: {fileID: 8424395142145832818, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: OnAudioFinished.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424395142145832818, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: OnAudioFinished.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424395142145832818, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: OnAudioFinished.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ARquatic.App.UIClose, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424395142145832818, guid: fddb977535cb80c4b9e42ecaeaf2df3e,
+        type: 3}
+      propertyPath: OnAudioFinished.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fddb977535cb80c4b9e42ecaeaf2df3e, type: 3}

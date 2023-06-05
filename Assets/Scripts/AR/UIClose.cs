@@ -32,6 +32,10 @@ public class UIClose : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (UIHider.UIHidden) return;
+        Close();
+    }
+
+    public void Close() {
         if (transitionHasStarted) return;
 
         transitionHasStarted = true;
