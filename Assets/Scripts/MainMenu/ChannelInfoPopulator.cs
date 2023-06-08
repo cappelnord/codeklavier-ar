@@ -86,7 +86,8 @@ public class ChannelInfoPopulator : MonoBehaviour
                 status.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.MainMenuStatusOffline;
                 status.GetComponent<TextMeshProUGUI>().color = new Color(1f, 0.4f, 0.4f, 1.0f);
             } else if(info.status == "bundled") {
-                status.GetComponent<TextMeshProUGUI>().text = ""; // ARAppUITexts.MainMenuStatusBundled;
+                status.GetComponent<TextMeshProUGUI>().text = ARAppUITexts.MainMenuStatusBundled;
+                status.GetComponent<TextMeshProUGUI>().color = new Color(0.4f, 1f, 0.4f, 1.0f);
             } else
             {
                 status.GetComponent<TextMeshProUGUI>().text = info.status;

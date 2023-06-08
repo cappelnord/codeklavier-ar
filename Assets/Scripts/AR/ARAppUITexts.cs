@@ -110,7 +110,7 @@ public static class ARAppUITexts
 
         MainMenuStatusOnline = "online";
         MainMenuStatusOffline = "offline";
-        MainMenuStatusBundled = "bundled";
+        MainMenuStatusBundled = "online";
 
         // status messages displayed in the AR experience
         ARStatusWaitingForTracking = "Move your device slowly to establish tracking!";
@@ -194,7 +194,7 @@ public static class ARAppUITexts
 
         MainMenuStatusOnline = "online";
         MainMenuStatusOffline = "offline";
-        MainMenuStatusBundled = "gebundeld";
+        MainMenuStatusBundled = "online";
 
         // status messages displayed in the AR experience
         ARStatusWaitingForTracking = "Beweeg uw apparaat langzaam om het trekken te activeren.";
