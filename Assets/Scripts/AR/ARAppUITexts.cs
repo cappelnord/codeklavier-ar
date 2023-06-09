@@ -128,7 +128,7 @@ public static class ARAppUITexts
         x.Paragraph("The ARquatic app creates the Augmented Reality (AR) visuals during an 'ARquatic Live' experience. At showtime, simply follow the app prompts to watch the AR underwater world unfold before your eyes.");
         x.Paragraph("The 'ARquatic Live' experience is a CodeKlavier project. A key aspect of this experience is that the AR visuals are built on L-systems that are coded, (yes coded!), with the help of the CodeKlavier, by the pianist in real-time during the show. 'ARquatic Live' is an audio-visual experience with the same pianist and a collaborating laptop musician, performing music live.");
         x.Paragraph("Keep reading or visit our website for more info about how 'ARquatic Live' works or ask the host!");
-        x.LinkButton("ARquatic Live", "https://arquatic.nl");
+        x.LinkButton("ARquatic Live", "https://codeklavier.space/arquatic");
 
         x.ParagraphDivider();
 
@@ -212,7 +212,7 @@ public static class ARAppUITexts
         x.Paragraph("De ARquatic app creeert Augmented Reality (AR) visuals tijdens een 'ARquatic Live' ervaring. Volg de aanwijzingen van de app als de show begint om de AR onderwaterwereld voor uw ogen te zien groeien en bloeien.");
         x.Paragraph("De 'ARquatic Live' ervaring is een CodeKlavier project. Een belangrijk element van de ervaring is dat de AR beelden gebouwd worden met L-systemen met behulp van CodeKlavier. De pianist schrijft tijdens de voorstelling live computer code om de L-systemen te coderen. 'ARquatic Live' is een audio-visuele ervaring met dezelfde pianist en een laptop musicus die samen live muziek maken.");
         x.Paragraph("Lees verder of bezoek onze website voor meer informatie over hoe 'ARquatic Live' werkt. U kunt ook de host vragen.");
-        x.LinkButton("ARquatic Live", "https://arquatic.nl");
+        x.LinkButton("ARquatic Live", "https://codeklavier.space/arquatic");
 
         x.ParagraphDivider();
 
