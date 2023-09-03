@@ -46,7 +46,9 @@ namespace ARquatic
             if(isPlaying) return;
             if(framesUntilPlay > 0) return;
 
-            Mixer.SetFloat("Volume", 0f);
+            if(Mixer != null) {
+                Mixer.SetFloat("Volume", 0f);
+            }
             audioSource.Play();
             isPlaying = true;
         }
